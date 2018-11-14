@@ -1,82 +1,60 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
+#Import Statements
 import pymysql
 import sys
-from PyQt5.QtWidgets import QApplication, QDesktopWidget, QWidget, QPushButton, QToolTip, QMessageBox
+from PyQt5.QtWidgets import QApplication, QDesktopWidget, QWidget, QAction, QPushButton, QToolTip, QMessageBox, QMainWindow, qApp
 from PyQt5.QtGui import QIcon, QFont
 
+#Application Class Definition
+class Application(QMainWindow):
 
-class Application(QWidget):
-
+    #Simple class init method - required
     def __init__(self):
         super().__init__()
         self.initUI()
 
-    def initUI(self):
-
-        QToolTip.setFont(QFont('SansSerif', 10))
-
-        patientButton = QPushButton('Patient', self)
-
-        doctorButton = QPushButton('Doctor', self)
-
-        nurseButton = QPushButton('Nurse', self)
-
-        adminButton = QPushButton('Administrator', self)
-
-        patientButton.setToolTip('Select this if you are a patient')
-
-        doctorButton.setToolTip('Select this if you are a doctor')
-
-        nurseButton.setToolTip('Select this if you are a nurse')
-
-        adminButton.setToolTip('Select this if you are an administrator')
-
-        patientButton.resize(patientButton.sizeHint())
-
-        doctorButton.resize(doctorButton.sizeHint())
-
-        nurseButton.resize(nurseButton.sizeHint())
-
-        adminButton.resize(adminButton.sizeHint())
-
-        self.setGeometry(300, 300, 300, 220)
-
-        self.center()
-
-        self.setWindowTitle("HealthCare United Patient Portal")
-
-        self.setWindowIcon(QIcon('icon.PNG'))
-
-        self.show()
-
+    #Function that centers the window in the display upon loading
     def center(self):
-
         qr = self.frameGeometry();
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def closeEvent(self, event):
+    #Function that initializes the UI
+    def initUI(self):
+        #Creates a status bar and sets the initial value to "Ready"
+        self.statusBar().showMessage("Ready")
+        #See center method above
+        self.center()
+        #Sets window title
+        self.setWindowTitle("HealthCare United Patient Portal")
+        #Sets window icon
+        self.setWindowIcon(QIcon('icon.PNG'))
+        #Displays the window
+        self.show()
 
+
+    #Function that prompts the user whether or not they wont to exit
+    def closeEvent(self, event):
+        #Displays a message box to prompt the user
         reply = QMessageBox.question(self, 'Message', "Are you sure you want to quit?",
             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
         if reply == QMessageBox.Yes:
+            #Quit application
             event.accept()
-
         else:
+            #Stay in application
             event.ignore()
 
-
+#This code block is used to launch the UI and connect to the database
 if __name__ == "__main__":
-
+    #Initialize database connection
     conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
-
+    #Initialize the database cursor
     cur = conn.cursor()
-
+    #Controls start and end of the application
     app = QApplication(sys.argv)
-
     root = Application()
-
     sys.exit(app.exec_())
