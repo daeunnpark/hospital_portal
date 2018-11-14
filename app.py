@@ -4,8 +4,9 @@
 #Import Statements
 import pymysql
 import sys
-from PyQt5.QtWidgets import QApplication, QDesktopWidget, QWidget, QAction, QPushButton, QToolTip, QMessageBox, QMainWindow, qApp
+from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QWidget, QAction, QPushButton, QToolTip, QMessageBox, QMainWindow, qApp, QVBoxLayout, QLabel)
 from PyQt5.QtGui import QIcon, QFont
+from PyQt5 import QtCore, uic
 
 #Application Class Definition
 class Application(QMainWindow):
@@ -13,6 +14,10 @@ class Application(QMainWindow):
     #Simple class init method - required
     def __init__(self):
         super().__init__()
+        #Load UI File: To Edit UI File, Open File .ui file in QtDesigner
+        uic.loadUi('mainwindow.ui', self)
+        #The widget names are listed in the right panel of QtDesigner. They will need to be used to call them and implement them in python
+        #self.pushButton.setText("WOW")
         self.initUI()
 
     #Function that centers the window in the display upon loading
@@ -22,10 +27,25 @@ class Application(QMainWindow):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
+#This is commented out code of when I was trying to implement a label in PyQt manually
+    #def firstPage(self):
+        #label = QLabel(self)
+        #label.setText("Healthcare United Patient Portal")
+        #font = QFont("Lucida", 16, QFont.Bold)
+        #label.setFont(font)
+        #label.setGeometry(QtCore.QRect(100, 100, 900, 100))
+        #label.setStyleSheet('color: teal')
+        #label.setAlignment(QtCore.Qt.AlignVCenter)
+        #vBox = QVBoxLayout(self)
+        #vBox.addWidget(label)
+        #self.setLayout(vBox)
+
     #Function that initializes the UI
     def initUI(self):
         #Creates a status bar and sets the initial value to "Ready"
         self.statusBar().showMessage("Ready")
+        #Keep this function commented out
+        #self.firstPage()
         #See center method above
         self.center()
         #Sets window title
