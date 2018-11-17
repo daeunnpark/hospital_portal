@@ -6,6 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+# This is generated from .ui files.
+# command line: exec python3 -m PyQt5.uic.pyuic first.ui -o fisrt.py -x to convert .ui file to .py file
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class login_page(object):
@@ -51,7 +54,7 @@ class login_page(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.pushButton_5.clicked.connect(self.changeUI_to_Menu)
+        self.pushButton_5.clicked.connect(self.changeUI_to_Menu) # set listener
     
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -63,9 +66,8 @@ class login_page(object):
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
-    def changeUI_to_Menu(self):
-        #MainWindow = QtWidgets.QMainWindow()
-        ui = Ui_Menu() #MainWindow()
+    def changeUI_to_Menu(self): # change UI to Menu
+        ui = Ui_Menu()
         ui.setupUi(MainWindow)
         MainWindow.show()
 
@@ -171,7 +173,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = login_page() #MainWindow()
+    ui = login_page() # set login page as UI
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
