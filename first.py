@@ -209,10 +209,11 @@ class Ui_SignInOrRegister(object):
             self.statusbar = QtWidgets.QStatusBar(SignInOrRegister)
             self.statusbar.setObjectName("statusbar")
             MainWindow.setStatusBar(self.statusbar)
-            self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
 
             self.retranslateUi(SignInOrRegister)
             QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
+
+            self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
 
         def retranslateUi(self, SignInOrRegister):
             _translate = QtCore.QCoreApplication.translate
@@ -220,6 +221,11 @@ class Ui_SignInOrRegister(object):
             self.pushButton.setText(_translate("SignInOrRegister", "Sign Up Using Your Access Code"))
             self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
             self.label.setText(_translate("SignInOrRegister", "New User?"))
+
+        def changeUI_to_CommonLogin(self):  # change UI to Menu
+             ui = Ui_CommonLogin()
+             ui.setupUi(MainWindow)
+             MainWindow.show()
 
 class Ui_CommonLogin(object):
     def setupUi(self, CommonLogin):
@@ -268,11 +274,6 @@ class Ui_CommonLogin(object):
         CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
         self.label.setText(_translate("CommonLogin", "Username:"))
         self.label_2.setText(_translate("CommonLogin", "Password:"))
-
-    def changeUI_to_CommonLogin(self):  # change UI to Menu
-        ui = Ui_CommonLogin()
-        ui.setupUi(MainWindow)
-        MainWindow.show()
 
 if __name__ == "__main__":
     import sys
