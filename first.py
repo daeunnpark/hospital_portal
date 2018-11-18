@@ -179,11 +179,55 @@ class Ui_Menu(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Insurance Information"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
 
+    class Ui_SignInOrRegister(object):
+        def setupUi(self, SignInOrRegister):
+            SignInOrRegister.setObjectName("SignInOrRegister")
+            SignInOrRegister.resize(800, 600)
+            self.centralwidget = QtWidgets.QWidget(SignInOrRegister)
+            self.centralwidget.setObjectName("centralwidget")
+            self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+            self.pushButton.setGeometry(QtCore.QRect(2000, 1000, 611, 161))
+            self.pushButton.setStyleSheet("font: 15pt \"Lucida Calligraphy\";\n"
+                                          "color: rgb(46, 125, 132)")
+            self.pushButton.setObjectName("pushButton")
+            self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+            self.pushButton_2.setGeometry(QtCore.QRect(120, 60, 571, 101))
+            self.pushButton_2.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+                                            "color: rgb(46, 125, 132)")
+            self.pushButton_2.setObjectName("pushButton_2")
+            self.label = QtWidgets.QLabel(self.centralwidget)
+            self.label.setGeometry(QtCore.QRect(2000, 290, 301, 131))
+            self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+                                     "color: rgb(0, 0, 0);\n"
+                                     "font-weight:bold;")
+            self.label.setObjectName("label")
+            SignInOrRegister.setCentralWidget(self.centralwidget)
+            self.menubar = QtWidgets.QMenuBar(SignInOrRegister)
+            self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+            self.menubar.setObjectName("menubar")
+            MainWindow.setMenuBar(self.menubar)
+            self.statusbar = QtWidgets.QStatusBar(SignInOrRegister)
+            self.statusbar.setObjectName("statusbar")
+            MainWindow.setStatusBar(self.statusbar)
+
+            self.retranslateUi(SignInOrRegister)
+            QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
+
+        def retranslateUi(self, SignInOrRegister):
+            _translate = QtCore.QCoreApplication.translate
+            SignInOrRegister.setWindowTitle(_translate("SignInOrRegister", "SignInOrRegister"))
+            self.pushButton.setText(_translate("SignInOrRegister", "Sign Up Using Your Access Code"))
+            self.pushButton_2.setText(_translate("SignInOrRegister", "Login"))
+            self.label.setText(_translate("SignInOrRegister", "New User?"))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = login_page() # set login page as UI
+    #ui = login_page() # set login page as UI
+    #ui.setupUi(MainWindow)
+    #MainWindow.show()
+    ui = Ui_SignInOrRegister
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

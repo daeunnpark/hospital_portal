@@ -14,27 +14,18 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>290</y>
-      <width>113</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>       New User?</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>190</x>
       <y>270</y>
-      <width>371</width>
-      <height>101</height>
+      <width>611</width>
+      <height>161</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 15pt &quot;Lucida Calligraphy&quot;;
+color: rgb(46, 125, 132)</string>
     </property>
     <property name="text">
      <string>Sign Up Using Your Access Code</string>
@@ -49,8 +40,30 @@
       <height>101</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
+color: rgb(46, 125, 132)</string>
+    </property>
     <property name="text">
      <string>Login</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>290</y>
+      <width>301</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
+color: rgb(0, 0, 0);
+font-weight:bold;</string>
+    </property>
+    <property name="text">
+     <string>New User?</string>
     </property>
    </widget>
   </widget>
