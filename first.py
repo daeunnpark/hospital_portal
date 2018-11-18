@@ -190,11 +190,11 @@ class Ui_SignInOrRegister(object):
             self.pushButton.setStyleSheet("font: 15pt \"Lucida Calligraphy\";\n"
                                           "color: rgb(46, 125, 132)")
             self.pushButton.setObjectName("pushButton")
-            self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-            self.pushButton_2.setGeometry(QtCore.QRect(300, 400, 2000, 200))
-            self.pushButton_2.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+            self.commonLoginButton = QtWidgets.QPushButton(self.centralwidget)
+            self.commonLoginButton.setGeometry(QtCore.QRect(300, 400, 2000, 200))
+            self.commonLoginButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
                                             "color: rgb(46, 125, 132)")
-            self.pushButton_2.setObjectName("pushButton_2")
+            self.commonLoginButton.setObjectName("pushButton_2")
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setGeometry(QtCore.QRect(300, 900, 301, 131))
             self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
@@ -209,6 +209,7 @@ class Ui_SignInOrRegister(object):
             self.statusbar = QtWidgets.QStatusBar(SignInOrRegister)
             self.statusbar.setObjectName("statusbar")
             MainWindow.setStatusBar(self.statusbar)
+            self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
 
             self.retranslateUi(SignInOrRegister)
             QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
@@ -217,8 +218,61 @@ class Ui_SignInOrRegister(object):
             _translate = QtCore.QCoreApplication.translate
             SignInOrRegister.setWindowTitle(_translate("SignInOrRegister", "SignInOrRegister"))
             self.pushButton.setText(_translate("SignInOrRegister", "Sign Up Using Your Access Code"))
-            self.pushButton_2.setText(_translate("SignInOrRegister", "Login"))
+            self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
             self.label.setText(_translate("SignInOrRegister", "New User?"))
+
+class Ui_CommonLogin(object):
+    def setupUi(self, CommonLogin):
+        CommonLogin.setObjectName("CommonLogin")
+        CommonLogin.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(CommonLogin)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(120, 80, 181, 71))
+        self.label.setStyleSheet("color: rgb(46, 125, 132);\n"
+"font-weight: bold;\n"
+"font: 18pt \"Lucida Calligraphy\";\n"
+"\n"
+"")
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(300, 150, 321, 61))
+        self.lineEdit.setText("")
+        self.lineEdit.setObjectName("lineEdit")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(120, 280, 181, 71))
+        self.label_2.setStyleSheet("color: rgb(46, 125, 132);\n"
+"font-weight: bold;\n"
+"font: 18pt \"Lucida Calligraphy\";\n"
+"\n"
+"")
+        self.label_2.setObjectName("label_2")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setGeometry(QtCore.QRect(310, 370, 321, 61))
+        self.lineEdit_2.setText("")
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        CommonLogin.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(CommonLogin)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(CommonLogin)
+        self.statusbar.setObjectName("statusbar")
+        CommonLogin.setStatusBar(self.statusbar)
+
+        self.retranslateUi(CommonLogin)
+        QtCore.QMetaObject.connectSlotsByName(CommonLogin)
+
+    def retranslateUi(self, CommonLogin):
+        _translate = QtCore.QCoreApplication.translate
+        CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
+        self.label.setText(_translate("CommonLogin", "Username:"))
+        self.label_2.setText(_translate("CommonLogin", "Password:"))
+
+    def changeUI_to_CommonLogin(self):  # change UI to Menu
+        ui = Ui_CommonLogin()
+        ui.setupUi(MainWindow)
+        MainWindow.show()
 
 if __name__ == "__main__":
     import sys
