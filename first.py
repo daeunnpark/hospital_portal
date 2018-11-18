@@ -63,7 +63,7 @@ class login_page(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #self.pushButton_5.clicked.connect(self.changeUI_to_Menu) # set listener
+        self.pushButton.clicked.connect(self.changeUI_to_LoginOrRegister) # set listener
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -76,8 +76,8 @@ class login_page(object):
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         #self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
-    def changeUI_to_Menu(self): # change UI to Menu
-        ui = Ui_Menu()
+    def changeUI_to_LoginOrRegister(self): # change UI to Menu
+        ui = Ui_SignInOrRegister()
         ui.setupUi(MainWindow)
         MainWindow.show()
 
@@ -224,10 +224,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    #ui = login_page() # set login page as UI
-    #ui.setupUi(MainWindow)
-    #MainWindow.show()
-    ui = Ui_SignInOrRegister()
+    ui = login_page() # set login page as UI
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
