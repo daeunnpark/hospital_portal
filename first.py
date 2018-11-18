@@ -179,24 +179,24 @@ class Ui_Menu(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Insurance Information"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
 
-    class Ui_SignInOrRegister(object):
+class Ui_SignInOrRegister(object):
         def setupUi(self, SignInOrRegister):
             SignInOrRegister.setObjectName("SignInOrRegister")
             SignInOrRegister.resize(800, 600)
             self.centralwidget = QtWidgets.QWidget(SignInOrRegister)
             self.centralwidget.setObjectName("centralwidget")
             self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-            self.pushButton.setGeometry(QtCore.QRect(2000, 1000, 611, 161))
+            self.pushButton.setGeometry(QtCore.QRect(1000, 880, 1000, 200))
             self.pushButton.setStyleSheet("font: 15pt \"Lucida Calligraphy\";\n"
                                           "color: rgb(46, 125, 132)")
             self.pushButton.setObjectName("pushButton")
             self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-            self.pushButton_2.setGeometry(QtCore.QRect(120, 60, 571, 101))
+            self.pushButton_2.setGeometry(QtCore.QRect(300, 400, 2000, 200))
             self.pushButton_2.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
                                             "color: rgb(46, 125, 132)")
             self.pushButton_2.setObjectName("pushButton_2")
             self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(QtCore.QRect(2000, 290, 301, 131))
+            self.label.setGeometry(QtCore.QRect(300, 900, 301, 131))
             self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
                                      "color: rgb(0, 0, 0);\n"
                                      "font-weight:bold;")
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     #ui = login_page() # set login page as UI
     #ui.setupUi(MainWindow)
     #MainWindow.show()
-    ui = Ui_SignInOrRegister
+    ui = Ui_SignInOrRegister()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
