@@ -234,7 +234,7 @@ class Ui_CommonLogin(object):
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(120, 80, 181, 71))
+        self.label.setGeometry(QtCore.QRect(120, 80, 400, 71))
         self.label.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
 "font: 18pt \"Lucida Calligraphy\";\n"
@@ -242,11 +242,11 @@ class Ui_CommonLogin(object):
 "")
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(300, 150, 321, 61))
+        self.lineEdit.setGeometry(QtCore.QRect(700, 150, 800, 61))
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(120, 280, 181, 71))
+        self.label_2.setGeometry(QtCore.QRect(120, 580, 400, 71))
         self.label_2.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
 "font: 18pt \"Lucida Calligraphy\";\n"
@@ -254,7 +254,7 @@ class Ui_CommonLogin(object):
 "")
         self.label_2.setObjectName("label_2")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(310, 370, 321, 61))
+        self.lineEdit_2.setGeometry(QtCore.QRect(700, 670, 800, 61))
         self.lineEdit_2.setText("")
         self.lineEdit_2.setObjectName("lineEdit_2")
         CommonLogin.setCentralWidget(self.centralwidget)
