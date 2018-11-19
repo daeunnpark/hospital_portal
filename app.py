@@ -58,9 +58,9 @@ class Application(QMainWindow):
 #This code block is used to launch the UI and connect to the database
 if __name__ == "__main__":
     #Initialize database connection
-    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     #Initialize the database cursor
-    #cur = conn.cursor()
+    cur = conn.cursor()
     #Controls start and end of the application
     app = QApplication(sys.argv)
     root = Application()

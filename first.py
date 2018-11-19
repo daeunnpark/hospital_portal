@@ -266,6 +266,7 @@ class Ui_CommonLogin(object):
         self.lineEdit_2.setGeometry(QtCore.QRect(700, 670, 800, 61))
         self.lineEdit_2.setText("")
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         CommonLogin.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(CommonLogin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -278,12 +279,19 @@ class Ui_CommonLogin(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
+        self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
+
     def retranslateUi(self, CommonLogin):
         _translate = QtCore.QCoreApplication.translate
         CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
         self.label.setText(_translate("CommonLogin", "Username:"))
         self.label_2.setText(_translate("CommonLogin", "Password:"))
         self.loginButton.setText(_translate("CommonLogin", "Login"))
+        
+    def changeUI_to_Menu(self): # change UI to Menu
+        self.uiNew = Ui_Menu()
+        self.uiNew.setupUi(MainWindow)
+        MainWindow.showFullScreen()
 
 if __name__ == "__main__":
     import sys
