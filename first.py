@@ -266,7 +266,7 @@ class Ui_CommonLogin(object):
         self.lineEdit_2.setGeometry(QtCore.QRect(700, 670, 800, 61))
         self.lineEdit_2.setText("")
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)    #Password
         CommonLogin.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(CommonLogin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
