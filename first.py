@@ -80,7 +80,7 @@ class login_page(object):
     def changeUI_to_LoginOrRegister(self): # change UI to Menu
         self.uiNew = Ui_SignInOrRegister()
         self.uiNew.setupUi(MainWindow)
-        MainWindow.show()
+        MainWindow.showFullScreen()
 
 class Ui_Menu(object):
     def setupUi(self, Menu):
@@ -226,7 +226,7 @@ class Ui_SignInOrRegister(object):
         def changeUI_to_CommonLogin(self):  # change UI to Menu
              self.uiLogin = Ui_CommonLogin()
              self.uiLogin.setupUi(MainWindow)
-             MainWindow.show()
+             MainWindow.showMaximized()
 
 class Ui_CommonLogin(object):
     def setupUi(self, CommonLogin):
@@ -291,7 +291,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI
     ui.setupUi(MainWindow)
-    MainWindow.show()
+    MainWindow.showMaximized()
     sys.exit(app.exec_())
 
 
