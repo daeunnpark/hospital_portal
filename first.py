@@ -216,6 +216,7 @@ class Ui_SignInOrRegister(object):
             QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
 
             self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
+            self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
 
         def retranslateUi(self, SignInOrRegister):
             _translate = QtCore.QCoreApplication.translate
@@ -228,6 +229,12 @@ class Ui_SignInOrRegister(object):
              self.uiLogin = Ui_CommonLogin()
              self.uiLogin.setupUi(MainWindow)
              MainWindow.showMaximized()
+
+        def changeUI_to_AccessCode(self):  # change UI to Menu
+             self.uiAccess = Ui_Access()
+             self.uiAccess.setupUi(MainWindow)
+             MainWindow.showMaximized()
+
 
 class Ui_CommonLogin(object):
     def setupUi(self, CommonLogin):
@@ -299,6 +306,43 @@ class Ui_CommonLogin(object):
         #cur.execute(sql_command)
         numberAuthenticatedUsers = 0;
         #numberAuthenticatedUsers = cur.fetchall()
+
+class Ui_Access(object):
+    def setupUi(self, Access):
+        Access.setObjectName("Access")
+        Access.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(Access)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(80, 40, 1400, 171))
+        self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+"color: rgb(46, 125, 132);")
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(600, 550, 1400, 111))
+        self.lineEdit.setObjectName("lineEdit")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(2000, 1000, 241, 81))
+        self.pushButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+"color: rgb(46, 125, 132);")
+        self.pushButton.setObjectName("pushButton")
+        Access.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Access)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setObjectName("menubar")
+        Access.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Access)
+        self.statusbar.setObjectName("statusbar")
+        Access.setStatusBar(self.statusbar)
+
+        self.retranslateUi(Access)
+        QtCore.QMetaObject.connectSlotsByName(Access)
+
+    def retranslateUi(self, Access):
+        _translate = QtCore.QCoreApplication.translate
+        Access.setWindowTitle(_translate("Access", "Access"))
+        self.label.setText(_translate("Access", "Enter Your Access Code Received Via Email:"))
+        self.pushButton.setText(_translate("Access", "Enter"))
 
 
 if __name__ == "__main__":
