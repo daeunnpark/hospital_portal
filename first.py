@@ -11,6 +11,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
+import pymysql
 
 class login_page(object):
     def setupUi(self, MainWindow2):
@@ -288,13 +289,24 @@ class Ui_CommonLogin(object):
         self.label_2.setText(_translate("CommonLogin", "Password:"))
         self.loginButton.setText(_translate("CommonLogin", "Login"))
         
-    def changeUI_to_Menu(self): # change UI to Menu
-        self.uiNew = Ui_Menu()
-        self.uiNew.setupUi(MainWindow)
-        MainWindow.showFullScreen()
+    #def changeUI_to_Menu(self): # change UI to Menu
+     #   self.uiNew = Ui_Menu()
+      #  self.uiNew.setupUi(MainWindow)
+       # MainWindow.showFullScreen()
+
+    def authenticateUser(self):
+        sql_command = """SELECT COUNT(P.Username, P.Password) FROM Patient P WHERE P.Username = '%s' AND P.Password = '%s';"""  #If highlighted, means not connected to database
+        #cur.execute(sql_command)
+        numberAuthenticatedUsers = 0;
+        #numberAuthenticatedUsers = cur.fetchall()
+        
 
 if __name__ == "__main__":
     import sys
+    # Initialize database connection
+    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    # Initialize the database cursor
+    #cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI
