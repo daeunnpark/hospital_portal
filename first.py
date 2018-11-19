@@ -10,6 +10,7 @@
 # command line: exec python3 -m PyQt5.uic.pyuic first.ui -o fisrt.py -x to convert .ui file to .py file
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
 
 class login_page(object):
     def setupUi(self, MainWindow2):
@@ -77,8 +78,8 @@ class login_page(object):
         #self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
     def changeUI_to_LoginOrRegister(self): # change UI to Menu
-        ui = Ui_SignInOrRegister()
-        ui.setupUi(MainWindow)
+        self.uiNew = Ui_SignInOrRegister()
+        self.uiNew.setupUi(MainWindow)
         MainWindow.show()
 
 class Ui_Menu(object):
@@ -223,8 +224,8 @@ class Ui_SignInOrRegister(object):
             self.label.setText(_translate("SignInOrRegister", "New User?"))
 
         def changeUI_to_CommonLogin(self):  # change UI to Menu
-             ui = Ui_CommonLogin()
-             ui.setupUi(MainWindow)
+             self.uiLogin = Ui_CommonLogin()
+             self.uiLogin.setupUi(MainWindow)
              MainWindow.show()
 
 class Ui_CommonLogin(object):
