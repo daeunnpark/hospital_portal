@@ -16,7 +16,7 @@ class Application(QMainWindow):
         super().__init__()
         #Load UI File: To Edit UI File, Open File .ui file in QtDesigner
         #uic.loadUi('mainwindow.ui', self)
-        uic.loadUi('commonlogin.ui', self)
+        #uic.loadUi('commonlogin.ui', self)
         #uic.loadUi('menu.ui',self) # comment out line#47 too to run menu.ui
         #The widget names are listed in the right panel of QtDesigner. They will need to be used to call them and implement them in python
         self.initUI()

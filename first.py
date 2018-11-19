@@ -241,6 +241,14 @@ class Ui_CommonLogin(object):
 "\n"
 "")
         self.label.setObjectName("label")
+        self.loginButton = QtWidgets.QPushButton(self.centralwidget)
+        self.loginButton.setGeometry(QtCore.QRect(2000, 1000, 200, 200))
+        self.loginButton.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                   "font-weight: bold;\n"
+                                   "font: 18pt \"Lucida Calligraphy\";\n"
+                                   "\n"
+                                   "")
+        self.loginButton.setObjectName("loginButton")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(700, 150, 800, 61))
         self.lineEdit.setText("")
@@ -274,6 +282,7 @@ class Ui_CommonLogin(object):
         CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
         self.label.setText(_translate("CommonLogin", "Username:"))
         self.label_2.setText(_translate("CommonLogin", "Password:"))
+        self.loginButton.setText(_translate("CommonLogin", "Login"))
 
 if __name__ == "__main__":
     import sys
