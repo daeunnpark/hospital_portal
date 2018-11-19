@@ -289,17 +289,17 @@ class Ui_CommonLogin(object):
         self.label_2.setText(_translate("CommonLogin", "Password:"))
         self.loginButton.setText(_translate("CommonLogin", "Login"))
         
-    #def changeUI_to_Menu(self): # change UI to Menu
-     #   self.uiNew = Ui_Menu()
-      #  self.uiNew.setupUi(MainWindow)
-       # MainWindow.showFullScreen()
+    def changeUI_to_Menu(self): # change UI to Menu
+        self.uiNew = Ui_Menu()
+        self.uiNew.setupUi(MainWindow)
+        MainWindow.showMaximized()
 
     def authenticateUser(self):
-        sql_command = """SELECT COUNT(P.Username, P.Password) FROM Patient P WHERE P.Username = '%s' AND P.Password = '%s';"""  #If highlighted, means not connected to database
+        #sql_command = """SELECT COUNT(P.Username, P.Password) FROM Patient P WHERE P.Username = '%s' AND P.Password = '%s';"""  #If highlighted, means not connected to database
         #cur.execute(sql_command)
         numberAuthenticatedUsers = 0;
         #numberAuthenticatedUsers = cur.fetchall()
-        
+
 
 if __name__ == "__main__":
     import sys
