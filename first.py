@@ -287,7 +287,8 @@ class Ui_CommonLogin(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
-        self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
+        #self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
+        self.loginButton.clicked.connect(self.authenticateUser)
 
     def retranslateUi(self, CommonLogin):
         _translate = QtCore.QCoreApplication.translate
@@ -302,8 +303,9 @@ class Ui_CommonLogin(object):
         MainWindow.showMaximized()
 
     def authenticateUser(self):
+        sql_command = """SELECT * FROM PATIENT"""
         #sql_command = """SELECT COUNT(P.Username, P.Password) FROM Patient P WHERE P.Username = '%s' AND P.Password = '%s';"""  #If highlighted, means not connected to database
-        #cur.execute(sql_command)
+        cur.execute(sql_command)
         numberAuthenticatedUsers = 0;
         #numberAuthenticatedUsers = cur.fetchall()
 
@@ -348,9 +350,9 @@ class Ui_Access(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
-    #cur = conn.cursor()
+    cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI
