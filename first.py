@@ -303,12 +303,13 @@ class Ui_CommonLogin(object):
         MainWindow.showMaximized()
 
     def authenticateUser(self):
-        sql_command = """SELECT Age FROM PATIENT WHERE Weight = 3.0"""
-        #sql_command = """SELECT COUNT(P.Username, P.Password) FROM Patient P WHERE P.Username = '%s' AND P.Password = '%s';"""  #If highlighted, means not connected to database
-        cur.execute(sql_command)
+        cur.execute("SELECT * FROM Patient WHERE Weight = '3.0'")
         ageUser = 0;
         ageUser = cur.fetchall()
         print(ageUser)
+        self.uiNew = Ui_Menu()
+        self.uiNew.setupUi(MainWindow)
+        MainWindow.showMaximized()
 
 class Ui_Access(object):
     def setupUi(self, Access):
