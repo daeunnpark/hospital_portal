@@ -270,11 +270,18 @@ class Ui_CommonLogin(object):
         cur.execute('SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
         authenticate = cur.fetchall()
         if(len(authenticate) == 1):
+            #def fetchInfoForPatientPersonalInfo
             self.uiNew = Ui_Menu()
             self.uiNew.setupUi(MainWindow)
             MainWindow.showFullScreen()
         else:
             print("no user")
+
+    def fetchInfoForPatientPersonalInfo(self):
+        cur.execute('SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        firstName = cur.fetchall()
+
+
 
 class Ui_Access(object):
     def setupUi(self, Access):
