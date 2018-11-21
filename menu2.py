@@ -209,7 +209,7 @@ class Ui_Menu(object):
         Menu.setStatusBar(self.statusBar)
 
         self.retranslateUi(Menu)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
     def retranslateUi(self, Menu):
@@ -232,3 +232,14 @@ class Ui_Menu(object):
         self.label_13.setText(_translate("Menu", "Credit Card Number:"))
         self.label_14.setText(_translate("Menu", "Billing Amount:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Menu = QtWidgets.QMainWindow()
+    ui = Ui_Menu()
+    ui.setupUi(Menu)
+    Menu.show()
+    sys.exit(app.exec_())
+
