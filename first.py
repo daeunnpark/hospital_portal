@@ -303,9 +303,9 @@ class Ui_CommonLogin(object):
         MainWindow.showMaximized()
 
     def authenticateUser(self):
-        cur.execute("SELECT * FROM Person P WHERE Username = 'AAA' AND UserPassword = 'bbb'")
-        ageUser = cur.fetchall()
-        if(len(ageUser) == 1):
+        cur.execute('SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        authenticate = cur.fetchall()
+        if(len(authenticate) == 1):
             self.uiNew = Ui_Menu()
             self.uiNew.setupUi(MainWindow)
             MainWindow.showMaximized()
