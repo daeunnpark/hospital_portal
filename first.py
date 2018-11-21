@@ -303,13 +303,14 @@ class Ui_CommonLogin(object):
         MainWindow.showMaximized()
 
     def authenticateUser(self):
-        cur.execute("SELECT * FROM Patient WHERE Weight = '3.0'")
-        ageUser = 0;
+        cur.execute("SELECT * FROM Person P WHERE Username = 'AAA' AND UserPassword = 'bbb'")
         ageUser = cur.fetchall()
-        print(ageUser)
-        self.uiNew = Ui_Menu()
-        self.uiNew.setupUi(MainWindow)
-        MainWindow.showMaximized()
+        if(len(ageUser) == 1):
+            self.uiNew = Ui_Menu()
+            self.uiNew.setupUi(MainWindow)
+            MainWindow.showMaximized()
+        else:
+            print("no user")
 
 class Ui_Access(object):
     def setupUi(self, Access):
