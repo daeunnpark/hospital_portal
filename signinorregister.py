@@ -7,55 +7,60 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from first import *
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+
+class Ui_SignInOrRegister(object):
+    def setupUi(self, SignInOrRegister):
+        SignInOrRegister.setObjectName("SignInOrRegister")
+        SignInOrRegister.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(SignInOrRegister)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(190, 270, 611, 161))
+        self.pushButton.setGeometry(QtCore.QRect(1000, 880, 1000, 200))
         self.pushButton.setStyleSheet("font: 15pt \"Lucida Calligraphy\";\n"
-"color: rgb(46, 125, 132)")
+                                      "color: rgb(46, 125, 132)")
         self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(120, 60, 571, 101))
-        self.pushButton_2.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
-"color: rgb(46, 125, 132)")
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.commonLoginButton = QtWidgets.QPushButton(self.centralwidget)
+        self.commonLoginButton.setGeometry(QtCore.QRect(300, 400, 2000, 200))
+        self.commonLoginButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+                                             "color: rgb(46, 125, 132)")
+        self.commonLoginButton.setObjectName("pushButton_2")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 290, 301, 131))
+        self.label.setGeometry(QtCore.QRect(300, 900, 301, 131))
         self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
-"color: rgb(0, 0, 0);\n"
-"font-weight:bold;")
+                                 "color: rgb(0, 0, 0);\n"
+                                 "font-weight:bold;")
         self.label.setObjectName("label")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        SignInOrRegister.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(SignInOrRegister)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar = QtWidgets.QStatusBar(SignInOrRegister)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(SignInOrRegister)
+        QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
 
-    def retranslateUi(self, MainWindow):
+        self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
+        self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
+
+    def retranslateUi(self, SignInOrRegister):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Sign Up Using Your Access Code"))
-        self.pushButton_2.setText(_translate("MainWindow", "Login"))
-        self.label.setText(_translate("MainWindow", "New User?"))
+        SignInOrRegister.setWindowTitle(_translate("SignInOrRegister", "SignInOrRegister"))
+        self.pushButton.setText(_translate("SignInOrRegister", "Sign Up Using Your Access Code"))
+        self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
+        self.label.setText(_translate("SignInOrRegister", "New User?"))
 
+    def changeUI_to_CommonLogin(self):  # change UI to Menu
+        self.uiLogin = Ui_CommonLogin()
+        self.uiLogin.setupUi(MainWindow)
+        MainWindow.showMaximized()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+    def changeUI_to_AccessCode(self):  # change UI to Menu
+        self.uiAccess = Ui_Access()
+        self.uiAccess.setupUi(MainWindow)
+        MainWindow.showMaximized()
 

@@ -76,13 +76,3 @@ class Ui_Menu(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Insurance Information"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Menu = QtWidgets.QMainWindow()
-    ui = Ui_Menu()
-    ui.setupUi(Menu)
-    Menu.show()
-    sys.exit(app.exec_())
-
