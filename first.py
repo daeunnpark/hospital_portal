@@ -280,8 +280,30 @@ class Ui_CommonLogin(object):
     def fetchInfoForPatientPersonalInfo(self):
         cur.execute('SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
         firstName = cur.fetchall()
-
-
+        cur.execute('SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        lastName = cur.fetchall()
+        cur.execute('SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        phoneNumber = cur.fetchall()
+        cur.execute('SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        emailAddress = cur.fetchall()
+        cur.execute('SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)', (self.lineEdit.text(), self.lineEdit_2.text()))
+        ID = cur.fetchall()
+        cur.execute('SELECT Age FROM Patient P WHERE PatientID = (%d)', (ID))
+        age = cur.fetchall()
+        cur.execute('SELECT Weight FROM Patient P WHERE PatientID = (%d)', (ID))
+        weight = cur.fetchall()
+        cur.execute('SELECT Height FROM Patient P WHERE PatientID = (%d)', (ID))
+        height = cur.fetchall()
+        cur.execute('SELECT SSN FROM Patient P WHERE PatientID = (%d)', (ID))
+        ssn = cur.fetchall()
+        cur.execute('SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%d)', (ID))
+        creditCardNumber = cur.fetchall()
+        cur.execute('SELECT BillingAmount FROM Patient P WHERE PatientID = (%d)', (ID))
+        billingAmount = cur.fetchall()
+        cur.execute('SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%d)', (ID))
+        insuranceNumber = cur.fetchall()
+        cur.execute('SELECT MedicationList FROM Patient P WHERE PatientID = (%d)', (ID))
+        medicationList = cur.fetchall()
 
 class Ui_Access(object):
     def setupUi(self, Access):
