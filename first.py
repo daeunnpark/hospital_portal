@@ -235,14 +235,16 @@ class Ui_CommonLogin(object):
             insuranceNumber = str(cur.fetchone()[0])
             cur.execute('SELECT MedicationList FROM Patient P WHERE PatientID = (%s)', ID)
             medicationList = str(cur.fetchone()[0])
+            cur.execute('SELECT Date FROM Appointment A WHERE PatientID = (%s)', ID)
+            appointmentDates = cur.fetchall()
             self.uiNew = Ui_Menu()
-            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList)
+            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates)
             MainWindow.showFullScreen()
         else:
             print("no user")
 
 class Ui_Menu(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
         Menu.setObjectName("Menu")
         Menu.resize(1600, 1200)
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -378,6 +380,13 @@ class Ui_Menu(object):
         self.calendarWidget_2 = QtWidgets.QCalendarWidget(self.gridLayoutWidget_2)
         self.calendarWidget_2.setObjectName("calendarWidget_2")
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
+        for row in appointmentDates:
+            #self.calendarWidget_2.setDateTextFormat(row[0], QtGui.QTextCharFormat.SingleUnderline)
+            #painter = QtGui.QPainter(self)
+            #painter.setPen(QtGui.QPen(QtCore.Qt.red))
+            #self.calendarWidget_2.paintCell(row[0])
+            self.calendarWidget_2.setSelectedDate(row[0])
+
         self.label_11 = QtWidgets.QLabel(self.tab_2)
         self.label_11.setGeometry(QtCore.QRect(50, 700, 600, 41))
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -420,6 +429,7 @@ class Ui_Menu(object):
         self.lineEdit_11 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_11.setGeometry(QtCore.QRect(80, 100, 400, 60))
         self.lineEdit_11.setObjectName("lineEdit_11")
+        self.lineEdit_11.setText(insuranceNumber)
         self.label_13 = QtWidgets.QLabel(self.tab_4)
         self.label_13.setGeometry(QtCore.QRect(30, 300, 500, 61))
         self.label_13.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -429,6 +439,7 @@ class Ui_Menu(object):
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_12.setGeometry(QtCore.QRect(80, 370, 400, 60))
         self.lineEdit_12.setObjectName("lineEdit_12")
+        self.lineEdit_12.setText(creditCardNumber)
         self.label_14 = QtWidgets.QLabel(self.tab_4)
         self.label_14.setGeometry(QtCore.QRect(30, 550, 500, 61))
         self.label_14.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -438,6 +449,7 @@ class Ui_Menu(object):
         self.lineEdit_13 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_13.setGeometry(QtCore.QRect(80, 630, 400, 60))
         self.lineEdit_13.setObjectName("lineEdit_13")
+        self.lineEdit_13.setText(billingAmount)
         self.tabWidget.addTab(self.tab_4, "")
         Menu.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(Menu)
@@ -517,7 +529,7 @@ class Ui_Access(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
