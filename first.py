@@ -368,7 +368,7 @@ class Ui_Menu(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.groupBox_2 = QtWidgets.QGroupBox(self.tab_2)
-        self.groupBox_2.setGeometry(QtCore.QRect(430, 40, 1000, 600))
+        self.groupBox_2.setGeometry(QtCore.QRect(430, 80, 1000, 600))
         self.groupBox_2.setObjectName("groupBox_2")
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self.groupBox_2)
         self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 0, 1020, 600))
@@ -396,6 +396,12 @@ class Ui_Menu(object):
 "font-weight: bold;\n"
 "font: 18pt \"Lucida Calligraphy\";")
         self.label_11.setObjectName("label_11")
+        self.label_34 = QtWidgets.QLabel(self.tab_2)
+        self.label_34.setGeometry(QtCore.QRect(0, 10, 700, 41))
+        self.label_34.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_34.setObjectName("label_34")
         self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.tab_2)
         self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 194, 22))
         self.dateTimeEdit.setObjectName("dateTimeEdit")
@@ -490,6 +496,7 @@ class Ui_Menu(object):
         self.label_13.setText(_translate("Menu", "Credit Card Number:"))
         self.label_14.setText(_translate("Menu", "Billing Amount:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
+        self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
 
 class Ui_Access(object):
     def setupUi(self, Access):
