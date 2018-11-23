@@ -394,6 +394,10 @@ class Ui_Menu(object):
         self.dateTimeEdit_7 = QtWidgets.QDateTimeEdit(self.tab_2)
         self.dateTimeEdit_7.setGeometry(QtCore.QRect(1200, 780, 300, 80))
         self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
+        self.dateTimeEdit.setVisible(False)
+        self.dateTimeEdit_3.setVisible(False)
+        self.dateTimeEdit_5.setVisible(False)
+        self.dateTimeEdit_7.setVisible(False)
         numDates = 0
         for row in appointmentDates:
             if(earliestDate == None):
@@ -402,15 +406,19 @@ class Ui_Menu(object):
                 if(row[0] < earliestDate):
                     earliestDate = row[0]
             if(numDates == 0):
+                self.dateTimeEdit.setVisible(True)
                 self.dateTimeEdit.setDate(row[0])
                 numDates = numDates + 1
             elif(numDates == 1):
+                self.dateTimeEdit_3.setVisible(True)
                 self.dateTimeEdit_3.setDate(row[0])
                 numDates = numDates + 1
             elif(numDates == 2):
+                self.dateTimeEdit_5.setVisible(True)
                 self.dateTimeEdit_5.setDate(row[0])
                 numDates = numDates + 1
             elif(numDates == 3):
+                self.dateTimeEdit_7.setVisible(True)
                 self.dateTimeEdit_7.setDate(row[0])
                 numDates = numDates + 1
 
