@@ -702,6 +702,11 @@ class Ui_CommonSignUp(object):
         self.menubar = QtWidgets.QMenuBar(CommonSignUp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(2000, 1200, 400, 81))
+        self.pushButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
+                                      "color: rgb(46, 125, 132);")
+        self.pushButton.setObjectName("pushButton")
         CommonSignUp.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(CommonSignUp)
         self.statusbar.setObjectName("statusbar")
@@ -709,6 +714,8 @@ class Ui_CommonSignUp(object):
 
         self.retranslateUi(CommonSignUp)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
+
+        self.pushButton.clicked.connect(self.CreatePatient)
 
     def retranslateUi(self, CommonSignUp):
         _translate = QtCore.QCoreApplication.translate
@@ -726,6 +733,10 @@ class Ui_CommonSignUp(object):
         self.label_11.setText(_translate("MainWindow", "SSN:"))
         self.label_12.setText(_translate("MainWindow", "Credit Card Number:"))
         self.label_13.setText(_translate("MainWindow", "Insurance Number:"))
+        self.pushButton.setText(_translate("Main Window", "Sign Up!"))
+
+    def CreatePatient(self):
+        print("hello")
 
 
 if __name__ == "__main__":
