@@ -531,13 +531,13 @@ class Ui_Access(object):
         access = cur.fetchall()
         if (cur.rowcount != 0):
             self.uiNew = Ui_CommonSignUp()
-            self.uiNew.setupUi(MainWindow)
+            self.uiNew.setupUi(MainWindow, access)
             MainWindow.showFullScreen()
         else:
             print("error")
 
 class Ui_CommonSignUp(object):
-    def setupUi(self, CommonSignUp):
+    def setupUi(self, CommonSignUp, access):
         CommonSignUp.setObjectName("CommonSignUp")
         CommonSignUp.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonSignUp)
@@ -736,7 +736,18 @@ class Ui_CommonSignUp(object):
         self.pushButton.setText(_translate("Main Window", "Sign Up!"))
 
     def CreatePatient(self):
-        print("hello")
+        if(self.lineEdit_6.text() != self.lineEdit_7.text()):
+            print("error")
+        #else:
+            #cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
+            #if(cur.rowcount != 0):
+             #   print("error: Username Already Exists")
+            #else:
+                #cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                #if(cur.rowcount != 0):
+                 #   print("error: UserPassword Already Exists")
+                #else:
+                    #cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES ( access, self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5, self.lineEdit_6)')
 
 
 if __name__ == "__main__":
