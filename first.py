@@ -626,6 +626,78 @@ class Ui_CommonSignUp(object):
         self.lineEdit_7.setGeometry(QtCore.QRect(1500, 580, 521, 61))
         self.lineEdit_7.setText("")
         self.lineEdit_7.setObjectName("lineEdit_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(30, 650, 541, 71))
+        self.label_8.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                   "font-weight: bold;\n"
+                                   "font: 18pt \"Lucida Calligraphy\";\n"
+                                   "\n"
+                                   "")
+        self.label_8.setObjectName("label_8")
+        self.lineEdit_8 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_8.setGeometry(QtCore.QRect(90, 730, 521, 61))
+        self.lineEdit_8.setText("")
+        self.lineEdit_8.setObjectName("lineEdit_8")
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        self.label_9.setGeometry(QtCore.QRect(1300, 650, 541, 71))
+        self.label_9.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                   "font-weight: bold;\n"
+                                   "font: 18pt \"Lucida Calligraphy\";\n"
+                                   "\n"
+                                   "")
+        self.label_9.setObjectName("label_9")
+        self.lineEdit_9 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_9.setGeometry(QtCore.QRect(1500, 730, 521, 61))
+        self.lineEdit_9.setText("")
+        self.lineEdit_9.setObjectName("lineEdit_9")
+        self.label_10 = QtWidgets.QLabel(self.centralwidget)
+        self.label_10.setGeometry(QtCore.QRect(30, 800, 541, 71))
+        self.label_10.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                   "font-weight: bold;\n"
+                                   "font: 18pt \"Lucida Calligraphy\";\n"
+                                   "\n"
+                                   "")
+        self.label_10.setObjectName("label_10")
+        self.lineEdit_10 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_10.setGeometry(QtCore.QRect(90, 880, 521, 61))
+        self.lineEdit_10.setText("")
+        self.lineEdit_10.setObjectName("lineEdit_10")
+        self.label_11 = QtWidgets.QLabel(self.centralwidget)
+        self.label_11.setGeometry(QtCore.QRect(1300, 800, 541, 71))
+        self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 18pt \"Lucida Calligraphy\";\n"
+                                    "\n"
+                                    "")
+        self.label_11.setObjectName("label_11")
+        self.lineEdit_11 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_11.setGeometry(QtCore.QRect(1500, 880, 521, 61))
+        self.lineEdit_11.setText("")
+        self.lineEdit_11.setObjectName("lineEdit_11")
+        self.label_12 = QtWidgets.QLabel(self.centralwidget)
+        self.label_12.setGeometry(QtCore.QRect(30, 950, 541, 71))
+        self.label_12.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 18pt \"Lucida Calligraphy\";\n"
+                                    "\n"
+                                    "")
+        self.label_12.setObjectName("label_12")
+        self.lineEdit_12 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_12.setGeometry(QtCore.QRect(90, 1030, 521, 61))
+        self.lineEdit_12.setText("")
+        self.lineEdit_12.setObjectName("lineEdit_12")
+        self.label_13 = QtWidgets.QLabel(self.centralwidget)
+        self.label_13.setGeometry(QtCore.QRect(1300, 950, 541, 71))
+        self.label_13.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 18pt \"Lucida Calligraphy\";\n"
+                                    "\n"
+                                    "")
+        self.label_13.setObjectName("label_10")
+        self.lineEdit_13 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_13.setGeometry(QtCore.QRect(1500, 1030, 521, 61))
+        self.lineEdit_13.setText("")
+        self.lineEdit_13.setObjectName("lineEdit_13")
         CommonSignUp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(CommonSignUp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -648,13 +720,19 @@ class Ui_CommonSignUp(object):
         self.label_5.setText(_translate("MainWindow", "Username: "))
         self.label_6.setText(_translate("MainWindow", "Password:"))
         self.label_7.setText(_translate("MainWindow", "Re-Enter Password:"))
+        self.label_8.setText(_translate("MainWindow", "Age:"))
+        self.label_9.setText(_translate("MainWindow", "Weight:"))
+        self.label_10.setText(_translate("MainWindow", "Height:"))
+        self.label_11.setText(_translate("MainWindow", "SSN:"))
+        self.label_12.setText(_translate("MainWindow", "Credit Card Number:"))
+        self.label_13.setText(_translate("MainWindow", "Insurance Number:"))
 
 
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
-    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
