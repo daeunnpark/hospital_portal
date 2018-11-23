@@ -749,7 +749,7 @@ class Ui_CommonSignUp(object):
                 if(cur.rowcount != 0):
                     print("error: UserPassword Already Exists")
                 else:
-                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (2, "f", "1234567891", "h", "i", "j", "k")')
+                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (access, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     conn.commit()
 
 if __name__ == "__main__":
