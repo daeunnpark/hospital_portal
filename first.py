@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow2.ui'
+# Form implementation generated from reading ui file 'MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -15,10 +15,10 @@ import pymysql
 #from menu import *
 
 class login_page(object):
-    def setupUi(self, MainWindow2):
-        MainWindow2.setObjectName("MainWindow2")
-        MainWindow2.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow2)
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        #MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.imageLabel = QtWidgets.QLabel(self.centralwidget)
         self.imageLabel2 = QtWidgets.QLabel(self.centralwidget)
@@ -54,29 +54,29 @@ class login_page(object):
         #self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
         #self.pushButton_5.setGeometry(QtCore.QRect(340, 460, 114, 32))
         #self.pushButton_5.setObjectName("pushButton_5")
-        MainWindow2.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow2)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
-        MainWindow2.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow2)
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
-        MainWindow2.setStatusBar(self.statusbar)
+        MainWindow.setStatusBar(self.statusbar)
         
-        self.retranslateUi(MainWindow2)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow2)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.pushButton.clicked.connect(self.changeUI_to_LoginOrRegister) # set listener
 
-    def retranslateUi(self, MainWindow2):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow2.setWindowTitle(_translate("MainWindow2", "MainWindow2"))
-        self.label.setText(_translate("MainWindow2", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600;\">Welcome to Healthcare United Patient Portal</span></p><p><br/></p></body></html>"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600;\">Welcome to Healthcare United Patient Portal</span></p><p><br/></p></body></html>"))
         self.label.setStyleSheet('color: teal')
-        self.pushButton.setText(_translate("MainWindow2", "Patient"))
-        self.pushButton_2.setText(_translate("MainWindow2", "Doctor"))
-        self.pushButton_3.setText(_translate("MainWindow2", "Nurse"))
-        self.pushButton_4.setText(_translate("MainWindow2", "Admin"))
+        self.pushButton.setText(_translate("MainWindow", "Patient"))
+        self.pushButton_2.setText(_translate("MainWindow", "Doctor"))
+        self.pushButton_3.setText(_translate("MainWindow", "Nurse"))
+        self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         #self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
     def changeUI_to_LoginOrRegister(self): # change UI to Menu
@@ -653,9 +653,9 @@ class Ui_CommonSignUp(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
     # Initialize the database cursor
-    cur = conn.cursor()
+    #cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI
