@@ -380,6 +380,7 @@ class Ui_Menu(object):
         self.calendarWidget_2 = QtWidgets.QCalendarWidget(self.gridLayoutWidget_2)
         self.calendarWidget_2.setObjectName("calendarWidget_2")
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
+        self.calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
         earliestDate = None
         for row in appointmentDates:
             if(earliestDate == None):
