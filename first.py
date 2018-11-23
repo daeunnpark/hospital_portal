@@ -715,7 +715,7 @@ class Ui_CommonSignUp(object):
         self.retranslateUi(CommonSignUp)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
 
-        self.pushButton.clicked.connect(self.CreatePatient)
+        self.pushButton.clicked.connect(lambda: self.CreatePatient(access))
 
     def retranslateUi(self, CommonSignUp):
         _translate = QtCore.QCoreApplication.translate
@@ -735,17 +735,17 @@ class Ui_CommonSignUp(object):
         self.label_13.setText(_translate("MainWindow", "Insurance Number:"))
         self.pushButton.setText(_translate("Main Window", "Sign Up!"))
 
-    def CreatePatient(self):
+    def CreatePatient(self, access):
         if(self.lineEdit_6.text() != self.lineEdit_7.text()):
             print("error")
-        #else:
-            #cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
-            #if(cur.rowcount != 0):
-             #   print("error: Username Already Exists")
-            #else:
-                #cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
-                #if(cur.rowcount != 0):
-                 #   print("error: UserPassword Already Exists")
+        else:
+            cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
+            if(cur.rowcount != 0):
+                print("error: Username Already Exists")
+            else:
+                cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                if(cur.rowcount != 0):
+                    print("error: UserPassword Already Exists")
                 #else:
                     #cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES ( access, self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5, self.lineEdit_6)')
 
