@@ -380,13 +380,15 @@ class Ui_Menu(object):
         self.calendarWidget_2 = QtWidgets.QCalendarWidget(self.gridLayoutWidget_2)
         self.calendarWidget_2.setObjectName("calendarWidget_2")
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
+        earliestDate = None
         for row in appointmentDates:
-            #self.calendarWidget_2.setDateTextFormat(row[0], QtGui.QTextCharFormat.SingleUnderline)
-            #painter = QtGui.QPainter(self)
-            #painter.setPen(QtGui.QPen(QtCore.Qt.red))
-            #self.calendarWidget_2.paintCell(row[0])
-            self.calendarWidget_2.setSelectedDate(row[0])
+            if(earliestDate == None):
+                earliestDate = row[0]
+            else:
+                if(row[0] < earliestDate):
+                    earliestDate = row[0]
 
+        self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
         self.label_11.setGeometry(QtCore.QRect(50, 700, 600, 41))
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
