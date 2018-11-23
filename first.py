@@ -750,7 +750,7 @@ class Ui_CommonSignUp(object):
                     print("error: UserPassword Already Exists")
                 else:
                     cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (2, "f", "1234567891", "h", "i", "j", "k")')
-
+                    conn.commit()
 
 if __name__ == "__main__":
     import sys
@@ -764,6 +764,7 @@ if __name__ == "__main__":
     ui = login_page() # set login page as UI
     ui.setupUi(MainWindow)
     MainWindow.showMaximized()
+    #conn.commit()
     sys.exit(app.exec_())
 
 
