@@ -10,7 +10,7 @@
 # command line: exec python3 -m PyQt5.uic.pyuic first.ui -o fisrt.py -x to convert .ui file to .py file
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication
+#from PyQt5.QtWidgets import QApplication
 import pymysql
 #from menu import *
 

@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -19,10 +20,10 @@ class Ui_MainWindow(object):
         self.label.setTextFormat(QtCore.Qt.AutoText)
         self.label.setObjectName("label")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        #self.groupBox.setGeometry(QtCore.QRect(120, 190, 591, 311))
+        # self.groupBox.setGeometry(QtCore.QRect(120, 190, 591, 311))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
-        self.groupBox.setAlignment(Qt.AlignCenter)
+        # self.groupBox.setAlignment(Qt.AlignCenter)
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout.setObjectName("gridLayout")
         self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
@@ -52,7 +53,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600;\">Welcome to Healthcare United </span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600;\">Patient Portal</span></p><p align=\"center\"><br/></p></body></html>"))
+        self.label.setText(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p align="center"><span style=" font-size:18pt; font-weight:600;">Welcome to Healthcare United </span></p><p align="center"><span style=" font-size:18pt; font-weight:600;">Patient Portal</span></p><p align="center"><br/></p></body></html>',
+            )
+        )
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         self.pushButton_2.setText(_translate("MainWindow", "Doctor"))
         self.pushButton.setText(_translate("MainWindow", "Patient"))
@@ -61,6 +67,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

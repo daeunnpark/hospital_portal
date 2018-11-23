@@ -1,0 +1,86 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+import pymysql
+
+# from menu import *
+
+
+class login_page_UI(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.imageLabel = QtWidgets.QLabel(self.centralwidget)
+        self.imageLabel2 = QtWidgets.QLabel(self.centralwidget)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(720, 120, 1500, 200))
+        self.imageLabel.setGeometry(QtCore.QRect(400, -300, 1999, 1000))
+        self.imageLabel2.setGeometry(QtCore.QRect(1850, -300, 1999, 1000))
+        self.label.setTextFormat(QtCore.Qt.AutoText)
+        self.label.setObjectName("label")
+        self.imageLabel.setObjectName("imageLabel")
+        self.imageLabel2.setObjectName("imageLabel2")
+        self.pixmap = QtGui.QPixmap("icon.PNG")
+        self.imageLabel.setPixmap(self.pixmap)
+        self.imageLabel2.setPixmap(self.pixmap)
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox.setGeometry(QtCore.QRect(850, 400, 800, 600))
+        self.groupBox.setTitle("")
+        self.groupBox.setObjectName("groupBox")
+        self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
+        self.gridLayout.setObjectName("gridLayout")
+        self.pushButton = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton.setObjectName("pushButton")
+        self.gridLayout.addWidget(self.pushButton, 0, 0, 1, 1)
+        self.pushButton_2 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.gridLayout.addWidget(self.pushButton_2, 1, 0, 1, 1)
+        self.pushButton_3 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.gridLayout.addWidget(self.pushButton_3, 2, 0, 1, 1)
+        self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.gridLayout.addWidget(self.pushButton_4, 3, 0, 1, 1)
+        # self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        # self.pushButton_5.setGeometry(QtCore.QRect(340, 460, 114, 32))
+        # self.pushButton_5.setObjectName("pushButton_5")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    #        self.pushButton.clicked.connect(
+    # self.changeUI_to_LoginOrRegister
+    #       )  # set listener
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-size:18pt; font-weight:600;">Welcome to Healthcare United Patient Portal</span></p><p><br/></p></body></html>',
+            )
+        )
+        self.label.setStyleSheet("color: teal")
+        self.pushButton.setText(_translate("MainWindow", "Patient"))
+        self.pushButton_2.setText(_translate("MainWindow", "Doctor"))
+        self.pushButton_3.setText(_translate("MainWindow", "Nurse"))
+        self.pushButton_4.setText(_translate("MainWindow", "Admin"))
+        # self.pushButton_5.setText(_translate("MainWindow", "Login"))
+
+
+# Block comment
+"""
+    def changeUI_to_LoginOrRegister(self):  # change UI to Menu
+        self.uiNew = Ui_SignInOrRegister()
+        self.uiNew.setupUi(MainWindow)
+        MainWindow.showFullScreen()
+"""
