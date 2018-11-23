@@ -1,7 +1,8 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 import pymysql
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-# from menu import *
+from loginOrRegister import loginOrRegister_UI
 
 
 class login_page_UI(object):
@@ -56,9 +57,9 @@ class login_page_UI(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    #        self.pushButton.clicked.connect(
-    # self.changeUI_to_LoginOrRegister
-    #       )  # set listener
+        # set clicklistener
+        print("111")
+        self.pushButton.clicked.connect(self.changeUI_to_SignInOrRegister)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -76,6 +77,37 @@ class login_page_UI(object):
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         # self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
+    def changeUI_to_SignInOrRegister(self):  # change UI to Menu
+
+        # MainWindow = QtWidgets.QMainWindow()
+
+        self.ui = loginOrRegister_UI()
+        self.ui.setupUi(MainWindow)
+
+        MainWindow.showMaximized()
+        print("changeUI_to_SignInOrRegister")
+
+
+"""
+        self.uiNew = loginOrRegister_UI()
+        self.uiNew.setupUi(MainWindow)
+        MainWindow.showFullScreen()
+"""
+
+# main method of MainWindow.py
+# This is only executed with command python MainWindow.py
+if __name__ == "__main__":
+    print("nonono")
+    app = QtWidgets.QApplication(sys.argv)
+
+    MainWindow = QtWidgets.QMainWindow()
+
+    ui = login_page_UI()
+    ui.setupUi(MainWindow)
+
+    MainWindow.showMaximized()
+
+    sys.exit(app.exec_())
 
 # Block comment
 """

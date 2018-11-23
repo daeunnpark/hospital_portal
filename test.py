@@ -1,12 +1,12 @@
+import sys
+import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-# from PyQt5.QtWidgets import QApplication
-import pymysql
-
+# import modules
 from login_page import login_page_UI
 
+
 if __name__ == "__main__":
-    import sys
 
     # Initialize database connection
     # conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
@@ -17,11 +17,21 @@ if __name__ == "__main__":
         passwd="hospitalCSE305!",
         db="hospital",
     )
+
     # Initialize the database cursor
     cur = conn.cursor()
+
     app = QtWidgets.QApplication(sys.argv)
+
     MainWindow = QtWidgets.QMainWindow()
-    ui = login_page_UI()  # set login page as UI
+
+    # Load login_page_UI
+    ui = login_page_UI()
+
+    # Set MainWindow to login_page
     ui.setupUi(MainWindow)
+    print("222")
     MainWindow.showMaximized()
+    ui.pushButton.clicked.connect(ui.changeUI_to_SignInOrRegister)
+    print("333")
     sys.exit(app.exec_())
