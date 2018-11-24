@@ -530,6 +530,42 @@ class Ui_Menu(object):
                                     "font-weight: bold;\n"
                                     "font: 12pt \"Lucida Calligraphy\";")
         self.label_34.setObjectName("label_34")
+        self.label_35 = QtWidgets.QLabel(self.tab_2)
+        self.label_35.setGeometry(QtCore.QRect(1440, 10, 700, 41))
+        self.label_35.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_35.setObjectName("label_35")
+        self.label_36 = QtWidgets.QLabel(self.tab_2)
+        self.label_36.setGeometry(QtCore.QRect(1440, 80, 700, 41))
+        self.label_36.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_36.setObjectName("label_36")
+        self.dateWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.dateWidget.setGeometry(QtCore.QRect(1440, 120, 400, 41))
+        self.dateWidget.setObjectName("dateWidget")
+        self.label_37 = QtWidgets.QLabel(self.tab_2)
+        self.label_37.setGeometry(QtCore.QRect(1440, 200, 700, 41))
+        self.label_37.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_37.setObjectName("label_37")
+        self.timeStartWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.timeStartWidget.setGeometry(QtCore.QRect(1440, 240, 400, 41))
+        self.timeStartWidget.setObjectName("timeStartWidget")
+        self.label_38 = QtWidgets.QLabel(self.tab_2)
+        self.label_38.setGeometry(QtCore.QRect(1440, 320, 700, 41))
+        self.label_38.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_38.setObjectName("label_38")
+        self.timeEndWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.timeEndWidget.setGeometry(QtCore.QRect(1440, 360, 400, 41))
+        self.timeEndWidget.setObjectName("timeEndWidget")
+        self.pushButtonSchedule = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonSchedule.setGeometry(QtCore.QRect(1490, 520, 300, 80))
+        self.pushButtonSchedule.setObjectName("pushButtonSchedule")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -610,6 +646,11 @@ class Ui_Menu(object):
         self.pushButtonCancel3.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButtonCancel5.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButtonCancel7.setText(_translate("Menu", "Cancel Appointment"))
+        self.label_35.setText(_translate("Menu", "Schedule Appointment: Max 4"))
+        self.label_36.setText(_translate("Menu", "Date:"))
+        self.label_37.setText(_translate("Menu", "Start Time:"))
+        self.label_38.setText(_translate("Menu", "End Time:"))
+        self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
 
     def cancelAppt(self, num, appointmentIDs):
         if(num == 1):
