@@ -796,14 +796,14 @@ class Ui_Access(object):
         access = cur.fetchall()
         if (cur.rowcount != 0):
             self.uiNew = Ui_CommonSignUp()
-            self.uiNew.setupUi(MainWindow, access)
+            self.uiNew.setupUi(MainWindow, access, num)
             MainWindow.showFullScreen()
         else:
             print("error")
 
 # moved to test.py as common_signup.py
 class Ui_CommonSignUp(object):
-    def setupUi(self, CommonSignUp, access):
+    def setupUi(self, CommonSignUp, access, num):
         CommonSignUp.setObjectName("CommonSignUp")
         CommonSignUp.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonSignUp)
@@ -964,6 +964,15 @@ class Ui_CommonSignUp(object):
         self.lineEdit_13.setGeometry(QtCore.QRect(1500, 1030, 521, 61))
         self.lineEdit_13.setText("")
         self.lineEdit_13.setObjectName("lineEdit_13")
+        if(num == 2 or num == 3):
+            self.lineEdit_13.setVisible(False)
+            self.label_13.setVisible(False)
+            self.lineEdit_12.setVisible(False)
+            self.label_12.setVisible(False)
+            self.lineEdit_11.setVisible(False)
+            self.label_11.setVisible(False)
+            self.lineEdit_10.setVisible(False)
+            self.label_10.setVisible(False)
         CommonSignUp.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(CommonSignUp)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -978,12 +987,12 @@ class Ui_CommonSignUp(object):
         self.statusbar.setObjectName("statusbar")
         CommonSignUp.setStatusBar(self.statusbar)
 
-        self.retranslateUi(CommonSignUp)
+        self.retranslateUi(CommonSignUp, num)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
 
         self.pushButton.clicked.connect(lambda: self.CreatePatient(access))
 
-    def retranslateUi(self, CommonSignUp):
+    def retranslateUi(self, CommonSignUp, num):
         _translate = QtCore.QCoreApplication.translate
         CommonSignUp.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "First Name:"))
@@ -993,8 +1002,12 @@ class Ui_CommonSignUp(object):
         self.label_5.setText(_translate("MainWindow", "Username: "))
         self.label_6.setText(_translate("MainWindow", "Password:"))
         self.label_7.setText(_translate("MainWindow", "Re-Enter Password:"))
-        self.label_8.setText(_translate("MainWindow", "Age:"))
-        self.label_9.setText(_translate("MainWindow", "Weight:"))
+        if(num == 1):
+            self.label_8.setText(_translate("MainWindow", "Age:"))
+            self.label_9.setText(_translate("MainWindow", "Weight:"))
+        else:
+            self.label_8.setText(_translate("MainWindow", "Specialty:"))
+            self.label_9.setText(_translate("MainWindow", "Medical License"))
         self.label_10.setText(_translate("MainWindow", "Height:"))
         self.label_11.setText(_translate("MainWindow", "SSN:"))
         self.label_12.setText(_translate("MainWindow", "Credit Card Number:"))
