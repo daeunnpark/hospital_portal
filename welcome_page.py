@@ -2,10 +2,11 @@ import sys
 import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from loginOrRegister import loginOrRegister_UI
+# import modules
+from login_or_register import login_or_register_UI
 
 
-class login_page_UI(object):
+class welcome_page_UI(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -30,9 +31,12 @@ class login_page_UI(object):
         self.groupBox.setObjectName("groupBox")
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout.setObjectName("gridLayout")
-        self.pushButton = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 0, 0, 1, 1)
+
+        # Renamed pushButton -> patient Btn for better understanding in test.py
+        self.patientBtn = QtWidgets.QPushButton(self.groupBox)
+        # self.patientBtn.setObjectName("pushButton")
+
+        self.gridLayout.addWidget(self.patientBtn, 0, 0, 1, 1)
         self.pushButton_2 = QtWidgets.QPushButton(self.groupBox)
         self.pushButton_2.setObjectName("pushButton_2")
         self.gridLayout.addWidget(self.pushButton_2, 1, 0, 1, 1)
@@ -57,8 +61,8 @@ class login_page_UI(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # moved to test.py
         # set clicklistener
-        print("111")
         # self.pushButton.clicked.connect(self.changeUI_to_SignInOrRegister)
 
     def retranslateUi(self, MainWindow):
@@ -71,48 +75,33 @@ class login_page_UI(object):
             )
         )
         self.label.setStyleSheet("color: teal")
-        self.pushButton.setText(_translate("MainWindow", "Patient"))
+        self.patientBtn.setText(_translate("MainWindow", "Patient"))
         self.pushButton_2.setText(_translate("MainWindow", "Doctor"))
         self.pushButton_3.setText(_translate("MainWindow", "Nurse"))
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         # self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
+
+""" Moved to test.py
     def changeUI_to_SignInOrRegister(self):  # change UI to Menu
 
-        # MainWindow = QtWidgets.QMainWindow()
-
-        self.ui = loginOrRegister_UI()
-        self.ui.setupUi(MainWindow)
-
-        MainWindow.showMaximized()
-        print("changeUI_to_SignInOrRegister")
-
-
-"""
         self.uiNew = loginOrRegister_UI()
         self.uiNew.setupUi(MainWindow)
         MainWindow.showFullScreen()
 """
 
 # main method of MainWindow.py
-# This is only executed with command python MainWindow.py
+# This is only executed with command python welcome_page.py
 if __name__ == "__main__":
     print("nonono")
     app = QtWidgets.QApplication(sys.argv)
 
     MainWindow = QtWidgets.QMainWindow()
 
-    ui = login_page_UI()
+    ui = welcome_page_UI()
     ui.setupUi(MainWindow)
 
     MainWindow.showMaximized()
 
     sys.exit(app.exec_())
 
-# Block comment
-"""
-    def changeUI_to_LoginOrRegister(self):  # change UI to Menu
-        self.uiNew = Ui_SignInOrRegister()
-        self.uiNew.setupUi(MainWindow)
-        MainWindow.showFullScreen()
-"""
