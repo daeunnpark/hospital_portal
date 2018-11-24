@@ -1,5 +1,6 @@
 import sys
-import pymysql
+
+# import pymysql -- unused
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 # import modules
@@ -15,6 +16,8 @@ class common_login_UI(object):
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
         self.centralwidget.setObjectName("centralwidget")
 
+        # Login
+        # Username
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setObjectName("label1")
         self.label1.setGeometry(QtCore.QRect(20, 200, 200, 100))
@@ -28,7 +31,7 @@ class common_login_UI(object):
 
         self.lineEdit1 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit1.setGeometry(QtCore.QRect(250, 200, 500, 50))
-        self.lineEdit1.setObjectName("lineEdit")
+        self.lineEdit1.setObjectName("lineEdit1")
 
         self.loginBtn = QtWidgets.QPushButton(self.centralwidget)
         self.loginBtn.setObjectName("loginBtn")
@@ -52,10 +55,11 @@ class common_login_UI(object):
             ""
         )
 
+        # Password
         self.lineEdit2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit2.setGeometry(QtCore.QRect(250, 400, 800, 50))
-        self.lineEdit2.setText("")
-        self.lineEdit2.setObjectName("lineEdit_2")
+        # self.lineEdit2.setText("")
+        self.lineEdit2.setObjectName("lineEdit2")
         self.lineEdit2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
         CommonLogin.setCentralWidget(self.centralwidget)
 
@@ -79,66 +83,115 @@ class common_login_UI(object):
         self.label2.setText(_translate("CommonLogin", "Password:"))
         self.loginBtn.setText(_translate("CommonLogin", "Login"))
 
-
-"""
-    def authenticateUser(self):
+    """
+    def user_exist(self, cur):
         cur.execute(
             "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-            (self.lineEdit.text(), self.lineEdit_2.text()),
+            (self.lineEdit1.text(), self.lineEdit2.text()),
         )
         authenticate = cur.fetchall()
+
+        if len(authenticate) == 1:
+            return True
+        return False
+
+    
+    def authenticate_user(self, cur):
+        print("AUTHENTIFICATION +++++")
+        print(cur)
+
+        cur.execute(
+            "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+            (self.lineEdit1.text(), self.lineEdit2.text()),
+        )
+        print("here?")
+        authenticate = cur.fetchall()
+
+        # initalize all data
+        self.firstName = None
+        self.lastName = None
+        self.phoneNumber = None
+        self.emailAddress = None
+        self.ID = None
+        self.age = None
+        self.weight = None
+        self.height = None
+        self.ssn = None
+        self.creditCardNumber = None
+        self.billingAmount = None
+        self.insuranceNumber = None
+        self.medicationList = None
+        self.appointmentDates = None
+        print("gg")
+
         if len(authenticate) == 1:
             cur.execute(
                 "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit.text(), self.lineEdit_2.text()),
+                (self.lineEdit1.text(), self.lineEdit2.text()),
             )
-            firstName = str(cur.fetchone()[0])
+            self.firstName = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit.text(), self.lineEdit_2.text()),
+                (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             lastName = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit.text(), self.lineEdit_2.text()),
+                (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             phoneNumber = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit.text(), self.lineEdit_2.text()),
+                (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             emailAddress = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit.text(), self.lineEdit_2.text()),
+                (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             ID = str(cur.fetchone()[0])
+
             cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", ID)
             age = str(cur.fetchone()[0])
+
             cur.execute("SELECT Weight FROM Patient P WHERE PatientID = (%s)", ID)
             weight = str(cur.fetchone()[0])
+
             cur.execute("SELECT Height FROM Patient P WHERE PatientID = (%s)", ID)
             height = str(cur.fetchone()[0])
+
             cur.execute("SELECT SSN FROM Patient P WHERE PatientID = (%s)", ID)
             ssn = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%s)", ID
             )
             creditCardNumber = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT BillingAmount FROM Patient P WHERE PatientID = (%s)", ID
             )
             billingAmount = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%s)", ID
             )
             insuranceNumber = str(cur.fetchone()[0])
+
             cur.execute(
                 "SELECT MedicationList FROM Patient P WHERE PatientID = (%s)", ID
             )
             medicationList = str(cur.fetchone()[0])
+
             cur.execute("SELECT Date FROM Appointment A WHERE PatientID = (%s)", ID)
             appointmentDates = cur.fetchall()
+
+            # moved to test.py
+
             self.uiNew = menu_UI()
             self.uiNew.setupUi(
                 MainWindow,
@@ -158,9 +211,13 @@ class common_login_UI(object):
                 appointmentDates,
             )
             MainWindow.showFullScreen()
+                    
         else:
             print("no user")
-"""
+
+        print("this is all")
+    """
+
 
 if __name__ == "__main__":
 

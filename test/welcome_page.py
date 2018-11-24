@@ -1,6 +1,8 @@
 import sys
 import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+
 
 # import modules
 from login_or_register import login_or_register_UI
@@ -9,8 +11,9 @@ from login_or_register import login_or_register_UI
 class welcome_page_UI(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-
         MainWindow.resize(800, 600)
+
+        # Welcome label
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.imageLabel = QtWidgets.QLabel(self.centralwidget)
@@ -22,7 +25,6 @@ class welcome_page_UI(object):
         self.label.setTextFormat(QtCore.Qt.AutoText)
         self.label.setObjectName("label")
         self.imageLabel.setObjectName("imageLabel")
-        self.imageLabel2.setObjectName("imageLabel2")
         self.pixmap = QtGui.QPixmap("icon.PNG")
         self.imageLabel.setPixmap(self.pixmap)
         self.imageLabel2.setPixmap(self.pixmap)
@@ -87,7 +89,6 @@ class welcome_page_UI(object):
         # self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
 
-# main method of MainWindow.py
 # This is only executed with command python welcome_page.py
 if __name__ == "__main__":
 
