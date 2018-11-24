@@ -241,15 +241,19 @@ class Ui_CommonLogin(object):
             medicationList = str(cur.fetchone()[0])
             cur.execute('SELECT Date FROM Appointment A WHERE PatientID = (%s)', ID)
             appointmentDates = cur.fetchall()
+            cur.execute('SELECT StartTime FROM Appointment A WHERE PatientID = (%s)', ID)
+            startTimes = cur.fetchall()
+            cur.execute('SELECT EndTime FROM Appointment A WHERE PatientID = (%s)', ID)
+            endTimes = cur.fetchall()
             self.uiNew = Ui_Menu()
-            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates)
+            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes)
             MainWindow.showFullScreen()
         else:
             print("no user")
 
 # moved to test.py as menu.py
 class Ui_Menu(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes):
         Menu.setObjectName("Menu")
         Menu.resize(1600, 1200)
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -388,16 +392,16 @@ class Ui_Menu(object):
         self.calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
         earliestDate = None
         self.dateTimeEdit = QtWidgets.QLineEdit(self.tab_2)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 300, 80))
+        self.dateTimeEdit.setGeometry(QtCore.QRect(0, 780, 500, 80))
         self.dateTimeEdit.setObjectName("dateTimeEdit")
         self.dateTimeEdit_3 = QtWidgets.QLineEdit(self.tab_2)
-        self.dateTimeEdit_3.setGeometry(QtCore.QRect(440, 780, 300, 80))
+        self.dateTimeEdit_3.setGeometry(QtCore.QRect(510, 780, 500, 80))
         self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
         self.dateTimeEdit_5 = QtWidgets.QLineEdit(self.tab_2)
-        self.dateTimeEdit_5.setGeometry(QtCore.QRect(800, 780, 300, 80))
+        self.dateTimeEdit_5.setGeometry(QtCore.QRect(1020, 780, 500, 80))
         self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
         self.dateTimeEdit_7 = QtWidgets.QLineEdit(self.tab_2)
-        self.dateTimeEdit_7.setGeometry(QtCore.QRect(1200, 780, 300, 80))
+        self.dateTimeEdit_7.setGeometry(QtCore.QRect(1540, 780, 500, 80))
         self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
         self.dateTimeEdit.setVisible(False)
         self.dateTimeEdit_3.setVisible(False)
@@ -430,7 +434,55 @@ class Ui_Menu(object):
                 self.dateTimeEdit_7.setVisible(True)
                 self.dateTimeEdit_7.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
-
+        numStarts = 0
+        for row in startTimes:
+            if(numStarts == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif(numStarts == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit_3.setText(self.dateTimeEdit_3.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif(numStarts == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(
+                self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif(numStarts == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+        numEnds = 0
+        for row in endTimes:
+            if (numEnds == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(
+                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit_3.setText(
+                    self.dateTimeEdit_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(
+                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(
+                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
         self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
         self.label_11.setGeometry(QtCore.QRect(50, 700, 600, 41))
