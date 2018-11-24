@@ -11,48 +11,54 @@ class common_login_UI(object):
     def setupUi(self, CommonLogin):
         CommonLogin.setObjectName("CommonLogin")
         CommonLogin.resize(800, 600)
+
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(120, 80, 400, 71))
-        self.label.setStyleSheet(
+
+        self.label1 = QtWidgets.QLabel(self.centralwidget)
+        self.label1.setObjectName("label1")
+        self.label1.setGeometry(QtCore.QRect(20, 200, 200, 100))
+        self.label1.setStyleSheet(
             "color: rgb(46, 125, 132);\n"
             "font-weight: bold;\n"
             'font: 18pt "Lucida Calligraphy";\n'
             "\n"
             ""
         )
-        self.label.setObjectName("label")
-        self.loginButton = QtWidgets.QPushButton(self.centralwidget)
-        self.loginButton.setGeometry(QtCore.QRect(2000, 1000, 200, 200))
-        self.loginButton.setStyleSheet(
+
+        self.lineEdit1 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit1.setGeometry(QtCore.QRect(250, 200, 500, 50))
+        self.lineEdit1.setObjectName("lineEdit")
+
+        self.loginBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.loginBtn.setObjectName("loginBtn")
+        self.loginBtn.setGeometry(QtCore.QRect(1000, 200, 200, 50))
+        self.loginBtn.setStyleSheet(
             "color: rgb(46, 125, 132);\n"
             "font-weight: bold;\n"
             'font: 18pt "Lucida Calligraphy";\n'
             "\n"
             ""
         )
-        self.loginButton.setObjectName("loginButton")
-        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(700, 150, 800, 61))
-        self.lineEdit.setText("")
-        self.lineEdit.setObjectName("lineEdit")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(120, 580, 400, 71))
-        self.label_2.setStyleSheet(
+
+        self.label2 = QtWidgets.QLabel(self.centralwidget)
+        self.label2.setObjectName("label2")
+        self.label2.setGeometry(QtCore.QRect(20, 400, 200, 100))
+        self.label2.setStyleSheet(
             "color: rgb(46, 125, 132);\n"
             "font-weight: bold;\n"
             'font: 18pt "Lucida Calligraphy";\n'
             "\n"
             ""
         )
-        self.label_2.setObjectName("label_2")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(700, 670, 800, 61))
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
+
+        self.lineEdit2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit2.setGeometry(QtCore.QRect(250, 400, 800, 50))
+        self.lineEdit2.setText("")
+        self.lineEdit2.setObjectName("lineEdit_2")
+        self.lineEdit2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
         CommonLogin.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(CommonLogin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
@@ -64,16 +70,17 @@ class common_login_UI(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
-        # self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
-        self.loginButton.clicked.connect(self.authenticateUser)
+        # self.loginBtn.clicked.connect(self.authenticateUser)
 
     def retranslateUi(self, CommonLogin):
         _translate = QtCore.QCoreApplication.translate
         CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
-        self.label.setText(_translate("CommonLogin", "Username:"))
-        self.label_2.setText(_translate("CommonLogin", "Password:"))
-        self.loginButton.setText(_translate("CommonLogin", "Login"))
+        self.label1.setText(_translate("CommonLogin", "Username:"))
+        self.label2.setText(_translate("CommonLogin", "Password:"))
+        self.loginBtn.setText(_translate("CommonLogin", "Login"))
 
+
+"""
     def authenticateUser(self):
         cur.execute(
             "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
@@ -153,3 +160,17 @@ class common_login_UI(object):
             MainWindow.showFullScreen()
         else:
             print("no user")
+"""
+
+if __name__ == "__main__":
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    MainWindow = QtWidgets.QMainWindow()
+
+    ui = common_login_UI()
+    ui.setupUi(MainWindow)
+
+    MainWindow.showMaximized()
+
+    sys.exit(app.exec_())

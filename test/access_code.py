@@ -11,16 +11,18 @@ class access_code_UI(object):
     def setupUi(self, Access):
         Access.setObjectName("Access")
         Access.resize(800, 600)
+
         self.centralwidget = QtWidgets.QWidget(Access)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(80, 40, 1400, 171))
+        self.label.setObjectName("label")
+        self.label.setGeometry(QtCore.QRect(30, 100, 50, 171))
         self.label.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132);"
         )
-        self.label.setObjectName("label")
+
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(600, 550, 1400, 111))
+        self.lineEdit.setGeometry(QtCore.QRect(350, 100, 1400, 111))
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(2000, 1000, 241, 81))
@@ -36,7 +38,9 @@ class access_code_UI(object):
         self.statusbar = QtWidgets.QStatusBar(Access)
         self.statusbar.setObjectName("statusbar")
         Access.setStatusBar(self.statusbar)
-        self.pushButton.clicked.connect(self.authenticateAccess)
+
+        # temp comment out
+        # self.pushButton.clicked.connect(self.authenticateAccess)
 
         self.retranslateUi(Access)
         QtCore.QMetaObject.connectSlotsByName(Access)
@@ -49,6 +53,8 @@ class access_code_UI(object):
         )
         self.pushButton.setText(_translate("Access", "Enter"))
 
+
+"""
     def authenticateAccess(self):
         cur.execute(
             "SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)",
@@ -61,3 +67,17 @@ class access_code_UI(object):
             MainWindow.showFullScreen()
         else:
             print("error")
+"""
+
+if __name__ == "__main__":
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    MainWindow = QtWidgets.QMainWindow()
+
+    ui = access_code_UI()
+    ui.setupUi(MainWindow)
+
+    MainWindow.showMaximized()
+
+    sys.exit(app.exec_())

@@ -87,18 +87,10 @@ class welcome_page_UI(object):
         # self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
 
-""" Moved to test.py
-    def changeUI_to_SignInOrRegister(self):  # change UI to Menu
-
-        self.uiNew = loginOrRegister_UI()
-        self.uiNew.setupUi(MainWindow)
-        MainWindow.showFullScreen()
-"""
-
 # main method of MainWindow.py
 # This is only executed with command python welcome_page.py
 if __name__ == "__main__":
-    print("nonono")
+
     app = QtWidgets.QApplication(sys.argv)
 
     MainWindow = QtWidgets.QMainWindow()
