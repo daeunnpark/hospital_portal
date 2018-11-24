@@ -5,6 +5,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 # import modules
 from welcome_page import welcome_page_UI
 from login_or_register import login_or_register_UI
+from common_login import common_login_UI
+from access_code import access_code_UI
+from common_signup import common_signup_UI
+from menu import menu_UI
 
 
 class test(object):
@@ -13,14 +17,29 @@ class test(object):
         w = welcome_page_UI()
         w.setupUi(MainWindow)
         # when user selects an option(pateint for now), set window to login_or_register.py
+        w.patientBtn.clicked.connect(self.setwindowTo_login_or_reigster)
 
-        w.patientBtn.clicked.connect(self.setTologin_or_reigster)
         MainWindow.showMaximized()
 
     # Set window to login_or_register_UI
-    def setTologin_or_reigster(self):
+    def setwindowTo_login_or_reigster(self):
         w = login_or_register_UI()
         w.setupUi(MainWindow)
+        w.commonLoginButton.clicked.connect(self.setwindowTo_common_login)
+        w.accesscodeBtn.clicked.connect(self.setwindowTo_access_code)
+
+        MainWindow.showMaximized()
+
+    def setwindowTo_common_login(self):
+        w = common_login_UI()
+        w.setupUi(MainWindow)
+
+        MainWindow.showMaximized()
+
+    def setwindowTo_access_code(self):
+        w = access_code_UI()
+        w.setupUi(MainWindow)
+
         MainWindow.showMaximized()
 
 

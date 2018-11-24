@@ -9,12 +9,13 @@ class login_or_register_UI(object):
         loginOrRegister.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(loginOrRegister)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(1000, 880, 1000, 200))
-        self.pushButton.setStyleSheet(
+        # pushbutton -> accesscodeBtn
+        self.accesscodeBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.accesscodeBtn.setGeometry(QtCore.QRect(1000, 880, 1000, 200))
+        self.accesscodeBtn.setStyleSheet(
             'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-        self.pushButton.setObjectName("pushButton")
+        self.accesscodeBtn.setObjectName("accesscodeBtn")
         self.commonLoginButton = QtWidgets.QPushButton(self.centralwidget)
         self.commonLoginButton.setGeometry(QtCore.QRect(300, 400, 2000, 200))
         self.commonLoginButton.setStyleSheet(
@@ -47,12 +48,11 @@ class login_or_register_UI(object):
     #      self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
 
     def retranslateUi(self, loginOrRegister):
-        print("retranslate")
         _translate = QtCore.QCoreApplication.translate
         loginOrRegister.setWindowTitle(
             _translate("loginOrRegister", "Login or Register")
         )
-        self.pushButton.setText(
+        self.accesscodeBtn.setText(
             _translate("loginOrRegister", "Sign Up Using Your Access Code")
         )
         self.commonLoginButton.setText(_translate("loginOrRegister", "Login"))

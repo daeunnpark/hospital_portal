@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import pymysql
 #from menu import *
 
+# moved to test.py as welcome)page.py
 class login_page(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -84,6 +85,7 @@ class login_page(object):
         self.uiNew.setupUi(MainWindow)
         MainWindow.showFullScreen()
 
+# moved to test.py as login_or_reigster.py
 class Ui_SignInOrRegister(object):
         def setupUi(self, SignInOrRegister):
             SignInOrRegister.setObjectName("SignInOrRegister")
@@ -95,6 +97,7 @@ class Ui_SignInOrRegister(object):
             self.pushButton.setStyleSheet("font: 15pt \"Lucida Calligraphy\";\n"
                                           "color: rgb(46, 125, 132)")
             self.pushButton.setObjectName("pushButton")
+
             self.commonLoginButton = QtWidgets.QPushButton(self.centralwidget)
             self.commonLoginButton.setGeometry(QtCore.QRect(300, 400, 2000, 200))
             self.commonLoginButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
@@ -139,6 +142,7 @@ class Ui_SignInOrRegister(object):
              MainWindow.showMaximized()
 
 
+# moved to test.py as common_login.py
 class Ui_CommonLogin(object):
     def setupUi(self, CommonLogin):
         CommonLogin.setObjectName("CommonLogin")
@@ -243,6 +247,7 @@ class Ui_CommonLogin(object):
         else:
             print("no user")
 
+# moved to test.py as menu.py
 class Ui_Menu(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
         Menu.setObjectName("Menu")
@@ -507,6 +512,8 @@ class Ui_Menu(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
         self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
 
+
+# moved to test.py as acces_code.py
 class Ui_Access(object):
     def setupUi(self, Access):
         Access.setObjectName("Access")
@@ -555,6 +562,7 @@ class Ui_Access(object):
         else:
             print("error")
 
+# moved to test.py as common_signup.py
 class Ui_CommonSignUp(object):
     def setupUi(self, CommonSignUp, access):
         CommonSignUp.setObjectName("CommonSignUp")
@@ -778,8 +786,8 @@ class Ui_CommonSignUp(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
-    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
