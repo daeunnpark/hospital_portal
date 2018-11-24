@@ -11,4 +11,6 @@ To test, run **test.py** <br />
 **test.py** contains (so far):
 - **welcome_page.py** (= **login_page Class** in **first.py**)<br />
 - **login_or_register.py**(=**signinorregister.py**) <br />
-- **common_login.py**(==**commonlogin.py=**) <br />
+- **common_login.py**(=**commonlogin.py**) <br />
+- **access_code.py**(=**access.py**) <br />
+- **common_login.py**(=**commonlogin.py**) <br />
