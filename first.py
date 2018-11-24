@@ -633,7 +633,7 @@ class Ui_Menu(object):
         self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs))
         self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs))
         self.pushButtonSchedule.clicked.connect(self.scheduleAppt)
-        self.pushButtonPay.clicked.connect(self.Pay)
+        self.pushButtonPay.clicked.connect(lambda: self.Pay(ID))
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
@@ -668,18 +668,24 @@ class Ui_Menu(object):
         self.label_56.setText(_translate("Menu", "Payment Amount:"))
         self.pushButtonPay.setText(_translate("Menu", "Pay"))
 
-    def Pay(self):
+    def Pay(self, ID):
         if(self.lineEdit_13.text() < self.lineEdit_56.text()):
             diff = float(self.lineEdit_56.text()) - float(self.lineEdit_13.text())
             self.lineEdit_56.setText(str(diff))
             self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
         elif(self.lineEdit_13.text() == self.lineEdit_56.text()):
             self.lineEdit_56.setText("0")
             self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
         else:
             diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_56.text())
             self.lineEdit_13.setText(str(diff2))
             self.lineEdit_56.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
+            conn.commit()
 
     def scheduleAppt(self):
         apptID = 1
