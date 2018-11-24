@@ -245,15 +245,17 @@ class Ui_CommonLogin(object):
             startTimes = cur.fetchall()
             cur.execute('SELECT EndTime FROM Appointment A WHERE PatientID = (%s)', ID)
             endTimes = cur.fetchall()
+            cur.execute('SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)', ID)
+            appointmentIDs = cur.fetchall()
             self.uiNew = Ui_Menu()
-            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes)
+            self.uiNew.setupUi(MainWindow, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs)
             MainWindow.showFullScreen()
         else:
             print("no user")
 
 # moved to test.py as menu.py
 class Ui_Menu(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs):
         Menu.setObjectName("Menu")
         Menu.resize(1600, 1200)
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -578,6 +580,11 @@ class Ui_Menu(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
+        self.pushButtonCancel.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs))
+        self.pushButtonCancel3.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs))
+        self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs))
+        self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs))
+
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
@@ -603,6 +610,56 @@ class Ui_Menu(object):
         self.pushButtonCancel3.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButtonCancel5.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButtonCancel7.setText(_translate("Menu", "Cancel Appointment"))
+
+    def cancelAppt(self, num, appointmentIDs):
+        if(num == 1):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if(numAppointment == 0):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 3):
+            self.dateTimeEdit_3.setText("")
+            self.dateTimeEdit_3.setVisible(False)
+            self.pushButtonCancel3.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 1):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 5):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 2):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 7):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 3):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
 
 # moved to test.py as acces_code.py
 class Ui_Access(object):
