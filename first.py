@@ -594,7 +594,6 @@ class Ui_Menu(object):
         self.lineEdit_56 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_56.setGeometry(QtCore.QRect(1100, 80, 400, 60))
         self.lineEdit_56.setObjectName("lineEdit_56")
-        self.lineEdit_56.setText("$")
         self.pushButtonPay = QtWidgets.QPushButton(self.tab_4)
         self.pushButtonPay.setGeometry(QtCore.QRect(1100, 200, 300, 60))
         self.pushButtonPay.setObjectName("pushButtonPay")
@@ -634,6 +633,7 @@ class Ui_Menu(object):
         self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs))
         self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs))
         self.pushButtonSchedule.clicked.connect(self.scheduleAppt)
+        self.pushButtonPay.clicked.connect(self.Pay)
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
@@ -667,6 +667,19 @@ class Ui_Menu(object):
         self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
         self.label_56.setText(_translate("Menu", "Payment Amount:"))
         self.pushButtonPay.setText(_translate("Menu", "Pay"))
+
+    def Pay(self):
+        if(self.lineEdit_13.text() < self.lineEdit_56.text()):
+            diff = float(self.lineEdit_56.text()) - float(self.lineEdit_13.text())
+            self.lineEdit_56.setText(str(diff))
+            self.lineEdit_13.setText("0")
+        elif(self.lineEdit_13.text() == self.lineEdit_56.text()):
+            self.lineEdit_56.setText("0")
+            self.lineEdit_13.setText("0")
+        else:
+            diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_56.text())
+            self.lineEdit_13.setText(str(diff2))
+            self.lineEdit_56.setText("0")
 
     def scheduleAppt(self):
         apptID = 1
