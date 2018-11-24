@@ -620,6 +620,7 @@ class Ui_Menu(object):
         self.pushButtonCancel3.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs))
         self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs))
         self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs))
+        self.pushButtonSchedule.clicked.connect(self.scheduleAppt)
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
@@ -651,6 +652,15 @@ class Ui_Menu(object):
         self.label_37.setText(_translate("Menu", "Start Time:"))
         self.label_38.setText(_translate("Menu", "End Time:"))
         self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
+
+    def scheduleAppt(self):
+        apptID = 1
+        cur.rowcount = -1
+        while (cur.rowcount != 0):
+            cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
+            apptID = apptID + 1
+        
+
 
     def cancelAppt(self, num, appointmentIDs):
         if(num == 1):
@@ -979,6 +989,7 @@ if __name__ == "__main__":
     #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
+    global apptID
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI
