@@ -585,6 +585,19 @@ class Ui_Menu(object):
 "font-weight: bold;\n"
 "font: 12pt \"Lucida Calligraphy\";")
         self.label_13.setObjectName("label_13")
+        self.label_56 = QtWidgets.QLabel(self.tab_4)
+        self.label_56.setGeometry(QtCore.QRect(1000, 30, 500, 61))
+        self.label_56.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_56.setObjectName("label_56")
+        self.lineEdit_56 = QtWidgets.QLineEdit(self.tab_4)
+        self.lineEdit_56.setGeometry(QtCore.QRect(1100, 80, 400, 60))
+        self.lineEdit_56.setObjectName("lineEdit_56")
+        self.lineEdit_56.setText("$")
+        self.pushButtonPay = QtWidgets.QPushButton(self.tab_4)
+        self.pushButtonPay.setGeometry(QtCore.QRect(1100, 200, 300, 60))
+        self.pushButtonPay.setObjectName("pushButtonPay")
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_12.setGeometry(QtCore.QRect(80, 370, 400, 60))
         self.lineEdit_12.setObjectName("lineEdit_12")
@@ -652,6 +665,8 @@ class Ui_Menu(object):
         self.label_37.setText(_translate("Menu", "Start Time:"))
         self.label_38.setText(_translate("Menu", "End Time:"))
         self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
+        self.label_56.setText(_translate("Menu", "Payment Amount:"))
+        self.pushButtonPay.setText(_translate("Menu", "Pay"))
 
     def scheduleAppt(self):
         apptID = 1
@@ -659,7 +674,7 @@ class Ui_Menu(object):
         while (cur.rowcount != 0):
             cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
             apptID = apptID + 1
-        
+
 
 
     def cancelAppt(self, num, appointmentIDs):
