@@ -9,27 +9,31 @@ class login_or_register_UI(object):
         loginOrRegister.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(loginOrRegister)
         self.centralwidget.setObjectName("centralwidget")
-        # pushbutton -> accesscodeBtn
-        self.accesscodeBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.accesscodeBtn.setGeometry(QtCore.QRect(1000, 880, 1000, 200))
-        self.accesscodeBtn.setStyleSheet(
-            'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
-        )
-        self.accesscodeBtn.setObjectName("accesscodeBtn")
-        self.commonLoginButton = QtWidgets.QPushButton(self.centralwidget)
-        self.commonLoginButton.setGeometry(QtCore.QRect(300, 400, 2000, 200))
-        self.commonLoginButton.setStyleSheet(
+
+        self.commonLoginBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.commonLoginBtn.setObjectName("commonLoginBtn")
+        self.commonLoginBtn.setGeometry(QtCore.QRect(100, 200, 900, 100))
+        self.commonLoginBtn.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-        self.commonLoginButton.setObjectName("pushButton_2")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(300, 900, 301, 131))
+        self.label.setObjectName("label")
+        self.label.setGeometry(QtCore.QRect(100, 600, 301, 131))
         self.label.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n'
             "color: rgb(0, 0, 0);\n"
             "font-weight:bold;"
         )
-        self.label.setObjectName("label")
+
+        # pushbutton -> accesscodeBtn
+        self.accesscodeBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.accesscodeBtn.setObjectName("accesscodeBtn")
+        self.accesscodeBtn.setGeometry(QtCore.QRect(600, 600, 800, 100))
+        self.accesscodeBtn.setStyleSheet(
+            'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
+        )
+
         loginOrRegister.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(loginOrRegister)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -42,7 +46,7 @@ class login_or_register_UI(object):
         self.retranslateUi(loginOrRegister)
         QtCore.QMetaObject.connectSlotsByName(loginOrRegister)
 
-    #        self.commonLoginButton.clicked.connect(
+    #        self.commonLoginBtn.clicked.connect(
     #           self.changeUI_to_CommonLogin
     #      )  # set listener
     #      self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
@@ -55,7 +59,7 @@ class login_or_register_UI(object):
         self.accesscodeBtn.setText(
             _translate("loginOrRegister", "Sign Up Using Your Access Code")
         )
-        self.commonLoginButton.setText(_translate("loginOrRegister", "Login"))
+        self.commonLoginBtn.setText(_translate("loginOrRegister", "Login"))
         self.label.setText(_translate("loginOrRegister", "New User?"))
 
 

@@ -19,13 +19,14 @@ class test(object):
         # when user selects an option(pateint for now), set window to login_or_register.py
         w.patientBtn.clicked.connect(self.setwindowTo_login_or_reigster)
 
+        # MainWindow.show()
         MainWindow.showMaximized()
 
     # Set window to login_or_register_UI
     def setwindowTo_login_or_reigster(self):
         w = login_or_register_UI()
         w.setupUi(MainWindow)
-        w.commonLoginButton.clicked.connect(self.setwindowTo_common_login)
+        w.commonLoginBtn.clicked.connect(self.setwindowTo_common_login)
         w.accesscodeBtn.clicked.connect(self.setwindowTo_access_code)
 
         MainWindow.showMaximized()

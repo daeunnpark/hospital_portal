@@ -9,6 +9,7 @@ from login_or_register import login_or_register_UI
 class welcome_page_UI(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -26,7 +27,11 @@ class welcome_page_UI(object):
         self.imageLabel.setPixmap(self.pixmap)
         self.imageLabel2.setPixmap(self.pixmap)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(850, 400, 800, 600))
+
+        # absolute geometry
+        # self.groupBox.setGeometry(QtCore.QRect(850, 400, 800, 600))
+        self.groupBox.setGeometry(QtCore.QRect(400, 300, 800, 600))
+
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
@@ -101,7 +106,8 @@ if __name__ == "__main__":
     ui = welcome_page_UI()
     ui.setupUi(MainWindow)
 
-    MainWindow.showMaximized()
+    MainWindow.show()
+    # MainWindow.showMaximized()
 
     sys.exit(app.exec_())
 
