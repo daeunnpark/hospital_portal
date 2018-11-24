@@ -13,4 +13,4 @@ To test, run **test.py** <br />
 - **login_or_register.py**(=**signinorregister.py**) <br />
 - **common_login.py**(=**commonlogin.py**) <br />
 - **access_code.py**(=**access.py**) <br />
-- **common_login.py**(=**commonlogin.py**) <br />
+- **menu.py**(=**menu.py**)(not complete) <br />
