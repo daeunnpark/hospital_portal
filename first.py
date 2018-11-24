@@ -67,7 +67,11 @@ class login_page(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.pushButton.clicked.connect(self.changeUI_to_LoginOrRegister) # set listener
+        self.pushButton.clicked.connect(lambda: self.changeUI_to_LoginOrRegister(1))
+        self.pushButton_2.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(2))
+        self.pushButton_3.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(3))
+        self.pushButton_4.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(4))
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -80,14 +84,14 @@ class login_page(object):
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         #self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
-    def changeUI_to_LoginOrRegister(self): # change UI to Menu
+    def changeUI_to_LoginOrRegister(self, num): # change UI to Menu
         self.uiNew = Ui_SignInOrRegister()
-        self.uiNew.setupUi(MainWindow)
+        self.uiNew.setupUi(MainWindow, num)
         MainWindow.showFullScreen()
 
 # moved to test.py as login_or_reigster.py
 class Ui_SignInOrRegister(object):
-        def setupUi(self, SignInOrRegister):
+        def setupUi(self, SignInOrRegister, num):
             SignInOrRegister.setObjectName("SignInOrRegister")
             SignInOrRegister.resize(800, 600)
             self.centralwidget = QtWidgets.QWidget(SignInOrRegister)
@@ -109,6 +113,9 @@ class Ui_SignInOrRegister(object):
                                      "color: rgb(0, 0, 0);\n"
                                      "font-weight:bold;")
             self.label.setObjectName("label")
+            if(num == 4):
+                self.label.setVisible(False)
+                self.pushButton.setVisible(False)
             SignInOrRegister.setCentralWidget(self.centralwidget)
             self.menubar = QtWidgets.QMenuBar(SignInOrRegister)
             self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -121,8 +128,8 @@ class Ui_SignInOrRegister(object):
             self.retranslateUi(SignInOrRegister)
             QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
 
-            self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
-            self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
+            self.commonLoginButton.clicked.connect(lambda: self.changeUI_to_CommonLogin(num))  # set listener
+            self.pushButton.clicked.connect(lambda: self.changeUI_to_AccessCode(num))
 
         def retranslateUi(self, SignInOrRegister):
             _translate = QtCore.QCoreApplication.translate
@@ -131,20 +138,20 @@ class Ui_SignInOrRegister(object):
             self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
             self.label.setText(_translate("SignInOrRegister", "New User?"))
 
-        def changeUI_to_CommonLogin(self):  # change UI to Menu
+        def changeUI_to_CommonLogin(self, num):  # change UI to Menu
              self.uiLogin = Ui_CommonLogin()
-             self.uiLogin.setupUi(MainWindow)
+             self.uiLogin.setupUi(MainWindow, num)
              MainWindow.showMaximized()
 
-        def changeUI_to_AccessCode(self):  # change UI to Menu
+        def changeUI_to_AccessCode(self, num):  # change UI to Menu
              self.uiAccess = Ui_Access()
-             self.uiAccess.setupUi(MainWindow)
+             self.uiAccess.setupUi(MainWindow, num)
              MainWindow.showMaximized()
 
 
 # moved to test.py as common_login.py
 class Ui_CommonLogin(object):
-    def setupUi(self, CommonLogin):
+    def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")
         CommonLogin.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
@@ -194,7 +201,6 @@ class Ui_CommonLogin(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
-        #self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
         self.loginButton.clicked.connect(self.authenticateUser)
 
     def retranslateUi(self, CommonLogin):
@@ -594,7 +600,6 @@ class Ui_Menu(object):
         self.lineEdit_56 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_56.setGeometry(QtCore.QRect(1100, 80, 400, 60))
         self.lineEdit_56.setObjectName("lineEdit_56")
-        self.lineEdit_56.setText("$")
         self.pushButtonPay = QtWidgets.QPushButton(self.tab_4)
         self.pushButtonPay.setGeometry(QtCore.QRect(1100, 200, 300, 60))
         self.pushButtonPay.setObjectName("pushButtonPay")
@@ -634,6 +639,7 @@ class Ui_Menu(object):
         self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs))
         self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs))
         self.pushButtonSchedule.clicked.connect(self.scheduleAppt)
+        self.pushButtonPay.clicked.connect(lambda: self.Pay(ID))
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
@@ -667,6 +673,25 @@ class Ui_Menu(object):
         self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
         self.label_56.setText(_translate("Menu", "Payment Amount:"))
         self.pushButtonPay.setText(_translate("Menu", "Pay"))
+
+    def Pay(self, ID):
+        if(self.lineEdit_13.text() < self.lineEdit_56.text()):
+            diff = float(self.lineEdit_56.text()) - float(self.lineEdit_13.text())
+            self.lineEdit_56.setText(str(diff))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        elif(self.lineEdit_13.text() == self.lineEdit_56.text()):
+            self.lineEdit_56.setText("0")
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        else:
+            diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_56.text())
+            self.lineEdit_13.setText(str(diff2))
+            self.lineEdit_56.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
+            conn.commit()
 
     def scheduleAppt(self):
         apptID = 1
@@ -729,7 +754,7 @@ class Ui_Menu(object):
 
 # moved to test.py as acces_code.py
 class Ui_Access(object):
-    def setupUi(self, Access):
+    def setupUi(self, Access, num):
         Access.setObjectName("Access")
         Access.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(Access)
@@ -755,7 +780,7 @@ class Ui_Access(object):
         self.statusbar = QtWidgets.QStatusBar(Access)
         self.statusbar.setObjectName("statusbar")
         Access.setStatusBar(self.statusbar)
-        self.pushButton.clicked.connect(self.authenticateAccess)
+        self.pushButton.clicked.connect(lambda:self.authenticateAccess(num))
 
         self.retranslateUi(Access)
         QtCore.QMetaObject.connectSlotsByName(Access)
@@ -766,7 +791,7 @@ class Ui_Access(object):
         self.label.setText(_translate("Access", "Enter Your Access Code Received Via Email:"))
         self.pushButton.setText(_translate("Access", "Enter"))
 
-    def authenticateAccess(self):
+    def authenticateAccess(self, num):
         cur.execute('SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)', self.lineEdit.text())
         access = cur.fetchall()
         if (cur.rowcount != 0):
