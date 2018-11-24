@@ -387,22 +387,26 @@ class Ui_Menu(object):
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
         self.calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
         earliestDate = None
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 300, 80))
         self.dateTimeEdit.setObjectName("dateTimeEdit")
-        self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_3 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_3.setGeometry(QtCore.QRect(440, 780, 300, 80))
         self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
-        self.dateTimeEdit_5 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_5 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_5.setGeometry(QtCore.QRect(800, 780, 300, 80))
         self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
-        self.dateTimeEdit_7 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_7 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_7.setGeometry(QtCore.QRect(1200, 780, 300, 80))
         self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
         self.dateTimeEdit.setVisible(False)
         self.dateTimeEdit_3.setVisible(False)
         self.dateTimeEdit_5.setVisible(False)
         self.dateTimeEdit_7.setVisible(False)
+        self.dateTimeEdit.setReadOnly(True)
+        self.dateTimeEdit_3.setReadOnly(True)
+        self.dateTimeEdit_5.setReadOnly(True)
+        self.dateTimeEdit_7.setReadOnly(True)
         numDates = 0
         for row in appointmentDates:
             if(earliestDate == None):
@@ -412,19 +416,19 @@ class Ui_Menu(object):
                     earliestDate = row[0]
             if(numDates == 0):
                 self.dateTimeEdit.setVisible(True)
-                self.dateTimeEdit.setDate(row[0])
+                self.dateTimeEdit.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 1):
                 self.dateTimeEdit_3.setVisible(True)
-                self.dateTimeEdit_3.setDate(row[0])
+                self.dateTimeEdit_3.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 2):
                 self.dateTimeEdit_5.setVisible(True)
-                self.dateTimeEdit_5.setDate(row[0])
+                self.dateTimeEdit_5.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 3):
                 self.dateTimeEdit_7.setVisible(True)
-                self.dateTimeEdit_7.setDate(row[0])
+                self.dateTimeEdit_7.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
 
         self.calendarWidget_2.setSelectedDate(earliestDate)
@@ -786,8 +790,8 @@ class Ui_CommonSignUp(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
-    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
     app = QtWidgets.QApplication(sys.argv)
