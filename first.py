@@ -382,12 +382,45 @@ class Ui_Menu(object):
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
         self.calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
         earliestDate = None
+        self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 300, 80))
+        self.dateTimeEdit.setObjectName("dateTimeEdit")
+        self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_3.setGeometry(QtCore.QRect(440, 780, 300, 80))
+        self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
+        self.dateTimeEdit_5 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_5.setGeometry(QtCore.QRect(800, 780, 300, 80))
+        self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
+        self.dateTimeEdit_7 = QtWidgets.QDateTimeEdit(self.tab_2)
+        self.dateTimeEdit_7.setGeometry(QtCore.QRect(1200, 780, 300, 80))
+        self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
+        self.dateTimeEdit.setVisible(False)
+        self.dateTimeEdit_3.setVisible(False)
+        self.dateTimeEdit_5.setVisible(False)
+        self.dateTimeEdit_7.setVisible(False)
+        numDates = 0
         for row in appointmentDates:
             if(earliestDate == None):
                 earliestDate = row[0]
             else:
                 if(row[0] < earliestDate):
                     earliestDate = row[0]
+            if(numDates == 0):
+                self.dateTimeEdit.setVisible(True)
+                self.dateTimeEdit.setDate(row[0])
+                numDates = numDates + 1
+            elif(numDates == 1):
+                self.dateTimeEdit_3.setVisible(True)
+                self.dateTimeEdit_3.setDate(row[0])
+                numDates = numDates + 1
+            elif(numDates == 2):
+                self.dateTimeEdit_5.setVisible(True)
+                self.dateTimeEdit_5.setDate(row[0])
+                numDates = numDates + 1
+            elif(numDates == 3):
+                self.dateTimeEdit_7.setVisible(True)
+                self.dateTimeEdit_7.setDate(row[0])
+                numDates = numDates + 1
 
         self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
@@ -402,30 +435,6 @@ class Ui_Menu(object):
                                     "font-weight: bold;\n"
                                     "font: 12pt \"Lucida Calligraphy\";")
         self.label_34.setObjectName("label_34")
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 194, 22))
-        self.dateTimeEdit.setObjectName("dateTimeEdit")
-        self.dateTimeEdit_2 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_2.setGeometry(QtCore.QRect(70, 830, 194, 22))
-        self.dateTimeEdit_2.setObjectName("dateTimeEdit_2")
-        self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_3.setGeometry(QtCore.QRect(300, 780, 194, 22))
-        self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
-        self.dateTimeEdit_4 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_4.setGeometry(QtCore.QRect(300, 830, 194, 22))
-        self.dateTimeEdit_4.setObjectName("dateTimeEdit_4")
-        self.dateTimeEdit_5 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_5.setGeometry(QtCore.QRect(530, 780, 194, 22))
-        self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
-        self.dateTimeEdit_6 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_6.setGeometry(QtCore.QRect(530, 830, 194, 22))
-        self.dateTimeEdit_6.setObjectName("dateTimeEdit_6")
-        self.dateTimeEdit_7 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_7.setGeometry(QtCore.QRect(760, 780, 194, 22))
-        self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
-        self.dateTimeEdit_8 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_8.setGeometry(QtCore.QRect(760, 830, 194, 22))
-        self.dateTimeEdit_8.setObjectName("dateTimeEdit_8")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
