@@ -128,8 +128,8 @@ class Ui_SignInOrRegister(object):
             self.retranslateUi(SignInOrRegister)
             QtCore.QMetaObject.connectSlotsByName(SignInOrRegister)
 
-            self.commonLoginButton.clicked.connect(self.changeUI_to_CommonLogin)  # set listener
-            self.pushButton.clicked.connect(self.changeUI_to_AccessCode)
+            self.commonLoginButton.clicked.connect(lambda: self.changeUI_to_CommonLogin(num))  # set listener
+            self.pushButton.clicked.connect(lambda: self.changeUI_to_AccessCode(num))
 
         def retranslateUi(self, SignInOrRegister):
             _translate = QtCore.QCoreApplication.translate
@@ -138,20 +138,20 @@ class Ui_SignInOrRegister(object):
             self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
             self.label.setText(_translate("SignInOrRegister", "New User?"))
 
-        def changeUI_to_CommonLogin(self):  # change UI to Menu
+        def changeUI_to_CommonLogin(self, num):  # change UI to Menu
              self.uiLogin = Ui_CommonLogin()
-             self.uiLogin.setupUi(MainWindow)
+             self.uiLogin.setupUi(MainWindow, num)
              MainWindow.showMaximized()
 
-        def changeUI_to_AccessCode(self):  # change UI to Menu
+        def changeUI_to_AccessCode(self, num):  # change UI to Menu
              self.uiAccess = Ui_Access()
-             self.uiAccess.setupUi(MainWindow)
+             self.uiAccess.setupUi(MainWindow, num)
              MainWindow.showMaximized()
 
 
 # moved to test.py as common_login.py
 class Ui_CommonLogin(object):
-    def setupUi(self, CommonLogin):
+    def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")
         CommonLogin.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
@@ -201,7 +201,6 @@ class Ui_CommonLogin(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
-        #self.loginButton.clicked.connect(self.changeUI_to_Menu) # set listener
         self.loginButton.clicked.connect(self.authenticateUser)
 
     def retranslateUi(self, CommonLogin):
@@ -755,7 +754,7 @@ class Ui_Menu(object):
 
 # moved to test.py as acces_code.py
 class Ui_Access(object):
-    def setupUi(self, Access):
+    def setupUi(self, Access, num):
         Access.setObjectName("Access")
         Access.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(Access)
@@ -781,7 +780,7 @@ class Ui_Access(object):
         self.statusbar = QtWidgets.QStatusBar(Access)
         self.statusbar.setObjectName("statusbar")
         Access.setStatusBar(self.statusbar)
-        self.pushButton.clicked.connect(self.authenticateAccess)
+        self.pushButton.clicked.connect(lambda:self.authenticateAccess(num))
 
         self.retranslateUi(Access)
         QtCore.QMetaObject.connectSlotsByName(Access)
@@ -792,7 +791,7 @@ class Ui_Access(object):
         self.label.setText(_translate("Access", "Enter Your Access Code Received Via Email:"))
         self.pushButton.setText(_translate("Access", "Enter"))
 
-    def authenticateAccess(self):
+    def authenticateAccess(self, num):
         cur.execute('SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)', self.lineEdit.text())
         access = cur.fetchall()
         if (cur.rowcount != 0):
