@@ -86,12 +86,12 @@ class login_page(object):
 
     def changeUI_to_LoginOrRegister(self, num): # change UI to Menu
         self.uiNew = Ui_SignInOrRegister()
-        self.uiNew.setupUi(MainWindow)
+        self.uiNew.setupUi(MainWindow, num)
         MainWindow.showFullScreen()
 
 # moved to test.py as login_or_reigster.py
 class Ui_SignInOrRegister(object):
-        def setupUi(self, SignInOrRegister):
+        def setupUi(self, SignInOrRegister, num):
             SignInOrRegister.setObjectName("SignInOrRegister")
             SignInOrRegister.resize(800, 600)
             self.centralwidget = QtWidgets.QWidget(SignInOrRegister)
@@ -113,6 +113,9 @@ class Ui_SignInOrRegister(object):
                                      "color: rgb(0, 0, 0);\n"
                                      "font-weight:bold;")
             self.label.setObjectName("label")
+            if(num == 4):
+                self.label.setVisible(False)
+                self.pushButton.setVisible(False)
             SignInOrRegister.setCentralWidget(self.centralwidget)
             self.menubar = QtWidgets.QMenuBar(SignInOrRegister)
             self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
