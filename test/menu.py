@@ -6,23 +6,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class menu_UI(object):
-    def __init__(self, parent=None):
-        print("menu variables initalized")
-        self.firstName = None
-        self.lastName = None
-        self.phoneNumber = None
-        self.emailAddress = None
-        self.ID = None
-        self.age = None
-        self.weight = None
-        self.height = None
-        self.ssn = None
-        self.creditCardNumber = None
-        self.billingAmount = None
-        self.insuranceNumber = None
-        self.medicationList = None
-        self.appointmentDates = None
-
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
         Menu.setObjectName("Menu")
         #Menu.resize(1600, 1200)

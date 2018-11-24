@@ -9,6 +9,24 @@ from menu import menu_UI
 
 
 class common_login_UI(object):
+    def __init__(self, parent=None):
+
+        # initalize all data for authenticate_user()
+        self.firstName = None
+        self.lastName = None
+        self.phoneNumber = None
+        self.emailAddress = None
+        self.ID = None
+        self.age = None
+        self.weight = None
+        self.height = None
+        self.ssn = None
+        self.creditCardNumber = None
+        self.billingAmount = None
+        self.insuranceNumber = None
+        self.medicationList = None
+        self.appointmentDates = None
+
     def setupUi(self, CommonLogin):
         CommonLogin.setObjectName("CommonLogin")
         CommonLogin.resize(800, 600)
@@ -74,8 +92,6 @@ class common_login_UI(object):
         self.retranslateUi(CommonLogin)
         QtCore.QMetaObject.connectSlotsByName(CommonLogin)
 
-        # self.loginBtn.clicked.connect(self.authenticateUser)
-
     def retranslateUi(self, CommonLogin):
         _translate = QtCore.QCoreApplication.translate
         CommonLogin.setWindowTitle(_translate("CommonLogin", "CommonLogin"))
@@ -83,47 +99,17 @@ class common_login_UI(object):
         self.label2.setText(_translate("CommonLogin", "Password:"))
         self.loginBtn.setText(_translate("CommonLogin", "Login"))
 
-    """
-    def user_exist(self, cur):
-        cur.execute(
-            "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-            (self.lineEdit1.text(), self.lineEdit2.text()),
-        )
-        authenticate = cur.fetchall()
-
-        if len(authenticate) == 1:
-            return True
-        return False
-
-    
+    # Wrapper function to load user profile
     def authenticate_user(self, cur):
-        print("AUTHENTIFICATION +++++")
-        print(cur)
 
         cur.execute(
             "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
             (self.lineEdit1.text(), self.lineEdit2.text()),
         )
-        print("here?")
         authenticate = cur.fetchall()
 
-        # initalize all data
-        self.firstName = None
-        self.lastName = None
-        self.phoneNumber = None
-        self.emailAddress = None
-        self.ID = None
-        self.age = None
-        self.weight = None
-        self.height = None
-        self.ssn = None
-        self.creditCardNumber = None
-        self.billingAmount = None
-        self.insuranceNumber = None
-        self.medicationList = None
-        self.appointmentDates = None
-        print("gg")
-
+        # If user exists in DB
+        # Load/store its profile to self obj to pass to test obj(main module)
         if len(authenticate) == 1:
             cur.execute(
                 "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
@@ -135,88 +121,82 @@ class common_login_UI(object):
                 "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
-            lastName = str(cur.fetchone()[0])
+            self.lastName = str(cur.fetchone()[0])
 
             cur.execute(
                 "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
-            phoneNumber = str(cur.fetchone()[0])
+            self.phoneNumber = str(cur.fetchone()[0])
 
             cur.execute(
                 "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
-            emailAddress = str(cur.fetchone()[0])
+            self.emailAddress = str(cur.fetchone()[0])
 
             cur.execute(
                 "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
-            ID = str(cur.fetchone()[0])
+            self.ID = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", ID)
-            age = str(cur.fetchone()[0])
+            cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
+            self.age = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Weight FROM Patient P WHERE PatientID = (%s)", ID)
-            weight = str(cur.fetchone()[0])
+            cur.execute("SELECT SSN FROM Patient P WHERE PatientID = (%s)", self.ID)
+            self.ssn = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Height FROM Patient P WHERE PatientID = (%s)", ID)
-            height = str(cur.fetchone()[0])
+            cur.execute("SELECT Weight FROM Patient P WHERE PatientID = (%s)", self.ID)
+            self.weight = str(cur.fetchone()[0])
 
-            cur.execute("SELECT SSN FROM Patient P WHERE PatientID = (%s)", ID)
-            ssn = str(cur.fetchone()[0])
-
-            cur.execute(
-                "SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%s)", ID
-            )
-            creditCardNumber = str(cur.fetchone()[0])
+            cur.execute("SELECT Height FROM Patient P WHERE PatientID = (%s)", self.ID)
+            self.height = str(cur.fetchone()[0])
 
             cur.execute(
-                "SELECT BillingAmount FROM Patient P WHERE PatientID = (%s)", ID
+                "SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%s)", self.ID
             )
-            billingAmount = str(cur.fetchone()[0])
+            self.creditCardNumber = str(cur.fetchone()[0])
 
             cur.execute(
-                "SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%s)", ID
+                "SELECT BillingAmount FROM Patient P WHERE PatientID = (%s)", self.ID
             )
-            insuranceNumber = str(cur.fetchone()[0])
+            self.billingAmount = str(cur.fetchone()[0])
 
             cur.execute(
-                "SELECT MedicationList FROM Patient P WHERE PatientID = (%s)", ID
+                "SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%s)", self.ID
             )
-            medicationList = str(cur.fetchone()[0])
+            self.insuranceNumber = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Date FROM Appointment A WHERE PatientID = (%s)", ID)
-            appointmentDates = cur.fetchall()
-
-            # moved to test.py
-
-            self.uiNew = menu_UI()
-            self.uiNew.setupUi(
-                MainWindow,
-                firstName,
-                lastName,
-                phoneNumber,
-                emailAddress,
-                ID,
-                age,
-                ssn,
-                weight,
-                height,
-                creditCardNumber,
-                billingAmount,
-                insuranceNumber,
-                medicationList,
-                appointmentDates,
+            cur.execute(
+                "SELECT MedicationList FROM Patient P WHERE PatientID = (%s)", self.ID
             )
-            MainWindow.showFullScreen()
-                    
+            self.medicationList = str(cur.fetchone()[0])
+
+            cur.execute(
+                "SELECT Date FROM Appointment A WHERE PatientID = (%s)", self.ID
+            )
+            self.appointmentDates = cur.fetchall()
+
+            # print("LOGIN Successful")
         else:
+            # reset data
+            self.firstName = None
+            self.lastName = None
+            self.phoneNumber = None
+            self.emailAddress = None
+            self.ID = None
+            self.age = None
+            self.weight = None
+            self.height = None
+            self.ssn = None
+            self.creditCardNumber = None
+            self.billingAmount = None
+            self.insuranceNumber = None
+            self.medicationList = None
+            self.appointmentDates = None
+            # Add dialog maybe
             print("no user")
-
-        print("this is all")
-    """
 
 
 if __name__ == "__main__":
