@@ -485,7 +485,7 @@ class Ui_Menu(object):
                 numEnds = numEnds + 1
         self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
-        self.label_11.setGeometry(QtCore.QRect(50, 700, 600, 41))
+        self.label_11.setGeometry(QtCore.QRect(50, 700, 1500, 41))
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
 "font: 18pt \"Lucida Calligraphy\";")
@@ -560,7 +560,7 @@ class Ui_Menu(object):
         self.label_9.setText(_translate("Menu", "Age:"))
         self.label_10.setText(_translate("Menu", "Medication List:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Menu", "Profile"))
-        self.label_11.setText(_translate("Menu", "Appointments:"))
+        self.label_11.setText(_translate("Menu", "Appointments: {Date    Start Time    End Time}"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Menu", "Appointment"))
         self.label_12.setText(_translate("Menu", "Insurance Number:"))
         self.label_13.setText(_translate("Menu", "Credit Card Number:"))
