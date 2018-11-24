@@ -67,7 +67,11 @@ class login_page(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.pushButton.clicked.connect(self.changeUI_to_LoginOrRegister) # set listener
+        self.pushButton.clicked.connect(lambda: self.changeUI_to_LoginOrRegister(1))
+        self.pushButton_2.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(2))
+        self.pushButton_3.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(3))
+        self.pushButton_4.clicked.connect(lambda:self.changeUI_to_LoginOrRegister(4))
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -80,7 +84,7 @@ class login_page(object):
         self.pushButton_4.setText(_translate("MainWindow", "Admin"))
         #self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
-    def changeUI_to_LoginOrRegister(self): # change UI to Menu
+    def changeUI_to_LoginOrRegister(self, num): # change UI to Menu
         self.uiNew = Ui_SignInOrRegister()
         self.uiNew.setupUi(MainWindow)
         MainWindow.showFullScreen()
