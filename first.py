@@ -10,11 +10,11 @@
 # command line: exec python3 -m PyQt5.uic.pyuic first.ui -o fisrt.py -x to convert .ui file to .py file
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-#from PyQt5.QtWidgets import QApplication
+#from PyQt5.QtWidgets import QApplication -- unused
 import pymysql
 #from menu import *
 
-# moved to test.py as welcome)page.py
+# moved to test.py as welcome_page.py
 class login_page(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -1000,10 +1000,10 @@ class Ui_CommonSignUp(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
     #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
-    cur = conn.cursor()
+    #cur = conn.cursor()
     global apptID
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()

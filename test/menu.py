@@ -6,9 +6,27 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class menu_UI(object):
+    def __init__(self, parent=None):
+        print("menu variables initalized")
+        self.firstName = None
+        self.lastName = None
+        self.phoneNumber = None
+        self.emailAddress = None
+        self.ID = None
+        self.age = None
+        self.weight = None
+        self.height = None
+        self.ssn = None
+        self.creditCardNumber = None
+        self.billingAmount = None
+        self.insuranceNumber = None
+        self.medicationList = None
+        self.appointmentDates = None
+
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
         Menu.setObjectName("Menu")
-        Menu.resize(1600, 1200)
+        #Menu.resize(1600, 1200)
+        Menu.resize(800, 600)
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralWidget)
@@ -268,4 +286,19 @@ class menu_UI(object):
         self.label_14.setText(_translate("Menu", "Billing Amount:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
         self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
+
+
+if __name__ == "__main__":
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    MainWindow = QtWidgets.QMainWindow()
+
+    ui = menu_UI()
+    ui.setupUi(MainWindow)
+
+    MainWindow.show()
+    # MainWindow.showMaximized()
+
+    sys.exit(app.exec_())
 
