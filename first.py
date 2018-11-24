@@ -394,19 +394,47 @@ class Ui_Menu(object):
         self.dateTimeEdit = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit.setGeometry(QtCore.QRect(0, 780, 500, 80))
         self.dateTimeEdit.setObjectName("dateTimeEdit")
+        self.pushButtonCancel = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel.setGeometry(QtCore.QRect(30, 870, 400, 80))
+        self.pushButtonCancel.setObjectName("pushButtonCancel")
+        self.pushButtonCancel.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.dateTimeEdit_3 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_3.setGeometry(QtCore.QRect(510, 780, 500, 80))
         self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
+        self.pushButtonCancel3 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel3.setGeometry(QtCore.QRect(540, 870, 400, 80))
+        self.pushButtonCancel3.setObjectName("pushButtonCancel3")
+        self.pushButtonCancel3.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                            "font-weight: bold;\n"
+                                            "font: 12pt \"Lucida Calligraphy\";")
         self.dateTimeEdit_5 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_5.setGeometry(QtCore.QRect(1020, 780, 500, 80))
         self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
+        self.pushButtonCancel5 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel5.setGeometry(QtCore.QRect(1050, 870, 400, 80))
+        self.pushButtonCancel5.setObjectName("pushButtonCancel5")
+        self.pushButtonCancel5.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                            "font-weight: bold;\n"
+                                            "font: 12pt \"Lucida Calligraphy\";")
         self.dateTimeEdit_7 = QtWidgets.QLineEdit(self.tab_2)
         self.dateTimeEdit_7.setGeometry(QtCore.QRect(1540, 780, 500, 80))
         self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
+        self.pushButtonCancel7 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel7.setGeometry(QtCore.QRect(1570, 870, 400, 80))
+        self.pushButtonCancel7.setObjectName("pushButtonCancel7")
+        self.pushButtonCancel7.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                            "font-weight: bold;\n"
+                                            "font: 12pt \"Lucida Calligraphy\";")
         self.dateTimeEdit.setVisible(False)
         self.dateTimeEdit_3.setVisible(False)
         self.dateTimeEdit_5.setVisible(False)
         self.dateTimeEdit_7.setVisible(False)
+        self.pushButtonCancel.setVisible(False)
+        self.pushButtonCancel3.setVisible(False)
+        self.pushButtonCancel5.setVisible(False)
+        self.pushButtonCancel7.setVisible(False)
         self.dateTimeEdit.setReadOnly(True)
         self.dateTimeEdit_3.setReadOnly(True)
         self.dateTimeEdit_5.setReadOnly(True)
@@ -420,18 +448,22 @@ class Ui_Menu(object):
                     earliestDate = row[0]
             if(numDates == 0):
                 self.dateTimeEdit.setVisible(True)
+                self.pushButtonCancel.setVisible(True)
                 self.dateTimeEdit.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 1):
                 self.dateTimeEdit_3.setVisible(True)
+                self.pushButtonCancel3.setVisible(True)
                 self.dateTimeEdit_3.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 2):
                 self.dateTimeEdit_5.setVisible(True)
+                self.pushButtonCancel5.setVisible(True)
                 self.dateTimeEdit_5.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 3):
                 self.dateTimeEdit_7.setVisible(True)
+                self.pushButtonCancel7.setVisible(True)
                 self.dateTimeEdit_7.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
         numStarts = 0
@@ -567,7 +599,10 @@ class Ui_Menu(object):
         self.label_14.setText(_translate("Menu", "Billing Amount:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
         self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
-
+        self.pushButtonCancel.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel3.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel5.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel7.setText(_translate("Menu", "Cancel Appointment"))
 
 # moved to test.py as acces_code.py
 class Ui_Access(object):
