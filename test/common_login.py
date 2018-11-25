@@ -76,7 +76,6 @@ class common_login_UI(object):
         # Password
         self.lineEdit2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit2.setGeometry(QtCore.QRect(250, 400, 800, 50))
-        # self.lineEdit2.setText("")
         self.lineEdit2.setObjectName("lineEdit2")
         self.lineEdit2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
         CommonLogin.setCentralWidget(self.centralwidget)

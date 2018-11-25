@@ -12,17 +12,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class welcome_page_UI(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 607)
 
         # Welcome label
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(720, 120, 1500, 200))
 
         self.label.setTextFormat(QtCore.Qt.AutoText)
         self.label.setObjectName("label")
+
+        self.gridLayout_2.addWidget(self.label, 0, 0, QtCore.Qt.AlignCenter)
 
         self.imageLabel1 = QtWidgets.QLabel(self.centralwidget)
         self.imageLabel1.setGeometry(QtCore.QRect(400, -300, 1999, 1000))
@@ -64,6 +68,9 @@ class welcome_page_UI(object):
         self.departmentAdminBtn = QtWidgets.QPushButton(self.groupBox)
         self.departmentAdminBtn.setObjectName("departmentAdminBtn")
         self.gridLayout.addWidget(self.departmentAdminBtn, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.groupBox, 1, 0, 5, 0, QtCore.Qt.AlignCenter)
+        self.gridLayout_2.addWidget(self.imageLabel1, 0, 0, QtCore.Qt.AlignLeft)
+        self.gridLayout_2.addWidget(self.imageLabel2, 0, 0, QtCore.Qt.AlignRight)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
