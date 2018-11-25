@@ -78,6 +78,8 @@ class test(object):
             w.startTimes,
             w.endTimes,
             w.appointmentIDs,
+            cur,
+            conn,
         )
 
         MainWindow.showMaximized()

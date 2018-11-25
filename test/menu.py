@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class menu_UI(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
         Menu.setObjectName("Menu")
         #Menu.resize(1600, 1200)
         Menu.resize(800, 600)
@@ -378,6 +378,13 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
+        self.pushButtonCancel.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
+        self.pushButtonCancel3.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
+        self.pushButtonCancel5.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
+        self.pushButtonCancel7.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButtonSchedule.clicked.connect(self.scheduleAppt)
+        self.pushButtonPay.clicked.connect(lambda: self.Pay(ID, cur, conn))
+
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
@@ -411,6 +418,84 @@ class menu_UI(object):
         self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
         self.label_56.setText(_translate("Menu", "Payment Amount:"))
         self.pushButtonPay.setText(_translate("Menu", "Pay"))
+
+    def Pay(self, ID, cur, conn):
+        if(self.lineEdit_13.text() < self.lineEdit_56.text()):
+            diff = float(self.lineEdit_56.text()) - float(self.lineEdit_13.text())
+            self.lineEdit_56.setText(str(diff))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        elif(self.lineEdit_13.text() == self.lineEdit_56.text()):
+            self.lineEdit_56.setText("0")
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        else:
+            diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_56.text())
+            self.lineEdit_13.setText(str(diff2))
+            self.lineEdit_56.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
+            conn.commit()
+
+    def scheduleAppt(self, cur, conn):
+        apptID = 1
+        cur.rowcount = -1
+        while (cur.rowcount != 0):
+            cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
+            apptID = apptID + 1
+
+
+
+    def cancelAppt(self, num, appointmentIDs, cur, conn):
+        if(num == 1):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if(numAppointment == 0):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 3):
+            self.dateTimeEdit_3.setText("")
+            self.dateTimeEdit_3.setVisible(False)
+            self.pushButtonCancel3.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 1):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 5):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 2):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 7):
+            self.dateTimeEdit.setText("")
+            self.dateTimeEdit.setVisible(False)
+            self.pushButtonCancel.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 3):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
 
 
 if __name__ == "__main__":
