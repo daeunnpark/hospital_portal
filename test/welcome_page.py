@@ -16,18 +16,27 @@ class welcome_page_UI(object):
         # Welcome label
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.imageLabel = QtWidgets.QLabel(self.centralwidget)
-        self.imageLabel2 = QtWidgets.QLabel(self.centralwidget)
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(720, 120, 1500, 200))
-        self.imageLabel.setGeometry(QtCore.QRect(400, -300, 1999, 1000))
-        self.imageLabel2.setGeometry(QtCore.QRect(1850, -300, 1999, 1000))
+
         self.label.setTextFormat(QtCore.Qt.AutoText)
         self.label.setObjectName("label")
-        self.imageLabel.setObjectName("imageLabel")
+
+        self.imageLabel1 = QtWidgets.QLabel(self.centralwidget)
+        self.imageLabel1.setGeometry(QtCore.QRect(400, -300, 1999, 1000))
+
+        self.imageLabel2 = QtWidgets.QLabel(self.centralwidget)
+        self.imageLabel2.setGeometry(QtCore.QRect(1850, -300, 1999, 1000))
+
+        self.imageLabel1.setObjectName("imageLabel1")
+        self.imageLabel2.setObjectName("imageLabel2")
+
         self.pixmap = QtGui.QPixmap("icon.PNG")
-        self.imageLabel.setPixmap(self.pixmap)
+        self.imageLabel1.setPixmap(self.pixmap)
         self.imageLabel2.setPixmap(self.pixmap)
+
+        # Options
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
 
         # absolute geometry
@@ -39,28 +48,28 @@ class welcome_page_UI(object):
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout.setObjectName("gridLayout")
 
-        # Renamed pushButton -> patient Btn for better understanding in test.py
         self.patientBtn = QtWidgets.QPushButton(self.groupBox)
-        # self.patientBtn.setObjectName("pushButton")
-
+        self.patientBtn.setObjectName("patientButton")
         self.gridLayout.addWidget(self.patientBtn, 0, 0, 1, 1)
+
         self.doctorBtn = QtWidgets.QPushButton(self.groupBox)
         self.doctorBtn.setObjectName("doctorBtn")
         self.gridLayout.addWidget(self.doctorBtn, 1, 0, 1, 1)
+
         self.nurseBtn = QtWidgets.QPushButton(self.groupBox)
         self.nurseBtn.setObjectName("nurseBtn")
         self.gridLayout.addWidget(self.nurseBtn, 2, 0, 1, 1)
+
         self.departmentAdminBtn = QtWidgets.QPushButton(self.groupBox)
         self.departmentAdminBtn.setObjectName("departmentAdminBtn")
         self.gridLayout.addWidget(self.departmentAdminBtn, 3, 0, 1, 1)
-        # self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
-        # self.pushButton_5.setGeometry(QtCore.QRect(340, 460, 114, 32))
-        # self.pushButton_5.setObjectName("pushButton_5")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -68,13 +77,9 @@ class welcome_page_UI(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # moved to test.py
-        # set clicklistener
-        # self.pushButton.clicked.connect(self.changeUI_to_SignInOrRegister)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Welcome"))
         self.label.setText(
             _translate(
                 "MainWindow",
@@ -86,7 +91,6 @@ class welcome_page_UI(object):
         self.doctorBtn.setText(_translate("MainWindow", "Doctor"))
         self.nurseBtn.setText(_translate("MainWindow", "Nurse"))
         self.departmentAdminBtn.setText(_translate("MainWindow", "Admin"))
-        # self.pushButton_5.setText(_translate("MainWindow", "Login"))
 
 
 # This is only executed with command python welcome_page.py
@@ -99,8 +103,8 @@ if __name__ == "__main__":
     ui = welcome_page_UI()
     ui.setupUi(MainWindow)
 
-    MainWindow.show()
-    # MainWindow.showMaximized()
+    # MainWindow.show()
+    MainWindow.showMaximized()
 
     sys.exit(app.exec_())
 
