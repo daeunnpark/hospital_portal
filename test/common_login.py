@@ -29,7 +29,6 @@ class common_login_UI(object):
 
     def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")
-        CommonLogin.resize(800, 600)
 
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
         self.centralwidget.setObjectName("centralwidget")

@@ -6,7 +6,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class login_or_register_UI(object):
     def setupUi(self, loginOrRegister, num):
         loginOrRegister.setObjectName("loginOrRegister")
-        loginOrRegister.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(loginOrRegister)
         self.centralwidget.setObjectName("centralwidget")
 

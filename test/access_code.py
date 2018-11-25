@@ -13,8 +13,6 @@ class access_code_UI(object):
 
     def setupUi(self, Access, num):
         Access.setObjectName("Access")
-        Access.resize(800, 600)
-
         self.centralwidget = QtWidgets.QWidget(Access)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)

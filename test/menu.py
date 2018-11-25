@@ -8,8 +8,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
         Menu.setObjectName("Menu")
-        #Menu.resize(1600, 1200)
-        Menu.resize(800, 600)
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralWidget)
