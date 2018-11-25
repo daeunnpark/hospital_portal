@@ -33,7 +33,7 @@ class login_or_register_UI(object):
         self.accesscodeBtn.setStyleSheet(
             'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-        if (num == 4):
+        if num == 4:
             self.label.setVisible(False)
             self.accesscodeBtn.setVisible(False)
         loginOrRegister.setCentralWidget(self.centralwidget)
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
 
     ui = login_or_register_UI()
-    ui.setupUi(MainWindow)
+    ui.setupUi(MainWindow, 1)  # default Patient
 
     MainWindow.showMaximized()
 

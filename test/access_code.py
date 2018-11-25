@@ -8,6 +8,9 @@ from common_signup import common_signup_UI
 
 
 class access_code_UI(object):
+    def __init__(self, parent=None):
+        self.rowcount = 0
+
     def setupUi(self, Access, num):
         Access.setObjectName("Access")
         Access.resize(800, 600)
@@ -39,9 +42,6 @@ class access_code_UI(object):
         self.statusbar.setObjectName("statusbar")
         Access.setStatusBar(self.statusbar)
 
-        # temp comment out
-        # self.pushButton.clicked.connect(self.authenticateAccess)
-
         self.retranslateUi(Access)
         QtCore.QMetaObject.connectSlotsByName(Access)
 
@@ -63,17 +63,9 @@ class access_code_UI(object):
 
         access = cur.fetchall()
         self.rowcount = cur.rowcount
+        print(self.rowcount)
 
-        # moved to test.py
-        """
-        if cur.rowcount != 0:
-            self.rowcount = cur.rowcount
-            self.uiNew = common_signup_UI()
-            self.uiNew.setupUi(MainWindow, access)
-            MainWindow.showFullScreen()
-        else:
-            print("error")
-        """
+        # Add dialog maybe?
         if self.rowcount == 0:
             print("errorrr")
 
@@ -85,7 +77,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
 
     ui = access_code_UI()
-    ui.setupUi(MainWindow)
+    ui.setupUi(MainWindow, 1)
 
     MainWindow.showMaximized()
 

@@ -18,17 +18,17 @@ class test(object):
         w = welcome_page_UI()
         w.setupUi(MainWindow)
 
-        # when user selects an option(patientBtn for now), set window to login_or_register.py
-        w.patientBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(1))
-        w.doctorBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(2))
-        w.nurseBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(3))
+        # when user selects an option, set window to login_or_register.py
+        w.patientBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(1))
+        w.doctorBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(2))
+        w.nurseBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(3))
         w.departmentAdminBtn.clicked.connect(
-            lambda: self.setwindowTo_login_or_reigster(4)
+            lambda: self.setwindowTo_login_or_register(4)
         )
 
         MainWindow.showMaximized()
 
-    def setwindowTo_login_or_reigster(self, num):
+    def setwindowTo_login_or_register(self, num):
         w = login_or_register_UI()
         w.setupUi(MainWindow, num)
 
@@ -45,6 +45,12 @@ class test(object):
 
         MainWindow.showMaximized()
 
+    def setwindowTo_access_code(self, num):
+        w = access_code_UI()
+        w.setupUi(MainWindow, num)
+        w.pushButton.clicked.connect(lambda: self.authenticate_access_code(w))
+        MainWindow.showMaximized()
+
     def authenticate_user(self, w):
         w.authenticate_user(cur)
 
@@ -53,22 +59,23 @@ class test(object):
             self.setwindowTo_menu(w)
         # else, still on event listener
 
-    def setwindowTo_access_code(self, num):
-        w = access_code_UI()
-        w.setupUi(MainWindow, num)
-        w.pushButton.clicked.connect(lambda: self.authenticate_access_code(w))
-        MainWindow.showMaximized()
-
     def authenticate_access_code(self, w):
         w.authenticate_access_code(cur)
 
         # if access code exists
         if w.rowcount != 0:
+            print(w.rowcount)
             self.setwindowTo_common_signup()
 
     def setwindowTo_common_signup(self):
         w = common_signup_UI()
         w.setupUi(MainWindow)
+        w.pushButton.clicked.connect(lambda: w.CreatePatient(cur))
+
+        # if new Patient is created
+        if w.newP == True:
+            conn.commit()
+            self.setwindowTo_common_login(1)
 
         MainWindow.showMaximized()
 
@@ -101,7 +108,6 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
-    # commented out by Daeun for test run
 
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
@@ -115,6 +121,7 @@ if __name__ == "__main__":
         db="hospital",
     )
     """
+
     # Initialize the database cursor
     cur = conn.cursor()
 

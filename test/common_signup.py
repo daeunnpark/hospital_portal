@@ -7,11 +7,16 @@ from common_login import common_login_UI
 
 
 class common_signup_UI(object):
+    def __init__(self, parent=None):
+        self.newP = False
+
     def setupUi(self, CommonSignUp): #, access): third argument unused
         CommonSignUp.setObjectName("CommonSignUp")
         CommonSignUp.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonSignUp)
         self.centralwidget.setObjectName("centralwidget")
+
+
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(20, 200, 200, 100))
         self.label1.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -20,10 +25,12 @@ class common_signup_UI(object):
 "\n"
 "")
         self.label1.setObjectName("label")
-        self.lineEdit2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit2.setGeometry(QtCore.QRect(250, 200, 500, 50))
-        self.lineEdit2.setText("")
-        self.lineEdit2.setObjectName("lineEdit")
+        self.lineEdit1 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit1.setGeometry(QtCore.QRect(250, 200, 500, 50))
+        self.lineEdit1.setText("")
+        self.lineEdit1.setObjectName("lineEdit")
+
+
         self.label2 = QtWidgets.QLabel(self.centralwidget)
         self.label2.setGeometry(QtCore.QRect(20, 400, 200, 100))
         self.label2.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -46,8 +53,6 @@ class common_signup_UI(object):
 "\n"
 "")
         self.label3.setObjectName("label_3")
-
-
         self.lineEdit3 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit3.setGeometry(QtCore.QRect(90, 240, 521, 61))
         self.lineEdit3.setText("")
@@ -187,7 +192,9 @@ class common_signup_UI(object):
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(2000, 1200, 400, 81))
+
+        #self.pushButton.setGeometry(QtCore.QRect(2000, 1200, 400, 81))
+        self.pushButton.setGeometry(QtCore.QRect(50, 100, 200, 50))
         self.pushButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
                                       "color: rgb(46, 125, 132);")
         self.pushButton.setObjectName("pushButton")
@@ -220,28 +227,35 @@ class common_signup_UI(object):
         self.label13.setText(_translate("MainWindow", "Insurance Number:"))
         self.pushButton.setText(_translate("Main Window", "Sign Up!"))
 
-"""
-    def CreatePatient(self, access):
-        if(self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
+    #second arg access removed - unused
+    def CreatePatient(self, cur): 
+        self.newP = False
+        if(self.lineEdit6.text() == "" or self.lineEdit7.text() == "" or self.lineEdit5.text() == ""):
             print("error empty")
-        if(self.lineEdit_6.text() != self.lineEdit_7.text()):
+        if(self.lineEdit6.text() != self.lineEdit7.text()):
             print("error not same")
         else:
-            cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
+            cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit5.text()))
             if(cur.rowcount != 0):
                 print("error: Username Already Exists")
             else:
-                cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit6.text()))
                 if(cur.rowcount != 0):
                     print("error: UserPassword Already Exists")
                 else:
-                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (access, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
-                    cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', (access, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.lineEdit_11.text(), self.lineEdit_12.text(), self.lineEdit_13.text()))
+                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', ("305",self.lineEdit1.text(), self.lineEdit2.text(), self.lineEdit3.text(), self.lineEdit4.text(), self.lineEdit5.text(), self.lineEdit6.text()))
+                    
+                    cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', ("305", self.lineEdit8.text(), self.lineEdit9.text(), self.lineEdit10.text(), self.lineEdit11.text(), self.lineEdit12.text(), self.lineEdit13.text()))
+                    # Line above : replaced access -> "305" to avoid using access
+                    
+                    self.newP = True
+                    # moved to test.py
+                    """
                     conn.commit()
                     self.uiLogin = common_login_UI()
                     self.uiLogin.setupUi(MainWindow)
                     MainWindow.showMaximized()
-"""
+                    """
 
 
 
@@ -251,7 +265,7 @@ if __name__ == "__main__":
 
     MainWindow = QtWidgets.QMainWindow()
 
-    ui = common_login_UI()
+    ui = common_signup_UI()
     ui.setupUi(MainWindow)
 
     MainWindow.showMaximized()

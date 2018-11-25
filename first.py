@@ -1038,7 +1038,7 @@ if __name__ == "__main__":
     #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
-    global apptID
+    # global apptID 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = login_page() # set login page as UI

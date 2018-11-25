@@ -189,10 +189,10 @@ class common_login_UI(object):
             self.endTimes = cur.fetchall()
 
             cur.execute(
-                "SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)", self.ID
+                "SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)",
+                self.ID,
             )
             self.appointmentIDs = cur.fetchall()
-
 
             # print("LOGIN Successful")
         else:
@@ -215,7 +215,7 @@ class common_login_UI(object):
             self.endTimes = None
             self.appointmentIDs = None
 
-            # Add dialog maybe
+            # Add dialog maybe?
             print("no user")
 
 
@@ -226,7 +226,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
 
     ui = common_login_UI()
-    ui.setupUi(MainWindow)
+    ui.setupUi(MainWindow,1) # default patient
 
     MainWindow.showMaximized()
 

@@ -14,6 +14,7 @@ To test, run **test.py** <br />
 - **common_login.py**(=**commonlogin.py**) <br />
 - **access_code.py**(=**signUpAcessCode.py**) <br />
 - **menu.py**(=**menu.py**) <br />
+- **common_signup.py**(=**commonSignUp.py**) (to be tested)<br />
 
 # Hello it is Becca
 I am integrating my changes into test.py. I started with adding the
