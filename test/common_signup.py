@@ -25,7 +25,7 @@ class common_signup_UI(object):
         self.lineEdit2.setText("")
         self.lineEdit2.setObjectName("lineEdit")
         self.label2 = QtWidgets.QLabel(self.centralwidget)
-        self.label2.setGeometrysetGeometry(QtCore.QRect(20, 400, 200, 100))
+        self.label2.setGeometry(QtCore.QRect(20, 400, 200, 100))
         self.label2.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
 "font: 18pt \"Lucida Calligraphy\";\n"

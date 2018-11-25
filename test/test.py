@@ -62,6 +62,7 @@ class test(object):
     def authenticate_access_code(self, w):
         w.authenticate_access_code(cur)
 
+        # if access code exists
         if w.rowcount != 0:
             self.setwindowTo_common_signup()
 
@@ -101,7 +102,7 @@ class test(object):
 if __name__ == "__main__":
     # Initialize database connection
     # commented out by Daeun for test run
-    """
+
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
@@ -113,7 +114,7 @@ if __name__ == "__main__":
         passwd="hospitalCSE305!",
         db="hospital",
     )
-
+    """
     # Initialize the database cursor
     cur = conn.cursor()
 

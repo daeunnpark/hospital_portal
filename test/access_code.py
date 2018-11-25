@@ -25,7 +25,7 @@ class access_code_UI(object):
         self.lineEdit.setGeometry(QtCore.QRect(350, 100, 1400, 111))
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(2000, 1000, 241, 81))
+        self.pushButton.setGeometry(QtCore.QRect(100, 200, 241, 81))
         self.pushButton.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132);"
         )
@@ -60,9 +60,11 @@ class access_code_UI(object):
             "SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)",
             self.lineEdit.text(),
         )
+
         access = cur.fetchall()
         self.rowcount = cur.rowcount
 
+        # moved to test.py
         """
         if cur.rowcount != 0:
             self.rowcount = cur.rowcount
