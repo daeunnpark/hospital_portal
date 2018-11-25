@@ -1,7 +1,8 @@
 import sys
 import pymysql
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+from PyQt5 import QtWidgets  # QtCore, QtGui - unused
+
+# from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
 
 # import modules
 from welcome_page import welcome_page_UI
@@ -48,7 +49,9 @@ class test(object):
     def setwindowTo_access_code(self, num):
         w = access_code_UI()
         w.setupUi(MainWindow, num)
+
         w.pushButton.clicked.connect(lambda: self.authenticate_access_code(w))
+
         MainWindow.showMaximized()
 
     def authenticate_user(self, w):
@@ -70,6 +73,7 @@ class test(object):
     def setwindowTo_common_signup(self):
         w = common_signup_UI()
         w.setupUi(MainWindow)
+
         w.pushButton.clicked.connect(lambda: w.CreatePatient(cur))
 
         # if new Patient is created
@@ -102,7 +106,7 @@ class test(object):
             cur,
             conn,
         )
-
+        # btn clicker too add
         MainWindow.showMaximized()
 
 

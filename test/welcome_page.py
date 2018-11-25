@@ -1,11 +1,12 @@
 import sys
-import pymysql
+
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
 
-
+# Unused
+# from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+# import pymysql
 # import modules
-from login_or_register import login_or_register_UI
+# from login_or_register import login_or_register_UI
 
 
 class welcome_page_UI(object):
@@ -107,4 +108,3 @@ if __name__ == "__main__":
     MainWindow.showMaximized()
 
     sys.exit(app.exec_())
-
