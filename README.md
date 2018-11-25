@@ -12,10 +12,10 @@ To test, run **test.py** <br />
 - **welcome_page.py** (= **login_page Class** in **first.py**)<br />
 - **login_or_register.py**(=**signinorregister.py**) <br />
 - **common_login.py**(=**commonlogin.py**) <br />
-- **access_code.py**(=**access.py**) <br />
+- **access_code.py**(=**signUpAcessCode.py**) <br />
 - **menu.py**(=**menu.py**) <br />
 
-#Hello it is Becca
+# Hello it is Becca
 I am integrating my changes into test.py. I started with adding the
 functionality to reuse UI forms for doctor and nurse too.<br />
 

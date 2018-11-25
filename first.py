@@ -1034,8 +1034,8 @@ class Ui_CommonSignUp(object):
 if __name__ == "__main__":
     import sys
     # Initialize database connection
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
-    #conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
+    #conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='root', db='hospital')
+    conn = pymysql.connect(host='10.245.235.98', port=3306, user='root', passwd='hospitalCSE305!', db='hospital')
     # Initialize the database cursor
     cur = conn.cursor()
     global apptID
