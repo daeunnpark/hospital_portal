@@ -75,6 +75,9 @@ class test(object):
             w.insuranceNumber,
             w.medicationList,
             w.appointmentDates,
+            w.startTimes,
+            w.endTimes,
+            w.appointmentIDs,
         )
 
         MainWindow.showMaximized()

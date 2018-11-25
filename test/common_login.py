@@ -178,6 +178,22 @@ class common_login_UI(object):
             )
             self.appointmentDates = cur.fetchall()
 
+            cur.execute(
+                "SELECT StartTime FROM Appointment A WHERE PatientID = (%s)", self.ID
+            )
+            self.startTimes = cur.fetchall()
+
+            cur.execute(
+                "SELECT EndTime FROM Appointment A WHERE PatientID = (%s)", self.ID
+            )
+            self.endTimes = cur.fetchall()
+
+            cur.execute(
+                "SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)", self.ID
+            )
+            self.appointmentIDs = cur.fetchall()
+
+
             # print("LOGIN Successful")
         else:
             # reset data
@@ -195,6 +211,10 @@ class common_login_UI(object):
             self.insuranceNumber = None
             self.medicationList = None
             self.appointmentDates = None
+            self.startTimes = None
+            self.endTimes = None
+            self.appointmentIDs = None
+
             # Add dialog maybe
             print("no user")
 

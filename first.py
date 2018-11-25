@@ -471,8 +471,7 @@ class Ui_Menu(object):
                 numDates = numDates + 1
             elif(numDates == 3):
                 self.dateTimeEdit_7.setVisible(True)
-                self.pushButtonCancel7.setVisible(True)
-                self.dateTimeEdit_7.setText(row[0].strftime('%m/%d/%Y'))
+                self.dateTimeEdit_7.setDate(row[0])
                 numDates = numDates + 1
         numStarts = 0
         for row in startTimes:
@@ -502,26 +501,22 @@ class Ui_Menu(object):
             if (numEnds == 0):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
-                self.dateTimeEdit.setText(
-                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
-                self.dateTimeEdit_3.setText(
-                    self.dateTimeEdit_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                self.dateTimeEdit_3.setText(self.dateTimeEdit_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
-                self.dateTimeEdit.setText(
-                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
-                self.dateTimeEdit.setText(
-                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
         if(earliestDate != None):
             self.calendarWidget_2.setSelectedDate(earliestDate)

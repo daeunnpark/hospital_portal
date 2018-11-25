@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class menu_UI(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs):
         Menu.setObjectName("Menu")
         #Menu.resize(1600, 1200)
         Menu.resize(800, 600)
@@ -145,22 +145,54 @@ class menu_UI(object):
         self.gridLayout_3.addWidget(self.calendarWidget_2, 0, 0, 0, 0)
         self.calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
         earliestDate = None
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(70, 780, 300, 80))
+        self.dateTimeEdit = QtWidgets.QLineEdit(self.tab_2)
+        self.dateTimeEdit.setGeometry(QtCore.QRect(0, 780, 500, 80))
         self.dateTimeEdit.setObjectName("dateTimeEdit")
-        self.dateTimeEdit_3 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_3.setGeometry(QtCore.QRect(440, 780, 300, 80))
+        self.pushButtonCancel = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel.setGeometry(QtCore.QRect(30, 870, 400, 80))
+        self.pushButtonCancel.setObjectName("pushButtonCancel")
+        self.pushButtonCancel.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                            "font-weight: bold;\n"
+                                            "font: 12pt \"Lucida Calligraphy\";")
+        self.dateTimeEdit_3 = QtWidgets.QLineEdit(self.tab_2)
+        self.dateTimeEdit_3.setGeometry(QtCore.QRect(510, 780, 500, 80))
         self.dateTimeEdit_3.setObjectName("dateTimeEdit_3")
-        self.dateTimeEdit_5 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_5.setGeometry(QtCore.QRect(800, 780, 300, 80))
+        self.pushButtonCancel3 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel3.setGeometry(QtCore.QRect(540, 870, 400, 80))
+        self.pushButtonCancel3.setObjectName("pushButtonCancel3")
+        self.pushButtonCancel3.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                             "font-weight: bold;\n"
+                                             "font: 12pt \"Lucida Calligraphy\";")
+        self.dateTimeEdit_5 = QtWidgets.QLineEdit(self.tab_2)
+        self.dateTimeEdit_5.setGeometry(QtCore.QRect(1020, 780, 500, 80))
         self.dateTimeEdit_5.setObjectName("dateTimeEdit_5")
-        self.dateTimeEdit_7 = QtWidgets.QDateTimeEdit(self.tab_2)
-        self.dateTimeEdit_7.setGeometry(QtCore.QRect(1200, 780, 300, 80))
+        self.pushButtonCancel5 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel5.setGeometry(QtCore.QRect(1050, 870, 400, 80))
+        self.pushButtonCancel5.setObjectName("pushButtonCancel5")
+        self.pushButtonCancel5.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                             "font-weight: bold;\n"
+                                             "font: 12pt \"Lucida Calligraphy\";")
+        self.dateTimeEdit_7 = QtWidgets.QLineEdit(self.tab_2)
+        self.dateTimeEdit_7.setGeometry(QtCore.QRect(1540, 780, 500, 80))
         self.dateTimeEdit_7.setObjectName("dateTimeEdit_7")
+        self.pushButtonCancel7 = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonCancel7.setGeometry(QtCore.QRect(1570, 870, 400, 80))
+        self.pushButtonCancel7.setObjectName("pushButtonCancel7")
+        self.pushButtonCancel7.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                             "font-weight: bold;\n"
+                                             "font: 12pt \"Lucida Calligraphy\";")
         self.dateTimeEdit.setVisible(False)
         self.dateTimeEdit_3.setVisible(False)
         self.dateTimeEdit_5.setVisible(False)
         self.dateTimeEdit_7.setVisible(False)
+        self.dateTimeEdit.setReadOnly(True)
+        self.dateTimeEdit_3.setReadOnly(True)
+        self.dateTimeEdit_5.setReadOnly(True)
+        self.dateTimeEdit_7.setReadOnly(True)
+        self.pushButtonCancel.setVisible(False)
+        self.pushButtonCancel3.setVisible(False)
+        self.pushButtonCancel5.setVisible(False)
+        self.pushButtonCancel7.setVisible(False)
         numDates = 0
         for row in appointmentDates:
             if(earliestDate == None):
@@ -170,22 +202,72 @@ class menu_UI(object):
                     earliestDate = row[0]
             if(numDates == 0):
                 self.dateTimeEdit.setVisible(True)
-                self.dateTimeEdit.setDate(row[0])
+                self.pushButtonCancel.setVisible(True)
+                self.dateTimeEdit.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 1):
                 self.dateTimeEdit_3.setVisible(True)
-                self.dateTimeEdit_3.setDate(row[0])
+                self.pushButtonCancel3.setVisible(True)
+                self.dateTimeEdit_3.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 2):
                 self.dateTimeEdit_5.setVisible(True)
-                self.dateTimeEdit_5.setDate(row[0])
+                self.pushButtonCancel5.setVisible(True)
+                self.dateTimeEdit_5.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif(numDates == 3):
                 self.dateTimeEdit_7.setVisible(True)
-                self.dateTimeEdit_7.setDate(row[0])
+                self.pushButtonCancel7.setVisible(True)
+                self.dateTimeEdit_7.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
-
-        self.calendarWidget_2.setSelectedDate(earliestDate)
+        numStarts = 0
+        for row in startTimes:
+            if (numStarts == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit_3.setText(self.dateTimeEdit_3.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(
+                    self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numStarts = numStarts + 1
+        numEnds = 0
+        for row in endTimes:
+            if (numEnds == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit_3.setText(self.dateTimeEdit_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.dateTimeEdit.setText(self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                numEnds = numEnds + 1
+        if(earliestDate != None):
+            self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
         self.label_11.setGeometry(QtCore.QRect(50, 700, 600, 41))
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -198,6 +280,42 @@ class menu_UI(object):
                                     "font-weight: bold;\n"
                                     "font: 12pt \"Lucida Calligraphy\";")
         self.label_34.setObjectName("label_34")
+        self.label_35 = QtWidgets.QLabel(self.tab_2)
+        self.label_35.setGeometry(QtCore.QRect(1440, 10, 700, 41))
+        self.label_35.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_35.setObjectName("label_35")
+        self.label_36 = QtWidgets.QLabel(self.tab_2)
+        self.label_36.setGeometry(QtCore.QRect(1440, 80, 700, 41))
+        self.label_36.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_36.setObjectName("label_36")
+        self.dateWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.dateWidget.setGeometry(QtCore.QRect(1440, 120, 400, 41))
+        self.dateWidget.setObjectName("dateWidget")
+        self.label_37 = QtWidgets.QLabel(self.tab_2)
+        self.label_37.setGeometry(QtCore.QRect(1440, 200, 700, 41))
+        self.label_37.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_37.setObjectName("label_37")
+        self.timeStartWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.timeStartWidget.setGeometry(QtCore.QRect(1440, 240, 400, 41))
+        self.timeStartWidget.setObjectName("timeStartWidget")
+        self.label_38 = QtWidgets.QLabel(self.tab_2)
+        self.label_38.setGeometry(QtCore.QRect(1440, 320, 700, 41))
+        self.label_38.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_38.setObjectName("label_38")
+        self.timeEndWidget = QtWidgets.QDateEdit(self.tab_2)
+        self.timeEndWidget.setGeometry(QtCore.QRect(1440, 360, 400, 41))
+        self.timeEndWidget.setObjectName("timeEndWidget")
+        self.pushButtonSchedule = QtWidgets.QPushButton(self.tab_2)
+        self.pushButtonSchedule.setGeometry(QtCore.QRect(1490, 520, 300, 80))
+        self.pushButtonSchedule.setObjectName("pushButtonSchedule")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -217,6 +335,18 @@ class menu_UI(object):
 "font-weight: bold;\n"
 "font: 12pt \"Lucida Calligraphy\";")
         self.label_13.setObjectName("label_13")
+        self.label_56 = QtWidgets.QLabel(self.tab_4)
+        self.label_56.setGeometry(QtCore.QRect(1000, 30, 500, 61))
+        self.label_56.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_56.setObjectName("label_56")
+        self.lineEdit_56 = QtWidgets.QLineEdit(self.tab_4)
+        self.lineEdit_56.setGeometry(QtCore.QRect(1100, 80, 400, 60))
+        self.lineEdit_56.setObjectName("lineEdit_56")
+        self.pushButtonPay = QtWidgets.QPushButton(self.tab_4)
+        self.pushButtonPay.setGeometry(QtCore.QRect(1100, 200, 300, 60))
+        self.pushButtonPay.setObjectName("pushButtonPay")
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_4)
         self.lineEdit_12.setGeometry(QtCore.QRect(80, 370, 400, 60))
         self.lineEdit_12.setObjectName("lineEdit_12")
@@ -262,13 +392,25 @@ class menu_UI(object):
         self.label_9.setText(_translate("Menu", "Age:"))
         self.label_10.setText(_translate("Menu", "Medication List:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Menu", "Profile"))
-        self.label_11.setText(_translate("Menu", "Appointments:"))
+        self.label_11.setText(_translate("Menu", "Appointments: {Date    Start Time    End Time}"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Menu", "Appointment"))
         self.label_12.setText(_translate("Menu", "Insurance Number:"))
         self.label_13.setText(_translate("Menu", "Credit Card Number:"))
         self.label_14.setText(_translate("Menu", "Billing Amount:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Billing Info"))
         self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
+        self.label_34.setText(_translate("Menu", "Next Appointment Highlighted in Gray"))
+        self.pushButtonCancel.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel3.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel5.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButtonCancel7.setText(_translate("Menu", "Cancel Appointment"))
+        self.label_35.setText(_translate("Menu", "Schedule Appointment: Max 4"))
+        self.label_36.setText(_translate("Menu", "Date:"))
+        self.label_37.setText(_translate("Menu", "Start Time:"))
+        self.label_38.setText(_translate("Menu", "End Time:"))
+        self.pushButtonSchedule.setText(_translate("Menu", "Schedule:"))
+        self.label_56.setText(_translate("Menu", "Payment Amount:"))
+        self.pushButtonPay.setText(_translate("Menu", "Pay"))
 
 
 if __name__ == "__main__":
