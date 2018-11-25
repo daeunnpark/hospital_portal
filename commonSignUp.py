@@ -128,6 +128,6 @@ if __name__ == "__main__":
     CommonSignUp = QtWidgets.QMainWindow()
     ui = Ui_CommonSignUp()
     ui.setupUi(CommonSignUp)
-    CommonSignUp.show()
+    CommonSignUp.showMaximized()
     sys.exit(app.exec_())
 

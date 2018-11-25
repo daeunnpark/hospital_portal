@@ -121,7 +121,6 @@ if __name__ == "__main__":
         db="hospital",
     )
     """
-
     # Initialize the database cursor
     cur = conn.cursor()
 
