@@ -53,21 +53,28 @@ class access_code_UI(object):
         )
         self.pushButton.setText(_translate("Access", "Enter"))
 
+    def authenticate_access_code(self, cur):
+        # initalize
 
-"""
-    def authenticateAccess(self):
         cur.execute(
             "SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)",
             self.lineEdit.text(),
         )
         access = cur.fetchall()
+        self.rowcount = cur.rowcount
+
+        """
         if cur.rowcount != 0:
+            self.rowcount = cur.rowcount
             self.uiNew = common_signup_UI()
             self.uiNew.setupUi(MainWindow, access)
             MainWindow.showFullScreen()
         else:
             print("error")
-"""
+        """
+        if self.rowcount == 0:
+            print("errorrr")
+
 
 if __name__ == "__main__":
 

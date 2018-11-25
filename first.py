@@ -138,12 +138,12 @@ class Ui_SignInOrRegister(object):
             self.commonLoginButton.setText(_translate("SignInOrRegister", "Login"))
             self.label.setText(_translate("SignInOrRegister", "New User?"))
 
-        def changeUI_to_CommonLogin(self, num):  # change UI to Menu
+        def changeUI_to_CommonLogin(self, num):  
              self.uiLogin = Ui_CommonLogin()
              self.uiLogin.setupUi(MainWindow, num)
              MainWindow.showMaximized()
 
-        def changeUI_to_AccessCode(self, num):  # change UI to Menu
+        def changeUI_to_AccessCode(self, num): 
              self.uiAccess = Ui_Access()
              self.uiAccess.setupUi(MainWindow, num)
              MainWindow.showMaximized()

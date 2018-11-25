@@ -7,7 +7,7 @@ from common_login import common_login_UI
 
 
 class common_signup_UI(object):
-    def setupUi(self, CommonSignUp, access):
+    def setupUi(self, CommonSignUp): #, access): third argument unused
         CommonSignUp.setObjectName("CommonSignUp")
         CommonSignUp.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(CommonSignUp)
