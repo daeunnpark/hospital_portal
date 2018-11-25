@@ -523,7 +523,8 @@ class Ui_Menu(object):
                 self.dateTimeEdit.setText(
                     self.dateTimeEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
-        self.calendarWidget_2.setSelectedDate(earliestDate)
+        if(earliestDate != None):
+            self.calendarWidget_2.setSelectedDate(earliestDate)
         self.label_11 = QtWidgets.QLabel(self.tab_2)
         self.label_11.setGeometry(QtCore.QRect(50, 700, 1500, 41))
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
