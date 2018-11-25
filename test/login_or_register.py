@@ -4,7 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 # import modules
 class login_or_register_UI(object):
-    def setupUi(self, loginOrRegister):
+    def setupUi(self, loginOrRegister, num):
         loginOrRegister.setObjectName("loginOrRegister")
         loginOrRegister.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(loginOrRegister)
@@ -33,7 +33,9 @@ class login_or_register_UI(object):
         self.accesscodeBtn.setStyleSheet(
             'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-
+        if (num == 4):
+            self.label.setVisible(False)
+            self.accesscodeBtn.setVisible(False)
         loginOrRegister.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(loginOrRegister)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))

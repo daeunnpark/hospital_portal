@@ -28,16 +28,16 @@ class test(object):
 
     def setwindowTo_login_or_reigster(self, num):
         w = login_or_register_UI()
-        w.setupUi(MainWindow)
+        w.setupUi(MainWindow, num)
 
-        w.commonLoginBtn.clicked.connect(self.setwindowTo_common_login)
-        w.accesscodeBtn.clicked.connect(self.setwindowTo_access_code)
+        w.commonLoginBtn.clicked.connect(lambda: self.setwindowTo_common_login(num))
+        w.accesscodeBtn.clicked.connect(lambda: self.setwindowTo_access_code(num))
 
         MainWindow.showMaximized()
 
-    def setwindowTo_common_login(self):
+    def setwindowTo_common_login(self, num):
         w = common_login_UI()
-        w.setupUi(MainWindow)
+        w.setupUi(MainWindow, num)
 
         w.loginBtn.clicked.connect(lambda: self.authenticate_user(w))
 
@@ -51,9 +51,9 @@ class test(object):
             self.setwindowTo_menu(w)
         # else, still on event listener
 
-    def setwindowTo_access_code(self):
+    def setwindowTo_access_code(self, num):
         w = access_code_UI()
-        w.setupUi(MainWindow)
+        w.setupUi(MainWindow, num)
 
         MainWindow.showMaximized()
 

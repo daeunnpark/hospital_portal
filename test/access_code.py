@@ -8,7 +8,7 @@ from common_signup import common_signup_UI
 
 
 class access_code_UI(object):
-    def setupUi(self, Access):
+    def setupUi(self, Access, num):
         Access.setObjectName("Access")
         Access.resize(800, 600)
 
