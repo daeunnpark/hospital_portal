@@ -14,3 +14,8 @@ To test, run **test.py** <br />
 - **common_login.py**(=**commonlogin.py**) <br />
 - **access_code.py**(=**access.py**) <br />
 - **menu.py**(=**menu.py**) <br />
+
+#Hello it is Becca
+I am integrating my changes into test.py. I started with adding the
+functionality to reuse UI forms for doctor and nurse too.<br />
+
