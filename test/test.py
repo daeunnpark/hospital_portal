@@ -19,11 +19,14 @@ class test(object):
         w.setupUi(MainWindow)
 
         # when user selects an option(patientBtn for now), set window to login_or_register.py
-        w.patientBtn.clicked.connect(self.setwindowTo_login_or_reigster)
+        w.patientBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(1))
+        w.doctorBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(2))
+        w.nurseBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(3))
+        w.departmentAdminBtn.clicked.connect(lambda: self.setwindowTo_login_or_reigster(4))
 
         MainWindow.showMaximized()
 
-    def setwindowTo_login_or_reigster(self):
+    def setwindowTo_login_or_reigster(self, num):
         w = login_or_register_UI()
         w.setupUi(MainWindow)
 
