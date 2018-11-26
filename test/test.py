@@ -50,7 +50,7 @@ class test(object):
         w = access_code_UI()
         w.setupUi(MainWindow, num)
 
-        w.pushButton.clicked.connect(lambda: self.authenticate_access_code(w))
+        w.pushButton.clicked.connect(lambda: self.authenticate_access_code(w, num))
 
         MainWindow.showMaximized()
 
@@ -62,23 +62,34 @@ class test(object):
             self.setwindowTo_menu(w)
         # else, still on event listener
 
-    def authenticate_access_code(self, w):
+    def authenticate_access_code(self, w, num):
         w.authenticate_access_code(cur)
 
         # if access code exists
         if w.rowcount != 0:
-            print(w.rowcount)
-            self.setwindowTo_common_signup()
+            print(w.authenticateCode[0][0])
+            accessCodeReceived = w.authenticateCode[0][0]
+            self.setwindowTo_common_signup(num, accessCodeReceived)
 
-    def setwindowTo_common_signup(self):
+    def setwindowTo_common_signup(self, num, accessCodeReceived):
         w = common_signup_UI()
-        w.setupUi(MainWindow)
-
-        w.pushButton.clicked.connect(lambda: w.CreatePatient(cur, conn))
+        w.setupUi(MainWindow, num)
+        if(num == 1):
+            w.pushButton.clicked.connect(lambda: w.CreatePatient(cur, conn, accessCodeReceived))
+        if(num == 2):
+            w.pushButton.clicked.connect(lambda: w.CreateDoctor(cur, conn, accessCodeReceived))
+        if(num == 3):
+            w.pushButton.clicked.connect(lambda: w.CreateNurse(cur, conn, accessCodeReceived))
         # if new Patient is created
         if w.newP == True:
             conn.commit()
             self.setwindowTo_common_login(1)
+        if w.newD == True:
+            conn.commit()
+            self.setwindowTo_common_login(2)
+        if w.newN == True:
+            conn.commit()
+            self.setwindowTo_common_login(3)
 
         MainWindow.showMaximized()
 
