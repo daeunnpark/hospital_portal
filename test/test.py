@@ -74,8 +74,7 @@ class test(object):
         w = common_signup_UI()
         w.setupUi(MainWindow)
 
-        w.pushButton.clicked.connect(lambda: w.CreatePatient(cur))
-
+        w.pushButton.clicked.connect(lambda: w.CreatePatient(cur, conn))
         # if new Patient is created
         if w.newP == True:
             conn.commit()

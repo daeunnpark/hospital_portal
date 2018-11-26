@@ -42,7 +42,7 @@ class access_code_UI(object):
         self.verticalLayout.addWidget(self.pushButton, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_2.addWidget(self.widget_2, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.label = QtWidgets.QLabel(self.widget)
-        self.label.setMaximumSize(QtCore.QSize(500, 100))
+        self.label.setMaximumSize(QtCore.QSize(1400, 100))
         self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
 "color: rgb(46, 125, 132);")
         self.label.setObjectName("label")
