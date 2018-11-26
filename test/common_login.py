@@ -115,26 +115,10 @@ class common_login_UI(object):
     # Wrapper function to load user profile
     def authenticate_user(self, cur, num):
 
-        if num == 1:
-            cur.execute(
-                "SELECT * FROM Patient P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-        elif num == 2:
-            cur.execute(
-                "SELECT * FROM Doctor D WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-        elif num == 3:
-            cur.execute(
-                "SELECT * FROM Nurse N WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-        else:
-            cur.execute(
-                "SELECT * FROM Administrator A WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
+        cur.execute(
+            "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+            (self.lineEdit1.text(), self.lineEdit2.text()),
+        )
 
         authenticate = cur.fetchall()
 
