@@ -7,12 +7,9 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
 
         Menu.setObjectName("Menu")
-<<<<<<< HEAD
         #Menu.resize(1600, 1200)
         Menu.resize(800, 600)
 
-=======
->>>>>>> 057997d0254610fbf887b0d742703dc2f81c1db5
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
 
@@ -378,8 +375,9 @@ class menu_UI(object):
         self.timeStartWidget = QtWidgets.QDateEdit(self.tab_2)
         self.timeStartWidget.setGeometry(QtCore.QRect(1440, 240, 400, 41))
         self.timeStartWidget.setObjectName("timeStartWidget")
-        self.label_20.setObjectName("label_20")
+        
         self.label_20 = QtWidgets.QLabel(self.tab_2)
+        self.label_20.setObjectName("label_20")
         self.label_20.setGeometry(QtCore.QRect(1440, 320, 700, 41))
         self.label_20.setStyleSheet("color: rgb(46, 125, 132);\n"
                                     "font-weight: bold;\n"
