@@ -8,14 +8,15 @@ class login_or_register_UI(object):
         loginOrRegister.setObjectName("loginOrRegister")
         self.centralwidget = QtWidgets.QWidget(loginOrRegister)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
 
         self.commonLoginBtn = QtWidgets.QPushButton(self.centralwidget)
         self.commonLoginBtn.setObjectName("commonLoginBtn")
-        self.commonLoginBtn.setGeometry(QtCore.QRect(100, 200, 900, 100))
+        self.commonLoginBtn.setGeometry(QtCore.QRect(100, 200, 200, 100))
         self.commonLoginBtn.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setObjectName("label")
         self.label.setGeometry(QtCore.QRect(100, 600, 301, 131))
@@ -32,6 +33,11 @@ class login_or_register_UI(object):
         self.accesscodeBtn.setStyleSheet(
             'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
+        self.gridLayout_2.addWidget(self.accesscodeBtn, 0, 0, QtCore.Qt.AlignHCenter)
+        self.gridLayout_2.addWidget(self.commonLoginBtn, 1, 0, QtCore.Qt.AlignVCenter)
+        self.gridLayout_2.addWidget(self.label, 0, 0, QtCore.Qt.AlignLeft)
+
+
         if num == 4:
             self.label.setVisible(False)
             self.accesscodeBtn.setVisible(False)
