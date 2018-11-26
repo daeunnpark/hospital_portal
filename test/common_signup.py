@@ -10,6 +10,7 @@ class common_signup_UI(object):
     def __init__(self, parent=None):
         self.newP = False
         self.newD = False
+        self.newN = False
 
     def setupUi(self, CommonSignUp, num):
 
@@ -260,12 +261,43 @@ class common_signup_UI(object):
                 else:
                     cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     conn.commit()
-                    cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)'(accessCodeReceived, 1234))
+                    cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
                     conn.commit()
                     cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
                     # Line above : replaced access -> "305" to avoid using access
                     conn.commit()
                     self.newD = True
+                    # moved to test.py
+                    """
+                    conn.commit()
+                    self.uiLogin = common_login_UI()
+                    self.uiLogin.setupUi(MainWindow)
+                    MainWindow.showMaximized()
+                    """
+
+    def CreateNurse(self, cur, conn, accessCodeReceived):
+        self.newN = False
+        if (self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
+            print("error empty")
+        if (self.lineEdit_6.text() != self.lineEdit_7.text()):
+            print("error not same")
+        else:
+            cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
+            if (cur.rowcount != 0):
+                print("error: Username Already Exists")
+            else:
+                cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                if (cur.rowcount != 0):
+                    print("error: UserPassword Already Exists")
+                else:
+                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                    conn.commit()
+                    cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
+                    conn.commit()
+                    cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
+                    # Line above : replaced access -> "305" to avoid using access
+                    conn.commit()
+                    self.newN = True
                     # moved to test.py
                     """
                     conn.commit()

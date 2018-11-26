@@ -78,6 +78,8 @@ class test(object):
             w.pushButton.clicked.connect(lambda: w.CreatePatient(cur, conn, accessCodeReceived))
         if(num == 2):
             w.pushButton.clicked.connect(lambda: w.CreateDoctor(cur, conn, accessCodeReceived))
+        if(num == 3):
+            w.pushButton.clicked.connect(lambda: w.CreateNurse(cur, conn, accessCodeReceived))
         # if new Patient is created
         if w.newP == True:
             conn.commit()
@@ -85,6 +87,9 @@ class test(object):
         if w.newD == True:
             conn.commit()
             self.setwindowTo_common_login(2)
+        if w.newN == True:
+            conn.commit()
+            self.setwindowTo_common_login(3)
 
         MainWindow.showMaximized()
 
