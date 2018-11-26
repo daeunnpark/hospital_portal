@@ -13,7 +13,7 @@ class login_or_register_UI(object):
 
         self.commonLoginBtn = QtWidgets.QPushButton(self.centralwidget)
         self.commonLoginBtn.setObjectName("commonLoginBtn")
-        self.commonLoginBtn.setGeometry(QtCore.QRect(100, 200, 200, 100))
+        #self.commonLoginBtn.setGeometry(QtCore.QRect(100, 200, 900, 100))
         self.commonLoginBtn.setStyleSheet(
             'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
@@ -33,9 +33,15 @@ class login_or_register_UI(object):
         self.accesscodeBtn.setStyleSheet(
             'font: 15pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132)"
         )
-        self.gridLayout_2.addWidget(self.accesscodeBtn, 0, 0, QtCore.Qt.AlignHCenter)
-        self.gridLayout_2.addWidget(self.commonLoginBtn, 1, 0, QtCore.Qt.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.commonLoginBtn, 1, 0, QtCore.Qt.AlignCenter)
+        self.commonLoginBtn.setFixedWidth(1000)
+        self.commonLoginBtn.setFixedHeight(200)
         self.gridLayout_2.addWidget(self.label, 0, 0, QtCore.Qt.AlignLeft)
+        self.label.setFixedWidth(400)
+        self.gridLayout_2.addWidget(self.accesscodeBtn, 0, 0, QtCore.Qt.AlignHCenter)
+        self.accesscodeBtn.setFixedWidth(1000)
+        self.accesscodeBtn.setFixedHeight(200)
 
 
         if num == 4:
