@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -182,47 +182,61 @@ font: 12pt &quot;Lucida Calligraphy&quot;;</string>
         <string>Appointment</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="2" column="1">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_5"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_1"/>
-        </item>
-        <item row="4" column="1">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_7"/>
-        </item>
-        <item row="4" column="0">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_3"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
-        </item>
-        <item row="5" column="0">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_4"/>
-        </item>
-        <item row="5" column="1">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_8"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDateTimeEdit" name="dateTimeEdit_6"/>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>Calendar</string>
+        <item row="18" column="0">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="maximumSize">
+           <size>
+            <width>589</width>
+            <height>16777215</height>
+           </size>
           </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="0" column="0">
-              <widget class="QCalendarWidget" name="calendarWidget_2"/>
-             </item>
-            </layout>
-           </item>
-          </layout>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="18" column="1">
+         <widget class="QLineEdit" name="lineEdit_11"/>
+        </item>
+        <item row="18" column="3">
+         <widget class="QLineEdit" name="lineEdit_15">
+          <property name="maxLength">
+           <number>300</number>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="19" column="1">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Cancel Appointment</string>
+          </property>
+         </widget>
+        </item>
+        <item row="19" column="3">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Cancel Appointment</string>
+          </property>
+         </widget>
+        </item>
+        <item row="19" column="4">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Cancel Appointment</string>
+          </property>
+         </widget>
+        </item>
+        <item row="19" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Cancel Appointment</string>
+          </property>
+         </widget>
+        </item>
+        <item row="18" column="4">
+         <widget class="QLineEdit" name="lineEdit_16"/>
+        </item>
+        <item row="17" column="0" colspan="4">
          <widget class="QLabel" name="label_11">
           <property name="maximumSize">
            <size>
@@ -236,7 +250,99 @@ font-weight: bold;
 font: 18pt &quot;Lucida Calligraphy&quot;;</string>
           </property>
           <property name="text">
-           <string>Appointments:</string>
+           <string>Appointments: { Date | Start Time | End Time}</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="label_18">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy;</string>
+          </property>
+          <property name="text">
+           <string>Start Time:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QLabel" name="label_19">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy;</string>
+          </property>
+          <property name="text">
+           <string>End Time:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="label_17">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy;</string>
+          </property>
+          <property name="text">
+           <string>Date:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="9" colspan="2">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="2" column="0">
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0">
+              <widget class="QCalendarWidget" name="calendarWidget_2"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy</string>
+             </property>
+             <property name="text">
+              <string>Next Appointment Highlighted in Gray: </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="2">
+         <widget class="QLabel" name="label_15">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy;</string>
+          </property>
+          <property name="text">
+           <string>Schedule Appointment: Max 4</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDateEdit" name="dateEdit"/>
+        </item>
+        <item row="4" column="3">
+         <widget class="QTimeEdit" name="timeEdit"/>
+        </item>
+        <item row="6" column="3">
+         <widget class="QTimeEdit" name="timeEdit_2"/>
+        </item>
+        <item row="7" column="3" rowspan="2">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="text">
+           <string>Schedule:</string>
           </property>
          </widget>
         </item>
@@ -313,6 +419,28 @@ font: 12pt &quot;Lucida Calligraphy&quot;;</string>
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_16">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 125, 132);
+font-weight: bold;
+font: 12pt Lucida Calligraphy;</string>
+          </property>
+          <property name="text">
+           <string>Payment Amount:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_17"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="text">
+           <string>Pay</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -325,7 +453,7 @@ font: 12pt &quot;Lucida Calligraphy&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

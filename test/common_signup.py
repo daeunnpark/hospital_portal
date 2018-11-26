@@ -14,6 +14,8 @@ class common_signup_UI(object):
         CommonSignUp.setObjectName("CommonSignUp")
         self.centralwidget = QtWidgets.QWidget(CommonSignUp)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
 
 
         self.label1 = QtWidgets.QLabel(self.centralwidget)
@@ -197,6 +199,13 @@ class common_signup_UI(object):
         self.pushButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
                                       "color: rgb(46, 125, 132);")
         self.pushButton.setObjectName("pushButton")
+
+        self.gridLayout_2.addWidget(self.label1, 0.1, 0.1, QtCore.Qt.AlignTop)
+        self.gridLayout_2.addWidget(self.lineEdit1, 0, 0.6, QtCore.Qt.AlignTop)
+        self.gridLayout_2.addWidget(self.label2, 0, 1, QtCore.Qt.AlignTop)
+        #self.lineEdit1.setFixedWidth(200)
+        #self.commonLo.setFixedWidth(1000)
+        #self.commonLoginBtn.setFixedHeight(200)
         CommonSignUp.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(CommonSignUp)
         self.statusbar.setObjectName("statusbar")
