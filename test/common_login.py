@@ -29,10 +29,11 @@ class common_login_UI(object):
 
     def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")
-        CommonLogin.resize(800, 600)
 
         self.centralwidget = QtWidgets.QWidget(CommonLogin)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
 
         # Login
         # Username
@@ -79,6 +80,19 @@ class common_login_UI(object):
         self.lineEdit2.setObjectName("lineEdit2")
         self.lineEdit2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
         CommonLogin.setCentralWidget(self.centralwidget)
+
+        self.gridLayout_2.addWidget(self.label1, 0, 0, QtCore.Qt.AlignLeading)
+        self.gridLayout_2.addWidget(self.lineEdit1, 0, 1, QtCore.Qt.AlignLeading)
+        self.label1.setFixedWidth(400)
+        self.lineEdit1.setFixedWidth(600)
+        self.lineEdit1.setFixedHeight(100)
+        self.gridLayout_2.addWidget(self.label2, 1, 0, QtCore.Qt.AlignLeading)
+        self.gridLayout_2.addWidget(self.lineEdit2, 1, 1, QtCore.Qt.AlignLeading)
+        self.label2.setFixedWidth(400)
+        self.lineEdit2.setFixedWidth(600)
+        self.lineEdit2.setFixedHeight(100)
+        self.gridLayout_2.addWidget(self.loginBtn, 5, 1, QtCore.Qt.AlignTrailing)
+        self.loginBtn.setFixedWidth(600)
 
         self.menubar = QtWidgets.QMenuBar(CommonLogin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))

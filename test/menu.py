@@ -7,9 +7,12 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
 
         Menu.setObjectName("Menu")
+<<<<<<< HEAD
         #Menu.resize(1600, 1200)
         Menu.resize(800, 600)
 
+=======
+>>>>>>> 057997d0254610fbf887b0d742703dc2f81c1db5
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
 
