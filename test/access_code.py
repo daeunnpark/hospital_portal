@@ -10,11 +10,11 @@ from common_signup import common_signup_UI
 class access_code_UI(object):
     def __init__(self, parent=None):
         self.rowcount = 0
+        self.authenticateCode = -1
     
     def setupUi(self, Access, num):
         Access.setObjectName("Access")
-        #Access.resize(800, 600)
-        
+
         self.centralwidget = QtWidgets.QWidget(Access)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -75,6 +75,7 @@ class access_code_UI(object):
         )
             
         access = cur.fetchall()
+        self.authenticateCode = access
         self.rowcount = cur.rowcount
         print(self.rowcount)
                     
