@@ -113,12 +113,29 @@ class common_login_UI(object):
         self.loginBtn.setText(_translate("CommonLogin", "Login"))
 
     # Wrapper function to load user profile
-    def authenticate_user(self, cur):
+    def authenticate_user(self, cur, num):
 
-        cur.execute(
-            "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-            (self.lineEdit1.text(), self.lineEdit2.text()),
-        )
+        if num == 1:
+            cur.execute(
+                "SELECT * FROM Patient P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+        elif num == 2:
+            cur.execute(
+                "SELECT * FROM Doctor D WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+        elif num == 3:
+            cur.execute(
+                "SELECT * FROM Nurse N WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+        else:
+            cur.execute(
+                "SELECT * FROM Administrator A WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+
         authenticate = cur.fetchall()
 
         # If user exists in DB
@@ -233,13 +250,12 @@ class common_login_UI(object):
 
 
 if __name__ == "__main__":
-
     app = QtWidgets.QApplication(sys.argv)
 
     MainWindow = QtWidgets.QMainWindow()
 
     ui = common_login_UI()
-    ui.setupUi(MainWindow,1) # default patient
+    ui.setupUi(MainWindow, 1)  # default patient
 
     MainWindow.showMaximized()
 

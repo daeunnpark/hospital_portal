@@ -42,7 +42,7 @@ class test(object):
         w = common_login_UI()
         w.setupUi(MainWindow, num)
 
-        w.loginBtn.clicked.connect(lambda: self.authenticate_user(w))
+        w.loginBtn.clicked.connect(lambda: self.authenticate_user(w, num))
 
         MainWindow.showMaximized()
 
@@ -54,8 +54,8 @@ class test(object):
 
         MainWindow.showMaximized()
 
-    def authenticate_user(self, w):
-        w.authenticate_user(cur)
+    def authenticate_user(self, w, num):
+        w.authenticate_user(cur, num)
 
         # if user exists
         if w.ID is not None:
@@ -122,11 +122,17 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
+<<<<<<< HEAD
     """
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
     """
+=======
+    """conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )"""
+>>>>>>> 69155c98006ae1c69dbc43458dbd96212a635db6
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
