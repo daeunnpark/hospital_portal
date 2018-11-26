@@ -14,50 +14,82 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>671</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0" alignment="Qt::AlignHCenter">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>400</height>
+       </size>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="0" alignment="Qt::AlignHCenter">
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>200</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>60</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="pushButton">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
 color: rgb(46, 125, 132);</string>
-    </property>
-    <property name="text">
-     <string>Enter Your Access Code Received Via Email:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>200</y>
-      <width>651</width>
-      <height>111</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>370</y>
-      <width>241</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
+            </property>
+            <property name="text">
+             <string>Enter</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 20pt &quot;Lucida Calligraphy&quot;;
 color: rgb(46, 125, 132);</string>
-    </property>
-    <property name="text">
-     <string>Enter</string>
-    </property>
-   </widget>
+         </property>
+         <property name="text">
+          <string>Enter Your Access Code Received Via Email:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -65,7 +97,7 @@ color: rgb(46, 125, 132);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
