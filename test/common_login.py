@@ -276,35 +276,6 @@ class common_login_UI(object):
                 self.appointmentIDs = cur.fetchall()
 
             elif num == 2:
-                cur.execute(
-                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.firstName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.lastName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.phoneNumber = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.emailAddress = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.ID = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
@@ -345,36 +316,6 @@ class common_login_UI(object):
             elif num == 3:
 
                 cur.execute(
-                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.firstName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.lastName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.phoneNumber = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.emailAddress = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.ID = str(cur.fetchone()[0])
-
-                cur.execute(
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
@@ -411,36 +352,6 @@ class common_login_UI(object):
                 self.appointmentIDs = cur.fetchall()
 
             else:
-
-                cur.execute(
-                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.firstName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.lastName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.phoneNumber = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.emailAddress = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.ID = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
