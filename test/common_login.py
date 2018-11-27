@@ -181,88 +181,288 @@ class common_login_UI(object):
         # If user exists in DB
         # Load/store its profile to self obj to pass to test obj(main module)
         if len(authenticate) == 1:
-            cur.execute(
-                "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-            self.firstName = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-            self.lastName = str(cur.fetchone()[0])
+            if num == 1:
+                cur.execute(
+                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.firstName = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-            self.phoneNumber = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.lastName = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-            self.emailAddress = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.phoneNumber = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                (self.lineEdit1.text(), self.lineEdit2.text()),
-            )
-            self.ID = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.emailAddress = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
-            self.age = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.ID = str(cur.fetchone()[0])
 
-            cur.execute("SELECT SSN FROM Patient P WHERE PatientID = (%s)", self.ID)
-            self.ssn = str(cur.fetchone()[0])
+                cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
+                self.age = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Weight FROM Patient P WHERE PatientID = (%s)", self.ID)
-            self.weight = str(cur.fetchone()[0])
+                cur.execute("SELECT SSN FROM Patient P WHERE PatientID = (%s)", self.ID)
+                self.ssn = str(cur.fetchone()[0])
 
-            cur.execute("SELECT Height FROM Patient P WHERE PatientID = (%s)", self.ID)
-            self.height = str(cur.fetchone()[0])
+                cur.execute("SELECT Weight FROM Patient P WHERE PatientID = (%s)", self.ID)
+                self.weight = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%s)", self.ID
-            )
-            self.creditCardNumber = str(cur.fetchone()[0])
+                cur.execute("SELECT Height FROM Patient P WHERE PatientID = (%s)", self.ID)
+                self.height = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT BillingAmount FROM Patient P WHERE PatientID = (%s)", self.ID
-            )
-            self.billingAmount = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT CreditCardNumber FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.creditCardNumber = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%s)", self.ID
-            )
-            self.insuranceNumber = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT BillingAmount FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.billingAmount = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT MedicationList FROM Patient P WHERE PatientID = (%s)", self.ID
-            )
-            self.medicationList = str(cur.fetchone()[0])
+                cur.execute(
+                    "SELECT InsuranceNumber FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.insuranceNumber = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT Date FROM Appointment A WHERE PatientID = (%s)", self.ID
-            )
-            self.appointmentDates = cur.fetchall()
+                cur.execute(
+                    "SELECT MedicationList FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.medicationList = str(cur.fetchone()[0])
 
-            cur.execute(
-                "SELECT StartTime FROM Appointment A WHERE PatientID = (%s)", self.ID
-            )
-            self.startTimes = cur.fetchall()
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE PatientID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
 
-            cur.execute(
-                "SELECT EndTime FROM Appointment A WHERE PatientID = (%s)", self.ID
-            )
-            self.endTimes = cur.fetchall()
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE PatientID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
 
-            cur.execute(
-                "SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)",
-                self.ID,
-            )
-            self.appointmentIDs = cur.fetchall()
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE PatientID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE PatientID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
+            elif num == 2:
+                cur.execute(
+                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.firstName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.lastName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.phoneNumber = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.emailAddress = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.ID = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT MedicalLicense FROM Doctor D WHERE DoctorID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE DoctorID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
+            elif num == 3:
+
+                cur.execute(
+                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.firstName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.lastName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.phoneNumber = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.emailAddress = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.ID = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Specialty FROM Nurse N WHERE NurseID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT MedicalLicense FROM Nurse N WHERE NurseID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE NurseID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
+            else:
+
+                cur.execute(
+                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.firstName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.lastName = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.phoneNumber = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.emailAddress = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                    (self.lineEdit1.text(), self.lineEdit2.text()),
+                )
+                self.ID = str(cur.fetchone()[0])
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT SecurityCode FROM DepartmentAdmin D WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE DepartmentAdminID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
 
             # print("LOGIN Successful")
         else:
