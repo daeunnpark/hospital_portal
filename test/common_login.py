@@ -116,6 +116,8 @@ class common_login_UI(object):
     # Wrapper function to load user profile
     def authenticate_user(self, cur, num):
 
+        exists = 0
+
         cur.execute(
             "SELECT * FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
             (self.lineEdit1.text(), self.lineEdit2.text()),
@@ -134,27 +136,36 @@ class common_login_UI(object):
 
             userID = int(userID)
 
+
             if num == 1:
                 cur.execute(
                     "SELECT * FROM Patient P WHERE PatientID = (%s)",
                     (userID),
                 )
+                if(cur.rowcount != 0):
+                    exists = 1
 
             elif num == 2:
                 cur.execute(
                     "SELECT * FROM Doctor D WHERE DoctorID = (%s)",
                     (userID),
                 )
+                if(cur.rowcount != 0):
+                    exists = 1
             elif num == 3:
                 cur.execute(
                     "SELECT * FROM Nurse N WHERE NurseID = (%s)",
                     (userID),
                 )
+                if(cur.rowcount != 0):
+                    exists = 1
             else:
                 cur.execute(
                     "SELECT * FROM DepartmentAdmin A WHERE DepartmentAdminID = (%s)",
                     (userID),
                 )
+                if(cur.rowcount != 0):
+                    exists = 1
 
             myUser = cur.fetchall()
 
@@ -180,39 +191,37 @@ class common_login_UI(object):
 
         # If user exists in DB
         # Load/store its profile to self obj to pass to test obj(main module)
-        if len(authenticate) == 1:
+        if (len(authenticate) == 1 and exists == 1):
+            cur.execute(
+                "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+            self.firstName = str(cur.fetchone()[0])
 
+            cur.execute(
+                "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+            self.lastName = str(cur.fetchone()[0])
+
+            cur.execute(
+                "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+            self.phoneNumber = str(cur.fetchone()[0])
+
+            cur.execute(
+                "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+            self.emailAddress = str(cur.fetchone()[0])
+
+            cur.execute(
+                "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
+                (self.lineEdit1.text(), self.lineEdit2.text()),
+            )
+            self.ID = str(cur.fetchone()[0])
             if num == 1:
-                cur.execute(
-                    "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.firstName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT LastName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.lastName = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT PhoneNumber FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.phoneNumber = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT EmailAddress FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.emailAddress = str(cur.fetchone()[0])
-
-                cur.execute(
-                    "SELECT ID FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
-                    (self.lineEdit1.text(), self.lineEdit2.text()),
-                )
-                self.ID = str(cur.fetchone()[0])
-
                 cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
                 self.age = str(cur.fetchone()[0])
 
@@ -463,6 +472,7 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
+
 
             # print("LOGIN Successful")
         else:
