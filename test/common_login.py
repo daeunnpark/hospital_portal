@@ -225,7 +225,7 @@ class common_login_UI(object):
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             self.ID = str(cur.fetchone()[0])
-            if(num == 1):
+            if num == 1:
                 cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
                 self.age = str(cur.fetchone()[0])
 
@@ -264,7 +264,7 @@ class common_login_UI(object):
                 self.appointmentDates = cur.fetchall()
 
                 cur.execute(
-                "SELECT StartTime FROM Appointment A WHERE PatientID = (%s)", self.ID
+                    "SELECT StartTime FROM Appointment A WHERE PatientID = (%s)", self.ID
                 )
                 self.startTimes = cur.fetchall()
 
@@ -278,6 +278,116 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
+
+            elif num == 2:
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT MedicalLicense FROM Doctor D WHERE DoctorID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE DoctorID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE DoctorID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
+            elif num == 3:
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Specialty FROM Nurse N WHERE NurseID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT MedicalLicense FROM Nurse N WHERE NurseID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE NurseID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE NurseID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
+            else:
+
+                cur.execute(
+                    "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT SecurityCode FROM DepartmentAdmin D WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                # TODO: Assign this to some UI component
+
+                cur.execute(
+                    "SELECT Date FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.appointmentDates = cur.fetchall()
+
+                cur.execute(
+                    "SELECT StartTime FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.startTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT EndTime FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
+                )
+                self.endTimes = cur.fetchall()
+
+                cur.execute(
+                    "SELECT AppointmentID FROM Appointment A WHERE DepartmentAdminID = (%s)",
+                    self.ID,
+                )
+                self.appointmentIDs = cur.fetchall()
+
 
             # print("LOGIN Successful")
         else:
