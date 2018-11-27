@@ -8,8 +8,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class menu_UI(object):
-    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
+                creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
+                endTimes, appointmentIDs, cur, conn):
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -32,11 +35,10 @@ class menu_UI(object):
         self.gridLayout.setSpacing(6)
         self.gridLayout.setObjectName("gridLayout")
 
-
         self.label_1 = QtWidgets.QLabel(self.tab_1)
         self.label_1.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_1.setObjectName("label_1")
         self.gridLayout.addWidget(self.label_1, 2, 0, 1, 1)
 
@@ -47,11 +49,10 @@ class menu_UI(object):
         self.gridLayout.addWidget(self.lineEdit_1, 2, 1, 1, 1)
         self.tabWidget.addTab(self.tab_1, "")
 
-
         self.label_2 = QtWidgets.QLabel(self.tab_1)
         self.label_2.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 2, 2, 1, 1)
 
@@ -61,11 +62,10 @@ class menu_UI(object):
         self.lineEdit_2.setText(lastName)
         self.lineEdit_2.setReadOnly(True)
 
-
         self.label_3 = QtWidgets.QLabel(self.tab_1)
         self.label_3.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
 
@@ -75,11 +75,10 @@ class menu_UI(object):
         self.lineEdit_3.setText(phoneNumber)
         self.lineEdit_3.setReadOnly(True)
 
-
         self.label_4 = QtWidgets.QLabel(self.tab_1)
         self.label_4.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 4, 2, 1, 1)
 
@@ -89,11 +88,10 @@ class menu_UI(object):
         self.lineEdit_4.setText(emailAddress)
         self.lineEdit_4.setReadOnly(True)
 
-
         self.label_5 = QtWidgets.QLabel(self.tab_1)
         self.label_5.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_5.setObjectName("label_5")
         self.gridLayout.addWidget(self.label_5, 6, 0, 1, 1)
 
@@ -103,11 +101,10 @@ class menu_UI(object):
         self.lineEdit_5.setText(ID)
         self.lineEdit_5.setReadOnly(True)
 
-
         self.label_6 = QtWidgets.QLabel(self.tab_1)
         self.label_6.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_6.setObjectName("label_6")
         self.gridLayout.addWidget(self.label_6, 6, 2, 1, 1)
 
@@ -119,8 +116,8 @@ class menu_UI(object):
 
         self.label_7 = QtWidgets.QLabel(self.tab_1)
         self.label_7.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_7.setObjectName("label_7")
         self.gridLayout.addWidget(self.label_7, 8, 0, 1, 1)
 
@@ -132,8 +129,8 @@ class menu_UI(object):
 
         self.label_8 = QtWidgets.QLabel(self.tab_1)
         self.label_8.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_8.setObjectName("label_8")
         self.gridLayout.addWidget(self.label_8, 8, 2, 1, 1)
 
@@ -145,8 +142,8 @@ class menu_UI(object):
 
         self.label_9 = QtWidgets.QLabel(self.tab_1)
         self.label_9.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt \"Lucida Calligraphy\";")
         self.label_9.setObjectName("label_9")
         self.gridLayout.addWidget(self.label_9, 10, 0, 1, 1)
 
@@ -156,14 +153,13 @@ class menu_UI(object):
         self.lineEdit_9.setText(age)
         self.lineEdit_9.setReadOnly(True)
 
-
         self.label_10 = QtWidgets.QLabel(self.tab_1)
         self.label_10.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
         self.label_10.setObjectName("label_10")
         self.gridLayout.addWidget(self.label_10, 10, 2, 1, 1)
-        
+
         self.lineEdit_10 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_10.setObjectName("lineEdit_10")
         self.lineEdit_10.setText(medicationList)
@@ -175,13 +171,10 @@ class menu_UI(object):
         self.EditBtn.setObjectName("EditBtn")
         self.gridLayout.addWidget(self.EditBtn, 1, 3, 1, 1, QtCore.Qt.AlignRight)
 
-
         self.SaveBtn = QtWidgets.QPushButton(self.tab_1)
         self.SaveBtn.setMaximumSize(QtCore.QSize(100, 16777215))
         self.SaveBtn.setObjectName("SaveBtn")
         self.gridLayout.addWidget(self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
-
-
 
         # Appointmt
         self.tab_2 = QtWidgets.QWidget()
@@ -190,7 +183,7 @@ class menu_UI(object):
         self.gridLayout_2.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_2.setSpacing(6)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        
+
         self.lineEdit19_1 = QtWidgets.QLineEdit(self.tab_2)
         self.lineEdit19_1.setMaximumSize(QtCore.QSize(589, 16777215))
         self.lineEdit19_1.setObjectName("lineEdit19_1")
@@ -238,37 +231,34 @@ class menu_UI(object):
         self.pushButton19_4.setVisible(False)
         self.gridLayout_2.addWidget(self.pushButton19_4, 19, 4, 1, 1)
 
-        
         self.label_16 = QtWidgets.QLabel(self.tab_2)
         self.label_16.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy;")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt Lucida Calligraphy;")
         self.label_16.setObjectName("label_16")
         self.gridLayout_2.addWidget(self.label_16, 1, 3, 1, 1)
 
         self.label_17 = QtWidgets.QLabel(self.tab_2)
         self.label_17.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy;")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt Lucida Calligraphy;")
         self.label_17.setObjectName("label_17")
         self.gridLayout_2.addWidget(self.label_17, 3, 3, 1, 1)
 
         self.label_18 = QtWidgets.QLabel(self.tab_2)
         self.label_18.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy;")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt Lucida Calligraphy;")
         self.label_18.setObjectName("label_18")
         self.gridLayout_2.addWidget(self.label_18, 5, 3, 1, 1)
 
         self.label_19 = QtWidgets.QLabel(self.tab_2)
         self.label_19.setMaximumSize(QtCore.QSize(16777215, 50))
         self.label_19.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 18pt \"Lucida Calligraphy\";")
+                                    "font-weight: bold;\n"
+                                    "font: 18pt \"Lucida Calligraphy\";")
         self.label_19.setObjectName("label_19")
         self.gridLayout_2.addWidget(self.label_19, 17, 0, 1, 4)
-
-
 
         self.groupBox = QtWidgets.QGroupBox(self.tab_2)
         self.groupBox.setTitle("")
@@ -289,11 +279,10 @@ class menu_UI(object):
         self.gridLayout_3.addWidget(self.calendarWidget_1, 0, 0, 1, 1)
         self.gridLayout_4.addLayout(self.gridLayout_3, 2, 0, 1, 1)
 
-
         self.label20 = QtWidgets.QLabel(self.groupBox)
         self.label20.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy")
+                                   "font-weight: bold;\n"
+                                   "font: 12pt Lucida Calligraphy")
         self.label20.setObjectName("label20")
         self.gridLayout_4.addWidget(self.label20, 1, 0, 1, 1)
 
@@ -301,8 +290,8 @@ class menu_UI(object):
 
         self.label_15 = QtWidgets.QLabel(self.tab_2)
         self.label_15.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy;")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt Lucida Calligraphy;")
         self.label_15.setObjectName("label_15")
         self.gridLayout_2.addWidget(self.label_15, 0, 3, 1, 2)
 
@@ -322,7 +311,6 @@ class menu_UI(object):
         self.timeEdit_18.setObjectName("timeEdit_18")
         self.gridLayout_2.addWidget(self.timeEdit_18, 6, 3, 1, 1)
 
-
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -333,8 +321,8 @@ class menu_UI(object):
 
         self.label_11 = QtWidgets.QLabel(self.tab_3)
         self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
         self.label_11.setObjectName("label_11")
         self.gridLayout_6.addWidget(self.label_11, 0, 0, 1, 1)
 
@@ -344,25 +332,23 @@ class menu_UI(object):
         self.gridLayout_6.addWidget(self.lineEdit_11, 1, 0, 1, 1)
         self.lineEdit_11.setText(insuranceNumber)
 
-
         self.label_12 = QtWidgets.QLabel(self.tab_3)
         self.label_12.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
         self.label_12.setObjectName("label_12")
         self.gridLayout_6.addWidget(self.label_12, 2, 0, 1, 1)
-        
+
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_3)
         self.lineEdit_12.setMaximumSize(QtCore.QSize(300, 50))
         self.lineEdit_12.setObjectName("lineEdit_12")
         self.gridLayout_6.addWidget(self.lineEdit_12, 3, 0, 1, 1)
         self.lineEdit_12.setText(creditCardNumber)
 
-
         self.label_13 = QtWidgets.QLabel(self.tab_3)
         self.label_13.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt \"Lucida Calligraphy\";")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt \"Lucida Calligraphy\";")
         self.label_13.setObjectName("label_13")
         self.gridLayout_6.addWidget(self.label_13, 4, 0, 1, 1)
 
@@ -372,11 +358,10 @@ class menu_UI(object):
         self.gridLayout_6.addWidget(self.lineEdit_13, 5, 0, 1, 1)
         self.lineEdit_13.setText(billingAmount)
 
-
         self.label_14 = QtWidgets.QLabel(self.tab_3)
         self.label_14.setStyleSheet("color: rgb(46, 125, 132);\n"
-"font-weight: bold;\n"
-"font: 12pt Lucida Calligraphy;")
+                                    "font-weight: bold;\n"
+                                    "font: 12pt Lucida Calligraphy;")
         self.label_14.setObjectName("label_14")
         self.gridLayout_6.addWidget(self.label_14, 6, 0, 1, 1)
 
@@ -386,13 +371,10 @@ class menu_UI(object):
         self.lineEdit_14.setObjectName("lineEdit_14")
         self.gridLayout_6.addWidget(self.lineEdit_14, 7, 0, 1, 1)
 
-
         self.pushButton_14 = QtWidgets.QPushButton(self.tab_3)
         self.pushButton_14.setMaximumSize(QtCore.QSize(100, 200))
         self.pushButton_14.setObjectName("pushButton_14")
         self.gridLayout_6.addWidget(self.pushButton_14, 7, 1, 1, 1)
-
-
 
         # Billing Info
         self.tabWidget.addTab(self.tab_3, "")
@@ -432,7 +414,6 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
-        
         """
         self.pushButton.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
         self.pushButton_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
@@ -532,12 +513,10 @@ class menu_UI(object):
                         seconds))
                 numEnds = numEnds + 1
 
-
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Menu", "Profile"))
-
 
         self.label_9.setText(_translate("Menu", "Age:"))
         self.label_3.setText(_translate("Menu", "Phone Number:"))
@@ -557,7 +536,7 @@ class menu_UI(object):
         self.pushButton19_2.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButton19_3.setText(_translate("Menu", "Cancel Appointment"))
         self.pushButton19_4.setText(_translate("Menu", "Cancel Appointment"))
-        
+
         self.label_19.setText(_translate("Menu", "Appointments: { Date | Start Time | End Time}"))
         self.label_17.setText(_translate("Menu", "Start Time:"))
         self.label_18.setText(_translate("Menu", "End Time:"))
@@ -585,15 +564,14 @@ class menu_UI(object):
         self.treeWidget.setSortingEnabled(__sortingEnabled)
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
-
     def Pay(self, ID, cur, conn):
-        if(self.lineEdit_13.text() < self.lineEdit_14.text()):
+        if (self.lineEdit_13.text() < self.lineEdit_14.text()):
             diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
             self.lineEdit_14.setText(str(diff))
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
             conn.commit()
-        elif(self.lineEdit_13.text() == self.lineEdit_14.text()):
+        elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
             self.lineEdit_14.setText("0")
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
@@ -611,23 +589,21 @@ class menu_UI(object):
         while (cur.rowcount != 0):
             cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
             apptID = apptID + 1
-                
-                
-                
+
     def cancelAppt(self, num, appointmentIDs, cur, conn):
-        if(num == 1):
+        if (num == 1):
             self.lineEdit19_1.setText("")
             self.lineEdit19_1.setVisible(False)
             self.pushButton19_1.setVisible(False)
             numAppointment = 0
             appointNum = -1
             for row in appointmentIDs:
-                if(numAppointment == 0):
+                if (numAppointment == 0):
                     appointNum = row[0]
                     numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
-        if(num == 3):
+        if (num == 3):
             self.lineEdit19_2.setText("")
             self.lineEdit19_2.setVisible(False)
             self.pushButton19_2.setVisible(False)
@@ -639,7 +615,7 @@ class menu_UI(object):
                     numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
-        if(num == 5):
+        if (num == 5):
             self.lineEdit19_3.setText("")
             self.lineEdit19_3.setVisible(False)
             self.pushButton19_3.setVisible(False)
@@ -651,7 +627,7 @@ class menu_UI(object):
                     numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
-        if(num == 7):
+        if (num == 7):
             self.lineEdit19_4.setText("")
             self.lineEdit19_4.setVisible(False)
             self.pushButton19_4.setVisible(False)
@@ -667,10 +643,10 @@ class menu_UI(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Menu = QtWidgets.QMainWindow()
     ui = menu_UI()
     ui.setupUi(Menu)
     Menu.show()
     sys.exit(app.exec_())
-
