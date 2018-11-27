@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -219,10 +219,10 @@ font: 12pt &quot;Lucida Calligraphy&quot;;</string>
          </widget>
         </item>
         <item row="18" column="1">
-         <widget class="QLineEdit" name="lineEdit_19_2"/>
+         <widget class="QLineEdit" name="lineEdit19_2"/>
         </item>
         <item row="18" column="3">
-         <widget class="QLineEdit" name="lineEdit_19_3">
+         <widget class="QLineEdit" name="lineEdit19_3">
           <property name="maxLength">
            <number>300</number>
           </property>
@@ -260,7 +260,7 @@ font: 12pt &quot;Lucida Calligraphy&quot;;</string>
          </widget>
         </item>
         <item row="18" column="4">
-         <widget class="QLineEdit" name="lineEdit_19_4"/>
+         <widget class="QLineEdit" name="lineEdit19_4"/>
         </item>
         <item row="17" column="0" colspan="4">
          <widget class="QLabel" name="label_19">

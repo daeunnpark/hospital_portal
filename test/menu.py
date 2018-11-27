@@ -441,7 +441,8 @@ class menu_UI(object):
         self.pushButton_5.clicked.connect(self.scheduleAppt)
         self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
         """
-
+        earliestDate = None
+        
         numDates = 0
         for row in appointmentDates:
             if (earliestDate == None):
