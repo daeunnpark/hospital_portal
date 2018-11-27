@@ -139,6 +139,7 @@ class common_login_UI(object):
                     "SELECT * FROM Patient P WHERE PatientID = (%s)",
                     (userID),
                 )
+
             elif num == 2:
                 cur.execute(
                     "SELECT * FROM Doctor D WHERE DoctorID = (%s)",
@@ -176,15 +177,10 @@ class common_login_UI(object):
                 self.startTimes = None
                 self.endTimes = None
                 self.appointmentIDs = None
-            else:
-            # Add dialog maybe?
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
-                error_dialog.exec()
 
         # If user exists in DB
         # Load/store its profile to self obj to pass to test obj(main module)
-        elif len(authenticate) == 1:
+        if len(authenticate) == 1:
             cur.execute(
                 "SELECT FirstName FROM Person P WHERE Username = (%s) AND UserPassword = (%s)",
                 (self.lineEdit1.text(), self.lineEdit2.text()),
