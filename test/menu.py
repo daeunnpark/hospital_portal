@@ -9,9 +9,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class menu_UI(object):
-    def setupUi(self, Menu):
+    def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height, creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes, endTimes, appointmentIDs, cur, conn):
+
         Menu.setObjectName("Menu")
-        Menu.resize(799, 614)
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.centralWidget)
@@ -49,6 +49,8 @@ class menu_UI(object):
         self.lineEdit_4 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.gridLayout.addWidget(self.lineEdit_4, 4, 3, 1, 1)
+        self.lineEdit_4.setText(emailAddress)
+
         self.label_10 = QtWidgets.QLabel(self.tab_1)
         self.label_10.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
@@ -76,6 +78,8 @@ class menu_UI(object):
         self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
+        self.lineEdit_6.setText(ssn)
+
         self.label_2 = QtWidgets.QLabel(self.tab_1)
         self.label_2.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
@@ -91,15 +95,24 @@ class menu_UI(object):
         self.lineEdit_5 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_5.setObjectName("lineEdit_5")
         self.gridLayout.addWidget(self.lineEdit_5, 6, 1, 1, 1)
+        self.lineEdit_5.setText(ID)
+
+        
         self.lineEdit_10 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_10.setObjectName("lineEdit_10")
+        self.lineEdit_10.setText(medicationList)
+        
         self.gridLayout.addWidget(self.lineEdit_10, 10, 3, 1, 1)
         self.lineEdit_8 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_8.setObjectName("lineEdit_8")
         self.gridLayout.addWidget(self.lineEdit_8, 8, 3, 1, 1)
+        self.lineEdit_8.setText(height)
+
         self.lineEdit_7 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_7.setObjectName("lineEdit_7")
         self.gridLayout.addWidget(self.lineEdit_7, 8, 1, 1, 1)
+        self.lineEdit_7.setText(weight)
+
         self.label_1 = QtWidgets.QLabel(self.tab_1)
         self.label_1.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
@@ -109,6 +122,8 @@ class menu_UI(object):
         self.lineEdit_9 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_9.setObjectName("lineEdit_9")
         self.gridLayout.addWidget(self.lineEdit_9, 10, 1, 1, 1)
+        self.lineEdit_9.setText(age)
+
         self.label_4 = QtWidgets.QLabel(self.tab_1)
         self.label_4.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
@@ -118,11 +133,17 @@ class menu_UI(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
+        self.lineEdit_3.setText(phoneNumber)
+
         self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout.addWidget(self.lineEdit_2, 2, 3, 1, 1)
+        self.lineEdit_2.setText(lastName)
+
         self.lineEdit_1 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_1.setObjectName("lineEdit_1")
+        self.lineEdit_1.setText(firstName)
+
         self.gridLayout.addWidget(self.lineEdit_1, 2, 1, 1, 1)
         self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QtWidgets.QWidget()
@@ -134,30 +155,45 @@ class menu_UI(object):
         self.lineEdit19_1 = QtWidgets.QLineEdit(self.tab_2)
         self.lineEdit19_1.setMaximumSize(QtCore.QSize(589, 16777215))
         self.lineEdit19_1.setObjectName("lineEdit19_1")
+        self.lineEdit19_1.setVisible(False)
+
         self.gridLayout_2.addWidget(self.lineEdit19_1, 18, 0, 1, 1)
-        self.lineEdit_19_2 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit_19_2.setObjectName("lineEdit_19_2")
-        self.gridLayout_2.addWidget(self.lineEdit_19_2, 18, 1, 1, 1)
-        self.lineEdit_19_3 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit_19_3.setMaxLength(300)
-        self.lineEdit_19_3.setReadOnly(True)
-        self.lineEdit_19_3.setObjectName("lineEdit_19_3")
-        self.gridLayout_2.addWidget(self.lineEdit_19_3, 18, 3, 1, 1)
+        self.lineEdit19_2 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit19_2.setObjectName("lineEdit19_2")
+        self.lineEdit19_2.setVisible(False)
+
+        self.gridLayout_2.addWidget(self.lineEdit19_2, 18, 1, 1, 1)
+        self.lineEdit19_3 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit19_3.setMaxLength(300)
+        self.lineEdit19_3.setReadOnly(True)
+        self.lineEdit19_3.setVisible(False)
+
+        self.lineEdit19_3.setObjectName("lineEdit19_3")
+        self.gridLayout_2.addWidget(self.lineEdit19_3, 18, 3, 1, 1)
         self.pushButton19_2 = QtWidgets.QPushButton(self.tab_2)
         self.pushButton19_2.setObjectName("pushButton19_2")
+        self.pushButton19_2.setVisible(False)
+
         self.gridLayout_2.addWidget(self.pushButton19_2, 19, 1, 1, 1)
         self.pushButton19_3 = QtWidgets.QPushButton(self.tab_2)
         self.pushButton19_3.setObjectName("pushButton19_3")
+        self.pushButton19_3.setVisible(False)
+
         self.gridLayout_2.addWidget(self.pushButton19_3, 19, 3, 1, 1)
         self.pushButton19_4 = QtWidgets.QPushButton(self.tab_2)
         self.pushButton19_4.setObjectName("pushButton19_4")
+        self.pushButton19_4.setVisible(False)
+
         self.gridLayout_2.addWidget(self.pushButton19_4, 19, 4, 1, 1)
         self.pushButton19_1 = QtWidgets.QPushButton(self.tab_2)
         self.pushButton19_1.setObjectName("pushButton19_1")
+        self.pushButton19_1.setVisible(False)
+
         self.gridLayout_2.addWidget(self.pushButton19_1, 19, 0, 1, 1)
-        self.lineEdit_19_4 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit_19_4.setObjectName("lineEdit_19_4")
-        self.gridLayout_2.addWidget(self.lineEdit_19_4, 18, 4, 1, 1)
+        self.lineEdit19_4 = QtWidgets.QLineEdit(self.tab_2)
+        self.lineEdit19_4.setObjectName("lineEdit19_4")
+        self.lineEdit19_4.setVisible(False)
+        self.gridLayout_2.addWidget(self.lineEdit19_4, 18, 4, 1, 1)
         self.label_19 = QtWidgets.QLabel(self.tab_2)
         self.label_19.setMaximumSize(QtCore.QSize(16777215, 50))
         self.label_19.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -233,6 +269,7 @@ class menu_UI(object):
         self.lineEdit_13.setMaximumSize(QtCore.QSize(300, 50))
         self.lineEdit_13.setObjectName("lineEdit_13")
         self.gridLayout_6.addWidget(self.lineEdit_13, 5, 0, 1, 1)
+        self.lineEdit_13.setText(billingAmount)
         self.label_14 = QtWidgets.QLabel(self.tab_3)
         self.label_14.setStyleSheet("color: rgb(46, 125, 132);\n"
 "font-weight: bold;\n"
@@ -270,10 +307,15 @@ class menu_UI(object):
         self.lineEdit_11.setMaximumSize(QtCore.QSize(300, 50))
         self.lineEdit_11.setObjectName("lineEdit_11")
         self.gridLayout_6.addWidget(self.lineEdit_11, 1, 0, 1, 1)
+        self.lineEdit_11.setText(insuranceNumber)
+
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_3)
         self.lineEdit_12.setMaximumSize(QtCore.QSize(300, 50))
         self.lineEdit_12.setObjectName("lineEdit_12")
+
         self.gridLayout_6.addWidget(self.lineEdit_12, 3, 0, 1, 1)
+        self.lineEdit_12.setText(creditCardNumber)
+
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -302,6 +344,107 @@ class menu_UI(object):
         self.retranslateUi(Menu)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
+
+        
+        """
+        self.pushButton.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
+        self.pushButton_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
+        self.pushButton_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
+        self.pushButton_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButton_5.clicked.connect(self.scheduleAppt)
+        self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
+        """
+
+        numDates = 0
+        for row in appointmentDates:
+            if (earliestDate == None):
+                earliestDate = row[0]
+            else:
+                if (row[0] < earliestDate):
+                    earliestDate = row[0]
+            if (numDates == 0):
+                self.lineEdit19_1.setVisible(True)
+                self.pushButton19_1.setVisible(True)
+                self.lineEdit19_1.setText(row[0].strftime('%m/%d/%Y'))
+                numDates = numDates + 1
+            elif (numDates == 1):
+                self.lineEdit19_2.setVisible(True)
+                self.pushButton19_2.setVisible(True)
+                self.lineEdit19_2.setText(row[0].strftime('%m/%d/%Y'))
+                numDates = numDates + 1
+            elif (numDates == 2):
+                self.lineEdit19_3.setVisible(True)
+                self.pushButton19_3.setVisible(True)
+                self.lineEdit19_3.setText(row[0].strftime('%m/%d/%Y'))
+                numDates = numDates + 1
+            elif (numDates == 3):
+                self.lineEdit19_4.setVisible(True)
+                self.pushButton19_4.setVisible(True)
+                self.lineEdit19_4.setText(row[0].strftime('%m/%d/%Y'))
+                numDates = numDates + 1
+
+        numStarts = 0
+        for row in startTimes:
+            if (numStarts == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_1.setText(
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_2.setText(
+                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_3.setText(
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numStarts = numStarts + 1
+            elif (numStarts == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_4.setText(
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numStarts = numStarts + 1
+
+        numEnds = 0
+        for row in endTimes:
+            if (numEnds == 0):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_1.setText(
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 1):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_2.setText(
+                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 2):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_3.setText(
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numEnds = numEnds + 1
+            elif (numEnds == 3):
+                hours, remainder = divmod(row[0].seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                self.lineEdit19_4.setText(
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                numEnds = numEnds + 1
+
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
@@ -349,6 +492,85 @@ class menu_UI(object):
         self.treeWidget.topLevelItem(0).child(0).setText(0, _translate("Menu", "New Subitem"))
         self.treeWidget.setSortingEnabled(__sortingEnabled)
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
+
+
+    def Pay(self, ID, cur, conn):
+        if(self.lineEdit_13.text() < self.lineEdit_14.text()):
+            diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
+            self.lineEdit_14.setText(str(diff))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        elif(self.lineEdit_13.text() == self.lineEdit_14.text()):
+            self.lineEdit_14.setText("0")
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        else:
+            diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_14.text())
+            self.lineEdit_13.setText(str(diff2))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
+            conn.commit()
+
+    def scheduleAppt(self, cur, conn):
+        apptID = 1
+        cur.rowcount = -1
+        while (cur.rowcount != 0):
+            cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
+            apptID = apptID + 1
+                
+                
+                
+    def cancelAppt(self, num, appointmentIDs, cur, conn):
+        if(num == 1):
+            self.lineEdit19_1.setText("")
+            self.lineEdit19_1.setVisible(False)
+            self.pushButton19_1.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if(numAppointment == 0):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 3):
+            self.lineEdit19_2.setText("")
+            self.lineEdit19_2.setVisible(False)
+            self.pushButton19_2.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 1):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 5):
+            self.lineEdit19_3.setText("")
+            self.lineEdit19_3.setVisible(False)
+            self.pushButton19_3.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 2):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+        if(num == 7):
+            self.lineEdit19_4.setText("")
+            self.lineEdit19_4.setVisible(False)
+            self.pushButton19_4.setVisible(False)
+            numAppointment = 0
+            appointNum = -1
+            for row in appointmentIDs:
+                if (numAppointment == 3):
+                    appointNum = row[0]
+                    numAppointment = numAppointment + 1
+            cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
 
 
 if __name__ == "__main__":
