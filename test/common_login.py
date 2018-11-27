@@ -129,56 +129,58 @@ class common_login_UI(object):
         )
 
         userID = cur.fetchall()
+        if(cur.rowcount != 0):
+            userID = re.sub("[^0-9]", "", str(userID))
 
-        userID = re.sub("[^0-9]", "", str(userID))
+            userID = int(userID)
 
-        userID = int(userID)
+            if num == 1:
+                cur.execute(
+                    "SELECT * FROM Patient P WHERE PatientID = (%s)",
+                    (userID),
+                )
+            elif num == 2:
+                cur.execute(
+                    "SELECT * FROM Doctor D WHERE DoctorID = (%s)",
+                    (userID),
+                )
+            elif num == 3:
+                cur.execute(
+                    "SELECT * FROM Nurse N WHERE NurseID = (%s)",
+                    (userID),
+                )
+            else:
+                cur.execute(
+                    "SELECT * FROM DepartmentAdmin A WHERE DepartmentAdminID = (%s)",
+                    (userID),
+                )
 
-        if num == 1:
-            cur.execute(
-                "SELECT * FROM Patient P WHERE PatientID = (%s)",
-                (userID),
-            )
-        elif num == 2:
-            cur.execute(
-                "SELECT * FROM Doctor D WHERE DoctorID = (%s)",
-                (userID),
-            )
-        elif num == 3:
-            cur.execute(
-                "SELECT * FROM Nurse N WHERE NurseID = (%s)",
-                (userID),
-            )
-        else:
-            cur.execute(
-                "SELECT * FROM DepartmentAdmin A WHERE DepartmentAdminID = (%s)",
-                (userID),
-            )
+            myUser = cur.fetchall()
 
-        myUser = cur.fetchall()
-
-        if cur.rowcount == 0:
-            # reset data
-            self.firstName = None
-            self.lastName = None
-            self.phoneNumber = None
-            self.emailAddress = None
-            self.ID = None
-            self.age = None
-            self.weight = None
-            self.height = None
-            self.ssn = None
-            self.creditCardNumber = None
-            self.billingAmount = None
-            self.insuranceNumber = None
-            self.medicationList = None
-            self.appointmentDates = None
-            self.startTimes = None
-            self.endTimes = None
-            self.appointmentIDs = None
-
+            if cur.rowcount == 0:
+                # reset data
+                self.firstName = None
+                self.lastName = None
+                self.phoneNumber = None
+                self.emailAddress = None
+                self.ID = None
+                self.age = None
+                self.weight = None
+                self.height = None
+                self.ssn = None
+                self.creditCardNumber = None
+                self.billingAmount = None
+                self.insuranceNumber = None
+                self.medicationList = None
+                self.appointmentDates = None
+                self.startTimes = None
+                self.endTimes = None
+                self.appointmentIDs = None
+            else:
             # Add dialog maybe?
-            print("no user")
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
+                error_dialog.exec()
 
         # If user exists in DB
         # Load/store its profile to self obj to pass to test obj(main module)
@@ -288,7 +290,9 @@ class common_login_UI(object):
             self.appointmentIDs = None
 
             # Add dialog maybe?
-            print("no user")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
+            error_dialog.exec()
 
 
 if __name__ == "__main__":
