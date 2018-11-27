@@ -218,24 +218,41 @@ class common_signup_UI(object):
     def CreatePatient(self, cur, conn, accessCodeReceived):
         self.newP = False
         if(self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
-            print("error empty")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Must Specify Username and Password!")
+            error_dialog.exec()
         if(self.lineEdit_6.text() != self.lineEdit_7.text()):
-            print("error not same")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Passwords Do Not Match!")
+            error_dialog.exec()
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if(cur.rowcount != 0):
-                print("error: Username Already Exists")
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Username Already Exists! Try Another Username")
+                error_dialog.exec()
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
                 if(cur.rowcount != 0):
-                    print("error: UserPassword Already Exists")
+                    error_dialog = QtWidgets.QMessageBox()
+                    error_dialog.setText("Error: Password Already Exists! Try Another Password")
+                    error_dialog.exec()
                 else:
-                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                    if(len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-') :
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.exec()
+                    elif(len(self.lineEdit_11.text()) != 9):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
+                        error_dialog.exec()
+                    else:
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     
-                    cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.lineEdit_11.text(), self.lineEdit_12.text(), self.lineEdit_13.text()))
+                        cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.lineEdit_11.text(), self.lineEdit_12.text(), self.lineEdit_13.text()))
                         # Line above : replaced access -> "305" to avoid using access
-                    conn.commit()
-                    self.newP = True
+                        conn.commit()
+                        self.newP = True
                     # moved to test.py
                     """
                     conn.commit()
@@ -247,26 +264,40 @@ class common_signup_UI(object):
     def CreateDoctor(self, cur, conn, accessCodeReceived):
         self.newD = False
         if (self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
-            print("error empty")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Must Specify Username and Password!")
+            error_dialog.exec()
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
-            print("error not same")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Passwords Do Not Match!")
+            error_dialog.exec()
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if (cur.rowcount != 0):
-                print("error: Username Already Exists")
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Username Already Exists! Choose Another Username")
+                error_dialog.exec()
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
                 if (cur.rowcount != 0):
-                    print("error: UserPassword Already Exists")
+                    error_dialog = QtWidgets.QMessageBox()
+                    error_dialog.setText("Error: Password Already Exists! Choose Another Password")
+                    error_dialog.exec()
                 else:
-                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
-                    conn.commit()
-                    cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
-                    conn.commit()
-                    cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
-                    # Line above : replaced access -> "305" to avoid using access
-                    conn.commit()
-                    self.newD = True
+                    if (len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[
+                        7] != '-'):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.exec()
+                    else:
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        conn.commit()
+                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
+                        conn.commit()
+                        cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
+                        # Line above : replaced access -> "305" to avoid using access
+                        conn.commit()
+                        self.newD = True
                     # moved to test.py
                     """
                     conn.commit()
@@ -278,26 +309,40 @@ class common_signup_UI(object):
     def CreateNurse(self, cur, conn, accessCodeReceived):
         self.newN = False
         if (self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
-            print("error empty")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Must Specify Username and Password!")
+            error_dialog.exec()
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
-            print("error not same")
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Passwords Do Not Match!")
+            error_dialog.exec()
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if (cur.rowcount != 0):
-                print("error: Username Already Exists")
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Username Already Exists! Choose Another One")
+                error_dialog.exec()
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
                 if (cur.rowcount != 0):
-                    print("error: UserPassword Already Exists")
+                    error_dialog = QtWidgets.QMessageBox()
+                    error_dialog.setText("Error: Password Already Exists! Choose Another One")
+                    error_dialog.exec()
                 else:
-                    cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
-                    conn.commit()
-                    cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
-                    conn.commit()
-                    cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
-                    # Line above : replaced access -> "305" to avoid using access
-                    conn.commit()
-                    self.newN = True
+                    if (len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[
+                        7] != '-'):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.exec()
+                    else:
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        conn.commit()
+                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
+                        conn.commit()
+                        cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
+                        # Line above : replaced access -> "305" to avoid using access
+                        conn.commit()
+                        self.newN = True
                     # moved to test.py
                     """
                     conn.commit()
