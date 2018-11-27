@@ -27,6 +27,10 @@ class common_login_UI(object):
         self.insuranceNumber = None
         self.medicationList = None
         self.appointmentDates = None
+        self.startTimes = None
+        self.endTimes = None
+        self.appointmentIDs = None
+
 
     def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")

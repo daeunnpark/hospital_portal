@@ -74,12 +74,27 @@ class test(object):
     def setwindowTo_common_signup(self, num, accessCodeReceived):
         w = common_signup_UI()
         w.setupUi(MainWindow, num)
+<<<<<<< HEAD
+        if num == 1:
+            w.pushButton.clicked.connect(
+                lambda: w.CreatePatient(cur, conn, accessCodeReceived)
+            )
+        if num == 2:
+            w.pushButton.clicked.connect(
+                lambda: w.CreateDoctor(cur, conn, accessCodeReceived)
+            )
+        if num == 3:
+            w.pushButton.clicked.connect(
+                lambda: w.CreateNurse(cur, conn, accessCodeReceived)
+            )
+=======
         if (num == 1):
             w.pushButton.clicked.connect(lambda: w.CreatePatient(cur, conn, accessCodeReceived))
         if (num == 2):
             w.pushButton.clicked.connect(lambda: w.CreateDoctor(cur, conn, accessCodeReceived))
         if (num == 3):
             w.pushButton.clicked.connect(lambda: w.CreateNurse(cur, conn, accessCodeReceived))
+>>>>>>> 5f1b6192060d9873ac941494934c2b0233c1a623
         # if new Patient is created
         if w.newP == True:
             conn.commit()
@@ -94,7 +109,9 @@ class test(object):
         MainWindow.showMaximized()
 
     def setwindowTo_menu(self, w):
-        menu_UI().setupUi(
+        menu = menu_UI()
+        # if you are updating menu.setupUI(), update common_login.py as well
+        menu.setupUi(
             MainWindow,
             w.firstName,
             w.lastName,
@@ -117,16 +134,30 @@ class test(object):
             conn,
         )
         # btn clicker too add
+        menu.EditBtn
         MainWindow.showMaximized()
 
 
 if __name__ == "__main__":
     # Initialize database connection
+<<<<<<< HEAD
+    """
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )
+    """
+    """
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )
+    """
+=======
 
     """conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )"""
 
+>>>>>>> 5f1b6192060d9873ac941494934c2b0233c1a623
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
