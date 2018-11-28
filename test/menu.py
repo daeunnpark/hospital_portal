@@ -275,6 +275,7 @@ class menu_UI(object):
 
         self.calendarWidget_1 = QtWidgets.QCalendarWidget(self.groupBox)
         self.calendarWidget_1.setObjectName("calendarWidget_1")
+        self.calendarWidget_1.setVerticalHeaderFormat(0)
 
         self.gridLayout_3.addWidget(self.calendarWidget_1, 0, 0, 1, 1)
         self.gridLayout_4.addLayout(self.gridLayout_3, 2, 0, 1, 1)
@@ -388,6 +389,7 @@ class menu_UI(object):
 
         self.calendarWidget = QtWidgets.QCalendarWidget(self.tab_4)
         self.calendarWidget.setObjectName("calendarWidget")
+        self.calendarWidget.setVerticalHeaderFormat(0)
         self.gridLayout_5.addWidget(self.calendarWidget, 0, 0, 1, 1)
 
         self.treeWidget = QtWidgets.QTreeWidget(self.tab_4)
@@ -423,7 +425,7 @@ class menu_UI(object):
         self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
         """
         earliestDate = None
-        
+
         numDates = 0
         for row in appointmentDates:
             if (earliestDate == None):
@@ -577,6 +579,7 @@ class menu_UI(object):
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
             conn.commit()
+        # Negative balance?
         else:
             diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_14.text())
             self.lineEdit_13.setText(str(diff2))
