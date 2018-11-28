@@ -102,7 +102,7 @@ class test(object):
 
     def setwindowTo_menu(self, w, num):
         menu = menu_UI()
-        # if you are updating args of menu.setupUI(), update common_login.py as well
+        # if you are updating args of menu.setupUI(), update common_login.py, menu.py as well
         menu.setupUi(
             MainWindow,
             w.firstName,
@@ -122,24 +122,19 @@ class test(object):
             w.startTimes,
             w.endTimes,
             w.appointmentIDs,
+            w.doctorID,
+            w.nurseID,
+            w.departmentAdminID,
             num,
             cur,
             conn,
         )
-        # btn clicker too add
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
-        # menu.EditBtn
         MainWindow.showMaximized()
 
 
 if __name__ == "__main__":
     # Initialize database connection
-
-    """
-    conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="root", db="hospital"
-    )
-    """
 
     conn = pymysql.connect(
         host="10.245.235.98",
@@ -148,6 +143,10 @@ if __name__ == "__main__":
         passwd="hospitalCSE305!",
         db="hospital",
     )
+
+    """conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="", db="test2"
+    )"""
 
     # Initialize the database cursor
     cur = conn.cursor()

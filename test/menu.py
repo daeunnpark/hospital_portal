@@ -7,7 +7,10 @@
 # WARNING! All changes made in this file will be lost!
 from copy import copy
 
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+from datetime import date
 
 myEarliestDate = QtCore.QDate()
 
@@ -26,7 +29,7 @@ class menu_UI(object):
 
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
-                endTimes, appointmentIDs, num, cur, conn):
+                endTimes, appointmentIDs, doctorID, nurseID, departmentAdminID, num, cur, conn):
 
         earliestDate = None
 
@@ -59,7 +62,16 @@ class menu_UI(object):
 
         myEarliestDate.setDate(myYear, myMonth, myDay)
 
+
         self.ID = ID
+        self.age = age
+        self.weight = weight
+        self.height = height
+        self.phoneNumber = phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10]
+        self.ssn = ssn # no formatting for Employee's DptID (ssn is a placeholder for DptID)
+        if(num==1):
+            self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
+        
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -119,8 +131,7 @@ class menu_UI(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
-        self.lineEdit_3.setText(phoneNumber)
-
+        self.lineEdit_3.setText(self.phoneNumber)  
         self.lineEdit_3.setEnabled(False)
 
         self.label_4 = QtWidgets.QLabel(self.tab_1)
@@ -159,7 +170,7 @@ class menu_UI(object):
         self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
-        self.lineEdit_6.setText(ssn)
+        self.lineEdit_6.setText(self.ssn)
         self.lineEdit_6.setEnabled(False)
 
         self.label_7 = QtWidgets.QLabel(self.tab_1)
@@ -470,14 +481,14 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
-        """
-        self.pushButton.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
-        self.pushButton_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
-        self.pushButton_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
-        self.pushButton_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_5.clicked.connect(self.scheduleAppt)
-        self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
-        """
+        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
+
+        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
+        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
+        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, doctorID, nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
+        self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
+
         earliestDate = None
 
         numDates = 0
@@ -521,22 +532,19 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
             elif (numStarts == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
             elif (numStarts == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
 
         numEnds = 0
@@ -545,29 +553,25 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
 
     def retranslateUi(self, Menu, num):
@@ -589,7 +593,6 @@ class menu_UI(object):
         # Employee
         if num != 1:
             self.label_6.setText("DepartmentID")
-
             self.label_9.setVisible(False)
             self.lineEdit_9.setVisible(False)
             self.label_10.setVisible(False)
@@ -639,7 +642,11 @@ class menu_UI(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
-        if (self.lineEdit_13.text() < self.lineEdit_14.text()):
+        if(self.lineEdit_14.text() == "" or self.lineEdit_14.text().replace('.', 1).isdigit() == False):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Payment Amount Must Be A Number!")
+            error_dialog.exec()
+        elif (self.lineEdit_13.text() < self.lineEdit_14.text()):
             diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
             self.lineEdit_14.setText(str(diff))
             self.lineEdit_13.setText("0")
@@ -658,12 +665,51 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
-    def scheduleAppt(self, cur, conn):
-        apptID = 1
-        cur.rowcount = -1
-        while (cur.rowcount != 0):
+    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
+
+        if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
+            error_dialog.exec()
+        else:
+            apptID = 1
+            cur.rowcount = -1
+            #while (cur.rowcount != 0):
             cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
             apptID = apptID + 1
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+            (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+            #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
+            if (lineEdit1.isVisible() == False):
+                lineEdit1.setVisible(True)
+                cancel1.setVisible(True)
+                self.setDateAndTimeForViewing(lineEdit1, Date, StartTime, EndTime)
+
+            elif (lineEdit2.isVisible() == False):
+                lineEdit2.setVisible(True)
+                cancel2.setVisible(True)
+                self.setDateAndTimeForViewing(lineEdit2, Date, StartTime, EndTime)
+
+            elif (lineEdit3.isVisible() == False):
+                lineEdit3.setVisible(True)
+                cancel3.setVisible(True)
+                self.setDateAndTimeForViewing(lineEdit3, Date, StartTime, EndTime)
+
+            elif (lineEdit4.isVisible() == False):
+                lineEdit4.setVisible(True)
+                cancel4.setVisible(True)
+                self.setDateAndTimeForViewing(lineEdit4, Date, StartTime, EndTime)
+
+    def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
+        lineEdit.setText(Date.toString("mm'/'dd'/'yyyy"))
+        hours, remainder = divmod(StartTime.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        lineEdit.setText(
+            lineEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+        hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+        minutes2, seconds2 = divmod(remainder2, 60)
+        lineEdit.setText(
+            lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(seconds2))
 
     def cancelAppt(self, num, appointmentIDs, cur, conn):
         if (num == 1):
@@ -675,7 +721,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 0):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 3):
@@ -687,7 +733,8 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 1):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
+            print(appointNum)
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 5):
@@ -699,7 +746,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 2):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 7):
@@ -711,7 +758,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 3):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
 
@@ -742,24 +789,60 @@ class menu_UI(object):
         self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur, conn))
 
     def saveProfile(self, num, cur, conn):
-        ID = self.lineEdit_5.text()
+        
+        if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+            error_dialog.exec()
 
-        # Person
-        cur.execute(
-            'UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)',
-            (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
+            # Reset to previous data
+            self.lineEdit_3.setText(self.phoneNumber)
 
-        if num == 1:  # Patient
-            cur.execute(
-                'UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)',
-                (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
-        if num == 2:  # Doctor
-            cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), ID))
-        if num == 3:  # Nurse
-            cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), ID))
-        # Admin can't change anything else then Person attributes
-        # if statement used sicne elif statement causes indentation error with following line.
-        conn.commit()
+        else:  
+            # phone number reformatted using self.reformat(str)
+            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.ID))
+            
+        if num==1:  # Patient
+            # Patient Error Checking - SSN
+            if (self.IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
+                error_dialog.exec()
+                self.lineEdit_6.setText(self.ssn)
+
+            elif (self.IsDigitorSpeChar(self.lineEdit_7.text(), ".", -1) == False):
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Weight Must Be A Number")
+                error_dialog.exec()
+                self.lineEdit_7.setText(self.weight)
+
+            elif (self.IsDigitorSpeChar(self.lineEdit_8.text(), ".", -1) == False):
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Height Must Be A Number")
+                error_dialog.exec()
+                self.lineEdit_8.setText(self.height)
+
+            elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), "", -1) == False):
+                error_dialog = QtWidgets.QMessageBox()
+                error_dialog.setText("Error: Age Must Be A Number")
+                error_dialog.exec()
+                self.lineEdit_9.setText(self.age)
+          
+            # Update self with valid inputs
+            self.ssn = self.lineEdit_6.text()
+            self.age = self.lineEdit_9.text()
+            self.weight = self.lineEdit_7.text()
+            self.height = self.lineEdit_8.text()
+
+            cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.reformat(self.lineEdit_6.text()), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
+            
+            if num==2: # Doctor
+                cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), self.ID))
+            
+            if num==3: # Nurse
+                cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), self.ID))
+            # Admin can't change anything else then Person attributes
+            conn.commit()
 
         self.lineEdit_1.setEnabled(False)
         self.lineEdit_2.setEnabled(False)
@@ -775,9 +858,26 @@ class menu_UI(object):
         self.SaveBtn.setEnabled(False)
         self.EditBtn.setEnabled(True)
 
+    # Remove dashes 
+    def reformat(self, str):
+        for char in str:
+            if char in "-":
+                str = str.replace(char, '')
+        return str
+
+    # Check if digit or spechar of len = num
+    def IsDigitorSpeChar(self, str, spechar, num):
+        if(num!=-1): # num=-1 when no need to check len
+            if len(str)!=num:
+                return False
+
+        for char in str:
+            if (char.isdigit() == False) and char not in spechar :
+                return False 
+         
+        return True               
 
 if __name__ == "__main__":
-    import sys
 
     app = QtWidgets.QApplication(sys.argv)
     Menu = QtWidgets.QMainWindow()
