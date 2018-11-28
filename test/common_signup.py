@@ -332,7 +332,23 @@ class common_signup_UI(object):
                                 number = number.replace(char, '')
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
-                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
+                        role = self.lineEdit_8.text()
+                        deptID = 8
+                        if(role == "Pediatrics" or role == "pediatrics"):
+                            deptID = 1
+                        elif(role == "Dermatology" or role == "dermatology"):
+                            deptID = 2
+                        elif(role == "Oncology" or role == "oncology"):
+                            deptID = 3
+                        elif(role == "Gynaecology" or role == "gynaecology"):
+                            deptID = 4
+                        elif(role == "Gastroenterology" or role == "gastroenterology"):
+                            deptID = 5
+                        elif(role == "Cardiology" or role == "cardiology"):
+                            deptID = 6
+                        elif(role == "Psychiatry" or role == "psychiatry"):
+                            deptID = 7
+                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, deptID))
                         conn.commit()
                         cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
                         # Line above : replaced access -> "305" to avoid using access
@@ -383,7 +399,23 @@ class common_signup_UI(object):
                                 number = number.replace(char, '')
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
-                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
+                        role = self.lineEdit_8.text()
+                        deptID = 8
+                        if (role == "Pediatrics" or role == "pediatrics"):
+                            deptID = 1
+                        elif (role == "Dermatology" or role == "dermatology"):
+                            deptID = 2
+                        elif (role == "Oncology" or role == "oncology"):
+                            deptID = 3
+                        elif (role == "Gynaecology" or role == "gynaecology"):
+                            deptID = 4
+                        elif (role == "Gastroenterology" or role == "gastroenterology"):
+                            deptID = 5
+                        elif (role == "Cardiology" or role == "cardiology"):
+                            deptID = 6
+                        elif (role == "Psychiatry" or role == "psychiatry"):
+                            deptID = 7
+                        cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, deptID))
                         conn.commit()
                         cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
                         # Line above : replaced access -> "305" to avoid using access
