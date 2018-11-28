@@ -238,11 +238,17 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Try Another Password")
                     error_dialog.exec()
                 else:
-                    if(len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-') :
+                    if(len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
+                        or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
+                        or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
+                        or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False) :
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
-                    elif(len(self.lineEdit_11.text()) != 11 or self.lineEdit_11.text().isdigit() == False or self.lineEdit_11.text()[3] != '-' or self.lineEdit_11.text() != '-'):
+                    elif(len(self.lineEdit_11.text()) != 11 or self.lineEdit_11.text()[3] != '-' or self.lineEdit_11.text()[6] != '-'
+                        or self.lineEdit_11.text()[0].isdigit() == False or self.lineEdit_11.text()[1].isdigit() == False or self.lineEdit_11.text()[2].isdigit() == False
+                        or self.lineEdit_11.text()[4].isdigit() == False or self.lineEdit_11.text()[5].isdigit() == False or self.lineEdit_11.text()[7].isdigit() == False
+                        or self.lineEdit_11.text()[8].isdigit() == False or self.lineEdit_11.text()[9].isdigit() == False or self.lineEdit_11.text()[10].isdigit() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                         error_dialog.exec()
@@ -250,11 +256,11 @@ class common_signup_UI(object):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Age Must Be A Number")
                         error_dialog.exec()
-                    elif(self.lineEdit_9.text().isdigit() == False):
+                    elif(self.lineEdit_9.text().replace('.', '1').isdigit() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Weight Must Be A Number")
                         error_dialog.exec()
-                    elif(self.lineEdit_10.text().isdigit() == False):
+                    elif(self.lineEdit_10.text().replace('.', '1').isdigit() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Height Must Be A Number")
                         error_dialog.exec()
@@ -312,7 +318,10 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another Password")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-'):
+                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
+                        or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
+                        or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
+                        or self.lineEdit_3[9].text() == False or self.lineEdit_3[10].text() == False or self.lineEdit_3[11].text() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
@@ -360,7 +369,10 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another One")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-'):
+                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
+                        or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
+                        or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
+                        or self.lineEdit_3[9].text() == False or self.lineEdit_3[10].text() == False or self.lineEdit_3[11].text() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
