@@ -1,6 +1,7 @@
 import sys
 import pymysql
 from PyQt5 import QtWidgets  # QtCore, QtGui - unused
+
 # from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
 
 # import modules
@@ -22,7 +23,9 @@ class test(object):
         w.patientBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(1))
         w.doctorBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(2))
         w.nurseBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(3))
-        w.departmentAdminBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(4))
+        w.departmentAdminBtn.clicked.connect(
+            lambda: self.setwindowTo_login_or_register(4)
+        )
 
         MainWindow.showMaximized()
 
@@ -135,6 +138,10 @@ if __name__ == "__main__":
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
     """
+
+    """conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )"""
 
     conn = pymysql.connect(
         host="10.245.235.98",
