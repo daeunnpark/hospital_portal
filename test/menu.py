@@ -458,6 +458,7 @@ class menu_UI(object):
                 self.lineEdit19_4.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
 
+
         numStarts = 0
         for row in startTimes:
             if (numStarts == 0):
@@ -696,8 +697,6 @@ class menu_UI(object):
     
     def saveProfile(self,num, cur):
         print("this")
-     
-
 
 
 if __name__ == "__main__":
