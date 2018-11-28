@@ -246,6 +246,26 @@ class common_signup_UI(object):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                         error_dialog.exec()
+                    elif(self.lineEdit_8.text().isdigit() == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Age Must Be A Number")
+                        error_dialog.exec()
+                    elif(self.lineEdit_9.text().isdigit() == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Weight Must Be A Number")
+                        error_dialog.exec()
+                    elif(self.lineEdit_10.text().isdigit() == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Height Must Be A Number")
+                        error_dialog.exec()
+                    elif(self.lineEdit_12.text().isdigit() == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Credit Card Number Must Be A Number")
+                        error_dialog.exec()
+                    elif(self.lineEdit_13.text().isdigit() == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Insurance Number Must Be A Number")
+                        error_dialog.exec()
                     else:
                         number = self.lineEdit_3.text()
                         for char in number:
