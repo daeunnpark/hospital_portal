@@ -122,12 +122,17 @@ class test(object):
             w.startTimes,
             w.endTimes,
             w.appointmentIDs,
+            w.doctorID,
+            w.nurseID,
+            w.departmentAdminID,
             num,
             cur,
             conn,
         )
         # btn clicker too add
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
+
+        #menu.pushButton_15.clicked.connect(lambda: menu.scheduleAppt(cur, conn, w.doctorID, w.nurseID, w.departmentAdminID, w.ID))
         # menu.EditBtn
         MainWindow.showMaximized()
 

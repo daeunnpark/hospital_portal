@@ -30,7 +30,9 @@ class common_login_UI(object):
         self.startTimes = None
         self.endTimes = None
         self.appointmentIDs = None
-
+        self.doctorID = None
+        self.nurseID = None
+        self.departmentAdminID = None
 
     def setupUi(self, CommonLogin, num):
         CommonLogin.setObjectName("CommonLogin")
@@ -192,6 +194,9 @@ class common_login_UI(object):
                 self.startTimes = None
                 self.endTimes = None
                 self.appointmentIDs = None
+                self.doctorID = None
+                self.nurseID = None
+                self.departmentAdminID = None
 
         # If user exists in DB
         # Load/store its profile to self obj to pass to test obj(main module)
@@ -279,6 +284,18 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
+                cur.execute(
+                    "SELECT DoctorID FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.doctorID = cur.fetchall()
+                cur.execute(
+                    "SELECT NurseID FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.nurseID = cur.fetchall()
+                cur.execute(
+                    "SELECT AdminID FROM Patient P WHERE PatientID = (%s)", self.ID
+                )
+                self.departmentAdminID = cur.fetchall()
 
             elif num == 2:
 
@@ -418,6 +435,9 @@ class common_login_UI(object):
             self.startTimes = None
             self.endTimes = None
             self.appointmentIDs = None
+            self.doctorID = None
+            self.nurseID = None
+            self.departmentAdminID = None
 
             # Add dialog maybe?
             error_dialog = QtWidgets.QMessageBox()
