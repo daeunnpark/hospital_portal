@@ -86,6 +86,7 @@ class test(object):
             w.pushButton.clicked.connect(
                 lambda: w.CreateNurse(cur, conn, accessCodeReceived)
             )
+
         # if new Patient is created
         if w.newP == True:
             conn.commit()
@@ -133,16 +134,13 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
+
     """
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
     """
-    """
-    conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="root", db="hospital"
-    )
-    """
+
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,

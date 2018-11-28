@@ -225,6 +225,7 @@ class common_login_UI(object):
                 (self.lineEdit1.text(), self.lineEdit2.text()),
             )
             self.ID = str(cur.fetchone()[0])
+
             if num == 1:
                 cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
                 self.age = str(cur.fetchone()[0])
@@ -396,7 +397,6 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
-
 
             # print("LOGIN Successful")
         else:
