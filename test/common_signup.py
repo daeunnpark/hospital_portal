@@ -283,7 +283,7 @@ class common_signup_UI(object):
                                 number2 = number2.replace(char2, '')
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     
-                        cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), number2, self.lineEdit_12.text(), self.lineEdit_13.text()))
+                        cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 0.0, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), number2, self.lineEdit_12.text(), self.lineEdit_13.text()))
                         # Line above : replaced access -> "305" to avoid using access
                         conn.commit()
                         self.newP = True
