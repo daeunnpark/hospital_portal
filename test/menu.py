@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'menu.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -14,7 +7,6 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, num, cur, conn):
-        self.ID = ID
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -530,7 +522,7 @@ class menu_UI(object):
                         seconds))
                 numEnds = numEnds + 1
 
-    def retranslateUi(self, Menu,num):
+    def retranslateUi(self, Menu, num):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Menu", "Profile"))
@@ -719,7 +711,6 @@ class menu_UI(object):
         if num==3: # Nurse
             cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), ID))
         # Admin can't change anything else then Person attributes
-        # if statement used sicne elif statement causes indentation error with following line.
         conn.commit()
 
         self.lineEdit_1.setEnabled(False)
@@ -738,7 +729,6 @@ class menu_UI(object):
 
 
 if __name__ == "__main__":
-    import sys
 
     app = QtWidgets.QApplication(sys.argv)
     Menu = QtWidgets.QMainWindow()
