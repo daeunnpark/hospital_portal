@@ -129,10 +129,7 @@ class test(object):
             cur,
             conn,
         )
-        # btn clicker too add
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
-
-        #menu.pushButton_15.clicked.connect(lambda: menu.scheduleAppt(cur, conn, w.doctorID, w.nurseID, w.departmentAdminID, w.ID))
         # menu.EditBtn
         MainWindow.showMaximized()
 
@@ -140,6 +137,11 @@ class test(object):
 if __name__ == "__main__":
     # Initialize database connection
 
+    """    
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )
+    """
 
     """conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"

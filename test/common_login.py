@@ -439,7 +439,6 @@ class common_login_UI(object):
             self.nurseID = None
             self.departmentAdminID = None
 
-            # Add dialog maybe?
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
             error_dialog.exec()

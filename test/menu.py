@@ -14,6 +14,7 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, doctorID, nurseID, departmentAdminID, num, cur, conn):
+
         self.ID = ID
 
         Menu.setObjectName("Menu")
@@ -429,14 +430,14 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
-
-        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
-        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
-        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
-        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, doctorID, nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
-        self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
-
+        """
+        self.pushButton.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
+        self.pushButton_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
+        self.pushButton_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
+        self.pushButton_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButton_5.clicked.connect(self.scheduleAppt)
+        self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
+        """
         earliestDate = None
 
         numDates = 0
@@ -603,29 +604,24 @@ class menu_UI(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
-        if (self.lineEdit_13.text().replace('.', '1').isdigit() == False or self.lineEdit_13.text() == ""):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Payment Amount Must Be a Number")
-            error_dialog.exec()
+        if (self.lineEdit_13.text() < self.lineEdit_14.text()):
+            diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
+            self.lineEdit_14.setText(str(diff))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
+            self.lineEdit_14.setText("0")
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
+            conn.commit()
+        # Negative balance?
         else:
-            if (self.lineEdit_13.text() < self.lineEdit_14.text()):
-                diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
-                self.lineEdit_14.setText(str(diff))
-                self.lineEdit_13.setText("0")
-                cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
-                conn.commit()
-            elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
-                self.lineEdit_14.setText("0")
-                self.lineEdit_13.setText("0")
-                cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
-                conn.commit()
-            # Negative balance?
-            else:
-                diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_14.text())
-                self.lineEdit_13.setText(str(diff2))
-                self.lineEdit_13.setText("0")
-                cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
-                conn.commit()
+            diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_14.text())
+            self.lineEdit_13.setText(str(diff2))
+            self.lineEdit_13.setText("0")
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
+            conn.commit()
 
     def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
         if(lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
@@ -794,20 +790,22 @@ class menu_UI(object):
             number = self.lineEdit_3.text()
             for char in number:
                 if char in "-":
-                    number = number.replace(char, '')
-            # Person
-            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), ID))
-        
+                    phoneNumber2 = phoneNumber2.replace(char, '')
+
+            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), phoneNumber2, self.lineEdit_4.text(), self.ID))
+
             if num==1:  # Patient
                 #Patient Error Checking
                 if (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-' or self.lineEdit_6.text()[0].isdigit() == False or self.lineEdit_6.text()[1].isdigit() == False or self.lineEdit_6.text()[2].isdigit() == False or self.lineEdit_6.text()[4].isdigit() == False or self.lineEdit_6.text()[5].isdigit() == False or self.lineEdit_6.text()[7].isdigit() == False or self.lineEdit_6.text()[8].isdigit() == False or self.lineEdit_6.text()[9].isdigit() == False or self.lineEdit_6.text()[10].isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                     error_dialog.exec()
+                    self.lineEdit_6.setText(self.ssn[0:3]+'-'+self.ssn[3:6]+ "-"+self.ssn[6:10])
                 elif (self.lineEdit_9.text().isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Age Must Be A Number")
                     error_dialog.exec()
+                    self.lineEdit_9.setText(self.age)
                 elif (self.lineEdit_7.text().replace('.', '1').isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Weight Must Be A Number")
@@ -816,12 +814,15 @@ class menu_UI(object):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Height Must Be A Number")
                     error_dialog.exec()
-                else:
-                    number2 = self.lineEdit_6.text()
-                    for char2 in number2:
-                        if char2 in "-":
-                            number2 = number2.replace(char2, '')
-                    cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (number2, self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
+                    self.lineEdit_8.setText(self.height)
+                else: # all inputs are correct
+                    ssn2 = self.lineEdit_6.text()
+                    for char in ssn2:
+                        if char in "-":
+                            ssn2 = ssn2.replace(char, '')
+
+                    cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (ssn2, self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
+
             if num==2: # Doctor
                 cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), ID))
             if num==3: # Nurse
@@ -829,6 +830,18 @@ class menu_UI(object):
             # Admin can't change anything else then Person attributes
             # if statement used sicne elif statement causes indentation error with following line.
             conn.commit()
+
+        """
+        else:
+            #Phone Number Convert
+            number = self.lineEdit_3.text()
+            for char in number:
+                if char in "-":
+                    number = number.replace(char, '')
+            
+        """
+
+
 
         self.lineEdit_1.setEnabled(False)
         self.lineEdit_2.setEnabled(False)
@@ -846,8 +859,6 @@ class menu_UI(object):
 
 
 if __name__ == "__main__":
-    import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Menu = QtWidgets.QMainWindow()
     ui = menu_UI()
