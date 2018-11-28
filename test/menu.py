@@ -10,8 +10,8 @@ class menu_UI(object):
         
         # Backup since needed when user want to update profile
         self.ID = ID
-        self.phoneNumber = phoneNumber
-        self.ssn = ssn
+        self.phoneNumber = phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10]
+        self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
         self.age = age
         self.weight = weight
         self.height = height
@@ -74,7 +74,7 @@ class menu_UI(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
-        self.lineEdit_3.setText(phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10])  
+        self.lineEdit_3.setText(self.phoneNumber)  
         self.lineEdit_3.setEnabled(False)
 
         self.label_4 = QtWidgets.QLabel(self.tab_1)
@@ -113,8 +113,7 @@ class menu_UI(object):
         self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
-        self.lineEdit_6.setText(ssn)
-        self.lineEdit_6.setText(ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10])
+        self.lineEdit_6.setText(self.ssn)
         self.lineEdit_6.setEnabled(False)
 
         self.label_7 = QtWidgets.QLabel(self.tab_1)
@@ -707,36 +706,36 @@ class menu_UI(object):
 
     def saveProfile(self, num, cur, conn):
 
-        #Person Error Checking - phone number
-        if  IsDigitorDash(self.lineEdit_3.text() == False) or len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
+        # Person Error Checking - phone number
+        if  (IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
             error_dialog.exec()
-            #reset to the previous phone number
-            self.lineEdit_3.setText(self.phoneNumber[0:3]+'-'+self.phoneNumber[3:6]+ "-"+self.phoneNumber[6:10])
+            # Reset to the previous phone number
+            self.lineEdit_3.setText(self.phoneNumber)
      
         else:  
             # phone number reformatted using self.reformat(str)
             cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.ID))
             
             if num==1:  # Patient
-                #Patient Error Checking - SSN
-                if IsDigitorDash(self.lineEdit_6.text() == False) or (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
+                # Patient Error Checking - SSN
+                if (IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                     error_dialog.exec()
-                    self.lineEdit_6.setText(self.ssn[0:3]+'-'+self.ssn[3:5]+ "-"+self.ssn[5:10])
-                elif (self.lineEdit_9.text().isdigit() == False):
+                    self.lineEdit_6.setText(self.ssn)
+                elif (IsDigitorSpeChar(self.lineEdit_9.text(), "", -1) == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Age Must Be A Number")
                     error_dialog.exec()
                     self.lineEdit_9.setText(self.age)
-                elif (self.lineEdit_7.text().replace('.', '1').isdigit() == False):
+                elif (IsDigitorSpeChar(self.lineEdit_7.text(), ".", -1) == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Weight Must Be A Number")
                     error_dialog.exec()
                     self.lineEdit_7.setText(self.weight)
-                elif (self.lineEdit_8.text().replace('.', '1').isdigit() == False):
+                elif (IsDigitorSpeChar(self.lineEdit_8.text(), ".", -1) == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Height Must Be A Number")
                     error_dialog.exec()
@@ -775,11 +774,16 @@ class menu_UI(object):
                 str = str.replace(char, '')
         return str
 
-    # Check if digit or dash
-    def IsDigitorDash(self, str):
+    # Check if digit or spechar of len = num
+    def IsDigitorSpeChar(self, str, spechar, num):
+        if(num!=-1): # num=-1 when no need to check len
+            if len(str)!=num:
+                return False
+
         for char in str:
-            if (char.isdigit() == False) and char not in "-" :
-                return False     
+            if (char.isdigit() == False) and char not in spechar :
+                return False 
+         
         return True               
 
 if __name__ == "__main__":
