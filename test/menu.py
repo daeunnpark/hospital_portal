@@ -629,7 +629,8 @@ class menu_UI(object):
                 cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
                 apptID = apptID + 1
                 cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                    (apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
+                (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+                #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
@@ -671,7 +672,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 0):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 3):
@@ -683,7 +684,8 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 1):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
+            print(appointNum)
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 5):
@@ -695,7 +697,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 2):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 7):
@@ -707,7 +709,7 @@ class menu_UI(object):
             for row in appointmentIDs:
                 if (numAppointment == 3):
                     appointNum = row[0]
-                    numAppointment = numAppointment + 1
+                numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
     
