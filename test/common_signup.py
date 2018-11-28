@@ -321,7 +321,7 @@ class common_signup_UI(object):
                     if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
                         or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
                         or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
-                        or self.lineEdit_3[9].text() == False or self.lineEdit_3[10].text() == False or self.lineEdit_3[11].text() == False):
+                        or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
@@ -372,7 +372,7 @@ class common_signup_UI(object):
                     if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
                         or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
                         or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
-                        or self.lineEdit_3[9].text() == False or self.lineEdit_3[10].text() == False or self.lineEdit_3[11].text() == False):
+                        or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
