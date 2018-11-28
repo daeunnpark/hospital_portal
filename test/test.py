@@ -102,7 +102,7 @@ class test(object):
 
     def setwindowTo_menu(self, w, num):
         menu = menu_UI()
-        # if you are updating args of menu.setupUI(), update common_login.py as well
+        # if you are updating args of menu.setupUI(), update common_login.py, menu.py as well
         menu.setupUi(
             MainWindow,
             w.firstName,
@@ -130,7 +130,6 @@ class test(object):
             conn,
         )
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
-        # menu.EditBtn
         MainWindow.showMaximized()
 
 

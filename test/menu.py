@@ -6,8 +6,9 @@ class menu_UI(object):
 
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
-                endTimes, appointmentIDs, num, cur, conn):
+                endTimes, appointmentIDs, doctorID, nurseID, departmentAdminID, num, cur, conn):
         
+        # Backup since needed when user want to update profile
         self.ID = ID
         self.phoneNumber = phoneNumber
         self.ssn = ssn
@@ -549,7 +550,6 @@ class menu_UI(object):
         # Employee
         if num != 1:
             self.label_6.setText("DepartmentID")
-
             self.label_9.setVisible(False)
             self.lineEdit_9.setVisible(False)
             self.label_10.setVisible(False)
@@ -707,7 +707,7 @@ class menu_UI(object):
 
     def saveProfile(self, num, cur, conn):
 
-        #Person Error Checking
+        #Person Error Checking - phone number
         if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
@@ -720,7 +720,7 @@ class menu_UI(object):
             cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.ID))
             
             if num==1:  # Patient
-                #Patient Error Checking
+                #Patient Error Checking - SSN
                 if (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-' or self.lineEdit_6.text()[0].isdigit() == False or self.lineEdit_6.text()[1].isdigit() == False or self.lineEdit_6.text()[2].isdigit() == False or self.lineEdit_6.text()[4].isdigit() == False or self.lineEdit_6.text()[5].isdigit() == False or self.lineEdit_6.text()[7].isdigit() == False or self.lineEdit_6.text()[8].isdigit() == False or self.lineEdit_6.text()[9].isdigit() == False or self.lineEdit_6.text()[10].isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")

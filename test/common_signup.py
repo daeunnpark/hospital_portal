@@ -244,7 +244,7 @@ class common_signup_UI(object):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
-                    elif(len(self.lineEdit_11.text()) != 11): # including dashes
+                    elif(len(self.lineEdit_11.text()) != 11): # SSN including dashes = 9+2
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
                         error_dialog.exec()
