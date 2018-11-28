@@ -651,60 +651,35 @@ class menu_UI(object):
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
-                #Put parsing of information into separate function probably
-                lineEdit1.setText(Date.strftime('%m/%d/%Y'))
-                hours, remainder = divmod(StartTime.seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
-                lineEdit1.setText(
-                    lineEdit1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
-                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
-                minutes2, seconds2 = divmod(remainder2, 60)
-                lineEdit1.setText(
-                    lineEdit1.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
-                        seconds2))
+                self.setDateAndTimeForViewing(lineEdit1, Date, StartTime, EndTime)
+
             elif (lineEdit2.isVisible() == False):
                 lineEdit2.setVisible(True)
                 cancel2.setVisible(True)
-                lineEdit2.setText(Date.strftime('%m/%d/%Y'))
-                hours, remainder = divmod(StartTime.seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
-                lineEdit2.setText(
-                    lineEdit2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
-                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
-                minutes2, seconds2 = divmod(remainder2, 60)
-                lineEdit2.setText(
-                    lineEdit2.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
-                        seconds2))
+                self.setDateAndTimeForViewing(lineEdit2, Date, StartTime, EndTime)
+
             elif (lineEdit3.isVisible() == False):
                 lineEdit3.setVisible(True)
                 cancel3.setVisible(True)
-                lineEdit3.setText(Date.strftime('%m/%d/%Y'))
-                hours, remainder = divmod(StartTime.seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
-                lineEdit3.setText(
-                    lineEdit3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
-                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
-                minutes2, seconds2 = divmod(remainder2, 60)
-                lineEdit3.setText(
-                    lineEdit3.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
-                        seconds2))
+                self.setDateAndTimeForViewing(lineEdit3, Date, StartTime, EndTime)
+
             elif (lineEdit4.isVisible() == False):
                 lineEdit4.setVisible(True)
                 cancel4.setVisible(True)
-                lineEdit4.setText(Date.strftime('%m/%d/%Y'))
-                hours, remainder = divmod(StartTime.seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
-                lineEdit4.setText(
-                    lineEdit4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
-                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
-                minutes2, seconds2 = divmod(remainder2, 60)
-                lineEdit4.setText(
-                    lineEdit4.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
-                        seconds2))
+                self.setDateAndTimeForViewing(lineEdit4, Date, StartTime, EndTime)
+
+    def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
+        lineEdit.setText(Date.strftime('%m/%d/%Y'))
+        hours, remainder = divmod(StartTime.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        lineEdit.setText(
+            lineEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                seconds))
+        hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+        minutes2, seconds2 = divmod(remainder2, 60)
+        lineEdit.setText(
+            lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
+                seconds2))
 
     def cancelAppt(self, num, appointmentIDs, cur, conn):
         if (num == 1):
