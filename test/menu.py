@@ -617,8 +617,7 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
-    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1,
-                     lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
+    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
         if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
