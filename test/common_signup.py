@@ -219,7 +219,7 @@ class common_signup_UI(object):
 
     def CreatePatient(self, cur, conn, accessCodeReceived):
         self.newP = False
-        if(self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
+        if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Must Specify Username and Password!")
             error_dialog.exec()
@@ -239,27 +239,38 @@ class common_signup_UI(object):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Password Already Exists! Try Another Password")
                     error_dialog.exec()
-                else: # phone number inlcuding dashes = 10+2
-                    if(len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-') :
+                else: 
+                    if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
-                    elif(len(self.lineEdit_11.text()) != 11): # SSN including dashes = 9+2
+                        self.lineEdit_3.setText()
+                    
+                    elif (self.IsDigitorSpeChar(self.lineEdit_8.text(), "", -1) == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Age Must Be A Number")
+                        error_dialog.exec()
+                        self.lineEdit_8.setText("")
+
+                    elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), ".", -1) == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Weight Must Be A Number")
+                        error_dialog.exec()
+                        self.lineEdit_9.setText("")
+
+                    elif (self.IsDigitorSpeChar(self.lineEdit_10.text(), ".", -1) == False):
+                        error_dialog = QtWidgets.QMessageBox()
+                        error_dialog.setText("Error: Height Must Be A Number")
+                        error_dialog.exec()
+                        self.lineEdit_10.setText("")
+                    
+                    elif (self.IsDigitorSpeChar(self.lineEdit_11.text(), "-", 11) == False) or self.lineEdit_11.text()[3] != '-' or self.lineEdit_11.text()[6] != '-':
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
                         error_dialog.exec()
+                        self.lineEdit_11.setText("")
+                    
                     else:
-                        # replaced by reformat(str)
-                        """
-                        number = self.lineEdit_3.text()
-                        for char in number:
-                            if char in "-":
-                                number = number.replace(char, '')
-                        number2 = self.lineEdit_11.text()
-                        for char2 in number2:
-                            if char2 in "-":
-                                number2 = number2.replace(char2, '')
-                        """
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     
                         cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 0.0, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.reformat(self.lineEdit_11.text()), self.lineEdit_12.text(), self.lineEdit_13.text()))
@@ -268,7 +279,7 @@ class common_signup_UI(object):
 
     def CreateDoctor(self, cur, conn, accessCodeReceived):
         self.newD = False
-        if (self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
+        if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Must Specify Username and Password!")
             error_dialog.exec()
@@ -289,10 +300,7 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another Password")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
-                        or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
-                        or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
-                        or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
+                    if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
@@ -324,7 +332,7 @@ class common_signup_UI(object):
 
     def CreateNurse(self, cur, conn, accessCodeReceived):
         self.newN = False
-        if (self.lineEdit_6.text() == "" or self.lineEdit_7.text() == "" or self.lineEdit_5.text() == ""):
+        if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Must Specify Username and Password!")
             error_dialog.exec()
@@ -345,10 +353,7 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another One")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False
-                        or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False
-                        or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False
-                        or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
+                    if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
@@ -378,12 +383,25 @@ class common_signup_UI(object):
                         self.newN = True
 
 
-        # Remove dashes in str
+    # Remove dashes 
     def reformat(self, str):
         for char in str:
             if char in "-":
                 str = str.replace(char, '')
         return str
+
+    # Check if digit or spechar of len = num
+    def IsDigitorSpeChar(self, str, spechar, num):
+        if(num!=-1): # num=-1 when no need to check len
+            if len(str)!=num:
+                return False
+
+        for char in str:
+            if (char.isdigit() == False) and char not in spechar :
+                return False 
+         
+        return True  
+
 
 if __name__ == "__main__":
 

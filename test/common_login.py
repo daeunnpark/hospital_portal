@@ -304,6 +304,7 @@ class common_login_UI(object):
                 )
                 # patient's ssn = placeholder for DepartmentID
                 self.ssn = str(cur.fetchone()[0])
+                print(self.ssn)
 
                 cur.execute(
                     "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID

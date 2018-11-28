@@ -140,11 +140,8 @@ if __name__ == "__main__":
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
-    """
+    
 
-    """conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="root", db="hospital"
-    )"""
 
     conn = pymysql.connect(
         host="10.245.235.98",
@@ -152,6 +149,11 @@ if __name__ == "__main__":
         user="root",
         passwd="hospitalCSE305!",
         db="hospital",
+    )
+    """
+
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="", db="test2"
     )
 
     # Initialize the database cursor
