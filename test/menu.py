@@ -114,7 +114,7 @@ class menu_UI(object):
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
         self.lineEdit_6.setText(ssn)
-        self.lineEdit_6.setText(ssn[0:3]+'-'+ssn[3:6]+ "-"+ssn[6:10])
+        self.lineEdit_6.setText(ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10])
         self.lineEdit_6.setEnabled(False)
 
         self.label_7 = QtWidgets.QLabel(self.tab_1)
@@ -717,20 +717,16 @@ class menu_UI(object):
             self.lineEdit_3.setText(self.phoneNumber[0:3]+'-'+self.phoneNumber[3:6]+ "-"+self.phoneNumber[6:10])
      
         else:  
-            phoneNumber2 = self.lineEdit_3.text()
-            for char in phoneNumber2:
-                if char in "-":
-                    phoneNumber2 = phoneNumber2.replace(char, '')
-
-            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), phoneNumber2, self.lineEdit_4.text(), self.ID))
+            # phone number reformatted using self.reformat(str)
+            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.ID))
             
             if num==1:  # Patient
                 #Patient Error Checking
-                if (len(self.lineEdit_6.text()) != 12 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-' or self.lineEdit_6.text()[0].isdigit() == False or self.lineEdit_6.text()[1].isdigit() == False or self.lineEdit_6.text()[2].isdigit() == False or self.lineEdit_6.text()[4].isdigit() == False or self.lineEdit_6.text()[5].isdigit() == False or self.lineEdit_6.text()[7].isdigit() == False or self.lineEdit_6.text()[8].isdigit() == False or self.lineEdit_6.text()[9].isdigit() == False or self.lineEdit_6.text()[10].isdigit() == False):
+                if (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-' or self.lineEdit_6.text()[0].isdigit() == False or self.lineEdit_6.text()[1].isdigit() == False or self.lineEdit_6.text()[2].isdigit() == False or self.lineEdit_6.text()[4].isdigit() == False or self.lineEdit_6.text()[5].isdigit() == False or self.lineEdit_6.text()[7].isdigit() == False or self.lineEdit_6.text()[8].isdigit() == False or self.lineEdit_6.text()[9].isdigit() == False or self.lineEdit_6.text()[10].isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                     error_dialog.exec()
-                    self.lineEdit_6.setText(self.ssn[0:3]+'-'+self.ssn[3:6]+ "-"+self.ssn[6:10])
+                    self.lineEdit_6.setText(self.ssn[0:3]+'-'+self.ssn[3:5]+ "-"+self.ssn[5:10])
                 elif (self.lineEdit_9.text().isdigit() == False):
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: Age Must Be A Number")
@@ -747,12 +743,7 @@ class menu_UI(object):
                     error_dialog.exec()
                     self.lineEdit_8.setText(self.height)
                 else: # all inputs are correct
-                    ssn2 = self.lineEdit_6.text()
-                    for char in ssn2:
-                        if char in "-":
-                            ssn2 = ssn2.replace(char, '')
-                    
-                    cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (ssn2, self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
+                    cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.reformat(self.lineEdit_6.text()), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
             
             if num==2: # Doctor
                 cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), self.ID))
@@ -760,20 +751,9 @@ class menu_UI(object):
             if num==3: # Nurse
                 cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), self.ID))
             # Admin can't change anything else then Person attributes
-            # if statement used sicne elif statement causes indentation error with following line.
             conn.commit()
 
-        """
-        else:
-            #Phone Number Convert
-            number = self.lineEdit_3.text()
-            for char in number:
-                if char in "-":
-                    number = number.replace(char, '')
-            
-        """
-        
-
+    
 
         self.lineEdit_1.setEnabled(False)
         self.lineEdit_2.setEnabled(False)
@@ -789,6 +769,12 @@ class menu_UI(object):
         self.SaveBtn.setEnabled(False)
         self.EditBtn.setEnabled(True)
 
+    # Remove dashes in str
+    def reformat(self, str):
+        for char in str:
+            if char in "-":
+                str = str.replace(char, '')
+        return str
 
 if __name__ == "__main__":
 
