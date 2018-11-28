@@ -47,7 +47,7 @@ class menu_UI(object):
         self.lineEdit_1 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_1.setObjectName("lineEdit_1")
         self.lineEdit_1.setText(firstName)
-        self.lineEdit_1.setReadOnly(True)
+        self.lineEdit_1.setEnabled(False)
         self.gridLayout.addWidget(self.lineEdit_1, 2, 1, 1, 1)
         self.tabWidget.addTab(self.tab_1, "")
 
@@ -62,7 +62,7 @@ class menu_UI(object):
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout.addWidget(self.lineEdit_2, 2, 3, 1, 1)
         self.lineEdit_2.setText(lastName)
-        self.lineEdit_2.setReadOnly(True)
+        self.lineEdit_2.setEnabled(False)
 
         self.label_3 = QtWidgets.QLabel(self.tab_1)
         self.label_3.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -75,7 +75,8 @@ class menu_UI(object):
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
         self.lineEdit_3.setText(phoneNumber)
-        self.lineEdit_3.setReadOnly(True)
+
+        self.lineEdit_3.setEnabled(False)
 
         self.label_4 = QtWidgets.QLabel(self.tab_1)
         self.label_4.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -88,7 +89,7 @@ class menu_UI(object):
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.gridLayout.addWidget(self.lineEdit_4, 4, 3, 1, 1)
         self.lineEdit_4.setText(emailAddress)
-        self.lineEdit_4.setReadOnly(True)
+        self.lineEdit_4.setEnabled(False)
 
         self.label_5 = QtWidgets.QLabel(self.tab_1)
         self.label_5.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -101,7 +102,7 @@ class menu_UI(object):
         self.lineEdit_5.setObjectName("lineEdit_5")
         self.gridLayout.addWidget(self.lineEdit_5, 6, 1, 1, 1)
         self.lineEdit_5.setText(ID)
-        self.lineEdit_5.setReadOnly(True)
+        self.lineEdit_5.setEnabled(False)
 
         self.label_6 = QtWidgets.QLabel(self.tab_1)
         self.label_6.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -114,7 +115,7 @@ class menu_UI(object):
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
         self.lineEdit_6.setText(ssn)
-        self.lineEdit_6.setReadOnly(True)
+        self.lineEdit_6.setEnabled(False)
 
         self.label_7 = QtWidgets.QLabel(self.tab_1)
         self.label_7.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -127,7 +128,7 @@ class menu_UI(object):
         self.lineEdit_7.setObjectName("lineEdit_7")
         self.gridLayout.addWidget(self.lineEdit_7, 8, 1, 1, 1)
         self.lineEdit_7.setText(weight)
-        self.lineEdit_7.setReadOnly(True)
+        self.lineEdit_7.setEnabled(False)
 
         self.label_8 = QtWidgets.QLabel(self.tab_1)
         self.label_8.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -140,7 +141,7 @@ class menu_UI(object):
         self.lineEdit_8.setObjectName("lineEdit_8")
         self.gridLayout.addWidget(self.lineEdit_8, 8, 3, 1, 1)
         self.lineEdit_8.setText(height)
-        self.lineEdit_8.setReadOnly(True)
+        self.lineEdit_8.setEnabled(False)
 
         self.label_9 = QtWidgets.QLabel(self.tab_1)
         self.label_9.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -153,7 +154,7 @@ class menu_UI(object):
         self.lineEdit_9.setObjectName("lineEdit_9")
         self.gridLayout.addWidget(self.lineEdit_9, 10, 1, 1, 1)
         self.lineEdit_9.setText(age)
-        self.lineEdit_9.setReadOnly(True)
+        self.lineEdit_9.setEnabled(False)
 
         self.label_10 = QtWidgets.QLabel(self.tab_1)
         self.label_10.setStyleSheet("color: rgb(46, 125, 132);\n"
@@ -166,7 +167,7 @@ class menu_UI(object):
         self.lineEdit_10.setObjectName("lineEdit_10")
         self.lineEdit_10.setText(medicationList)
         self.gridLayout.addWidget(self.lineEdit_10, 10, 3, 1, 1)
-        self.lineEdit_10.setReadOnly(True)
+        self.lineEdit_10.setEnabled(False)
 
 
 
@@ -178,7 +179,9 @@ class menu_UI(object):
         self.SaveBtn = QtWidgets.QPushButton(self.tab_1)
         self.SaveBtn.setMaximumSize(QtCore.QSize(100, 16777215))
         self.SaveBtn.setObjectName("SaveBtn")
+        self.SaveBtn.setEnabled(False)
         self.gridLayout.addWidget(self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
+        
 
         # Appointmt
         self.tab_2 = QtWidgets.QWidget()
@@ -217,7 +220,6 @@ class menu_UI(object):
         self.lineEdit19_3.setVisible(False)
         self.lineEdit19_3.setObjectName("lineEdit19_3")
         self.gridLayout_2.addWidget(self.lineEdit19_3, 18, 3, 1, 1)
-        self.lineEdit19_3.setReadOnly(True)
 
         self.pushButton19_3 = QtWidgets.QPushButton(self.tab_2)
         self.pushButton19_3.setObjectName("pushButton19_3")
@@ -440,7 +442,6 @@ class menu_UI(object):
             if (numDates == 0):
                 self.lineEdit19_1.setVisible(True)
                 self.pushButton19_1.setVisible(True)
-                print(row[0])
                 self.lineEdit19_1.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif (numDates == 1):
@@ -551,6 +552,7 @@ class menu_UI(object):
                 self.label_7.setText("Specialty")
                 self.label_8.setText("Medical License")
             else:  # Admin
+                self.label_7.setText("Security code")
                 self.label_8.setVisible(False)
                 self.lineEdit_8.setVisible(False)
 
@@ -670,35 +672,34 @@ class menu_UI(object):
             conn.commit()
     
     def editProfile(self, num, cur, conn):
+        self.EditBtn.setEnabled(False)
+        self.SaveBtn.setEnabled(True)
 
-        self.lineEdit_1.setReadOnly(False)
-        self.lineEdit_2.setReadOnly(False)
-        self.lineEdit_3.setReadOnly(False)
-        self.lineEdit_4.setReadOnly(False)
-        self.lineEdit_5.setReadOnly(False)
-        self.lineEdit_6.setReadOnly(False)
-        self.lineEdit_7.setReadOnly(False)
-        self.lineEdit_8.setReadOnly(False)
-        self.lineEdit_9.setReadOnly(False)
-        self.lineEdit_10.setReadOnly(False)
-        print("this is num")
-        print(num)
+        self.lineEdit_1.setEnabled(True)
+        self.lineEdit_2.setEnabled(True)
+        self.lineEdit_3.setEnabled(True)
+        self.lineEdit_4.setEnabled(True)
+        self.lineEdit_5.setEnabled(True)
+        self.lineEdit_6.setEnabled(True)
+        self.lineEdit_7.setEnabled(True)
+        self.lineEdit_8.setEnabled(True)
+        self.lineEdit_9.setEnabled(True)
+        self.lineEdit_10.setEnabled(True)
 
         # CANNOT be edited
         if num == 1: # Patient
-            self.lineEdit_5.setReadOnly(True)   # ID
-            self.lineEdit_10.setReadOnly(True)  # Medication List
+            self.lineEdit_5.setEnabled(False)  # ID
+            self.lineEdit_10.setEnabled(False) # Medication List
         else: # Employee
-            self.lineEdit_6.setReadOnly(True)   # ID
-            self.lineEdit_7.setReadOnly(True)   # Specialty for Doc,Nur and Security Code for Admin
+            self.lineEdit_5.setEnabled(False)   # ID
+            self.lineEdit_6.setEnabled(False)   # DepartmentID   
+            self.lineEdit_7.setEnabled(False)   # Specialty for Doc, Nur and Security Code for Admin
 
         self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur, conn))
     
     
     def saveProfile(self, num, cur, conn):
         ID = self.lineEdit_5.text()
-        print(ID)
-        print("THIS IS ID")
 
         # Person
         cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
@@ -712,7 +713,20 @@ class menu_UI(object):
         # Admin can't change anything else then Person attributes
         # if statement used sicne elif statement causes indentation error with following line.
         conn.commit()
-        
+
+        self.lineEdit_1.setEnabled(False)
+        self.lineEdit_2.setEnabled(False)
+        self.lineEdit_3.setEnabled(False)
+        self.lineEdit_4.setEnabled(False)
+        self.lineEdit_5.setEnabled(False)
+        self.lineEdit_6.setEnabled(False)
+        self.lineEdit_7.setEnabled(False)
+        self.lineEdit_8.setEnabled(False)
+        self.lineEdit_9.setEnabled(False)
+        self.lineEdit_10.setEnabled(False)
+
+        self.SaveBtn.setEnabled(False)
+        self.EditBtn.setEnabled(True)
 
 
 if __name__ == "__main__":
