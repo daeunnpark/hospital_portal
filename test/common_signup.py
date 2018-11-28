@@ -238,24 +238,29 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Try Another Password")
                     error_dialog.exec()
                 else:
-                    if(len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-') :
+                    if(len(self.lineEdit_3.text()) != 12 and self.lineEdit_3.text()[3] != '-' and self.lineEdit_3.text()[7] != '-') :
                         error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.setText("Error: Phone Number Incorrect! Remember: No Dashes! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
                     elif(len(self.lineEdit_11.text()) != 9):
                         error_dialog = QtWidgets.QMessageBox()
                         error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
                         error_dialog.exec()
                     else:
-                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        number = self.lineEdit_3.text()
+                        for char in number:
+                            if char in "-":
+                                number = number.replace(char, '')
+
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                     
                         cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 20.00, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.lineEdit_11.text(), self.lineEdit_12.text(), self.lineEdit_13.text()))
                         # Line above : replaced access -> "305" to avoid using access
                         conn.commit()
                         self.newP = True
                     # moved to test.py
-                    """
-                    conn.commit()
+
+                    """conn.commit()
                     self.uiLogin = common_login_UI()
                     self.uiLogin.setupUi(MainWindow)
                     MainWindow.showMaximized()
@@ -284,13 +289,16 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another Password")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[
-                        7] != '-'):
+                    if (len(self.lineEdit_3.text()) != 12 and self.lineEdit_3.text()[3] != '-' and self.lineEdit_3.text()[7] != '-'):
                         error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.setText("Error: Phone Number Incorrect! Remember: No Dashes! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
                     else:
-                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        number = self.lineEdit_3.text()
+                        for char in number:
+                            if char in "-":
+                                number = number.replace(char, '')
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
                         cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
                         conn.commit()
@@ -329,13 +337,16 @@ class common_signup_UI(object):
                     error_dialog.setText("Error: Password Already Exists! Choose Another One")
                     error_dialog.exec()
                 else:
-                    if (len(self.lineEdit_3.text()) != 11 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[
-                        7] != '-'):
+                    if (len(self.lineEdit_3.text()) != 12 and self.lineEdit_3.text()[3] != '-' and self.lineEdit_3.text()[7] != '-'):
                         error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+                        error_dialog.setText("Error: Phone Number Incorrect! Remember: No Dashes! Format: xxx-xxx-xxxx")
                         error_dialog.exec()
                     else:
-                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        number = self.lineEdit_3.text()
+                        for char in number:
+                            if char in "-":
+                                number = number.replace(char, '')
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), number, self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
                         cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, 1))
                         conn.commit()
