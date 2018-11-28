@@ -5,8 +5,21 @@
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
+from copy import copy
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+myEarliestDate = QtCore.QDate()
+
+
+class MyCalendar(QtWidgets.QCalendarWidget):
+    def __init__(self, parent=None):
+        QtWidgets.QCalendarWidget.__init__(self, parent)
+
+    def paintCell(self, painter, rect, date, **kwargs):
+        QtWidgets.QCalendarWidget.paintCell(self, painter, rect, date)
+        if date.day() == myEarliestDate.day() and date.year() == myEarliestDate.year() and date.month() == myEarliestDate.month():
+            painter.drawText(rect.bottomLeft(), "Appointment")
 
 
 class menu_UI(object):
@@ -14,6 +27,38 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, num, cur, conn):
+
+        earliestDate = None
+
+        numDates = 0
+        for row in appointmentDates:
+            if (earliestDate == None):
+                earliestDate = row[0]
+            else:
+                if (row[0] < earliestDate):
+                    earliestDate = row[0]
+            if (numDates == 0):
+                numDates = numDates + 1
+            elif (numDates == 1):
+                numDates = numDates + 1
+            elif (numDates == 2):
+                numDates = numDates + 1
+            elif (numDates == 3):
+                numDates = numDates + 1
+
+        earliestDateArray = str(earliestDate)
+
+        earliestDateArray = earliestDateArray.split("-")
+
+
+        myYear = int(earliestDateArray[0])
+
+        myDay = int(earliestDateArray[2])
+
+        myMonth = int(earliestDateArray[1])
+
+        myEarliestDate.setDate(myYear, myMonth, myDay)
+
         self.ID = ID
 
         Menu.setObjectName("Menu")
@@ -169,8 +214,6 @@ class menu_UI(object):
         self.gridLayout.addWidget(self.lineEdit_10, 10, 3, 1, 1)
         self.lineEdit_10.setEnabled(False)
 
-
-
         self.EditBtn = QtWidgets.QPushButton(self.tab_1)
         self.EditBtn.setMaximumSize(QtCore.QSize(100, 16777215))
         self.EditBtn.setObjectName("EditBtn")
@@ -181,7 +224,6 @@ class menu_UI(object):
         self.SaveBtn.setObjectName("SaveBtn")
         self.SaveBtn.setEnabled(False)
         self.gridLayout.addWidget(self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
-        
 
         # Appointmt
         self.tab_2 = QtWidgets.QWidget()
@@ -279,7 +321,7 @@ class menu_UI(object):
         self.gridLayout_3.setSpacing(6)
         self.gridLayout_3.setObjectName("gridLayout_3")
 
-        self.calendarWidget_1 = QtWidgets.QCalendarWidget(self.groupBox)
+        self.calendarWidget_1 = MyCalendar(self.groupBox)
         self.calendarWidget_1.setObjectName("calendarWidget_1")
         self.calendarWidget_1.setVerticalHeaderFormat(0)
 
@@ -392,7 +434,6 @@ class menu_UI(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
 
-
         self.gridLayout_5 = QtWidgets.QGridLayout(self.tab_4)
         self.gridLayout_5.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_5.setSpacing(6)
@@ -467,7 +508,6 @@ class menu_UI(object):
                 self.lineEdit19_4.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
 
-
         numStarts = 0
         for row in startTimes:
             if (numStarts == 0):
@@ -530,7 +570,7 @@ class menu_UI(object):
                         seconds))
                 numEnds = numEnds + 1
 
-    def retranslateUi(self, Menu,num):
+    def retranslateUi(self, Menu, num):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Menu", "Profile"))
@@ -546,7 +586,6 @@ class menu_UI(object):
         self.label_1.setText(_translate("Menu", "First Name:"))
         self.label_4.setText(_translate("Menu", "Email Address:"))
 
-
         # Employee
         if num != 1:
             self.label_6.setText("DepartmentID")
@@ -556,16 +595,13 @@ class menu_UI(object):
             self.label_10.setVisible(False)
             self.lineEdit_10.setVisible(False)
 
-            if num == 2 or num == 3: # Doct / Nurse
+            if num == 2 or num == 3:  # Doct / Nurse
                 self.label_7.setText("Specialty")
                 self.label_8.setText("Medical License")
             else:  # Admin
                 self.label_7.setText("Security code")
                 self.label_8.setVisible(False)
                 self.lineEdit_8.setVisible(False)
-
-        
-
 
         self.EditBtn.setText(_translate("Menu", "Edit"))
         self.SaveBtn.setText(_translate("Menu", "Save"))
@@ -579,7 +615,7 @@ class menu_UI(object):
         self.label_17.setText(_translate("Menu", "Start Time:"))
         self.label_18.setText(_translate("Menu", "End Time:"))
         self.label_16.setText(_translate("Menu", "Date:"))
-        self.label20.setText(_translate("Menu", "Next Appointment Highlighted in Gray: "))
+        self.label20.setText(_translate("Menu", "Next Upcoming Appointment is Labelled: "))
         self.label_15.setText(_translate("Menu", "Schedule Appointment: Max 4"))
         self.pushButton_15.setText(_translate("Menu", "Schedule:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Menu", "Appointment"))
@@ -678,7 +714,7 @@ class menu_UI(object):
                     numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
-    
+
     def editProfile(self, num, cur, conn):
         self.EditBtn.setEnabled(False)
         self.SaveBtn.setEnabled(True)
@@ -695,28 +731,31 @@ class menu_UI(object):
         self.lineEdit_10.setEnabled(True)
 
         # CANNOT be edited
-        if num == 1: # Patient
+        if num == 1:  # Patient
             self.lineEdit_5.setEnabled(False)  # ID
-            self.lineEdit_10.setEnabled(False) # Medication List
-        else: # Employee
-            self.lineEdit_5.setEnabled(False)   # ID
-            self.lineEdit_6.setEnabled(False)   # DepartmentID   
-            self.lineEdit_7.setEnabled(False)   # Specialty for Doc, Nur and Security Code for Admin
+            self.lineEdit_10.setEnabled(False)  # Medication List
+        else:  # Employee
+            self.lineEdit_5.setEnabled(False)  # ID
+            self.lineEdit_6.setEnabled(False)  # DepartmentID
+            self.lineEdit_7.setEnabled(False)  # Specialty for Doc, Nur and Security Code for Admin
 
         self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur, conn))
-
 
     def saveProfile(self, num, cur, conn):
         ID = self.lineEdit_5.text()
 
         # Person
-        cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
-        
-        if num==1:  # Patient
-            cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
-        if num==2: # Doctor
+        cur.execute(
+            'UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)',
+            (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
+
+        if num == 1:  # Patient
+            cur.execute(
+                'UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)',
+                (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
+        if num == 2:  # Doctor
             cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), ID))
-        if num==3: # Nurse
+        if num == 3:  # Nurse
             cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), ID))
         # Admin can't change anything else then Person attributes
         # if statement used sicne elif statement causes indentation error with following line.
