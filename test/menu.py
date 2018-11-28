@@ -428,14 +428,14 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
-        """
-        self.pushButton.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
-        self.pushButton_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
-        self.pushButton_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
-        self.pushButton_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_5.clicked.connect(self.scheduleAppt)
-        self.pushButton_6.clicked.connect(lambda: self.Pay(ID, cur, conn))
-        """
+        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
+
+        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
+        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
+        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, doctorID, nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
+        self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
+
         earliestDate = None
 
         numDates = 0
@@ -601,7 +601,11 @@ class menu_UI(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
-        if (self.lineEdit_13.text() < self.lineEdit_14.text()):
+        if(self.lineEdit_14.text() == "" or self.lineEdit_14.text().replace('.', 1).isdigit() == False):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Payment Amount Must Be A Number!")
+            error_dialog.exec()
+        elif (self.lineEdit_13.text() < self.lineEdit_14.text()):
             diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
             self.lineEdit_14.setText(str(diff))
             self.lineEdit_13.setText("0")
@@ -620,12 +624,86 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
-    def scheduleAppt(self, cur, conn):
-        apptID = 1
-        cur.rowcount = -1
-        while (cur.rowcount != 0):
-            cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
-            apptID = apptID + 1
+    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1,
+                     lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
+        if (
+                lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
+            error_dialog.exec()
+        else:
+            apptID = 1
+            cur.rowcount = -1
+            while (cur.rowcount != 0):
+                print()
+                cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
+                apptID = apptID + 1
+                print(apptID)
+                print(doctorID[0][0])
+                print(nurseID[0][0])
+                print(ID)
+                print(departmentAdminID[0][0])
+                cur.execute(
+                    'INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                    (apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United",
+                     '1998-06-06', '12:11:11', '11:12:11'))
+            if (lineEdit1.isVisible() == False):
+                lineEdit1.setVisible(True)
+                cancel1.setVisible(True)
+                #Put parsing of information into separate function probably
+                lineEdit1.setText(Date.strftime('%m/%d/%Y'))
+                hours, remainder = divmod(StartTime.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                lineEdit1.setText(
+                    lineEdit1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+                minutes2, seconds2 = divmod(remainder2, 60)
+                lineEdit1.setText(
+                    lineEdit1.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
+                        seconds2))
+            elif (lineEdit2.isVisible() == False):
+                lineEdit2.setVisible(True)
+                cancel2.setVisible(True)
+                lineEdit2.setText(Date.strftime('%m/%d/%Y'))
+                hours, remainder = divmod(StartTime.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                lineEdit2.setText(
+                    lineEdit2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+                minutes2, seconds2 = divmod(remainder2, 60)
+                lineEdit2.setText(
+                    lineEdit2.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
+                        seconds2))
+            elif (lineEdit3.isVisible() == False):
+                lineEdit3.setVisible(True)
+                cancel3.setVisible(True)
+                lineEdit3.setText(Date.strftime('%m/%d/%Y'))
+                hours, remainder = divmod(StartTime.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                lineEdit3.setText(
+                    lineEdit3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+                minutes2, seconds2 = divmod(remainder2, 60)
+                lineEdit3.setText(
+                    lineEdit3.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
+                        seconds2))
+            elif (lineEdit4.isVisible() == False):
+                lineEdit4.setVisible(True)
+                cancel4.setVisible(True)
+                lineEdit4.setText(Date.strftime('%m/%d/%Y'))
+                hours, remainder = divmod(StartTime.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                lineEdit4.setText(
+                    lineEdit4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
+                        seconds))
+                hours2, remainder2 = divmod(EndTime.seconds2, 3600)
+                minutes2, seconds2 = divmod(remainder2, 60)
+                lineEdit4.setText(
+                    lineEdit4.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
+                        seconds2))
 
     def cancelAppt(self, num, appointmentIDs, cur, conn):
         if (num == 1):
