@@ -127,7 +127,7 @@ class test(object):
             conn,
         )
         # btn clicker too add
-        menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur))
+        menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
         # menu.EditBtn
         MainWindow.showMaximized()
 
