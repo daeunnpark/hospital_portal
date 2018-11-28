@@ -10,9 +10,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class menu_UI(object):
+
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
-                endTimes, appointmentIDs, cur, conn):
+                endTimes, appointmentIDs, num, cur, conn):
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -412,7 +413,7 @@ class menu_UI(object):
         self.statusBar.setObjectName("statusBar")
         Menu.setStatusBar(self.statusBar)
 
-        self.retranslateUi(Menu)
+        self.retranslateUi(Menu, num)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
@@ -436,6 +437,7 @@ class menu_UI(object):
             if (numDates == 0):
                 self.lineEdit19_1.setVisible(True)
                 self.pushButton19_1.setVisible(True)
+                print(row[0])
                 self.lineEdit19_1.setText(row[0].strftime('%m/%d/%Y'))
                 numDates = numDates + 1
             elif (numDates == 1):
@@ -516,7 +518,7 @@ class menu_UI(object):
                         seconds))
                 numEnds = numEnds + 1
 
-    def retranslateUi(self, Menu):
+    def retranslateUi(self, Menu,num):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Menu", "Profile"))
@@ -531,6 +533,25 @@ class menu_UI(object):
         self.label_7.setText(_translate("Menu", "Weight:"))
         self.label_1.setText(_translate("Menu", "First Name:"))
         self.label_4.setText(_translate("Menu", "Email Address:"))
+
+
+        # Doctor, Nurse or Admin
+        if num != 1:
+            self.label_6.setText("DepartmentID")
+
+            self.label_9.setVisible(False)
+            self.lineEdit_9.setVisible(False)
+            self.label_10.setVisible(False)
+            self.lineEdit_10.setVisible(False)
+
+            if num == 2 or num == 3: # Doct / Nurse
+                self.label_7.setText("Specialty")
+                self.label_8.setText("Medical License")
+            else:  # Admin
+                self.label_8.setVisible(False)
+                self.lineEdit_8.setVisible(False)
+
+
 
         self.EditBtn.setText(_translate("Menu", "Edit"))
         self.SaveBtn.setText(_translate("Menu", "Save"))

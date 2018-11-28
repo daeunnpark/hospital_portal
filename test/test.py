@@ -14,6 +14,9 @@ from menu import menu_UI
 
 
 class test(object):
+    # global varialbe
+    # Patient =1, Doctor = 2
+    # num =0;
     # By default, initialize window to welcome_page.UI
     def __init__(self, parent=None):
         w = welcome_page_UI()
@@ -59,7 +62,7 @@ class test(object):
 
         # if user exists
         if w.ID is not None:
-            self.setwindowTo_menu(w)
+            self.setwindowTo_menu(w, num)
         # else, still on event listener
 
     def authenticate_access_code(self, w, num):
@@ -100,9 +103,9 @@ class test(object):
 
         MainWindow.showMaximized()
 
-    def setwindowTo_menu(self, w):
+    def setwindowTo_menu(self, w, num):
         menu = menu_UI()
-        # if you are updating menu.setupUI(), update common_login.py as well
+        # if you are updating args of menu.setupUI(), update common_login.py as well
         menu.setupUi(
             MainWindow,
             w.firstName,
@@ -122,16 +125,23 @@ class test(object):
             w.startTimes,
             w.endTimes,
             w.appointmentIDs,
+            num,
             cur,
             conn,
         )
         # btn clicker too add
-        menu.EditBtn
+        # menu.EditBtn
         MainWindow.showMaximized()
 
 
 if __name__ == "__main__":
     # Initialize database connection
+
+    """
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="root", db="hospital"
+    )
+    """
 
     conn = pymysql.connect(
         host="10.245.235.98",
@@ -147,7 +157,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     MainWindow = QtWidgets.QMainWindow()
-
+    num = 0
     # Create an instance of test
     m = test()
 
