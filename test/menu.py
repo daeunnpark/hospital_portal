@@ -678,7 +678,7 @@ class menu_UI(object):
             cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
             apptID = apptID + 1
             cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
-
+            conn.commit()
             """
             while (cur.rowcount != 0):
                 cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
