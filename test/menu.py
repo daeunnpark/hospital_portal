@@ -14,6 +14,7 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, num, cur, conn):
+        self.ID = ID
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -668,7 +669,7 @@ class menu_UI(object):
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
     
-    def editProfile(self, num, cur):
+    def editProfile(self, num, cur, conn):
 
         self.lineEdit_1.setReadOnly(False)
         self.lineEdit_2.setReadOnly(False)
@@ -691,13 +692,27 @@ class menu_UI(object):
             self.lineEdit_6.setReadOnly(True)   # ID
             self.lineEdit_7.setReadOnly(True)   # Specialty for Doc,Nur and Security Code for Admin
 
-        self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur))
+        self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur, conn))
     
     
-    def saveProfile(self,num, cur):
-        print("this")
-     
+    def saveProfile(self, num, cur, conn):
+        ID = self.lineEdit_5.text()
+        print(ID)
+        print("THIS IS ID")
 
+        # Person
+        cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
+        
+        if num==1:  # Patient
+            cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
+        if num==2: # Doctor
+            cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), ID))
+        if num==3: # Nurse
+            cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), ID))
+        # Admin can't change anything else then Person attributes
+        # if statement used sicne elif statement causes indentation error with following line.
+        conn.commit()
+        
 
 
 if __name__ == "__main__":
