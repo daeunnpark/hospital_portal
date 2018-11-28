@@ -674,12 +674,19 @@ class menu_UI(object):
         else:
             apptID = 1
             cur.rowcount = -1
-            #while (cur.rowcount != 0):
+
             cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
             apptID = apptID + 1
-            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-            (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
-            #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+
+            """
+            while (cur.rowcount != 0):
+                cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
+                apptID = apptID + 1
+                cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+                #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
+            """           
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
@@ -701,7 +708,17 @@ class menu_UI(object):
                 self.setDateAndTimeForViewing(lineEdit4, Date, StartTime, EndTime)
 
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
-        lineEdit.setText(Date.toString("mm'/'dd'/'yyyy"))
+        
+        date = Date.toString("MM'/'dd'/'yyyy")
+        sTime = StartTime.toString("                h:m:s ap")
+        eTime = EndTime.toString("                h:m:s ap")
+
+        lineEdit.setText(date+ sTime + eTime)
+        
+        # https://doc-snapshots.qt.io/qt5-5.11/qtime.html
+        # I can't remove ap for some reason - Daeun
+
+        """
         hours, remainder = divmod(StartTime.seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
         lineEdit.setText(
@@ -710,6 +727,7 @@ class menu_UI(object):
         minutes2, seconds2 = divmod(remainder2, 60)
         lineEdit.setText(
             lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(seconds2))
+        """
 
     def cancelAppt(self, num, appointmentIDs, cur, conn):
         if (num == 1):
@@ -790,7 +808,7 @@ class menu_UI(object):
 
     def saveProfile(self, num, cur, conn):
         
-        if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
+        if (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
             error_dialog.exec()
