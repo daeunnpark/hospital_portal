@@ -285,17 +285,25 @@ class common_login_UI(object):
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's ssn = placeholder for DepartmentID
+                self.ssn = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID
                 )
+                
                 # TODO: Assign this to some UI component
+                # patient's weight = placeholder for Specialty
+                self.weight = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT MedicalLicense FROM Doctor D WHERE DoctorID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's height = placeholder for MedicalLicense
+                self.height = str(cur.fetchone()[0])
 
+            
                 cur.execute(
                     "SELECT Date FROM Appointment A WHERE DoctorID = (%s)", self.ID
                 )
@@ -323,16 +331,23 @@ class common_login_UI(object):
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's ssn = placeholder for DepartmentID
+                self.ssn = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT Specialty FROM Nurse N WHERE NurseID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's weight = placeholder for Specialty
+                self.weight = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT MedicalLicense FROM Nurse N WHERE NurseID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's height = placeholder for MedicalLicense
+                self.height = str(cur.fetchone()[0])
+
 
                 cur.execute(
                     "SELECT Date FROM Appointment A WHERE NurseID = (%s)", self.ID
@@ -361,11 +376,15 @@ class common_login_UI(object):
                     "SELECT DepartmentID FROM Employee E WHERE EmployeeID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's ssn = placeholder for DepartmentID
+                self.ssn = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT SecurityCode FROM DepartmentAdmin D WHERE DepartmentAdminID = (%s)", self.ID
                 )
                 # TODO: Assign this to some UI component
+                # patient's weight = placeholder for SecurityCode
+                self.weight = str(cur.fetchone()[0])
 
                 cur.execute(
                     "SELECT Date FROM Appointment A WHERE DepartmentAdminID = (%s)", self.ID
