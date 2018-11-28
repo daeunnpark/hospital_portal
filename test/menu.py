@@ -480,22 +480,19 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
             elif (numStarts == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
             elif (numStarts == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numStarts = numStarts + 1
 
         numEnds = 0
@@ -504,29 +501,25 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
             elif (numEnds == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
                 numEnds = numEnds + 1
 
     def retranslateUi(self, Menu, num):
@@ -626,8 +619,7 @@ class menu_UI(object):
 
     def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1,
                      lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
-        if (
-                lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
+        if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
             error_dialog.exec()
@@ -638,15 +630,8 @@ class menu_UI(object):
                 print()
                 cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
                 apptID = apptID + 1
-                print(apptID)
-                print(doctorID[0][0])
-                print(nurseID[0][0])
-                print(ID)
-                print(departmentAdminID[0][0])
-                cur.execute(
-                    'INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                    (apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United",
-                     '1998-06-06', '12:11:11', '11:12:11'))
+                cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                    (apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
@@ -672,13 +657,11 @@ class menu_UI(object):
         hours, remainder = divmod(StartTime.seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
         lineEdit.setText(
-            lineEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                seconds))
+            lineEdit.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
         hours2, remainder2 = divmod(EndTime.seconds2, 3600)
         minutes2, seconds2 = divmod(remainder2, 60)
         lineEdit.setText(
-            lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(
-                seconds2))
+            lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(seconds2))
 
     def cancelAppt(self, num, appointmentIDs, cur, conn):
         if (num == 1):
