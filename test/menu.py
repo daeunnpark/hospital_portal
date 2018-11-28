@@ -7,6 +7,10 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, num, cur, conn):
+        
+        self.ID = ID
+        self.phoneNumber = phoneNumber
+        self.ssn = ssn
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -699,19 +703,32 @@ class menu_UI(object):
 
 
     def saveProfile(self, num, cur, conn):
-        ID = self.lineEdit_5.text()
+        #ID #= self.lineEdit_5.text()
 
-        # Person
-        cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), ID))
-        
-        if num==1:  # Patient
-            cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), ID))
-        if num==2: # Doctor
-            cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), ID))
-        if num==3: # Nurse
-            cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), ID))
-        # Admin can't change anything else then Person attributes
-        conn.commit()
+        # Check Phone number format
+        if(len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-') :
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
+            error_dialog.exec()
+            #reset to the previous phone number
+            self.lineEdit_3.setText(self.phoneNumber)
+        elif(len(self.lineEdit_6.text()) != 9):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
+            error_dialog.exec()
+            self.lineEdit_3.setText(self.ssn)
+        else:
+            # Person
+            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.ID))
+            
+            if num==1:  # Patient
+                cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.lineEdit_6.text(), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
+            if num==2: # Doctor
+                cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), self.ID))
+            if num==3: # Nurse
+                cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), self.ID))
+            # Admin can't change anything else then Person attributes
+            conn.commit()
 
         self.lineEdit_1.setEnabled(False)
         self.lineEdit_2.setEnabled(False)

@@ -1,7 +1,6 @@
 import sys
 import pymysql
 from PyQt5 import QtWidgets  # QtCore, QtGui - unused
-
 # from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
 
 # import modules
@@ -23,9 +22,7 @@ class test(object):
         w.patientBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(1))
         w.doctorBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(2))
         w.nurseBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(3))
-        w.departmentAdminBtn.clicked.connect(
-            lambda: self.setwindowTo_login_or_register(4)
-        )
+        w.departmentAdminBtn.clicked.connect(lambda: self.setwindowTo_login_or_register(4))
 
         MainWindow.showMaximized()
 
@@ -126,28 +123,26 @@ class test(object):
             cur,
             conn,
         )
-        # btn clicker too add
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
-        # menu.EditBtn
         MainWindow.showMaximized()
 
 
 if __name__ == "__main__":
     # Initialize database connection
 
-
+    """    
     conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="root", db="hospital"
     )
+    """
 
-
-    """conn = pymysql.connect(
+    conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
         user="root",
         passwd="hospitalCSE305!",
         db="hospital",
-    )"""
+    )
 
     # Initialize the database cursor
     cur = conn.cursor()

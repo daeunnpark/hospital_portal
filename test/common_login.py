@@ -419,7 +419,6 @@ class common_login_UI(object):
             self.endTimes = None
             self.appointmentIDs = None
 
-            # Add dialog maybe?
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
             error_dialog.exec()
