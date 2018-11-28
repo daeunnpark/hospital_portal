@@ -708,7 +708,7 @@ class menu_UI(object):
     def saveProfile(self, num, cur, conn):
 
         #Person Error Checking - phone number
-        if (len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' or self.lineEdit_3.text()[0].isdigit() == False or self.lineEdit_3.text()[1].isdigit() == False or self.lineEdit_3.text()[2].isdigit() == False or self.lineEdit_3.text()[4].isdigit() == False or self.lineEdit_3.text()[5].isdigit() == False or self.lineEdit_3.text()[6].isdigit() == False or self.lineEdit_3.text()[8].isdigit() == False or self.lineEdit_3.text()[9].isdigit() == False or self.lineEdit_3.text()[10].isdigit() == False or self.lineEdit_3.text()[11].isdigit() == False):
+        if  IsDigitorDash(self.lineEdit_3.text() == False) or len(self.lineEdit_3.text()) != 12 or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
             error_dialog.exec()
@@ -721,7 +721,7 @@ class menu_UI(object):
             
             if num==1:  # Patient
                 #Patient Error Checking - SSN
-                if (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-' or self.lineEdit_6.text()[0].isdigit() == False or self.lineEdit_6.text()[1].isdigit() == False or self.lineEdit_6.text()[2].isdigit() == False or self.lineEdit_6.text()[4].isdigit() == False or self.lineEdit_6.text()[5].isdigit() == False or self.lineEdit_6.text()[7].isdigit() == False or self.lineEdit_6.text()[8].isdigit() == False or self.lineEdit_6.text()[9].isdigit() == False or self.lineEdit_6.text()[10].isdigit() == False):
+                if IsDigitorDash(self.lineEdit_6.text() == False) or (len(self.lineEdit_6.text()) != 11 or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
                     error_dialog = QtWidgets.QMessageBox()
                     error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
                     error_dialog.exec()
@@ -774,6 +774,13 @@ class menu_UI(object):
             if char in "-":
                 str = str.replace(char, '')
         return str
+
+    # Check if digit or dash
+    def IsDigitorDash(self, str):
+        for char in str:
+            if (char.isdigit() == False) and char not in "-" :
+                return False     
+        return True               
 
 if __name__ == "__main__":
 
