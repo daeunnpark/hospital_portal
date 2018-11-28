@@ -170,6 +170,8 @@ class menu_UI(object):
         self.gridLayout.addWidget(self.lineEdit_10, 10, 3, 1, 1)
         self.lineEdit_10.setReadOnly(True)
 
+
+
         self.EditBtn = QtWidgets.QPushButton(self.tab_1)
         self.EditBtn.setMaximumSize(QtCore.QSize(100, 16777215))
         self.EditBtn.setObjectName("EditBtn")
@@ -551,7 +553,7 @@ class menu_UI(object):
         self.label_4.setText(_translate("Menu", "Email Address:"))
 
 
-        # Doctor, Nurse or Admin
+        # Employee
         if num != 1:
             self.label_6.setText("DepartmentID")
 
@@ -567,6 +569,7 @@ class menu_UI(object):
                 self.label_8.setVisible(False)
                 self.lineEdit_8.setVisible(False)
 
+        
 
 
         self.EditBtn.setText(_translate("Menu", "Edit"))
@@ -682,6 +685,37 @@ class menu_UI(object):
                     numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+    
+    def editProfile(self, num, cur):
+
+        self.lineEdit_1.setReadOnly(False)
+        self.lineEdit_2.setReadOnly(False)
+        self.lineEdit_3.setReadOnly(False)
+        self.lineEdit_4.setReadOnly(False)
+        self.lineEdit_5.setReadOnly(False)
+        self.lineEdit_6.setReadOnly(False)
+        self.lineEdit_7.setReadOnly(False)
+        self.lineEdit_8.setReadOnly(False)
+        self.lineEdit_9.setReadOnly(False)
+        self.lineEdit_10.setReadOnly(False)
+        print("this is num")
+        print(num)
+
+        # CANNOT be edited
+        if num == 1: # Patient
+            self.lineEdit_5.setReadOnly(True)   # ID
+            self.lineEdit_10.setReadOnly(True)  # Medication List
+        else: # Employee
+            self.lineEdit_6.setReadOnly(True)   # ID
+            self.lineEdit_7.setReadOnly(True)   # Specialty for Doc,Nur and Security Code for Admin
+
+        self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur))
+    
+    
+    def saveProfile(self,num, cur):
+        print("this")
+     
+
 
 
 if __name__ == "__main__":

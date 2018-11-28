@@ -14,9 +14,6 @@ from menu import menu_UI
 
 
 class test(object):
-    # global varialbe
-    # Patient =1, Doctor = 2
-    # num =0;
     # By default, initialize window to welcome_page.UI
     def __init__(self, parent=None):
         w = welcome_page_UI()
@@ -129,6 +126,7 @@ class test(object):
             conn,
         )
         # btn clicker too add
+        menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur))
         # menu.EditBtn
         MainWindow.showMaximized()
 
@@ -159,7 +157,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     MainWindow = QtWidgets.QMainWindow()
-    num = 0
     # Create an instance of test
     m = test()
 
