@@ -73,8 +73,7 @@ class menu_UI(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
-        self.lineEdit_3.setText(phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10])
-        
+        self.lineEdit_3.setText(phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10])  
         self.lineEdit_3.setEnabled(False)
 
         self.label_4 = QtWidgets.QLabel(self.tab_1)
@@ -769,7 +768,7 @@ class menu_UI(object):
         self.SaveBtn.setEnabled(False)
         self.EditBtn.setEnabled(True)
 
-    # Remove dashes in str
+    # Remove dashes 
     def reformat(self, str):
         for char in str:
             if char in "-":

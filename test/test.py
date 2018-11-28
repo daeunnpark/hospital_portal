@@ -122,11 +122,15 @@ class test(object):
             w.startTimes,
             w.endTimes,
             w.appointmentIDs,
+            w.doctorID,
+            w.nurseID,
+            w.departmentAdminID,
             num,
             cur,
             conn,
         )
         menu.EditBtn.clicked.connect(lambda: menu.editProfile(num, cur, conn))
+        # menu.EditBtn
         MainWindow.showMaximized()
 
 
