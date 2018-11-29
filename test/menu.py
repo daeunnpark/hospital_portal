@@ -488,11 +488,10 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
-        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
-
-        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
-        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
-        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
+        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4, self.lineEdit_13))
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
 
@@ -745,7 +744,7 @@ class menu_UI(object):
             lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(seconds2))
         """
 
-    def cancelAppt(self, num, appointmentIDs, cur, conn):
+    def cancelAppt(self, num, appointmentIDs, cur, conn, lineEdit13):
         if (num == 1):
             self.lineEdit19_1.setText("")
             self.lineEdit19_1.setVisible(False)
@@ -757,6 +756,13 @@ class menu_UI(object):
                     appointNum = row[0]
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
             conn.commit()
 
         if (num == 3):
@@ -773,6 +779,13 @@ class menu_UI(object):
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
 
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+
         if (num == 5):
             self.lineEdit19_3.setText("")
             self.lineEdit19_3.setVisible(False)
@@ -786,6 +799,13 @@ class menu_UI(object):
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
 
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+
         if (num == 7):
             self.lineEdit19_4.setText("")
             self.lineEdit19_4.setVisible(False)
@@ -797,6 +817,13 @@ class menu_UI(object):
                     appointNum = row[0]
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
             conn.commit()
 
     def editProfile(self, num, cur, conn):
