@@ -642,7 +642,7 @@ class menu_UI(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
-        if(self.lineEdit_14.text() == "" or self.lineEdit_14.text().replace('.', 1).isdigit() == False):
+        if(self.lineEdit_14.text() == "" or self.IsDigitorSpeChar(self.lineEdit_14.text(), ".", -1) == False):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Payment Amount Must Be A Number!")
             error_dialog.exec()
@@ -661,7 +661,7 @@ class menu_UI(object):
         else:
             diff2 = float(self.lineEdit_13.text()) - float(self.lineEdit_14.text())
             self.lineEdit_13.setText(str(diff2))
-            self.lineEdit_13.setText("0")
+            self.lineEdit_14.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
@@ -899,7 +899,7 @@ class menu_UI(object):
             if (char.isdigit() == False) and char not in spechar :
                 return False 
          
-        return True               
+        return True
 
 if __name__ == "__main__":
 
