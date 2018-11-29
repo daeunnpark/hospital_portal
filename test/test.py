@@ -43,7 +43,7 @@ class test(object):
         w.setupUi(MainWindow, num)
 
         w.loginBtn.clicked.connect(lambda: self.authenticate_user(w, num))
-
+        print("working once")
         MainWindow.showMaximized()
 
     def setwindowTo_access_code(self, num):
@@ -74,6 +74,7 @@ class test(object):
     def setwindowTo_common_signup(self, num, accessCodeReceived):
         w = common_signup_UI()
         w.setupUi(MainWindow, num)
+
         if num == 1:
             w.pushButton.clicked.connect(
                 lambda: w.CreatePatient(cur, conn, accessCodeReceived)
@@ -87,21 +88,39 @@ class test(object):
                 lambda: w.CreateNurse(cur, conn, accessCodeReceived)
             )
 
-        # if new Patient is created
+        """
+        # Previous code for Redirection, not working
         if w.newP == True:
-            conn.commit()
+            # conn.commit()
             self.setwindowTo_common_login(1)
+
         if w.newD == True:
-            conn.commit()
+            # conn.commit()
             self.setwindowTo_common_login(2)
         if w.newN == True:
-            conn.commit()
+            # conn.commit()
             self.setwindowTo_common_login(3)
-
+        """
         MainWindow.showMaximized()
+
+        # New code for Redirection, fails to load menu when user has no appt
+        w.pushButton.clicked.connect(lambda: self.setLoginNewUser(w, num))
+
+    def setLoginNewUser(self, w, num):
+        if w.newP == True:
+            # conn.commit()
+            self.setwindowTo_common_login(1)
+        if w.newD == True:
+            # conn.commit()
+            self.setwindowTo_common_login(2)
+        if w.newN == True:
+            # conn.commit()
+            self.setwindowTo_common_login(3)
 
     def setwindowTo_menu(self, w, num):
         menu = menu_UI()
+        print("--------")
+        print(w.firstName)
         # if you are updating args of menu.setupUI(), update common_login.py, menu.py as well
         menu.setupUi(
             MainWindow,
@@ -136,17 +155,17 @@ class test(object):
 if __name__ == "__main__":
     # Initialize database connection
 
-    conn = pymysql.connect(
+    """conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
         user="root",
         passwd="hospitalCSE305!",
         db="hospital",
-    )
-
-    """conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="", db="test2"
     )"""
+
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="", db="test2"
+    )
 
     # Initialize the database cursor
     cur = conn.cursor()
