@@ -442,8 +442,10 @@ class common_login_UI(object):
             self.departmentAdminID = None
 
             error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
+            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
+            error_dialog.setText("Username and Password Combination Does Not Exist in System! \nTry Again!")
             error_dialog.exec()
+
 
 
 if __name__ == "__main__":
@@ -457,3 +459,4 @@ if __name__ == "__main__":
     MainWindow.showMaximized()
 
     sys.exit(app.exec_())
+

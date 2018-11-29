@@ -11,7 +11,7 @@ class access_code_UI(object):
     def __init__(self, parent=None):
         self.rowcount = 0
         self.authenticateCode = -1
-    
+
     def setupUi(self, Access, num):
         Access.setObjectName("Access")
 
@@ -36,15 +36,17 @@ class access_code_UI(object):
         self.verticalLayout.addWidget(self.lineEdit)
         self.pushButton = QtWidgets.QPushButton(self.widget_2)
         self.pushButton.setMaximumSize(QtCore.QSize(200, 16777215))
-        self.pushButton.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
-"color: rgb(46, 125, 132);")
+        self.pushButton.setStyleSheet(
+            'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132);"
+        )
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout.addWidget(self.pushButton, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_2.addWidget(self.widget_2, 2, 0, 1, 1, QtCore.Qt.AlignHCenter)
         self.label = QtWidgets.QLabel(self.widget)
         self.label.setMaximumSize(QtCore.QSize(1400, 100))
-        self.label.setStyleSheet("font: 20pt \"Lucida Calligraphy\";\n"
-"color: rgb(46, 125, 132);")
+        self.label.setStyleSheet(
+            'font: 20pt "Lucida Calligraphy";\n' "color: rgb(46, 125, 132);"
+        )
         self.label.setObjectName("label")
         self.gridLayout_2.addWidget(self.label, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.widget, 1, 0, 1, 1, QtCore.Qt.AlignHCenter)
@@ -64,36 +66,38 @@ class access_code_UI(object):
         _translate = QtCore.QCoreApplication.translate
         Access.setWindowTitle(_translate("Access", "Access"))
         self.pushButton.setText(_translate("Access", "Enter"))
-        self.label.setText(_translate("Access", "Enter Your Access Code Received Via Email:"))
+        self.label.setText(
+            _translate("Access", "Enter Your Access Code Received Via Email:")
+        )
 
     def authenticate_access_code(self, cur):
         # initalize
-        
+
         cur.execute(
             "SELECT AccessCodes FROM AccessCodes A WHERE AccessCodes = (%s)",
             self.lineEdit.text(),
         )
-            
+
         access = cur.fetchall()
         self.authenticateCode = access
         self.rowcount = cur.rowcount
         print(self.rowcount)
-                    
+
         # Add dialog maybe?
         if self.rowcount == 0:
             error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Access Code is Invalid!")
+            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
+            error_dialog.setText("Access Code is Invalid!")
             error_dialog.exec()
-
-
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = access_code_UI()
-    ui.setupUi(MainWindow,1)
+    ui.setupUi(MainWindow, 1)
     MainWindow.showMaximized()
     sys.exit(app.exec_())
 

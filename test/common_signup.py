@@ -315,9 +315,6 @@ class common_signup_UI(object):
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if (cur.rowcount != 0):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Username Already Exists! \nChoose Another One")
-                error_dialog.exec()
                 self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
