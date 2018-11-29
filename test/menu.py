@@ -650,15 +650,15 @@ class menu_UI(object):
 
     def Pay(self, ID, cur, conn):
         if(self.lineEdit_14.text() == "" or self.IsDigitorSpeChar(self.lineEdit_14.text(), ".", -1) == False):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Payment Amount Must Be A Number!")
-            error_dialog.exec()
+             self.show_msg( 1, "Payment Amount Must Be A Number!")
+
         elif (self.lineEdit_13.text() < self.lineEdit_14.text()):
             diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
             self.lineEdit_14.setText(str(diff))
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
             conn.commit()
+
         elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
             self.lineEdit_14.setText("0")
             self.lineEdit_13.setText("0")
@@ -675,13 +675,11 @@ class menu_UI(object):
     def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
 
         if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
-            error_dialog.exec()
+            self.show_msg( 1, "Maximum Scheduled Appointments is 4!\nCannot Exceed this Amount!")
+        
         elif(QtCore.QDate.currentDate() > Date):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Cannot Schedule Appointment For Earlier Date")
-            error_dialog.exec()
+            self.show_msg( 1, "Cannot Schedule Appointment For Earlier Date")
+
         else:
             #cur.rowcount = -1
 
@@ -824,9 +822,7 @@ class menu_UI(object):
     def saveProfile(self, num, cur, conn):
         
         if (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
-            error_dialog.exec()
+            self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
 
             # Reset to previous data
             self.lineEdit_3.setText(self.phoneNumber)
@@ -838,34 +834,26 @@ class menu_UI(object):
         if num==1:  # Patient
             # Patient Error Checking - SSN
             if (self.IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
-                error_dialog.exec()
+                self.show_msg( 1, "SSN Incorrect! Must be 9 numbers long. \nFormat: xxx-xx-xxxx")
                 self.lineEdit_6.setText(self.ssn)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_7.text(), ".", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Weight Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Weight Must Be A Number.")
                 self.lineEdit_7.setText(self.weight)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_8.text(), ".", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Height Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Height Must Be A Number.")
                 self.lineEdit_8.setText(self.height)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), "", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Age Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Age Must Be A Number.")
                 self.lineEdit_9.setText(self.age)
           
             # Update self with valid inputs
             self.ssn = self.lineEdit_6.text()
-            self.age = self.lineEdit_9.text()
             self.weight = self.lineEdit_7.text()
             self.height = self.lineEdit_8.text()
+            self.age = self.lineEdit_9.text()
 
             cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.reformat(self.lineEdit_6.text()), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
             
@@ -900,6 +888,10 @@ class menu_UI(object):
 
     # Check if digit or spechar of len = num
     def IsDigitorSpeChar(self, str, spechar, num):
+        # Empty str
+        if(str==""):
+            return False
+
         if(num!=-1): # num=-1 when no need to check len
             if len(str)!=num:
                 return False
@@ -909,6 +901,17 @@ class menu_UI(object):
                 return False 
          
         return True
+
+    def show_msg(self, num, str):
+        # Warning
+        if num==1:
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
+            error_dialog.setText("\n"+str)
+            error_dialog.exec()
+
+        # Maybe other types of msg here
+
 
 if __name__ == "__main__":
 
