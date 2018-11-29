@@ -366,10 +366,12 @@ class menu_UI(object):
 
         self.timeEdit_17 = QtWidgets.QTimeEdit(self.tab_2)
         self.timeEdit_17.setObjectName("timeEdit_17")
+        self.timeEdit_17.setTime(QtCore.QTime.currentTime())
         self.gridLayout_2.addWidget(self.timeEdit_17, 4, 3, 1, 1)
 
         self.timeEdit_18 = QtWidgets.QTimeEdit(self.tab_2)
         self.timeEdit_18.setObjectName("timeEdit_18")
+        self.timeEdit_18.setTime(QtCore.QTime.currentTime().addMSecs(1000000))
         self.gridLayout_2.addWidget(self.timeEdit_18, 6, 3, 1, 1)
 
         if num == 1:
