@@ -284,18 +284,20 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
+
                 cur.execute(
                     "SELECT DoctorID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.doctorID = cur.fetchall()
+                self.doctorID = str(cur.fetchone()[0])              
+                
                 cur.execute(
                     "SELECT NurseID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.nurseID = cur.fetchall()
+                self.nurseID = str(cur.fetchone()[0]) 
                 cur.execute(
                     "SELECT AdminID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.departmentAdminID = cur.fetchall()
+                self.departmentAdminID = str(cur.fetchone()[0]) 
 
             elif num == 2:
 
@@ -304,7 +306,6 @@ class common_login_UI(object):
                 )
                 # patient's ssn = placeholder for DepartmentID
                 self.ssn = str(cur.fetchone()[0])
-                print(self.ssn)
 
                 cur.execute(
                     "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID
@@ -441,8 +442,10 @@ class common_login_UI(object):
             self.departmentAdminID = None
 
             error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Username and Password Combination Does Not Exist in System! Try Again!")
+            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
+            error_dialog.setText("Username and Password Combination Does Not Exist in System! \nTry Again!")
             error_dialog.exec()
+
 
 
 if __name__ == "__main__":
@@ -456,3 +459,4 @@ if __name__ == "__main__":
     MainWindow.showMaximized()
 
     sys.exit(app.exec_())
+

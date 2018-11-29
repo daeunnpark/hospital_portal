@@ -199,93 +199,85 @@ class common_signup_UI(object):
     def CreatePatient(self, cur, conn, accessCodeReceived):
         self.newP = False
         if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Must Specify Username and Password!")
-            error_dialog.exec()
+            self.show_msg( 1, "Please Specify Username and Password.")
+
         if(self.lineEdit_6.text() != self.lineEdit_7.text()):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Passwords Do Not Match!")
-            error_dialog.exec()
+            self.show_msg( 1, "Passwords Do Not Match!")
+
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
-            if(cur.rowcount != 0):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Username Already Exists! Try Another Username")
-                error_dialog.exec()
+            if(self.lineEdit_5.text())!= "" and (cur.rowcount != 0):
+               self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
+
             else:
+                
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                
                 if(cur.rowcount != 0):
-                    error_dialog = QtWidgets.QMessageBox()
-                    error_dialog.setText("Error: Password Already Exists! Try Another Password")
-                    error_dialog.exec()
+                    """Not check Password
+                    self.show_msg( 1, "Password Already Exists! Choose Another Password.")"""
+
                 else: 
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
                         self.lineEdit_3.setText("")
                     
                     elif (self.IsDigitorSpeChar(self.lineEdit_8.text(), "", -1) == False):
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Age Must Be A Number")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Age Must Be A Number.")
                         self.lineEdit_8.setText("")
 
                     elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), ".", -1) == False):
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Weight Must Be A Number")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Weight Must Be A Number.")
                         self.lineEdit_9.setText("")
 
                     elif (self.IsDigitorSpeChar(self.lineEdit_10.text(), ".", -1) == False):
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Height Must Be A Number")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Height Must Be A Number.")
                         self.lineEdit_10.setText("")
                     
                     elif (self.IsDigitorSpeChar(self.lineEdit_11.text(), "-", 11) == False) or self.lineEdit_11.text()[3] != '-' or self.lineEdit_11.text()[6] != '-':
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long")
-                        error_dialog.exec()
-                        self.lineEdit_11.setText("")
-                    
+                        self.show_msg( 1, "SSN Incorrect! Must be 9 numbers long. \nFormat: xxx-xx-xxxx")
+                        self.lineEdit_11.setText("") 
+
                     else:
+                        
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
                         cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 0.0, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.reformat(self.lineEdit_11.text()), self.lineEdit_12.text(), self.lineEdit_13.text()))
                         conn.commit()
+
+                        self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
                         self.newP = True
+        
+
 
     def CreateDoctor(self, cur, conn, accessCodeReceived):
         self.newD = False
         if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Must Specify Username and Password!")
-            error_dialog.exec()
+            self.show_msg( 1, "Please Specify Username and Password.")
+
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Passwords Do Not Match!")
-            error_dialog.exec()
+            self.show_msg( 1, "Passwords Do Not Match!")
+
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
-            if (cur.rowcount != 0):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Username Already Exists! Choose Another Username")
-                error_dialog.exec()
+            
+            if(self.lineEdit_5.text())!= "" and (cur.rowcount != 0):
+                self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
+            
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                
                 if (cur.rowcount != 0):
-                    error_dialog = QtWidgets.QMessageBox()
-                    error_dialog.setText("Error: Password Already Exists! Choose Another Password")
-                    error_dialog.exec()
+                    """self.show_msg( 1, "Password Already Exists! \nChoose Another Password.")"""
+                
                 else:
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
                     else:
-                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
+
                         role = self.lineEdit_8.text()
                         deptID = 8
                         if(role == "Pediatrics" or role == "pediatrics"):
@@ -306,38 +298,35 @@ class common_signup_UI(object):
                         conn.commit()
                         cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
                         conn.commit()
+
+                        self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
                         self.newD = True
 
+        
 
     def CreateNurse(self, cur, conn, accessCodeReceived):
         self.newN = False
         if(self.lineEdit_5.text() == "" or self.lineEdit_6.text() == "" or self.lineEdit_7.text() == ""):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Must Specify Username and Password!")
-            error_dialog.exec()
+            self.show_msg( 1, "Please Specify Username and Password.")
+
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Passwords Do Not Match!")
-            error_dialog.exec()
+            self.show_msg( 1, "Passwords Do Not Match!")
+
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if (cur.rowcount != 0):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Username Already Exists! Choose Another One")
-                error_dialog.exec()
+                self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
                 if (cur.rowcount != 0):
-                    error_dialog = QtWidgets.QMessageBox()
-                    error_dialog.setText("Error: Password Already Exists! Choose Another One")
-                    error_dialog.exec()
+                    """Not check Password
+                    self.show_msg( 1, "Password Already Exists! Choose Another Password.")"""
                 else:
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
-                        error_dialog = QtWidgets.QMessageBox()
-                        error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
-                        error_dialog.exec()
+                        self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
+                        self.lineEdit_3.setText("")
                     else:
-                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
+                        cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
                         role = self.lineEdit_8.text()
                         deptID = 8
@@ -359,8 +348,11 @@ class common_signup_UI(object):
                         conn.commit()
                         cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
                         conn.commit()
+
+                        self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
                         self.newN = True
 
+        
 
     # Remove dashes 
     def reformat(self, str):
@@ -371,15 +363,37 @@ class common_signup_UI(object):
 
     # Check if digit or spechar of len = num
     def IsDigitorSpeChar(self, str, spechar, num):
-        if(num!=-1): # num=-1 when no need to check len
+        # Empty str
+        if(str==""):
+            return False
+
+        if(num!=-1): # num=-1 when no need to check len, but should't be empty
             if len(str)!=num:
                 return False
+        
 
         for char in str:
             if (char.isdigit() == False) and char not in spechar :
                 return False 
          
         return True  
+
+    def show_msg(self, num, str):
+        
+        msg = QtWidgets.QMessageBox()
+        # Warning
+        if num==1:
+            msg.setIcon(QtWidgets.QMessageBox().Warning)
+            msg.setText("\n"+str)
+        # No Icon
+        if num==2:
+            msg.setIcon(QtWidgets.QMessageBox().Information)
+            msg.setText("\n"+str)
+
+        msg.exec()
+
+       # Maybe other types of msg here
+
 
 
 if __name__ == "__main__":

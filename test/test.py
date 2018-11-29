@@ -119,8 +119,6 @@ class test(object):
 
     def setwindowTo_menu(self, w, num):
         menu = menu_UI()
-        print("--------")
-        print(w.firstName)
         # if you are updating args of menu.setupUI(), update common_login.py, menu.py as well
         menu.setupUi(
             MainWindow,

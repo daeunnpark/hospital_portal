@@ -65,10 +65,15 @@ class menu_UI(object):
         self.age = age
         self.weight = weight
         self.height = height
-        self.phoneNumber = phoneNumber[0:3] + '-' + phoneNumber[3:6] + "-" + phoneNumber[6:10]
-        self.ssn = ssn  # no formatting for Employee's DptID (ssn is a placeholder for DptID)
-        if (num == 1):
-            self.ssn = ssn[0:3] + '-' + ssn[3:5] + "-" + ssn[5:10]
+
+        self.doctorID = doctorID
+        self.nurseID = nurseID
+        self.departmentAdminID = departmentAdminID
+        self.phoneNumber = phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10]
+        self.ssn = ssn # no formatting for Employee's DptID (ssn is a placeholder for DptID)
+        if(num==1):
+            self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
+
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -358,14 +363,17 @@ class menu_UI(object):
 
         self.dateEdit_16 = QtWidgets.QDateEdit(self.tab_2)
         self.dateEdit_16.setObjectName("dateEdit_16")
+        self.dateEdit_16.setDate(QtCore.QDate.currentDate())
         self.gridLayout_2.addWidget(self.dateEdit_16, 2, 3, 1, 1)
 
         self.timeEdit_17 = QtWidgets.QTimeEdit(self.tab_2)
         self.timeEdit_17.setObjectName("timeEdit_17")
+        self.timeEdit_17.setTime(QtCore.QTime.currentTime())
         self.gridLayout_2.addWidget(self.timeEdit_17, 4, 3, 1, 1)
 
         self.timeEdit_18 = QtWidgets.QTimeEdit(self.tab_2)
         self.timeEdit_18.setObjectName("timeEdit_18")
+        self.timeEdit_18.setTime(QtCore.QTime.currentTime().addMSecs(1000000))
         self.gridLayout_2.addWidget(self.timeEdit_18, 6, 3, 1, 1)
 
         if num == 1:
@@ -479,16 +487,11 @@ class menu_UI(object):
 
 
         self.calendarWidget.clicked.connect(lambda: self.showAppointmentsInTextEdit(num, ID, cur, conn))
-        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn))
-
-        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
-        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
-        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_15.clicked.connect(
-            lambda: self.scheduleAppt(cur, conn, doctorID, nurseID, departmentAdminID, ID, self.dateEdit_16.date(),
-                                      self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1,
-                                      self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1,
-                                      self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
+        self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn, self.lineEdit_13))
+        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4, self.lineEdit_13))
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
 
         earliestDate = None
@@ -718,16 +721,16 @@ class menu_UI(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
-        if (self.lineEdit_14.text() == "" or self.IsDigitorSpeChar(self.lineEdit_14.text(), ".", -1) == False):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Payment Amount Must Be A Number!")
-            error_dialog.exec()
+        if(self.lineEdit_14.text() == "" or self.IsDigitorSpeChar(self.lineEdit_14.text(), ".", -1) == False):
+             self.show_msg( 1, "Payment Amount Must Be A Number!")
+
         elif (self.lineEdit_13.text() < self.lineEdit_14.text()):
             diff = float(self.lineEdit_14.text()) - float(self.lineEdit_13.text())
             self.lineEdit_14.setText(str(diff))
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
             conn.commit()
+
         elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
             self.lineEdit_14.setText("0")
             self.lineEdit_13.setText("0")
@@ -741,16 +744,17 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
-    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1,
-                     lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
 
-        if (
-                lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
-            error_dialog.exec()
+    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4, lineEdit13):
+
+        if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
+            self.show_msg( 1, "Maximum Scheduled Appointments is 4!\nCannot Exceed this Amount!")
+        
+        elif(QtCore.QDate.currentDate() > Date):
+            self.show_msg( 1, "Cannot Schedule Appointment For Earlier Date")
+
         else:
-            cur.rowcount = -1
+            #cur.rowcount = -1
 
             cur.execute('SELECT AppointmentID FROM Appointment')
             # Generate next appointment ID to be next largest value
@@ -761,18 +765,17 @@ class menu_UI(object):
                     if (x[0] >= largestApptID):
                         largestApptID = x[0] + 1
 
-            cur.execute(
-                'INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                (largestApptID, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+            (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
+            
             conn.commit()
-            """
-            while (cur.rowcount != 0):
-                cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
-                apptID = apptID + 1
-                cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
-                #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
-            """
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] + 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+          
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
@@ -796,11 +799,11 @@ class menu_UI(object):
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
 
         date = Date.toString("MM'/'dd'/'yyyy")
-        sTime = StartTime.toString("                h:m:s ap")
-        eTime = EndTime.toString("                h:m:s ap")
 
-        lineEdit.setText(date + sTime + eTime)
-
+        sTime = StartTime.toString("                hh:mm")
+        eTime = EndTime.toString("                hh:mm")
+        lineEdit.setText(date+ sTime + eTime)
+        
         # https://doc-snapshots.qt.io/qt5-5.11/qtime.html
         # I can't remove ap for some reason - Daeun
 
@@ -815,7 +818,7 @@ class menu_UI(object):
             lineEdit.text() + "                " + str(hours2) + ":" + str(minutes2) + ":" + str(seconds2))
         """
 
-    def cancelAppt(self, num, appointmentIDs, cur, conn):
+    def cancelAppt(self, num, appointmentIDs, cur, conn, lineEdit13):
         if (num == 1):
             self.lineEdit19_1.setText("")
             self.lineEdit19_1.setVisible(False)
@@ -828,6 +831,14 @@ class menu_UI(object):
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+
         if (num == 3):
             self.lineEdit19_2.setText("")
             self.lineEdit19_2.setVisible(False)
@@ -838,9 +849,17 @@ class menu_UI(object):
                 if (numAppointment == 1):
                     appointNum = row[0]
                 numAppointment = numAppointment + 1
-            print(appointNum)
+            #print(appointNum)
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+
         if (num == 5):
             self.lineEdit19_3.setText("")
             self.lineEdit19_3.setVisible(False)
@@ -853,6 +872,14 @@ class menu_UI(object):
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
+            conn.commit()
+
         if (num == 7):
             self.lineEdit19_4.setText("")
             self.lineEdit19_4.setVisible(False)
@@ -864,6 +891,13 @@ class menu_UI(object):
                     appointNum = row[0]
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
+            conn.commit()
+
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] - 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
             conn.commit()
 
     def editProfile(self, num, cur, conn):
@@ -894,13 +928,10 @@ class menu_UI(object):
 
     def saveProfile(self, num, cur, conn):
 
-        if (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or \
-                self.lineEdit_3.text()[7] != '-':
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setText("Error: Phone Number Incorrect! Format: xxx-xxx-xxxx")
-            error_dialog.exec()
+        if (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
+            self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
 
-            # Reset to previous data
+            # Reset to prvious data
             self.lineEdit_3.setText(self.phoneNumber)
 
         else:
@@ -912,36 +943,28 @@ class menu_UI(object):
 
         if num == 1:  # Patient
             # Patient Error Checking - SSN
-            if (self.IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or \
-                    self.lineEdit_6.text()[6] != '-':
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: SSN Incorrect! Must be 9 numbers long! Format: xxx-xx-xxxx")
-                error_dialog.exec()
+
+            if (self.IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
+                self.show_msg( 1, "SSN Incorrect! Must be 9 numbers long. \nFormat: xxx-xx-xxxx")
                 self.lineEdit_6.setText(self.ssn)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_7.text(), ".", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Weight Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Weight Must Be A Number.")
                 self.lineEdit_7.setText(self.weight)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_8.text(), ".", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Height Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Height Must Be A Number.")
                 self.lineEdit_8.setText(self.height)
 
             elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), "", -1) == False):
-                error_dialog = QtWidgets.QMessageBox()
-                error_dialog.setText("Error: Age Must Be A Number")
-                error_dialog.exec()
+                self.show_msg( 1, "Age Must Be A Number.")
                 self.lineEdit_9.setText(self.age)
 
             # Update self with valid inputs
             self.ssn = self.lineEdit_6.text()
-            self.age = self.lineEdit_9.text()
             self.weight = self.lineEdit_7.text()
             self.height = self.lineEdit_8.text()
+            self.age = self.lineEdit_9.text()
 
             cur.execute(
                 'UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (
@@ -981,8 +1004,13 @@ class menu_UI(object):
 
     # Check if digit or spechar of len = num
     def IsDigitorSpeChar(self, str, spechar, num):
-        if (num != -1):  # num=-1 when no need to check len
-            if len(str) != num:
+
+        # Empty str
+        if(str==""):
+            return False
+
+        if(num!=-1): # num=-1 when no need to check len
+            if len(str)!=num:
                 return False
 
         for char in str:
@@ -990,6 +1018,17 @@ class menu_UI(object):
                 return False
 
         return True
+
+
+    def show_msg(self, num, str):
+        # Warning
+        if num==1:
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
+            error_dialog.setText("\n"+str)
+            error_dialog.exec()
+
+        # Maybe other types of msg here
 
 
 if __name__ == "__main__":
