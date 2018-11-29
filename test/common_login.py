@@ -231,6 +231,9 @@ class common_login_UI(object):
             )
             self.ID = str(cur.fetchone()[0])
 
+            print("FROM LOGIN1")
+            print(self.ID)
+
             if num == 1:
                 cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
                 self.age = str(cur.fetchone()[0])
@@ -287,15 +290,16 @@ class common_login_UI(object):
                 cur.execute(
                     "SELECT DoctorID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.doctorID = cur.fetchall()
+                self.doctorID = str(cur.fetchone()[0])              
+                
                 cur.execute(
                     "SELECT NurseID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.nurseID = cur.fetchall()
+                self.nurseID = str(cur.fetchone()[0]) 
                 cur.execute(
                     "SELECT AdminID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )
-                self.departmentAdminID = cur.fetchall()
+                self.departmentAdminID = str(cur.fetchone()[0]) 
 
             elif num == 2:
 
@@ -304,7 +308,6 @@ class common_login_UI(object):
                 )
                 # patient's ssn = placeholder for DepartmentID
                 self.ssn = str(cur.fetchone()[0])
-                print(self.ssn)
 
                 cur.execute(
                     "SELECT Specialty FROM Doctor D WHERE DoctorID = (%s)", self.ID

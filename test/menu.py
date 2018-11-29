@@ -487,7 +487,7 @@ class menu_UI(object):
         self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
         self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
         self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, doctorID, nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
+        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
 
         earliestDate = None
@@ -677,8 +677,8 @@ class menu_UI(object):
             error_dialog.setText("Error: Cannot Schedule Appointment For Earlier Date")
             error_dialog.exec()
         else:
-            cur.rowcount = -1
-
+            #cur.rowcount = -1
+            
             cur.execute('SELECT AppointmentID FROM Appointment')
             #Generate next appointment ID to be next largest value
             apptID = cur.fetchall()
@@ -688,7 +688,8 @@ class menu_UI(object):
                     if(x[0] >= largestApptID):
                         largestApptID = x[0] + 1
 
-            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (largestApptID, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
             conn.commit()
             """
             while (cur.rowcount != 0):
@@ -721,9 +722,9 @@ class menu_UI(object):
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
         
         date = Date.toString("MM'/'dd'/'yyyy")
-        sTime = StartTime.toString("                h:m:s ap")
+        sTime = StartTime.toString("                hh:mm:ss")
         eTime = EndTime.toString("                h:m:s ap")
-
+        # hh:mm:ss
         lineEdit.setText(date+ sTime + eTime)
         
         # https://doc-snapshots.qt.io/qt5-5.11/qtime.html
@@ -763,7 +764,7 @@ class menu_UI(object):
                 if (numAppointment == 1):
                     appointNum = row[0]
                 numAppointment = numAppointment + 1
-            print(appointNum)
+            #print(appointNum)
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
         if (num == 5):
