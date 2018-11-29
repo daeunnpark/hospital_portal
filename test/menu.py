@@ -375,7 +375,9 @@ class menu_UI(object):
 
         self.timeEdit_18 = QtWidgets.QTimeEdit(self.tab_2)
         self.timeEdit_18.setObjectName("timeEdit_18")
-        self.timeEdit_18.setTime(QtCore.QTime.currentTime().addMSecs(1000000))
+        # Appt for at least 30 min
+        self.timeEdit_18.setTime(QtCore.QTime.currentTime().addSecs(60*30))
+        #self.timeEdit_18.setTime(QtCore.QTime.currentTime().addMSecs(1000000))
         self.gridLayout_2.addWidget(self.timeEdit_18, 6, 3, 1, 1)
 
         if num == 1:
@@ -531,26 +533,25 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(
-                        seconds))
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
 
         numEnds = 0
@@ -559,25 +560,25 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes) + ":" + str(seconds))
+                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
 
     def retranslateUi(self, Menu, num):
@@ -677,7 +678,7 @@ class menu_UI(object):
             self.show_msg( 1, "Maximum Scheduled Appointments is 4!\nCannot Exceed this Amount!")
         
         elif(QtCore.QDate.currentDate() > Date):
-            self.show_msg( 1, "Cannot Schedule Appointment For Earlier Date")
+            self.show_msg( 1, "Cannot Schedule Appointment For Earlier Date.")
 
         else:
             #cur.rowcount = -1

@@ -87,7 +87,7 @@ class access_code_UI(object):
         if self.rowcount == 0:
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
-            error_dialog.setText("Access Code is Invalid!")
+            error_dialog.setText("\nAccess Code is Invalid!")
             error_dialog.exec()
 
 

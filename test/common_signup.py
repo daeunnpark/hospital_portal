@@ -203,6 +203,7 @@ class common_signup_UI(object):
 
         if(self.lineEdit_6.text() != self.lineEdit_7.text()):
             self.show_msg( 1, "Passwords Do Not Match!")
+            self.lineEdit_7.setText("")
 
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
@@ -257,6 +258,8 @@ class common_signup_UI(object):
 
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
             self.show_msg( 1, "Passwords Do Not Match!")
+            self.lineEdit_7.setText("")
+
 
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
@@ -311,6 +314,7 @@ class common_signup_UI(object):
 
         if (self.lineEdit_6.text() != self.lineEdit_7.text()):
             self.show_msg( 1, "Passwords Do Not Match!")
+            self.lineEdit_7.setText("")
 
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
@@ -320,7 +324,7 @@ class common_signup_UI(object):
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
                 if (cur.rowcount != 0):
                     """Not check Password
-                    self.show_msg( 1, "Password Already Exists! Choose Another Password.")"""
+                    self.show_msg( 1, "Password Already Exists! \nChoose Another Password.")"""
                 else:
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
@@ -385,7 +389,7 @@ class common_signup_UI(object):
         if num==1:
             msg.setIcon(QtWidgets.QMessageBox().Warning)
             msg.setText("\n"+str)
-        # No Icon
+        # Information
         if num==2:
             msg.setIcon(QtWidgets.QMessageBox().Information)
             msg.setText("\n"+str)

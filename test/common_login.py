@@ -443,7 +443,7 @@ class common_login_UI(object):
 
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
-            error_dialog.setText("Username and Password Combination Does Not Exist in System! \nTry Again!")
+            error_dialog.setText("\nUsername and Password Combination Does Not Exist in System! \nTry Again!")
             error_dialog.exec()
 
 

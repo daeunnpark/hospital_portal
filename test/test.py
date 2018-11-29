@@ -152,7 +152,7 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
-
+    
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
