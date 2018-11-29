@@ -493,7 +493,7 @@ class menu_UI(object):
         self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn))
         self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn))
         self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn))
-        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4))
+        self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4, self.lineEdit_13))
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
 
         earliestDate = None
@@ -672,7 +672,7 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
-    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4):
+    def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4, lineEdit13):
 
         if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
             self.show_msg( 1, "Maximum Scheduled Appointments is 4!\nCannot Exceed this Amount!")
@@ -696,6 +696,12 @@ class menu_UI(object):
             cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', 
             (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
             
+            conn.commit()
+            cur.execute('SELECT BillingAmount FROM Patient WHERE PatientID = (%s)', (self.ID))
+            bill = cur.fetchall()
+            cost = bill[0][0] + 200
+            cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
+            self.lineEdit_13.setText(str(cost))
             conn.commit()
           
             if (lineEdit1.isVisible() == False):

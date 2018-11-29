@@ -284,6 +284,7 @@ class common_login_UI(object):
                     self.ID,
                 )
                 self.appointmentIDs = cur.fetchall()
+
                 cur.execute(
                     "SELECT DoctorID FROM Patient P WHERE PatientID = (%s)", self.ID
                 )

@@ -152,7 +152,7 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
-    """
+
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
@@ -160,10 +160,10 @@ if __name__ == "__main__":
         passwd="hospitalCSE305!",
         db="hospital",
     )
-    """
-    conn = pymysql.connect(
+
+    """conn = pymysql.connect(
         host="localhost", port=3306, user="root", passwd="", db="test2"
-    )
+    )"""
 
     # Initialize the database cursor
     cur = conn.cursor()
