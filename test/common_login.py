@@ -231,9 +231,6 @@ class common_login_UI(object):
             )
             self.ID = str(cur.fetchone()[0])
 
-            print("FROM LOGIN1")
-            print(self.ID)
-
             if num == 1:
                 cur.execute("SELECT Age FROM Patient P WHERE PatientID = (%s)", self.ID)
                 self.age = str(cur.fetchone()[0])

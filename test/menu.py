@@ -67,10 +67,14 @@ class menu_UI(object):
         self.age = age
         self.weight = weight
         self.height = height
+        self.doctorID = doctorID
+        self.nurseID = nurseID
+        self.departmentAdminID = departmentAdminID
         self.phoneNumber = phoneNumber[0:3]+'-'+phoneNumber[3:6]+ "-"+phoneNumber[6:10]
         self.ssn = ssn # no formatting for Employee's DptID (ssn is a placeholder for DptID)
         if(num==1):
             self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
+
         
 
         Menu.setObjectName("Menu")
@@ -680,7 +684,7 @@ class menu_UI(object):
             error_dialog.exec()
         else:
             #cur.rowcount = -1
-            
+
             cur.execute('SELECT AppointmentID FROM Appointment')
             #Generate next appointment ID to be next largest value
             apptID = cur.fetchall()
@@ -691,16 +695,11 @@ class menu_UI(object):
                         largestApptID = x[0] + 1
 
 
-            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+            (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
+            
             conn.commit()
-            """
-            while (cur.rowcount != 0):
-                cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
-                apptID = apptID + 1
-                cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
-                (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
-                #(apptID, doctorID[0][0], nurseID[0][0], ID, departmentAdminID[0][0], "Healthcare United", '1998-06-06', '12:11:11', '11:12:11'))
-            """           
+          
             if (lineEdit1.isVisible() == False):
                 lineEdit1.setVisible(True)
                 cancel1.setVisible(True)
@@ -724,9 +723,8 @@ class menu_UI(object):
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
         
         date = Date.toString("MM'/'dd'/'yyyy")
-        sTime = StartTime.toString("                hh:mm:ss")
-        eTime = EndTime.toString("                h:m:s ap")
-        # hh:mm:ss
+        sTime = StartTime.toString("                hh:mm")
+        eTime = EndTime.toString("                hh:mm")
         lineEdit.setText(date+ sTime + eTime)
         
         # https://doc-snapshots.qt.io/qt5-5.11/qtime.html
@@ -756,6 +754,7 @@ class menu_UI(object):
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
         if (num == 3):
             self.lineEdit19_2.setText("")
             self.lineEdit19_2.setVisible(False)
@@ -769,6 +768,7 @@ class menu_UI(object):
             #print(appointNum)
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
         if (num == 5):
             self.lineEdit19_3.setText("")
             self.lineEdit19_3.setVisible(False)
@@ -781,6 +781,7 @@ class menu_UI(object):
                 numAppointment = numAppointment + 1
             cur.execute('DELETE FROM Appointment WHERE AppointmentID = (%s)', appointNum)
             conn.commit()
+
         if (num == 7):
             self.lineEdit19_4.setText("")
             self.lineEdit19_4.setVisible(False)
