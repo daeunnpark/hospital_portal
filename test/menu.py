@@ -361,6 +361,7 @@ class menu_UI(object):
 
         self.dateEdit_16 = QtWidgets.QDateEdit(self.tab_2)
         self.dateEdit_16.setObjectName("dateEdit_16")
+        self.dateEdit_16.setDate(QtCore.QDate.currentDate())
         self.gridLayout_2.addWidget(self.dateEdit_16, 2, 3, 1, 1)
 
         self.timeEdit_17 = QtWidgets.QTimeEdit(self.tab_2)
@@ -670,6 +671,10 @@ class menu_UI(object):
         if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
             error_dialog = QtWidgets.QMessageBox()
             error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
+            error_dialog.exec()
+        elif(QtCore.QDate.currentDate() > Date):
+            error_dialog = QtWidgets.QMessageBox()
+            error_dialog.setText("Error: Cannot Schedule Appointment For Earlier Date")
             error_dialog.exec()
         else:
             cur.rowcount = -1
