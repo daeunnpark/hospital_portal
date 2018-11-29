@@ -53,7 +53,6 @@ class menu_UI(object):
 
         earliestDateArray = earliestDateArray.split("-")
 
-
         myYear = int(earliestDateArray[0])
 
         myDay = int(earliestDateArray[2])
@@ -62,11 +61,11 @@ class menu_UI(object):
 
         myEarliestDate.setDate(myYear, myMonth, myDay)
 
-
         self.ID = ID
         self.age = age
         self.weight = weight
         self.height = height
+
         self.doctorID = doctorID
         self.nurseID = nurseID
         self.departmentAdminID = departmentAdminID
@@ -75,7 +74,6 @@ class menu_UI(object):
         if(num==1):
             self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
 
-        
 
         Menu.setObjectName("Menu")
         self.centralWidget = QtWidgets.QWidget(Menu)
@@ -135,7 +133,7 @@ class menu_UI(object):
         self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
-        self.lineEdit_3.setText(self.phoneNumber)  
+        self.lineEdit_3.setText(self.phoneNumber)
         self.lineEdit_3.setEnabled(False)
 
         self.label_4 = QtWidgets.QLabel(self.tab_1)
@@ -462,15 +460,14 @@ class menu_UI(object):
         self.calendarWidget = QtWidgets.QCalendarWidget(self.tab_4)
         self.calendarWidget.setObjectName("calendarWidget")
         self.calendarWidget.setVerticalHeaderFormat(0)
+
         self.gridLayout_5.addWidget(self.calendarWidget, 0, 0, 1, 1)
 
-        self.treeWidget = QtWidgets.QTreeWidget(self.tab_4)
-        self.treeWidget.setObjectName("treeWidget")
+        self.textAreaWidget = QtWidgets.QTextEdit(self.tab_4)
 
-        item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget)
-        item_1 = QtWidgets.QTreeWidgetItem(item_0)
+        self.textAreaWidget.setReadOnly(True)
 
-        self.gridLayout_5.addWidget(self.treeWidget, 0, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.textAreaWidget, 0, 1, 1, 1)
 
         if num != 1:
             self.tabWidget.addTab(self.tab_4, "")
@@ -490,6 +487,8 @@ class menu_UI(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
 
+
+        self.calendarWidget.clicked.connect(lambda: self.showAppointmentsInTextEdit(num, ID, cur, conn))
         self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn, self.lineEdit_13))
@@ -581,6 +580,70 @@ class menu_UI(object):
                     self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
 
+
+    def showAppointmentsInTextEdit(self, num, ID, cur, conn):
+        selected_date = QtCore.QDate(self.calendarWidget.selectedDate())
+
+        day = selected_date.day()
+        year = selected_date.year()
+        month = selected_date.month()
+
+        if day < 10:
+            dayString = "0" + str(day)
+        else:
+            dayString = str(day)
+
+        if month < 10:
+            monthString = "0" + str(month)
+        else:
+            monthString = str(month)
+
+        yearString = str(year)
+
+        dateString = yearString + "-" + monthString + "-" + dayString
+
+        #Doctor
+        if num == 2:
+            cur.execute(
+                "SELECT * FROM Appointment A WHERE Date = (%s) AND DoctorID = (%s)", (dateString, ID)
+            )
+
+        # Nurse
+        elif num == 3:
+            cur.execute(
+                "SELECT * FROM Appointment A WHERE Date = (%s) AND NurseID = (%s)", (dateString, ID)
+            )
+
+        # Admin
+        else:
+            cur.execute(
+                "SELECT * FROM Appointment A WHERE Date = (%s)", dateString
+            )
+
+        data = cur.fetchall()
+        print(data)
+        if len(data) == 0:
+            self.textAreaWidget.setText("There are no appointments scheduled for the selected date")
+        else:
+            finalString = "Note: Appointments are listed in the form: {Appointment ID|Doctor ID|Nurse ID|Patient ID|Department Administrator ID|Location|Date|Start Time|End Time}\n\n\n"
+            for apptTuple in data:
+                appointmentIDStr = str(apptTuple[0])
+                doctorIDStr = str(apptTuple[1])
+                nurseIDStr = str(apptTuple[2])
+                patientIDStr = str(apptTuple[3])
+                departmentAdminIDStr = str(apptTuple[4])
+                locationStr = str(apptTuple[5])
+                dateStr = str(apptTuple[6])
+                startTimeStr = str(apptTuple[7])
+                endTimeStr = str(apptTuple[8])
+
+                finalString = finalString + appointmentIDStr + "\t" + doctorIDStr + "\t" + nurseIDStr + "\t" \
+                              + patientIDStr + "\t" + departmentAdminIDStr + "\t" + locationStr + "\t" + dateStr \
+                              + "\t" + startTimeStr + "\t" + endTimeStr + "\n\n\n\n\n"
+            self.textAreaWidget.setText(finalString)
+
+
+
     def retranslateUi(self, Menu, num):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
@@ -635,17 +698,21 @@ class menu_UI(object):
         self.label_13.setText(_translate("Menu", "Billing Amount:"))
         self.pushButton_14.setText(_translate("Menu", "Pay"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Billing Info"))
-        self.treeWidget.headerItem().setText(0, _translate("Menu", "Date"))
-        self.treeWidget.headerItem().setText(1, _translate("Menu", "Doctor"))
-        self.treeWidget.headerItem().setText(2, _translate("Menu", "Patient"))
-        self.treeWidget.headerItem().setText(3, _translate("Menu", "Nurse"))
-        self.treeWidget.headerItem().setText(4, _translate("Menu", "Medication List"))
-        self.treeWidget.headerItem().setText(5, _translate("Menu", "Insurance"))
-        __sortingEnabled = self.treeWidget.isSortingEnabled()
-        self.treeWidget.setSortingEnabled(False)
-        self.treeWidget.topLevelItem(0).setText(0, _translate("Menu", "New Item"))
-        self.treeWidget.topLevelItem(0).child(0).setText(0, _translate("Menu", "New Subitem"))
-        self.treeWidget.setSortingEnabled(__sortingEnabled)
+
+        # Ignore this
+        """
+        self.tableWidget.headerItem().setText(1, _translate("Menu", "Doctor"))
+        self.tableWidget.headerItem().setText(2, _translate("Menu", "Patient"))
+        self.tableWidget.headerItem().setText(3, _translate("Menu", "Nurse"))
+        self.tableWidget.headerItem().setText(4, _translate("Menu", "Medication List"))
+        self.tableWidget.headerItem().setText(5, _translate("Menu", "Insurance"))
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        self.tableWidget.topLevelItem(0).setText(0, _translate("Menu", "New Item"))
+        self.tableWidget.topLevelItem(0).child(0).setText(0, _translate("Menu", "New Subitem"))
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
+        """
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
 
     def Pay(self, ID, cur, conn):
@@ -672,6 +739,7 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (diff2, ID))
             conn.commit()
 
+
     def scheduleAppt(self, cur, conn, doctorID, nurseID, departmentAdminID, ID, Date, StartTime, EndTime, lineEdit1, lineEdit2, lineEdit3, lineEdit4, cancel1, cancel2, cancel3, cancel4, lineEdit13):
 
         if (lineEdit1.isVisible() == True and lineEdit2.isVisible() == True and lineEdit3.isVisible() == True and lineEdit4.isVisible() == True):
@@ -684,14 +752,13 @@ class menu_UI(object):
             #cur.rowcount = -1
 
             cur.execute('SELECT AppointmentID FROM Appointment')
-            #Generate next appointment ID to be next largest value
+            # Generate next appointment ID to be next largest value
             apptID = cur.fetchall()
             largestApptID = 0;
             if apptID != None:
                 for x in apptID:
-                    if(x[0] >= largestApptID):
+                    if (x[0] >= largestApptID):
                         largestApptID = x[0] + 1
-
 
             cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', 
             (largestApptID, doctorID, nurseID, self.ID, departmentAdminID, "SBU2", Date.toString("yyyy-MM-dd"), StartTime.toString("hh:mm:ss"), EndTime.toString("hh:mm:ss")))
@@ -725,8 +792,9 @@ class menu_UI(object):
                 self.setDateAndTimeForViewing(lineEdit4, Date, StartTime, EndTime)
 
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
-        
+
         date = Date.toString("MM'/'dd'/'yyyy")
+
         sTime = StartTime.toString("                hh:mm")
         eTime = EndTime.toString("                hh:mm")
         lineEdit.setText(date+ sTime + eTime)
@@ -854,19 +922,23 @@ class menu_UI(object):
         self.SaveBtn.clicked.connect(lambda: self.saveProfile(num, cur, conn))
 
     def saveProfile(self, num, cur, conn):
-        
+
         if (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
             self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
 
-            # Reset to previous data
+            # Reset to prvious data
             self.lineEdit_3.setText(self.phoneNumber)
 
-        else:  
+        else:
             # phone number reformatted using self.reformat(str)
-            cur.execute('UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)', (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.ID))
-            
-        if num==1:  # Patient
+            cur.execute(
+                'UPDATE Person SET FirstName = (%s), LastName = (%s), PhoneNumber = (%s), EmailAddress = (%s) WHERE ID = (%s)',
+                (self.lineEdit_1.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()),
+                 self.lineEdit_4.text(), self.ID))
+
+        if num == 1:  # Patient
             # Patient Error Checking - SSN
+
             if (self.IsDigitorSpeChar(self.lineEdit_6.text(), "-", 11) == False) or self.lineEdit_6.text()[3] != '-' or self.lineEdit_6.text()[6] != '-':
                 self.show_msg( 1, "SSN Incorrect! Must be 9 numbers long. \nFormat: xxx-xx-xxxx")
                 self.lineEdit_6.setText(self.ssn)
@@ -882,20 +954,25 @@ class menu_UI(object):
             elif (self.IsDigitorSpeChar(self.lineEdit_9.text(), "", -1) == False):
                 self.show_msg( 1, "Age Must Be A Number.")
                 self.lineEdit_9.setText(self.age)
-          
+
             # Update self with valid inputs
             self.ssn = self.lineEdit_6.text()
             self.weight = self.lineEdit_7.text()
             self.height = self.lineEdit_8.text()
             self.age = self.lineEdit_9.text()
 
-            cur.execute('UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (self.reformat(self.lineEdit_6.text()), self.lineEdit_7.text(), self.lineEdit_8.text(), self.lineEdit_9.text(), self.ID))
-            
-            if num==2: # Doctor
-                cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)', (self.lineEdit_8.text(), self.ID))
-            
-            if num==3: # Nurse
-                cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)', (self.lineEdit_8.text(), self.ID))
+            cur.execute(
+                'UPDATE Patient SET SSN = (%s), Weight = (%s), Height = (%s), Age = (%s) WHERE PatientID = (%s)', (
+                self.reformat(self.lineEdit_6.text()), self.lineEdit_7.text(), self.lineEdit_8.text(),
+                self.lineEdit_9.text(), self.ID))
+
+            if num == 2:  # Doctor
+                cur.execute('UPDATE Doctor SET MedicalLicense = (%s) WHERE DoctorID = (%s)',
+                            (self.lineEdit_8.text(), self.ID))
+
+            if num == 3:  # Nurse
+                cur.execute('UPDATE Nurse SET MedicalLicense = (%s) WHERE NurseID = (%s)',
+                            (self.lineEdit_8.text(), self.ID))
             # Admin can't change anything else then Person attributes
             conn.commit()
 
@@ -922,6 +999,7 @@ class menu_UI(object):
 
     # Check if digit or spechar of len = num
     def IsDigitorSpeChar(self, str, spechar, num):
+
         # Empty str
         if(str==""):
             return False
@@ -931,10 +1009,11 @@ class menu_UI(object):
                 return False
 
         for char in str:
-            if (char.isdigit() == False) and char not in spechar :
-                return False 
-         
+            if (char.isdigit() == False) and char not in spechar:
+                return False
+
         return True
+
 
     def show_msg(self, num, str):
         # Warning
@@ -948,7 +1027,6 @@ class menu_UI(object):
 
 
 if __name__ == "__main__":
-
     app = QtWidgets.QApplication(sys.argv)
     Menu = QtWidgets.QMainWindow()
     ui = menu_UI()
