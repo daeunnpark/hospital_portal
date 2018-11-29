@@ -157,4 +157,8 @@ if __name__ == "__main__":
     # Create an instance of test
     m = test()
 
-    sys.exit(app.exec_())
+    ret = app.exec_()
+    cur.close()
+    del cur
+    conn.close()
+    sys.exit(ret)

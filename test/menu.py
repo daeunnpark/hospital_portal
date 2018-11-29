@@ -672,12 +672,18 @@ class menu_UI(object):
             error_dialog.setText("Error: Maximum Scheduled Appointments is 4! Cannot Exceed this Amount!")
             error_dialog.exec()
         else:
-            apptID = 1
             cur.rowcount = -1
 
-            cur.execute('SELECT * FROM Appointment WHERE AppointmentID = (%s)', apptID)
-            apptID = apptID + 1
-            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (308, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
+            cur.execute('SELECT AppointmentID FROM Appointment')
+            #Generate next appointment ID to be next largest value
+            apptID = cur.fetchall()
+            largestApptID = 0;
+            if apptID != None:
+                for x in apptID:
+                    if(x[0] >= largestApptID):
+                        largestApptID = x[0] + 1
+
+            cur.execute('INSERT INTO Appointment(AppointmentID, DoctorID, NurseID, PatientID, DepartmentAdminID, Location, Date, StartTime, EndTime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', (largestApptID, 222, 333, 111, 444, "SBU2", '1998-06-06', '12:11:11', '11:12:11'))
             conn.commit()
             """
             while (cur.rowcount != 0):
