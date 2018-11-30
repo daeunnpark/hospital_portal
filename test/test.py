@@ -43,7 +43,6 @@ class test(object):
         w.setupUi(MainWindow, num)
 
         w.loginBtn.clicked.connect(lambda: self.authenticate_user(w, num))
-        print("working once")
         MainWindow.showMaximized()
 
     def setwindowTo_access_code(self, num):
@@ -64,7 +63,6 @@ class test(object):
 
     def authenticate_access_code(self, w, num):
         w.authenticate_access_code(cur)
-
         # if access code exists
         if w.rowcount != 0:
             print(w.authenticateCode[0][0])
@@ -108,13 +106,13 @@ class test(object):
 
     def setLoginNewUser(self, w, num):
         if w.newP == True:
-            # conn.commit()
+            conn.commit()
             self.setwindowTo_common_login(1)
         if w.newD == True:
-            # conn.commit()
+            conn.commit()
             self.setwindowTo_common_login(2)
         if w.newN == True:
-            # conn.commit()
+            conn.commit()
             self.setwindowTo_common_login(3)
 
     def setwindowTo_menu(self, w, num):
@@ -152,18 +150,18 @@ class test(object):
 
 if __name__ == "__main__":
     # Initialize database connection
-    
+    """
     conn = pymysql.connect(
         host="10.245.235.98",
         port=3306,
         user="root",
         passwd="hospitalCSE305!",
         db="hospital",
-    )
-
-    """conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="", db="test2"
     )"""
+
+    conn = pymysql.connect(
+        host="localhost", port=3306, user="root", passwd="", db="test2"
+    )
 
     # Initialize the database cursor
     cur = conn.cursor()

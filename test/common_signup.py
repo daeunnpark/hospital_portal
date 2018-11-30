@@ -171,10 +171,27 @@ class common_signup_UI(object):
         self.pushButton.setText(_translate("MainWindow", "Sign Up!"))
 
         
-        # Employee
-        if(num != 1):            
+        # Employee - Doctor/Nurse
+        if(num != 1):    
 
+
+            self.lineEdit_8.deleteLater()
+            self.cb = QtWidgets.QComboBox()
+            self.cb.setObjectName("comboBox")        
             self.label_8.setText(_translate("MainWindow", "Specialty:"))
+
+            self.cb.addItem("Cardiology")
+            self.cb.addItem("Dermatology")
+            self.cb.addItem("Gastroenterology")
+            self.cb.addItem("Gynaecology")
+            self.cb.addItem("Oncology")
+            self.cb.addItem("Pediatrics")
+            self.cb.addItem("Psychiatry")
+
+            self.gridLayout.addWidget(self.cb, 4, 1, 1, 1)
+            
+
+
             self.label_9.setText(_translate("MainWindow", "Medical License:"))
 
             self.label_10.setVisible(False)
@@ -209,6 +226,7 @@ class common_signup_UI(object):
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if(self.lineEdit_5.text())!= "" and (cur.rowcount != 0):
                self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
+               lineEdit_5.setText("")
 
             else:
                 
@@ -266,6 +284,7 @@ class common_signup_UI(object):
             
             if(self.lineEdit_5.text())!= "" and (cur.rowcount != 0):
                 self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
+                lineEdit_5.text().setText("")
             
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
@@ -276,30 +295,20 @@ class common_signup_UI(object):
                 else:
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
+                        self.lineEdit_3.setText("")
+
                     else:
 
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
 
-                        role = self.lineEdit_8.text()
-                        deptID = 8
-                        if(role == "Pediatrics" or role == "pediatrics"):
-                            deptID = 1
-                        elif(role == "Dermatology" or role == "dermatology"):
-                            deptID = 2
-                        elif(role == "Oncology" or role == "oncology"):
-                            deptID = 3
-                        elif(role == "Gynaecology" or role == "gynaecology"):
-                            deptID = 4
-                        elif(role == "Gastroenterology" or role == "gastroenterology"):
-                            deptID = 5
-                        elif(role == "Cardiology" or role == "cardiology"):
-                            deptID = 6
-                        elif(role == "Psychiatry" or role == "psychiatry"):
-                            deptID = 7
+                        # first elemt at index 0
+                        Specialty = self.cb.currentText()
+                        deptID = self.cb.currentIndex()+1
+
                         cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, deptID))
                         conn.commit()
-                        cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
+                        cur.execute('INSERT INTO Doctor(DoctorID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, Specialty, self.lineEdit_9.text()))
                         conn.commit()
 
                         self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
@@ -318,13 +327,18 @@ class common_signup_UI(object):
 
         else:
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
-            if (cur.rowcount != 0):
+            
+            if self.lineEdit_5.text() != "" and (cur.rowcount != 0):
                 self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
+                lineEdit_5.setText("")
+            
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))
+                
                 if (cur.rowcount != 0):
                     """Not check Password
                     self.show_msg( 1, "Password Already Exists! \nChoose Another Password.")"""
+                
                 else:
                     if  (self.IsDigitorSpeChar(self.lineEdit_3.text(), "-", 12) == False) or self.lineEdit_3.text()[3] != '-' or self.lineEdit_3.text()[7] != '-' :
                         self.show_msg( 1, "Phone Number Incorrect! \nFormat: xxx-xxx-xxxx")
@@ -332,29 +346,20 @@ class common_signup_UI(object):
                     else:
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
-                        role = self.lineEdit_8.text()
-                        deptID = 8
-                        if (role == "Pediatrics" or role == "pediatrics"):
-                            deptID = 1
-                        elif (role == "Dermatology" or role == "dermatology"):
-                            deptID = 2
-                        elif (role == "Oncology" or role == "oncology"):
-                            deptID = 3
-                        elif (role == "Gynaecology" or role == "gynaecology"):
-                            deptID = 4
-                        elif (role == "Gastroenterology" or role == "gastroenterology"):
-                            deptID = 5
-                        elif (role == "Cardiology" or role == "cardiology"):
-                            deptID = 6
-                        elif (role == "Psychiatry" or role == "psychiatry"):
-                            deptID = 7
+                        
+                        # first elemt at index 0
+                        Specialty = self.cb.currentText()
+                        deptID = self.cb.currentIndex()+1
+
+                        
                         cur.execute('INSERT INTO Employee(EmployeeID, DepartmentID) VALUES (%s, %s)', (accessCodeReceived, deptID))
                         conn.commit()
-                        cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text()))
+                        cur.execute('INSERT INTO Nurse(NurseID, Specialty, MedicalLicense) VALUES (%s, %s, %s)', (accessCodeReceived, Specialty, self.lineEdit_9.text()))
                         conn.commit()
-
+                        
                         self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
                         self.newN = True
+
 
         
 
