@@ -53,11 +53,16 @@ class menu_UI(object):
 
         earliestDateArray = earliestDateArray.split("-")
 
-        myYear = int(earliestDateArray[0])
+        if(earliestDateArray[0] == "None"):
+            myYear = 0
+            myMonth = 0
+            myDay = 0
+        else:
+            myYear = int(earliestDateArray[0])
 
-        myDay = int(earliestDateArray[2])
+            myDay = int(earliestDateArray[2])
 
-        myMonth = int(earliestDateArray[1])
+            myMonth = int(earliestDateArray[1])
 
         myEarliestDate.setDate(myYear, myMonth, myDay)
 
