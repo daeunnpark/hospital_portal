@@ -243,6 +243,32 @@ class menu_UI(object):
         self.SaveBtn.setEnabled(False)
         self.gridLayout.addWidget(self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
 
+        self.accessEdit = QtWidgets.QLineEdit(self.tab_1)
+        self.accessEdit.setObjectName("accessEdit")
+        self.gridLayout.addWidget(self.accessEdit, 12, 1, 1, 1)
+        self.accessEdit.setVisible(False)
+        self.accessLabel = QtWidgets.QLabel(self.tab_1)
+        self.accessLabel.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                       "font-weight: bold;\n"
+                                       "font: 12pt \"Lucida Calligraphy\";")
+        self.accessLabel.setObjectName("accessLabel")
+        self.gridLayout.addWidget(self.accessLabel, 12, 0, 1, 1)
+        self.accessButton = QtWidgets.QPushButton(self.tab_1)
+        self.accessButton.setStyleSheet("color: rgb(46, 125, 132);\n"
+                                        "font-weight: bold;\n"
+                                        "font: 12pt \"Lucida Calligraphy\";")
+        self.accessButton.setObjectName("accessButton")
+        self.gridLayout.addWidget(self.accessButton, 12, 3, 1, 1)
+        self.accessButton.setFixedWidth(400)
+        self.accessButton.setVisible(False)
+        self.accessLabel.setVisible(False)
+
+
+        if (num == 4):
+            self.accessButton.setVisible(True)
+            self.accessEdit.setVisible(True)
+            self.accessLabel.setVisible(True)
+
         # Appointmt
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
@@ -504,6 +530,7 @@ class menu_UI(object):
         self.pushButton19_4.clicked.connect(lambda: self.cancelAppt(7, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton_15.clicked.connect(lambda: self.scheduleAppt(cur, conn, self.doctorID, self.nurseID, departmentAdminID, ID, self.dateEdit_16.date(), self.timeEdit_17.time(), self.timeEdit_18.time(), self.lineEdit19_1, self.lineEdit19_2, self.lineEdit19_3, self.lineEdit19_4, self.pushButton19_1, self.pushButton19_2, self.pushButton19_3, self.pushButton19_4, self.lineEdit_13))
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
+        self.accessButton.clicked.connect(lambda: self.addAccessCode(cur, conn, self.accessEdit))
 
         earliestDate = None
 
@@ -589,6 +616,12 @@ class menu_UI(object):
                     self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
 
+    def addAccessCode(self, cur, conn, accessEdit):
+        if (accessEdit.text().isdigit() == False):
+            self.show_msg(1, "Access Code Invalid!")
+        else:
+            cur.execute('INSERT INTO AccessCodes(AccessCodes) VALUES (%s)', accessEdit.text())
+            conn.commit()
 
     def showAppointmentsInTextEdit(self, num, ID, cur, conn):
         selected_date = QtCore.QDate(self.calendarWidget.selectedDate())
@@ -713,6 +746,9 @@ class menu_UI(object):
         self.label_11.setText(_translate("Menu", "Insurance Number:"))
         self.label_13.setText(_translate("Menu", "Billing Amount:"))
         self.pushButton_14.setText(_translate("Menu", "Pay"))
+        self.accessButton.setText(_translate("Menu", "Submit!"))
+        self.accessLabel.setText(_translate("Menu", "Enter Access Code:"))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Billing Info"))
 
         # Ignore this
