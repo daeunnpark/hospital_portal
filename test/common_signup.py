@@ -258,10 +258,29 @@ class common_signup_UI(object):
                         self.lineEdit_11.setText("") 
 
                     else:
-                        
+                        cur.execute('SELECT DoctorID FROM Doctor')
+                        doctor = cur.fetchall()
+                        cur.execute('SELECT NurseID FROM Nurse')
+                        nurse = cur.fetchall()
+                        cur.execute('SELECT DepartmentAdminID FROM DepartmentAdmin')
+                        admin = cur.fetchall()
+
+                        if(doctor[0] == None):
+                            doctorid = -1
+                        else:
+                            doctorid = doctor[0][0]
+                        if(nurse[0] == None):
+                            nurseid = -1
+                        else:
+                            nurseid = nurse[0][0]
+                        if(admin[0] == None):
+                            adminid = -1
+                        else:
+                            adminid = admin[0][0]
+
                         cur.execute('INSERT INTO Person(ID, FirstName, LastName, PhoneNumber, EmailAddress, Username, UserPassword) VALUES (%s, %s, %s, %s, %s, %s, %s)', (accessCodeReceived, self.lineEdit.text(), self.lineEdit_2.text(), self.reformat(self.lineEdit_3.text()), self.lineEdit_4.text(), self.lineEdit_5.text(), self.lineEdit_6.text()))
                         conn.commit()
-                        cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList) VALUES (%s, %s, %s, %s, %s, %s, 0.0, %s, "none")', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.reformat(self.lineEdit_11.text()), self.lineEdit_12.text(), self.lineEdit_13.text()))
+                        cur.execute('INSERT INTO Patient(PatientID, Age, Weight, Height, SSN, CreditCardNumber, BillingAmount, InsuranceNumber, MedicationList, DoctorID, NurseID, AdminID) VALUES (%s, %s, %s, %s, %s, %s, 0.0, %s, "none", %s, %s, %s)', (accessCodeReceived, self.lineEdit_8.text(), self.lineEdit_9.text(), self.lineEdit_10.text(), self.reformat(self.lineEdit_11.text()), self.lineEdit_12.text(), self.lineEdit_13.text(), doctorid, nurseid, adminid))
                         conn.commit()
 
                         self.show_msg( 2, "Success! \nYou've joined United HealthCare.")
