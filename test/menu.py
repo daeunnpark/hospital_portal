@@ -342,6 +342,9 @@ class menu_UI(object):
         self.calendarWidget_1 = MyCalendar(self.groupBox)
         self.calendarWidget_1.setObjectName("calendarWidget_1")
         self.calendarWidget_1.setVerticalHeaderFormat(0)
+        self.calendarWidget_1.setMinimumDate(QtCore.QDate.currentDate())
+        self.calendarWidget_1.selectionChanged.connect(self.updateDateSelected)
+
 
         self.gridLayout_3.addWidget(self.calendarWidget_1, 0, 0, 1, 1)
         self.gridLayout_4.addLayout(self.gridLayout_3, 2, 0, 1, 1)
@@ -827,6 +830,7 @@ class menu_UI(object):
         """
 
     def cancelAppt(self, num, appointmentIDs, cur, conn, lineEdit13):
+        
         if (num == 1):
             self.lineEdit19_1.setText("")
             self.lineEdit19_1.setVisible(False)
@@ -1002,6 +1006,10 @@ class menu_UI(object):
 
         self.SaveBtn.setEnabled(False)
         self.EditBtn.setEnabled(True)
+
+    def updateDateSelected(self):
+        self.dateEdit_16.setDate(self.calendarWidget_1.selectedDate())
+
 
     # Remove dashes 
     def reformat(self, str):
