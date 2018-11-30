@@ -460,6 +460,7 @@ class menu_UI(object):
         self.calendarWidget = QtWidgets.QCalendarWidget(self.tab_4)
         self.calendarWidget.setObjectName("calendarWidget")
         self.calendarWidget.setVerticalHeaderFormat(0)
+        self.calendarWidget.setMaximumSize(QtCore.QSize(600, 800))
 
         self.gridLayout_5.addWidget(self.calendarWidget, 0, 0, 1, 1)
 
@@ -623,9 +624,11 @@ class menu_UI(object):
         data = cur.fetchall()
         print(data)
         if len(data) == 0:
-            self.textAreaWidget.setText("There are no appointments scheduled for the selected date")
+            self.textAreaWidget.setText("There are no appointments scheduled for the selected date.")
         else:
-            finalString = "Note: Appointments are listed in the form: {Appointment ID|Doctor ID|Nurse ID|Patient ID|Department Administrator ID|Location|Date|Start Time|End Time}\n\n\n"
+
+            finalString = "Appointment ID | Doctor ID | Nurse ID | Patient ID | DeptAdmin ID | Location |Date                  | Start Time | End Time \n\n\n"
+            
             for apptTuple in data:
                 appointmentIDStr = str(apptTuple[0])
                 doctorIDStr = str(apptTuple[1])
@@ -637,11 +640,16 @@ class menu_UI(object):
                 startTimeStr = str(apptTuple[7])
                 endTimeStr = str(apptTuple[8])
 
-                finalString = finalString + appointmentIDStr + "\t" + doctorIDStr + "\t" + nurseIDStr + "\t" \
+                """finalString = finalString + appointmentIDStr + "\t" + doctorIDStr + "\t" + nurseIDStr + "\t" \
                               + patientIDStr + "\t" + departmentAdminIDStr + "\t" + locationStr + "\t" + dateStr \
-                              + "\t" + startTimeStr + "\t" + endTimeStr + "\n\n\n\n\n"
-            self.textAreaWidget.setText(finalString)
+                              + "\t" + startTimeStr + "\t" + endTimeStr + "\n\n\n\n\n"""
 
+                finalString = finalString + "{:<28}{:<16}{:<14}{:<15}{:<22}{:<11}{:<16}{:<12}{:<8}".format(\
+                appointmentIDStr, doctorIDStr, nurseIDStr, patientIDStr, departmentAdminIDStr, locationStr,\
+                dateStr, startTimeStr, endTimeStr) + "\n\n"   
+            
+            self.textAreaWidget.setText(finalString)
+            
 
 
     def retranslateUi(self, Menu, num):
