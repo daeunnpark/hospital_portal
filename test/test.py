@@ -173,6 +173,7 @@ if __name__ == "__main__":
     m = test()
 
     ret = app.exec_()
+    conn.commit()
     cur.close()
     del cur
     conn.close()

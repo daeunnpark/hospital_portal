@@ -81,7 +81,8 @@ class access_code_UI(object):
         access = cur.fetchall()
         self.authenticateCode = access
         self.rowcount = cur.rowcount
-        print(self.rowcount)
+        if(self.rowcount != 0):
+            cur.execute('DELETE FROM AccessCodes WHERE AccessCodes = (%s)', access[0][0])
 
         # Add dialog maybe?
         if self.rowcount == 0:
