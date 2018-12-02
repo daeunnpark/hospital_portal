@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class welcome_page_UI(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 607)
 
         # Welcome label
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -68,9 +67,12 @@ class welcome_page_UI(object):
         self.departmentAdminBtn = QtWidgets.QPushButton(self.groupBox)
         self.departmentAdminBtn.setObjectName("departmentAdminBtn")
         self.gridLayout.addWidget(self.departmentAdminBtn, 3, 0, 1, 1)
-        self.gridLayout_2.addWidget(self.groupBox, 1, 0, 5, 0, QtCore.Qt.AlignCenter)
-        self.gridLayout_2.addWidget(self.imageLabel1, 0, 0, QtCore.Qt.AlignLeft)
-        self.gridLayout_2.addWidget(self.imageLabel2, 0, 0, QtCore.Qt.AlignRight)
+        self.gridLayout_2.addWidget(
+            self.groupBox, 1, 0, 5, 0, QtCore.Qt.AlignCenter)
+        self.gridLayout_2.addWidget(
+            self.imageLabel1, 0, 0, QtCore.Qt.AlignLeft)
+        self.gridLayout_2.addWidget(
+            self.imageLabel2, 0, 0, QtCore.Qt.AlignRight)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
