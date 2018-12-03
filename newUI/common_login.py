@@ -88,6 +88,7 @@ class common_login_UI(object):
         self.lineEdit2.setFont(font)
         self.lineEdit2.setText("")
         self.lineEdit2.setObjectName("lineEdit2")
+        self.lineEdit2.setEchoMode(QtWidgets.QLineEdit.Password)  # Password
         self.gridLayout_2.addWidget(self.lineEdit2, 1, 1, 1, 1)
         self.label2 = QtWidgets.QLabel(self.widget)
         self.label2.setMaximumSize(QtCore.QSize(250, 16777215))

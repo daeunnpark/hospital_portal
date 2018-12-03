@@ -16,14 +16,28 @@ class welcome_page_UI(object):
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+
+
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setMaximumSize(QtCore.QSize(16777215, 250))
+        self.label.setMaximumSize(QtCore.QSize(16777215, 100000))
+
+
         font = QtGui.QFont()
         font.setFamily("Arial")
         self.label.setFont(font)
         self.label.setTextFormat(QtCore.Qt.AutoText)
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
+
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setObjectName("label_2")
+
+        # Logo
+        self.pixmap = QtGui.QPixmap("icon.PNG")
+        self.label_2.setPixmap(self.pixmap)
+
+        self.verticalLayout_2.addWidget(self.label_2, 0, QtCore.Qt.AlignHCenter)
+
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setMinimumSize(QtCore.QSize(250, 0))
         self.widget.setMaximumSize(QtCore.QSize(300, 300))
@@ -156,22 +170,14 @@ class welcome_page_UI(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        """
-        self.imageLabel1 = QtWidgets.QLabel(self.centralwidget)
-        self.imageLabel1.setGeometry(QtCore.QRect(400, -300, 1999, 1000))
-
-        self.imageLabel1.setObjectName("imageLabel1")
-
-        self.pixmap = QtGui.QPixmap("icon.PNG")
-        self.pixmap= self.pixmap.scaledToWidth(20)
-        self.imageLabel1.setPixmap(self.pixmap)
-        """
+        
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate(
             "MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:96pt;\">Healthcare United </span></p><p align=\"center\"><span style=\" font-size:96pt;\">Patient Portal</span></p></body></html>"))
+        #self.imageLabel1.setPixmap(self.pixmap)
         self.patientBtn.setText(_translate("MainWindow", "Patient"))
         self.doctorBtn.setText(_translate("MainWindow", "Doctor"))
         self.nurseBtn.setText(_translate("MainWindow", "Nurse"))

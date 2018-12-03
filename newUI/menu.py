@@ -15,6 +15,10 @@ class MyCalendar(QtWidgets.QCalendarWidget):
     def paintCell(self, painter, rect, date, **kwargs):
         QtWidgets.QCalendarWidget.paintCell(self, painter, rect, date)
         if date.day() == myEarliestDate.day() and date.year() == myEarliestDate.year() and date.month() == myEarliestDate.month():
+            font = QtGui.QFont()
+            font.setFamily("Arial")
+            font.setPointSize(10)
+            painter.setFont(font);
             painter.drawText(rect.bottomLeft(), "Appointment")
 
 
@@ -93,7 +97,9 @@ class menu_UI(object):
         font.setKerning(True)
         self.tabWidget.setFont(font)
         self.tabWidget.setStyleSheet("background-color: rgb(225,247,251);\n"
+                                     "font: 20pt \"Arial\";\n"
                                      "")
+                                    
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setIconSize(QtCore.QSize(20, 100))
         self.tabWidget.setTabBarAutoHide(False)
@@ -488,9 +494,11 @@ class menu_UI(object):
         self.textEdit.setMaximumSize(QtCore.QSize(16777215, 400))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(13)
+        font.setPointSize(5)
         self.textEdit.setFont(font)
-        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                        "font: 13pt \"Arial\";\n"
+                                        "")
         self.textEdit.setObjectName("textEdit")
         self.textEdit.setReadOnly(True)
         
