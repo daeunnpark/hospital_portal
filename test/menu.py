@@ -369,6 +369,7 @@ class menu_UI(object):
         self.calendarWidget_1.setObjectName("calendarWidget_1")
         self.calendarWidget_1.setVerticalHeaderFormat(0)
         self.calendarWidget_1.setMinimumDate(QtCore.QDate.currentDate())
+        #self.calendarWidget_1.setMaximumDate(QtCore.QDate.currentDate())
         self.calendarWidget_1.selectionChanged.connect(self.updateDateSelected)
 
 

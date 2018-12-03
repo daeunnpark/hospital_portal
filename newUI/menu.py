@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'menu.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
 from copy import copy
 
 import sys
@@ -30,6 +23,8 @@ class menu_UI(object):
     def setupUi(self, Menu, firstName, lastName, phoneNumber, emailAddress, ID, age, ssn, weight, height,
                 creditCardNumber, billingAmount, insuranceNumber, medicationList, appointmentDates, startTimes,
                 endTimes, appointmentIDs, doctorID, nurseID, departmentAdminID, num, cur, conn):
+
+        
 
         earliestDate = None
 
@@ -79,339 +74,350 @@ class menu_UI(object):
         if(num==1):
             self.ssn = ssn[0:3]+'-'+ssn[3:5]+ "-"+ssn[5:10]
 
-
         Menu.setObjectName("Menu")
+        Menu.setStyleSheet("background-color: rgb(243,255,255);\n"
+                           "")
         self.centralWidget = QtWidgets.QWidget(Menu)
         self.centralWidget.setObjectName("centralWidget")
-
         self.gridLayout_7 = QtWidgets.QGridLayout(self.centralWidget)
         self.gridLayout_7.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_7.setSpacing(6)
         self.gridLayout_7.setObjectName("gridLayout_7")
-
         self.tabWidget = QtWidgets.QTabWidget(self.centralWidget)
+        self.tabWidget.setMinimumSize(QtCore.QSize(775, 590))
+        self.tabWidget.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.tabWidget.setBaseSize(QtCore.QSize(0, 0))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(30)
+        font.setKerning(True)
+        self.tabWidget.setFont(font)
+        self.tabWidget.setStyleSheet("background-color: rgb(225,247,251);\n"
+                                     "")
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.tabWidget.setIconSize(QtCore.QSize(20, 100))
+        self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
-
-        # Profile
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
-
         self.gridLayout = QtWidgets.QGridLayout(self.tab_1)
         self.gridLayout.setContentsMargins(11, 11, 11, 11)
         self.gridLayout.setSpacing(6)
         self.gridLayout.setObjectName("gridLayout")
-
-        self.label_1 = QtWidgets.QLabel(self.tab_1)
-        self.label_1.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_1.setObjectName("label_1")
-        self.gridLayout.addWidget(self.label_1, 2, 0, 1, 1)
-
-        self.lineEdit_1 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_1.setObjectName("lineEdit_1")
-        self.lineEdit_1.setText(firstName)
-        self.lineEdit_1.setEnabled(False)
-        self.gridLayout.addWidget(self.lineEdit_1, 2, 1, 1, 1)
-        self.tabWidget.addTab(self.tab_1, "")
-
-        self.label_2 = QtWidgets.QLabel(self.tab_1)
-        self.label_2.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 2, 2, 1, 1)
-
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.gridLayout.addWidget(self.lineEdit_2, 2, 3, 1, 1)
-        self.lineEdit_2.setText(lastName)
-        self.lineEdit_2.setEnabled(False)
-
-        self.label_3 = QtWidgets.QLabel(self.tab_1)
-        self.label_3.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
-
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
-        self.lineEdit_3.setText(self.phoneNumber)
-        self.lineEdit_3.setEnabled(False)
-
-        self.label_4 = QtWidgets.QLabel(self.tab_1)
-        self.label_4.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 4, 2, 1, 1)
-
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_4.setObjectName("lineEdit_4")
-        self.gridLayout.addWidget(self.lineEdit_4, 4, 3, 1, 1)
-        self.lineEdit_4.setText(emailAddress)
-        self.lineEdit_4.setEnabled(False)
-
-        self.label_5 = QtWidgets.QLabel(self.tab_1)
-        self.label_5.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 6, 0, 1, 1)
-
+        self.EditBtn = QtWidgets.QPushButton(self.tab_1)
+        
+        self.EditBtn.setMinimumSize(QtCore.QSize(90, 50))
+        self.EditBtn.setMaximumSize(QtCore.QSize(100, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.EditBtn.setFont(font)
+        self.EditBtn.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                     "font: 20pt \"Arial\";\n"
+                                     "")
+        
+        self.EditBtn.setObjectName("EditBtn")
+        self.gridLayout.addWidget(
+            self.EditBtn, 1, 3, 1, 1, QtCore.Qt.AlignRight)
         self.lineEdit_5 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_5.setFont(font)
         self.lineEdit_5.setObjectName("lineEdit_5")
-        self.gridLayout.addWidget(self.lineEdit_5, 6, 1, 1, 1)
         self.lineEdit_5.setText(ID)
+        self.gridLayout.addWidget(self.lineEdit_5, 6, 1, 1, 1)
         self.lineEdit_5.setEnabled(False)
-
-        self.label_6 = QtWidgets.QLabel(self.tab_1)
-        self.label_6.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 6, 2, 1, 1)
-
-        self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_6.setObjectName("lineEdit_6")
-        self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
-        self.lineEdit_6.setText(self.ssn)
-        self.lineEdit_6.setEnabled(False)
-
-        self.label_7 = QtWidgets.QLabel(self.tab_1)
-        self.label_7.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 8, 0, 1, 1)
-
-        self.lineEdit_7 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_7.setObjectName("lineEdit_7")
-        self.gridLayout.addWidget(self.lineEdit_7, 8, 1, 1, 1)
-        self.lineEdit_7.setText(weight)
-        self.lineEdit_7.setEnabled(False)
-
-        self.label_8 = QtWidgets.QLabel(self.tab_1)
-        self.label_8.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
-        self.label_8.setObjectName("label_8")
-        self.gridLayout.addWidget(self.label_8, 8, 2, 1, 1)
-
-        self.lineEdit_8 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_8.setObjectName("lineEdit_8")
-        self.gridLayout.addWidget(self.lineEdit_8, 8, 3, 1, 1)
-        self.lineEdit_8.setText(height)
-        self.lineEdit_8.setEnabled(False)
-
         self.label_9 = QtWidgets.QLabel(self.tab_1)
-        self.label_9.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt \"Lucida Calligraphy\";")
+        self.label_9.setStyleSheet("font: 30pt \"Arial\";")
         self.label_9.setObjectName("label_9")
         self.gridLayout.addWidget(self.label_9, 10, 0, 1, 1)
-
-        self.lineEdit_9 = QtWidgets.QLineEdit(self.tab_1)
-        self.lineEdit_9.setObjectName("lineEdit_9")
-        self.gridLayout.addWidget(self.lineEdit_9, 10, 1, 1, 1)
-        self.lineEdit_9.setText(age)
-        self.lineEdit_9.setEnabled(False)
-
+        self.label_1 = QtWidgets.QLabel(self.tab_1)
+        self.label_1.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_1.setObjectName("label_1")
+        self.gridLayout.addWidget(self.label_1, 2, 0, 1, 1)
+        self.lineEdit_3 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_3.setFont(font)
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.lineEdit_3.setText(self.phoneNumber)
+        self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
+        self.lineEdit_3.setEnabled(False)
+        self.label_2 = QtWidgets.QLabel(self.tab_1)
+        self.label_2.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 2, 2, 1, 1)
         self.label_10 = QtWidgets.QLabel(self.tab_1)
-        self.label_10.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt \"Lucida Calligraphy\";")
+        self.label_10.setStyleSheet("font: 30pt \"Arial\";")
         self.label_10.setObjectName("label_10")
         self.gridLayout.addWidget(self.label_10, 10, 2, 1, 1)
-
+        self.label_4 = QtWidgets.QLabel(self.tab_1)
+        self.label_4.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_4.setObjectName("label_4")
+        self.gridLayout.addWidget(self.label_4, 4, 2, 1, 1)
         self.lineEdit_10 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_10.setFont(font)
         self.lineEdit_10.setObjectName("lineEdit_10")
         self.lineEdit_10.setText(medicationList)
         self.gridLayout.addWidget(self.lineEdit_10, 10, 3, 1, 1)
         self.lineEdit_10.setEnabled(False)
-
-        self.EditBtn = QtWidgets.QPushButton(self.tab_1)
-        self.EditBtn.setMaximumSize(QtCore.QSize(100, 16777215))
-        self.EditBtn.setObjectName("EditBtn")
-        self.gridLayout.addWidget(self.EditBtn, 1, 3, 1, 1, QtCore.Qt.AlignRight)
-
+        self.lineEdit_4 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_4.setFont(font)
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.gridLayout.addWidget(self.lineEdit_4, 4, 3, 1, 1)
+        self.lineEdit_4.setText(emailAddress)
+        self.lineEdit_4.setEnabled(False)
+        self.lineEdit_7 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_7.setFont(font)
+        self.lineEdit_7.setObjectName("lineEdit_7")
+        self.lineEdit_7.setText(weight)
+        self.gridLayout.addWidget(self.lineEdit_7, 8, 1, 1, 1)
+        self.lineEdit_7.setEnabled(False)
+        self.label_7 = QtWidgets.QLabel(self.tab_1)
+        self.label_7.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_7.setObjectName("label_7")
+        self.gridLayout.addWidget(self.label_7, 8, 0, 1, 1)
+        self.label_8 = QtWidgets.QLabel(self.tab_1)
+        self.label_8.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_8.setObjectName("label_8")
+        self.gridLayout.addWidget(self.label_8, 8, 2, 1, 1)
+        self.label_6 = QtWidgets.QLabel(self.tab_1)
+        self.label_6.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 6, 2, 1, 1)
+        self.lineEdit_8 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_8.setFont(font)
+        self.lineEdit_8.setObjectName("lineEdit_8")
+        self.lineEdit_8.setText(height)
+        self.gridLayout.addWidget(self.lineEdit_8, 8, 3, 1, 1)
+        self.lineEdit_8.setEnabled(False)
+        self.label_3 = QtWidgets.QLabel(self.tab_1)
+        self.label_3.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
         self.SaveBtn = QtWidgets.QPushButton(self.tab_1)
+        self.SaveBtn.setMinimumSize(QtCore.QSize(90, 50))
         self.SaveBtn.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.SaveBtn.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                   "font: 20pt \"Arial\";\n"
+                                   "")
         self.SaveBtn.setObjectName("SaveBtn")
+        self.gridLayout.addWidget(
+            self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
         self.SaveBtn.setEnabled(False)
-        self.gridLayout.addWidget(self.SaveBtn, 12, 3, 1, 1, QtCore.Qt.AlignRight)
 
-        self.accessEdit = QtWidgets.QLineEdit(self.tab_1)
-        self.accessEdit.setObjectName("accessEdit")
-        self.gridLayout.addWidget(self.accessEdit, 12, 1, 1, 1)
-        self.accessEdit.setVisible(False)
-        self.accessLabel = QtWidgets.QLabel(self.tab_1)
-        self.accessLabel.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                       "font-weight: bold;\n"
-                                       "font: 12pt \"Lucida Calligraphy\";")
-        self.accessLabel.setObjectName("accessLabel")
-        self.gridLayout.addWidget(self.accessLabel, 12, 0, 1, 1)
-        self.accessButton = QtWidgets.QPushButton(self.tab_1)
-        self.accessButton.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                        "font-weight: bold;\n"
-                                        "font: 12pt \"Lucida Calligraphy\";")
-        self.accessButton.setObjectName("accessButton")
-        self.gridLayout.addWidget(self.accessButton, 12, 3, 1, 1)
-        self.accessButton.setFixedWidth(400)
-        self.accessButton.setVisible(False)
-        self.accessLabel.setVisible(False)
-
-
-        if (num == 4):
-            self.accessButton.setVisible(True)
-            self.accessEdit.setVisible(True)
-            self.accessLabel.setVisible(True)
-
-        # Appointmt
+        self.lineEdit_1 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_1.setFont(font)
+        self.lineEdit_1.setObjectName("lineEdit_1")
+        self.lineEdit_1.setText(firstName)
+        self.gridLayout.addWidget(self.lineEdit_1, 2, 1, 1, 1)
+        self.lineEdit_1.setEnabled(False)
+        self.lineEdit_9 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_9.setFont(font)
+        self.lineEdit_9.setObjectName("lineEdit_9")
+        self.lineEdit_9.setText(age)
+        self.gridLayout.addWidget(self.lineEdit_9, 10, 1, 1, 1)
+        self.lineEdit_9.setEnabled(False)
+        self.lineEdit_6 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_6.setFont(font)
+        self.lineEdit_6.setObjectName("lineEdit_6")
+        self.lineEdit_6.setText(self.ssn)
+        self.gridLayout.addWidget(self.lineEdit_6, 6, 3, 1, 1)
+        self.lineEdit_6.setEnabled(False)
+        self.label_5 = QtWidgets.QLabel(self.tab_1)
+        self.label_5.setStyleSheet("font: 30pt \"Arial\";")
+        self.label_5.setObjectName("label_5")
+        self.gridLayout.addWidget(self.label_5, 6, 0, 1, 1)
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_1)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        self.lineEdit_2.setFont(font)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.setText(lastName)
+        self.gridLayout.addWidget(self.lineEdit_2, 2, 3, 1, 1)
+        self.lineEdit_2.setEnabled(False)
+        self.tabWidget.addTab(self.tab_1, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_2)
+        self.gridLayout_9 = QtWidgets.QGridLayout(self.tab_2)
+        self.gridLayout_9.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_9.setSpacing(6)
+        self.gridLayout_9.setObjectName("gridLayout_9")
+        self.groupBox = QtWidgets.QGroupBox(self.tab_2)
+        self.groupBox.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                    "")
+        self.groupBox.setTitle("")
+        self.groupBox.setObjectName("groupBox")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox)
         self.gridLayout_2.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_2.setSpacing(6)
         self.gridLayout_2.setObjectName("gridLayout_2")
-
-        self.lineEdit19_1 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit19_1.setMaximumSize(QtCore.QSize(589, 16777215))
-        self.lineEdit19_1.setObjectName("lineEdit19_1")
-        self.lineEdit19_1.setVisible(False)
-        self.gridLayout_2.addWidget(self.lineEdit19_1, 18, 0, 1, 1)
-        self.lineEdit19_1.setReadOnly(True)
-
-        self.pushButton19_1 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton19_1.setObjectName("pushButton19_1")
-        self.pushButton19_1.setVisible(False)
-        self.gridLayout_2.addWidget(self.pushButton19_1, 19, 0, 1, 1)
-
-        self.lineEdit19_2 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit19_2.setObjectName("lineEdit19_2")
-        self.lineEdit19_2.setVisible(False)
-        self.gridLayout_2.addWidget(self.lineEdit19_2, 18, 1, 1, 1)
-        self.lineEdit19_2.setReadOnly(True)
-
-        self.pushButton19_2 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton19_2.setObjectName("pushButton19_2")
-        self.pushButton19_2.setVisible(False)
-        self.gridLayout_2.addWidget(self.pushButton19_2, 19, 1, 1, 1)
-
-        self.lineEdit19_3 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit19_3.setMaxLength(300)
-        self.lineEdit19_3.setReadOnly(True)
-        self.lineEdit19_3.setVisible(False)
-        self.lineEdit19_3.setObjectName("lineEdit19_3")
-        self.gridLayout_2.addWidget(self.lineEdit19_3, 18, 3, 1, 1)
-
-        self.pushButton19_3 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton19_3.setObjectName("pushButton19_3")
-        self.pushButton19_3.setVisible(False)
-        self.gridLayout_2.addWidget(self.pushButton19_3, 19, 3, 1, 1)
-
-        self.lineEdit19_4 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit19_4.setObjectName("lineEdit19_4")
-        self.lineEdit19_4.setVisible(False)
-        self.gridLayout_2.addWidget(self.lineEdit19_4, 18, 4, 1, 1)
-        self.lineEdit19_4.setReadOnly(True)
-
-        self.pushButton19_4 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton19_4.setObjectName("pushButton19_4")
-        self.pushButton19_4.setVisible(False)
-        self.gridLayout_2.addWidget(self.pushButton19_4, 19, 4, 1, 1)
-
-        self.label_16 = QtWidgets.QLabel(self.tab_2)
-        self.label_16.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt Lucida Calligraphy;")
-        self.label_16.setObjectName("label_16")
-        self.gridLayout_2.addWidget(self.label_16, 1, 3, 1, 1)
-
-        self.label_17 = QtWidgets.QLabel(self.tab_2)
-        self.label_17.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt Lucida Calligraphy;")
-        self.label_17.setObjectName("label_17")
-        self.gridLayout_2.addWidget(self.label_17, 3, 3, 1, 1)
-
-        self.label_18 = QtWidgets.QLabel(self.tab_2)
-        self.label_18.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt Lucida Calligraphy;")
-        self.label_18.setObjectName("label_18")
-        self.gridLayout_2.addWidget(self.label_18, 5, 3, 1, 1)
-
-        self.label_19 = QtWidgets.QLabel(self.tab_2)
-        self.label_19.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.label_19.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 18pt \"Lucida Calligraphy\";")
-        self.label_19.setObjectName("label_19")
-        self.gridLayout_2.addWidget(self.label_19, 17, 0, 1, 4)
-
-        self.groupBox = QtWidgets.QGroupBox(self.tab_2)
-        self.groupBox.setTitle("")
-        self.groupBox.setObjectName("groupBox")
-
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.groupBox)
-        self.gridLayout_4.setContentsMargins(11, 11, 11, 11)
-        self.gridLayout_4.setSpacing(6)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-
-        self.gridLayout_3 = QtWidgets.QGridLayout()
-        self.gridLayout_3.setSpacing(6)
-        self.gridLayout_3.setObjectName("gridLayout_3")
-
         self.calendarWidget_1 = MyCalendar(self.groupBox)
+        self.calendarWidget_1.setMaximumSize(QtCore.QSize(20000, 16777215))
+        self.calendarWidget_1.setGridVisible(True)
         self.calendarWidget_1.setObjectName("calendarWidget_1")
         self.calendarWidget_1.setVerticalHeaderFormat(0)
         self.calendarWidget_1.setMinimumDate(QtCore.QDate.currentDate())
+        #self.calendarWidget_1.setMaximumDate(QtCore.QDate.currentDate())
         self.calendarWidget_1.selectionChanged.connect(self.updateDateSelected)
 
-
-        self.gridLayout_3.addWidget(self.calendarWidget_1, 0, 0, 1, 1)
-        self.gridLayout_4.addLayout(self.gridLayout_3, 2, 0, 1, 1)
-
-        self.label20 = QtWidgets.QLabel(self.groupBox)
-        self.label20.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                   "font-weight: bold;\n"
-                                   "font: 12pt Lucida Calligraphy")
-        self.label20.setObjectName("label20")
-        self.gridLayout_4.addWidget(self.label20, 1, 0, 1, 1)
-
-        self.gridLayout_2.addWidget(self.groupBox, 0, 0, 9, 2)
-
-        self.label_15 = QtWidgets.QLabel(self.tab_2)
-        self.label_15.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt Lucida Calligraphy;")
-        self.label_15.setObjectName("label_15")
-        self.gridLayout_2.addWidget(self.label_15, 0, 3, 1, 2)
-
-        self.pushButton_15 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_15.setObjectName("pushButton_15")
-        self.gridLayout_2.addWidget(self.pushButton_15, 7, 3, 2, 1)
-
-        self.dateEdit_16 = QtWidgets.QDateEdit(self.tab_2)
-        self.dateEdit_16.setObjectName("dateEdit_16")
-        self.dateEdit_16.setDate(QtCore.QDate.currentDate())
-        self.gridLayout_2.addWidget(self.dateEdit_16, 2, 3, 1, 1)
-
-        self.timeEdit_17 = QtWidgets.QTimeEdit(self.tab_2)
+        self.gridLayout_2.addWidget(self.calendarWidget_1, 0, 0, 1, 1)
+        self.frame = QtWidgets.QFrame(self.groupBox)
+        self.frame.setMinimumSize(QtCore.QSize(200, 0))
+        self.frame.setStyleSheet("background-color: rgb(205,245,246);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.gridLayout_8 = QtWidgets.QGridLayout(self.frame)
+        self.gridLayout_8.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_8.setSpacing(6)
+        self.gridLayout_8.setObjectName("gridLayout_8")
+        self.timeEdit_17 = QtWidgets.QTimeEdit(self.frame)
+        self.timeEdit_17.setStyleSheet("font: 20pt Arial;")
         self.timeEdit_17.setObjectName("timeEdit_17")
-        self.timeEdit_17.setTime(QtCore.QTime.currentTime())
-        self.gridLayout_2.addWidget(self.timeEdit_17, 4, 3, 1, 1)
-
-        self.timeEdit_18 = QtWidgets.QTimeEdit(self.tab_2)
+        self.gridLayout_8.addWidget(self.timeEdit_17, 3, 1, 1, 1)
+        self.label_16 = QtWidgets.QLabel(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(30)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_16.setFont(font)
+        self.label_16.setStyleSheet("font: 30pt Arial;")
+        self.label_16.setObjectName("label_16")
+        self.gridLayout_8.addWidget(self.label_16, 2, 0, 1, 1)
+        self.pushButton_15 = QtWidgets.QPushButton(self.frame)
+        self.pushButton_15.setMinimumSize(QtCore.QSize(0, 60))
+        self.pushButton_15.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                         "font: 20pt \"Arial\";\n"
+                                         "")
+        self.pushButton_15.setObjectName("pushButton_15")
+        self.gridLayout_8.addWidget(self.pushButton_15, 5, 1, 1, 1)
+        self.label_18 = QtWidgets.QLabel(self.frame)
+        self.label_18.setStyleSheet("font: 30pt Arial;")
+        self.label_18.setObjectName("label_18")
+        self.gridLayout_8.addWidget(self.label_18, 4, 0, 1, 1)
+        self.timeEdit_18 = QtWidgets.QTimeEdit(self.frame)
+        self.timeEdit_18.setStyleSheet("font: 20pt Arial;")
         self.timeEdit_18.setObjectName("timeEdit_18")
         # Appt for at least 30 min
         self.timeEdit_18.setTime(QtCore.QTime.currentTime().addSecs(60*30))
-        #self.timeEdit_18.setTime(QtCore.QTime.currentTime().addMSecs(1000000))
-        self.gridLayout_2.addWidget(self.timeEdit_18, 6, 3, 1, 1)
 
+        self.gridLayout_8.addWidget(self.timeEdit_18, 4, 1, 1, 1)
+        self.label_17 = QtWidgets.QLabel(self.frame)
+        self.label_17.setStyleSheet("font: 30pt Arial;")
+        self.label_17.setObjectName("label_17")
+        self.gridLayout_8.addWidget(self.label_17, 3, 0, 1, 1)
+        self.dateEdit_16 = QtWidgets.QDateEdit(self.frame)
+        self.dateEdit_16.setStyleSheet("font: 20pt Arial;")
+        self.dateEdit_16.setObjectName("dateEdit_16")
+        self.dateEdit_16.setDate(QtCore.QDate.currentDate())
+        self.gridLayout_8.addWidget(self.dateEdit_16, 2, 1, 1, 1)
+        self.label_15 = QtWidgets.QLabel(self.frame)
+        self.label_15.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_15.setStyleSheet("font: 20pt Arial;")
+        self.label_15.setObjectName("label_15")
+        self.gridLayout_8.addWidget(self.label_15, 0, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.frame, 0, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.groupBox, 0, 0, 1, 1)
+        self.widget = QtWidgets.QWidget(self.tab_2)
+        self.widget.setMinimumSize(QtCore.QSize(500, 120))
+        self.widget.setStyleSheet("background-color: rgb(205,245,246);\n"
+                                  "border-color: rgb(252, 37, 224);")
+        self.widget.setObjectName("widget")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_3.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_3.setSpacing(6)
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.pushButton19_1 = QtWidgets.QPushButton(self.widget)
+        self.pushButton19_1.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                          "font: 20pt \"Arial\";\n"
+                                          "")
+        self.pushButton19_1.setObjectName("pushButton19_1")
+        self.gridLayout_3.addWidget(self.pushButton19_1, 2, 0, 1, 1)
+        self.pushButton19_4 = QtWidgets.QPushButton(self.widget)
+        self.pushButton19_4.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                          "font: 20pt \"Arial\";\n"
+                                          "")
+        self.pushButton19_4.setObjectName("pushButton19_4")
+        self.gridLayout_3.addWidget(self.pushButton19_4, 2, 3, 1, 1)
+        self.lineEdit19_2 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit19_2.setStyleSheet("font: 15pt Arial;")
+        self.lineEdit19_2.setObjectName("lineEdit19_2")
+        self.gridLayout_3.addWidget(self.lineEdit19_2, 1, 1, 1, 1)
+        self.pushButton19_3 = QtWidgets.QPushButton(self.widget)
+        self.pushButton19_3.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                        "font: 20pt \"Arial\";\n"
+                                        "")
+        self.pushButton19_3.setObjectName("pushButton19_3")
+        self.gridLayout_3.addWidget(self.pushButton19_3, 2, 2, 1, 1)
+        self.lineEdit19_4 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit19_4.setStyleSheet("font: 15pt Arial;")
+        self.lineEdit19_4.setObjectName("lineEdit19_4")
+        self.gridLayout_3.addWidget(self.lineEdit19_4, 1, 3, 1, 1)
+        self.pushButton19_2 = QtWidgets.QPushButton(self.widget)
+        self.pushButton19_2.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                        "font: 20pt \"Arial\";\n"
+                                        "")
+        self.pushButton19_2.setObjectName("pushButton19_2")
+        self.gridLayout_3.addWidget(self.pushButton19_2, 2, 1, 1, 1)
+        self.lineEdit19_3 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit19_3.setStyleSheet("font: 15pt Arial;")
+        self.lineEdit19_3.setMaxLength(300)
+        self.lineEdit19_3.setReadOnly(True)
+        self.lineEdit19_3.setObjectName("lineEdit19_3")
+        self.gridLayout_3.addWidget(self.lineEdit19_3, 1, 2, 1, 1)
+        self.lineEdit19_1 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit19_1.setMaximumSize(QtCore.QSize(589, 16777215))
+        self.lineEdit19_1.setStyleSheet("font: 15pt Arial;")
+        self.lineEdit19_1.setObjectName("lineEdit19_1")
+        self.gridLayout_3.addWidget(self.lineEdit19_1, 1, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.widget, 2, 0, 1, 1)
+        self.label_19 = QtWidgets.QLabel(self.tab_2)
+        self.label_19.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.label_19.setStyleSheet("font: 20pt Arial;")
+        self.label_19.setObjectName("label_19")
+        self.gridLayout_9.addWidget(self.label_19, 1, 0, 1, 1)
+        #self.tabWidget.addTab(self.tab_2, "")
+
+
+        """sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        #QSizePolicy wsize = self.QsizePolicy()
+        
+        sizePolicy.setRetainSizeWhenHidden(True)
+        self.widget.setSizePolicy(sizePolicy)"""
+
+        
+        self.lineEdit19_1.setVisible(False)
+        self.lineEdit19_2.setVisible(False)
+        self.lineEdit19_3.setVisible(False)
+        self.lineEdit19_4.setVisible(False)
+
+        self.pushButton19_1.setVisible(False)
+        self.pushButton19_2.setVisible(False)
+        self.pushButton19_3.setVisible(False)
+        self.pushButton19_4.setVisible(False)
+        
         if num == 1:
             self.tabWidget.addTab(self.tab_2, "")
 
@@ -421,106 +427,146 @@ class menu_UI(object):
         self.gridLayout_6.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_6.setSpacing(6)
         self.gridLayout_6.setObjectName("gridLayout_6")
-
-        self.label_11 = QtWidgets.QLabel(self.tab_3)
-        self.label_11.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt \"Lucida Calligraphy\";")
-        self.label_11.setObjectName("label_11")
-        self.gridLayout_6.addWidget(self.label_11, 0, 0, 1, 1)
-
-        self.lineEdit_11 = QtWidgets.QLineEdit(self.tab_3)
-        self.lineEdit_11.setMaximumSize(QtCore.QSize(300, 50))
-        self.lineEdit_11.setObjectName("lineEdit_11")
-        self.gridLayout_6.addWidget(self.lineEdit_11, 1, 0, 1, 1)
-        self.lineEdit_11.setText(insuranceNumber)
-
-        self.label_12 = QtWidgets.QLabel(self.tab_3)
-        self.label_12.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt \"Lucida Calligraphy\";")
-        self.label_12.setObjectName("label_12")
-        self.gridLayout_6.addWidget(self.label_12, 2, 0, 1, 1)
-
         self.lineEdit_12 = QtWidgets.QLineEdit(self.tab_3)
-        self.lineEdit_12.setMaximumSize(QtCore.QSize(300, 50))
+        self.lineEdit_12.setMaximumSize(QtCore.QSize(500, 50))
         self.lineEdit_12.setObjectName("lineEdit_12")
-        self.gridLayout_6.addWidget(self.lineEdit_12, 3, 0, 1, 1)
         self.lineEdit_12.setText(creditCardNumber)
-
-        self.label_13 = QtWidgets.QLabel(self.tab_3)
-        self.label_13.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt \"Lucida Calligraphy\";")
-        self.label_13.setObjectName("label_13")
-        self.gridLayout_6.addWidget(self.label_13, 4, 0, 1, 1)
-
+        self.lineEdit_12.setStyleSheet("font: 30pt Arial;")
+        self.gridLayout_6.addWidget(self.lineEdit_12, 3, 1, 1, 1)
+        self.label_12 = QtWidgets.QLabel(self.tab_3)
+        self.label_12.setStyleSheet("font: 30pt Arial;")
+        self.label_12.setObjectName("label_12")
+        self.gridLayout_6.addWidget(self.label_12, 3, 0, 1, 1)
         self.lineEdit_13 = QtWidgets.QLineEdit(self.tab_3)
-        self.lineEdit_13.setMaximumSize(QtCore.QSize(300, 50))
+        self.lineEdit_13.setMaximumSize(QtCore.QSize(500, 50))
         self.lineEdit_13.setObjectName("lineEdit_13")
-        self.gridLayout_6.addWidget(self.lineEdit_13, 5, 0, 1, 1)
         self.lineEdit_13.setText(billingAmount)
-
-        self.label_14 = QtWidgets.QLabel(self.tab_3)
-        self.label_14.setStyleSheet("color: rgb(46, 125, 132);\n"
-                                    "font-weight: bold;\n"
-                                    "font: 12pt Lucida Calligraphy;")
-        self.label_14.setObjectName("label_14")
-        self.gridLayout_6.addWidget(self.label_14, 6, 0, 1, 1)
-
-        self.lineEdit_14 = QtWidgets.QLineEdit(self.tab_3)
-        self.lineEdit_14.setMinimumSize(QtCore.QSize(0, 40))
-        self.lineEdit_14.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.lineEdit_14.setObjectName("lineEdit_14")
-        self.gridLayout_6.addWidget(self.lineEdit_14, 7, 0, 1, 1)
-
+        self.lineEdit_13.setStyleSheet("font: 30pt Arial;")
+        self.gridLayout_6.addWidget(self.lineEdit_13, 5, 1, 1, 1)
+        self.label_11 = QtWidgets.QLabel(self.tab_3)
+        self.label_11.setStyleSheet("font: 30pt Arial;")
+        self.label_11.setObjectName("label_11")
+        self.gridLayout_6.addWidget(self.label_11, 1, 0, 1, 1)
         self.pushButton_14 = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton_14.setMinimumSize(QtCore.QSize(0, 70))
         self.pushButton_14.setMaximumSize(QtCore.QSize(100, 200))
+        self.pushButton_14.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                     "font: 30pt \"Arial\";\n"
+                                     "")
         self.pushButton_14.setObjectName("pushButton_14")
-        self.gridLayout_6.addWidget(self.pushButton_14, 7, 1, 1, 1)
-
-        # Billing Info
+        self.gridLayout_6.addWidget(self.pushButton_14, 7, 2, 1, 1)
+        self.lineEdit_11 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_11.setMaximumSize(QtCore.QSize(500, 50))
+        self.lineEdit_11.setObjectName("lineEdit_11")
+        self.lineEdit_11.setText(insuranceNumber)
+        self.lineEdit_11.setStyleSheet("font: 30pt Arial;")
+        self.gridLayout_6.addWidget(self.lineEdit_11, 1, 1, 1, 1)
+        self.label_14 = QtWidgets.QLabel(self.tab_3)
+        self.label_14.setStyleSheet("font: 30pt Arial;")
+        self.label_14.setObjectName("label_14")
+        self.gridLayout_6.addWidget(self.label_14, 7, 0, 1, 1)
+        self.lineEdit_14 = QtWidgets.QLineEdit(self.tab_3)
+        self.lineEdit_14.setMinimumSize(QtCore.QSize(0, 0))
+        self.lineEdit_14.setMaximumSize(QtCore.QSize(500, 50))
+        self.lineEdit_14.setObjectName("lineEdit_14")
+        self.lineEdit_14.setStyleSheet("font: 30pt Arial;")
+        self.gridLayout_6.addWidget(self.lineEdit_14, 7, 1, 1, 1)
+        self.label_13 = QtWidgets.QLabel(self.tab_3)
+        self.label_13.setStyleSheet("font: 30pt Arial;")
+        self.label_13.setObjectName("label_13")
+        self.gridLayout_6.addWidget(self.label_13, 5, 0, 1, 1)
         if num == 1:
             self.tabWidget.addTab(self.tab_3, "")
-
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
-
         self.gridLayout_5 = QtWidgets.QGridLayout(self.tab_4)
         self.gridLayout_5.setContentsMargins(11, 11, 11, 11)
         self.gridLayout_5.setSpacing(6)
         self.gridLayout_5.setObjectName("gridLayout_5")
+        self.textEdit = QtWidgets.QTextEdit(self.tab_4)
+        self.textEdit.setMinimumSize(QtCore.QSize(700, 300))
+        self.textEdit.setMaximumSize(QtCore.QSize(16777215, 400))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(13)
+        self.textEdit.setFont(font)
+        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.textEdit.setObjectName("textEdit")
+        self.textEdit.setReadOnly(True)
+        
+        self.gridLayout_5.addWidget(self.textEdit, 0, 1, 1, 1)
 
         self.calendarWidget = QtWidgets.QCalendarWidget(self.tab_4)
+        self.calendarWidget.setMaximumSize(QtCore.QSize(16777215, 400))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.calendarWidget.setFont(font)
+        self.calendarWidget.setStyleSheet(
+            "background-color: rgb(255, 255, 255);")
+        self.calendarWidget.setGridVisible(True)
         self.calendarWidget.setObjectName("calendarWidget")
         self.calendarWidget.setVerticalHeaderFormat(0)
-        self.calendarWidget.setMaximumSize(QtCore.QSize(600, 800))
-
         self.gridLayout_5.addWidget(self.calendarWidget, 0, 0, 1, 1)
-
-        self.textAreaWidget = QtWidgets.QTextEdit(self.tab_4)
-
-        self.textAreaWidget.setReadOnly(True)
-
-        self.gridLayout_5.addWidget(self.textAreaWidget, 0, 1, 1, 1)
 
         if num != 1:
             self.tabWidget.addTab(self.tab_4, "")
 
-        self.gridLayout_7.addWidget(self.tabWidget, 0, 1, 1, 1)
+        self.tab_5 = QtWidgets.QWidget()
+        self.tab_5.setObjectName("tab_5")
+        self.gridLayout_10 = QtWidgets.QGridLayout(self.tab_5)
+        self.gridLayout_10.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_10.setSpacing(6)
+        self.gridLayout_10.setObjectName("gridLayout_10")
+        self.widget_3 = QtWidgets.QWidget(self.tab_5)
+        self.widget_3.setMaximumSize(QtCore.QSize(10000, 10000))
+        self.widget_3.setObjectName("widget_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_3)
+        self.verticalLayout.setContentsMargins(11, 11, 11, 11)
+        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.accessLabel = QtWidgets.QLabel(self.widget_3)
+        self.accessLabel.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.accessLabel.setStyleSheet("font: 40pt \"Arial\";")
+        self.accessLabel.setObjectName("accessLabel")
+        self.verticalLayout.addWidget(self.accessLabel)
+        self.widget_2 = QtWidgets.QWidget(self.widget_3)
+        self.widget_2.setMaximumSize(QtCore.QSize(10000, 20000))
+        self.widget_2.setObjectName("widget_2")
+        self.gridLayout_4 = QtWidgets.QGridLayout(self.widget_2)
+        self.gridLayout_4.setContentsMargins(11, 11, 11, 11)
+        self.gridLayout_4.setSpacing(6)
+        self.gridLayout_4.setObjectName("gridLayout_4")
+        self.accessEdit = QtWidgets.QLineEdit(self.widget_2)
+        self.accessEdit.setMinimumSize(QtCore.QSize(0, 50))
+        self.accessEdit.setMaximumSize(QtCore.QSize(300, 16777215))
+        self.accessEdit.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.accessEdit.setStyleSheet("font: 30pt \"Arial\";")
+        self.accessEdit.setObjectName("accessEdit")
+        self.gridLayout_4.addWidget(self.accessEdit, 0, 0, 1, 1)
+        self.accessButton = QtWidgets.QPushButton(self.widget_2)
+        self.accessButton.setMinimumSize(QtCore.QSize(0, 80))
+        self.accessButton.setMaximumSize(QtCore.QSize(100000, 16777215))
+        self.accessButton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.accessButton.setStyleSheet("background-color: rgb(232, 232, 232);\n"
+                                        "font: 30pt \"Arial\";\n"
+                                        "")
+        self.accessButton.setObjectName("accessButton")
+        self.gridLayout_4.addWidget(self.accessButton, 1, 0, 1, 1)
+        self.verticalLayout.addWidget(self.widget_2)
+        self.gridLayout_10.addWidget(
+            self.widget_3, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
+
+        if num ==4:
+            self.tabWidget.addTab(self.tab_5, "")
+
+        self.gridLayout_7.addWidget(
+            self.tabWidget, 0, 0, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
         Menu.setCentralWidget(self.centralWidget)
-
-        self.mainToolBar = QtWidgets.QToolBar(Menu)
-        self.mainToolBar.setObjectName("mainToolBar")
-        Menu.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
-
-        self.statusBar = QtWidgets.QStatusBar(Menu)
-        self.statusBar.setObjectName("statusBar")
-        Menu.setStatusBar(self.statusBar)
 
         self.retranslateUi(Menu, num)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Menu)
+
 
 
         self.calendarWidget.clicked.connect(lambda: self.showAppointmentsInTextEdit(num, ID, cur, conn))
@@ -532,6 +578,8 @@ class menu_UI(object):
         self.pushButton_14.clicked.connect(lambda: self.Pay(ID, cur, conn))
         self.accessButton.clicked.connect(lambda: self.addAccessCode(cur, conn, self.accessEdit))
 
+        
+        
         earliestDate = None
 
         numDates = 0
@@ -568,25 +616,25 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_1.text() + "    " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "               " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_2.text() + "    " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_3.text() + "    " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
             elif (numStarts == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_4.text() + "    " + str(hours) + ":" + str(minutes))
                 numStarts = numStarts + 1
 
         numEnds = 0
@@ -595,33 +643,46 @@ class menu_UI(object):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_1.text() + "    " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 1):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_2.text() + "    " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 2):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_3.text() + "    " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
             elif (numEnds == 3):
                 hours, remainder = divmod(row[0].seconds, 3600)
                 minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "                " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_4.text() + "    " + str(hours) + ":" + str(minutes))
                 numEnds = numEnds + 1
+
+        if (self.lineEdit19_1.isVisible() == True and self.lineEdit19_2.isVisible() == True and self.lineEdit19_3.isVisible() == True and self.lineEdit19_4.isVisible() == True):
+            self.pushButton_15.setEnabled(False)
+
+        """sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        #QSizePolicy wsize = self.QsizePolicy()
+        sizePolicy.setRetainSizeWhenHidden(True)
+        self.widget.setSizePolicy(sizePolicy)"""
+        #self.label_19.setGeometry(self.label_19.geometry())
+
 
     def addAccessCode(self, cur, conn, accessEdit):
         if (accessEdit.text().isdigit() == False):
             self.show_msg(1, "Access Code Invalid!")
         else:
+            self.show_msg(2, "Access Code added.")
             cur.execute('INSERT INTO AccessCodes(AccessCodes) VALUES (%s)', accessEdit.text())
             conn.commit()
+            accessEdit.setText("")
 
     def showAppointmentsInTextEdit(self, num, ID, cur, conn):
         selected_date = QtCore.QDate(self.calendarWidget.selectedDate())
@@ -663,9 +724,10 @@ class menu_UI(object):
             )
 
         data = cur.fetchall()
-        print(data)
+        #print(data)
         if len(data) == 0:
-            self.textAreaWidget.setText("There are no appointments scheduled for the selected date.")
+            self.textEdit.setText(
+                "There are no appointments scheduled for the selected date.")
         else:
 
             finalString = "Appointment ID | Doctor ID | Nurse ID | Patient ID | DeptAdmin ID | Location |Date                  | Start Time | End Time \n\n\n"
@@ -685,29 +747,60 @@ class menu_UI(object):
                               + patientIDStr + "\t" + departmentAdminIDStr + "\t" + locationStr + "\t" + dateStr \
                               + "\t" + startTimeStr + "\t" + endTimeStr + "\n\n\n\n\n"""
 
-                finalString = finalString + "{:<28}{:<16}{:<14}{:<15}{:<22}{:<11}{:<16}{:<12}{:<8}".format(\
+                finalString = finalString + "{:<28}{:<16}{:<14}{:<15}{:<22}{:<11}{:<16}{:<15}{:<8}".format(\
                 appointmentIDStr, doctorIDStr, nurseIDStr, patientIDStr, departmentAdminIDStr, locationStr,\
                 dateStr, startTimeStr, endTimeStr) + "\n\n"   
             
-            self.textAreaWidget.setText(finalString)
+            self.textEdit.setText(finalString)
             
 
 
     def retranslateUi(self, Menu, num):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("Menu", "Profile"))
+        self.EditBtn.setText(_translate("Menu", "Edit"))
+        self.label_9.setText(_translate("Menu", "Age"))
+        self.label_1.setText(_translate("Menu", "First Name"))
+        self.label_2.setText(_translate("Menu", "Last Name"))
+        self.label_10.setText(_translate("Menu", "Medication List"))
+        self.label_4.setText(_translate("Menu", "Email Address"))
+        self.label_7.setText(_translate("Menu", "Weight"))
+        self.label_8.setText(_translate("Menu", "Height"))
+        self.label_6.setText(_translate("Menu", "SSN"))
+        self.label_3.setText(_translate("Menu", "Phone Number"))
+        self.SaveBtn.setText(_translate("Menu", "Save"))
+        self.label_5.setText(_translate("Menu", "ID"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tab_1), _translate("Menu", "Profile"))
+        self.label_16.setText(_translate("Menu", "Date:"))
+        self.pushButton_15.setText(_translate("Menu", "Schedule"))
+        self.label_18.setText(_translate("Menu", "End Time:"))
+        self.label_17.setText(_translate("Menu", "Start Time:"))
+        self.label_15.setText(_translate(
+            "Menu", "You can set up to 4 appointments."))
+        self.label_19.setText(_translate("Menu", "Current Appointments"))
+        self.pushButton19_1.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButton19_2.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButton19_3.setText(_translate("Menu", "Cancel Appointment"))
+        self.pushButton19_4.setText(_translate("Menu", "Cancel Appointment"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tab_2), _translate("Menu", "Appointment"))
+        self.label_12.setText(_translate("Menu", "Credit Card Number"))
+        self.label_11.setText(_translate("Menu", "Insurance Number"))
+        self.pushButton_14.setText(_translate("Menu", "Pay"))
+        
+        self.label_14.setText(_translate("Menu", "Payment Amount"))
+        self.label_13.setText(_translate("Menu", "Billing Amount"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tab_3), _translate("Menu", "Billing Info"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tab_4), _translate("Menu", "Appointment Info"))
+        self.accessLabel.setText(_translate(
+            "Menu", "<html><head/><body><p align=\"center\">Enter Access Code</p></body></html>"))
+        self.accessButton.setText(_translate("Menu", "Add"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tab_5), _translate("Menu", "Access Code"))
 
-        self.label_9.setText(_translate("Menu", "Age:"))
-        self.label_3.setText(_translate("Menu", "Phone Number:"))
-        self.label_10.setText(_translate("Menu", "Medication List:"))
-        self.label_6.setText(_translate("Menu", "SSN:"))
-        self.label_5.setText(_translate("Menu", "ID:"))
-        self.label_8.setText(_translate("Menu", "Height:"))
-        self.label_2.setText(_translate("Menu", "Last Name:"))
-        self.label_7.setText(_translate("Menu", "Weight:"))
-        self.label_1.setText(_translate("Menu", "First Name:"))
-        self.label_4.setText(_translate("Menu", "Email Address:"))
 
         # Employee
         if num != 1:
@@ -725,47 +818,11 @@ class menu_UI(object):
                 self.label_8.setVisible(False)
                 self.lineEdit_8.setVisible(False)
 
+
         self.EditBtn.setText(_translate("Menu", "Edit"))
         self.SaveBtn.setText(_translate("Menu", "Save"))
 
-        self.pushButton19_1.setText(_translate("Menu", "Cancel Appointment"))
-        self.pushButton19_2.setText(_translate("Menu", "Cancel Appointment"))
-        self.pushButton19_3.setText(_translate("Menu", "Cancel Appointment"))
-        self.pushButton19_4.setText(_translate("Menu", "Cancel Appointment"))
-
-        self.label_19.setText(_translate("Menu", "Appointments: { Date | Start Time | End Time}"))
-        self.label_17.setText(_translate("Menu", "Start Time:"))
-        self.label_18.setText(_translate("Menu", "End Time:"))
-        self.label_16.setText(_translate("Menu", "Date:"))
-        self.label20.setText(_translate("Menu", "Next Upcoming Appointment is Labelled: "))
-        self.label_15.setText(_translate("Menu", "Schedule Appointment: Max 4"))
-        self.pushButton_15.setText(_translate("Menu", "Schedule:"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Menu", "Appointment"))
-        self.label_14.setText(_translate("Menu", "Payment Amount:"))
-        self.label_12.setText(_translate("Menu", "Credit Card Number:"))
-        self.label_11.setText(_translate("Menu", "Insurance Number:"))
-        self.label_13.setText(_translate("Menu", "Billing Amount:"))
-        self.pushButton_14.setText(_translate("Menu", "Pay"))
-        self.accessButton.setText(_translate("Menu", "Submit!"))
-        self.accessLabel.setText(_translate("Menu", "Enter Access Code:"))
-
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Menu", "Billing Info"))
-
-        # Ignore this
-        """
-        self.tableWidget.headerItem().setText(1, _translate("Menu", "Doctor"))
-        self.tableWidget.headerItem().setText(2, _translate("Menu", "Patient"))
-        self.tableWidget.headerItem().setText(3, _translate("Menu", "Nurse"))
-        self.tableWidget.headerItem().setText(4, _translate("Menu", "Medication List"))
-        self.tableWidget.headerItem().setText(5, _translate("Menu", "Insurance"))
-        __sortingEnabled = self.tableWidget.isSortingEnabled()
-        self.tableWidget.setSortingEnabled(False)
-        self.tableWidget.topLevelItem(0).setText(0, _translate("Menu", "New Item"))
-        self.tableWidget.topLevelItem(0).child(0).setText(0, _translate("Menu", "New Subitem"))
-        self.tableWidget.setSortingEnabled(__sortingEnabled)
-        """
-
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Menu", "Appointment Info"))
+      
 
     def Pay(self, ID, cur, conn):
         if(self.lineEdit_14.text() == "" or self.IsDigitorSpeChar(self.lineEdit_14.text(), ".", -1) == False):
@@ -779,7 +836,7 @@ class menu_UI(object):
             conn.commit()
 
         elif (self.lineEdit_13.text() == self.lineEdit_14.text()):
-            self.lineEdit_14.setText("0")
+            self.lineEdit_14.smsgetText("0")
             self.lineEdit_13.setText("0")
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (0, ID))
             conn.commit()
@@ -801,6 +858,7 @@ class menu_UI(object):
             self.show_msg( 1, "Cannot Schedule Appointment For Earlier Date.")
 
         else:
+            
             #cur.rowcount = -1
 
             cur.execute('SELECT AppointmentID FROM Appointment')
@@ -842,13 +900,16 @@ class menu_UI(object):
                 lineEdit4.setVisible(True)
                 cancel4.setVisible(True)
                 self.setDateAndTimeForViewing(lineEdit4, Date, StartTime, EndTime)
+        
+        if (self.lineEdit19_1.isVisible() == True and self.lineEdit19_2.isVisible() == True and self.lineEdit19_3.isVisible() == True and self.lineEdit19_4.isVisible() == True):
+            self.pushButton_15.setEnabled(False)
 
     def setDateAndTimeForViewing(self, lineEdit, Date, StartTime, EndTime):
 
         date = Date.toString("MM'/'dd'/'yyyy")
 
-        sTime = StartTime.toString("                hh:mm")
-        eTime = EndTime.toString("                hh:mm")
+        sTime = StartTime.toString("    hh:mm")
+        eTime = EndTime.toString("  hh:mm")
         lineEdit.setText(date+ sTime + eTime)
         
         # https://doc-snapshots.qt.io/qt5-5.11/qtime.html
@@ -947,6 +1008,9 @@ class menu_UI(object):
             cur.execute('UPDATE Patient SET BillingAmount = (%s) WHERE PatientID = (%s)', (cost, self.ID))
             self.lineEdit_13.setText(str(cost))
             conn.commit()
+
+        if (self.lineEdit19_1.isVisible() == False or self.lineEdit19_2.isVisible() == False or self.lineEdit19_3.isVisible() == False or self.lineEdit19_4.isVisible() == False):
+            self.pushButton_15.setEnabled(True)
 
     def editProfile(self, num, cur, conn):
         self.EditBtn.setEnabled(False)
@@ -1073,14 +1137,17 @@ class menu_UI(object):
 
 
     def show_msg(self, num, str):
+        msg = QtWidgets.QMessageBox()
         # Warning
-        if num==1:
-            error_dialog = QtWidgets.QMessageBox()
-            error_dialog.setIcon(QtWidgets.QMessageBox().Warning)
-            error_dialog.setText("\n"+str)
-            error_dialog.exec()
+        if num == 1:
+            msg.setIcon(QtWidgets.QMessageBox().Warning)
+            msg.setText("\n"+str)
+        # Information
+        if num == 2:
+            msg.setIcon(QtWidgets.QMessageBox().Information)
+            msg.setText("\n"+str)
 
-        # Maybe other types of msg here
+        msg.exec()
 
 
 if __name__ == "__main__":
