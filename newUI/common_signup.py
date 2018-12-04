@@ -207,8 +207,7 @@ class common_signup_UI(object):
         self.gridLayout.addWidget(self.lineEdit_13, 6, 1, 1, 1)
         self.gridLayout_4.addWidget(self.widget_3, 2, 1, 1, 1)
         self.pushButton = QtWidgets.QPushButton(self.widget)
-        self.pushButton.setMinimumSize(QtCore.QSize(100, 60))
-        self.pushButton.setMaximumSize(QtCore.QSize(200, 50))
+        self.pushButton.setMaximumSize(QtCore.QSize(200, 60))
         self.pushButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.pushButton.setStyleSheet("font: 30pt Arial;\n"
                                       "background-color: rgb(232, 232, 232);")
@@ -217,11 +216,6 @@ class common_signup_UI(object):
         self.verticalLayout.addWidget(self.widget)
         CommonSignUp.setCentralWidget(self.centralwidget)
 
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        
-        sizePolicy.setRetainSizeWhenHidden(True)
-        self.widget.setSizePolicy(sizePolicy)
 
         self.retranslateUi(CommonSignUp, num)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
