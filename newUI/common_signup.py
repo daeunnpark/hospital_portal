@@ -217,6 +217,12 @@ class common_signup_UI(object):
         self.verticalLayout.addWidget(self.widget)
         CommonSignUp.setCentralWidget(self.centralwidget)
 
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        
+        sizePolicy.setRetainSizeWhenHidden(True)
+        self.widget.setSizePolicy(sizePolicy)
+
         self.retranslateUi(CommonSignUp, num)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
 
@@ -241,15 +247,21 @@ class common_signup_UI(object):
         self.label_13.setText(_translate("MainWindow", "Insurance Number"))
         self.pushButton.setText(_translate("MainWindow", "Sign Up!"))
 
+        """sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         
+        sizePolicy.setRetainSizeWhenHidden(True)
+        self.widget.setSizePolicy(sizePolicy)"""
         # Employee - Doctor/Nurse
         if(num != 1):    
-
+            # lineEdit_9 =  medical license
+            # lineEdit_8 = Specialty
 
             self.lineEdit_8.deleteLater()
             self.cb = QtWidgets.QComboBox()
             self.cb.setObjectName("comboBox")        
             self.label_8.setText(_translate("MainWindow", "Specialty:"))
+
 
             self.cb.addItem("Cardiology")
             self.cb.addItem("Dermatology")
@@ -258,13 +270,20 @@ class common_signup_UI(object):
             self.cb.addItem("Oncology")
             self.cb.addItem("Pediatrics")
             self.cb.addItem("Psychiatry")
+            #self.cb.setStyleSheet("font: 30pt Arial;")
 
-            self.gridLayout.addWidget(self.cb, 4, 1, 1, 1)
+            self.cb.setStyleSheet("font: 20pt Arial;\n"
+                            "background-color: rgb(255,255,255);\n"
+                                   "")
+
+            self.gridLayout_3.addWidget(self.cb, 4, 1, 1, 1)
+
             
 
 
             self.label_9.setText(_translate("MainWindow", "Medical License:"))
 
+            
             self.label_10.setVisible(False)
             self.label_11.setVisible(False)
             self.label_12.setVisible(False)
@@ -274,7 +293,7 @@ class common_signup_UI(object):
             self.lineEdit_11.setVisible(False)
             self.lineEdit_12.setVisible(False)
             self.lineEdit_13.setVisible(False)
-        
+            
             """
             if(num==4): # Admin
                 self.label_8.setVisible(False)
