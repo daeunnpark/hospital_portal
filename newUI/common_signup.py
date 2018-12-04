@@ -217,7 +217,7 @@ class common_signup_UI(object):
         self.verticalLayout.addWidget(self.widget)
         CommonSignUp.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(CommonSignUp)
+        self.retranslateUi(CommonSignUp, num)
         QtCore.QMetaObject.connectSlotsByName(CommonSignUp)
 
 

@@ -44,6 +44,10 @@ class access_code_UI(object):
         self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
         self.lineEdit.setMaximumSize(QtCore.QSize(300, 50))
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setStyleSheet("font: 30pt \"Arial\";\n"
+                                  "\n"
+                                  "")
+
         self.gridLayout_3.addWidget(self.lineEdit, 0, 0, 1, 1)
         self.pushButton = QtWidgets.QPushButton(self.widget_2)
         self.pushButton.setMinimumSize(QtCore.QSize(130, 80))
