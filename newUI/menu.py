@@ -620,67 +620,67 @@ class menu_UI(object):
 
         numStarts = 0
         for row in startTimes:
+            hours, remainder = divmod(row[0].seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+
+            # Time formatting
+            if(hours<10):
+                h = "0" + str(hours)
+            if (minutes<10):
+                m = "0" + str(minutes)
+
+            time = "    " + h + ":" + m
+
             if (numStarts == 0):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_1.text() + time)
                 numStarts = numStarts + 1
             elif (numStarts == 1):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_2.text() + time)
                 numStarts = numStarts + 1
             elif (numStarts == 2):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_3.text() + time)
                 numStarts = numStarts + 1
             elif (numStarts == 3):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_4.text() + time)
                 numStarts = numStarts + 1
 
         numEnds = 0
         for row in endTimes:
+            hours, remainder = divmod(row[0].seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+
+            # Time formatting
+            if(hours<10):
+                h = "0" + str(hours)
+            if (minutes<10):
+                m = "0" + str(minutes)
+
+            time = "    " + h + ":" + m
+
             if (numEnds == 0):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_1.setText(
-                    self.lineEdit19_1.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_1.text() + time)
                 numEnds = numEnds + 1
             elif (numEnds == 1):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_2.setText(
-                    self.lineEdit19_2.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_2.text() + time)
                 numEnds = numEnds + 1
             elif (numEnds == 2):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_3.setText(
-                    self.lineEdit19_3.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_3.text() + time)
                 numEnds = numEnds + 1
             elif (numEnds == 3):
-                hours, remainder = divmod(row[0].seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
                 self.lineEdit19_4.setText(
-                    self.lineEdit19_4.text() + "    " + str(hours) + ":" + str(minutes))
+                    self.lineEdit19_4.text() + time)
                 numEnds = numEnds + 1
 
         if (self.lineEdit19_1.isVisible() == True and self.lineEdit19_2.isVisible() == True and self.lineEdit19_3.isVisible() == True and self.lineEdit19_4.isVisible() == True):
             self.pushButton_15.setEnabled(False)
 
-        """sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        #QSizePolicy wsize = self.QsizePolicy()
-        sizePolicy.setRetainSizeWhenHidden(True)
-        self.widget.setSizePolicy(sizePolicy)"""
-        #self.label_19.setGeometry(self.label_19.geometry())
 
 
     def addAccessCode(self, cur, conn, accessEdit):
