@@ -310,7 +310,7 @@ class common_signup_UI(object):
             cur.execute('SELECT * FROM Person P WHERE Username = (%s)', (self.lineEdit_5.text()))
             if(self.lineEdit_5.text())!= "" and (cur.rowcount != 0):
                self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
-               lineEdit_5.setText("")
+               self.lineEdit_5.setText("")
 
             else:
                 
@@ -433,7 +433,7 @@ class common_signup_UI(object):
             
             if self.lineEdit_5.text() != "" and (cur.rowcount != 0):
                 self.show_msg( 1, "Username Already Exists! \nTry Another Username.")
-                lineEdit_5.setText("")
+                self.lineEdit_5.setText("")
             
             else:
                 cur.execute('SELECT * FROM Person P WHERE UserPassword = (%s)', (self.lineEdit_6.text()))

@@ -330,6 +330,7 @@ class menu_UI(object):
         self.label_17 = QtWidgets.QLabel(self.frame)
         self.label_17.setStyleSheet("font: 30pt Arial;")
         self.label_17.setObjectName("label_17")
+        self.timeEdit_17.setTime(QtCore.QTime.currentTime())
         self.gridLayout_8.addWidget(self.label_17, 3, 0, 1, 1)
         self.dateEdit_16 = QtWidgets.QDateEdit(self.frame)
         self.dateEdit_16.setStyleSheet("font: 20pt Arial;")
@@ -577,6 +578,7 @@ class menu_UI(object):
 
 
         self.calendarWidget.clicked.connect(lambda: self.showAppointmentsInTextEdit(num, ID, cur, conn))
+        
         self.pushButton19_1.clicked.connect(lambda: self.cancelAppt(1, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton19_2.clicked.connect(lambda: self.cancelAppt(3, appointmentIDs, cur, conn, self.lineEdit_13))
         self.pushButton19_3.clicked.connect(lambda: self.cancelAppt(5, appointmentIDs, cur, conn, self.lineEdit_13))
@@ -625,8 +627,13 @@ class menu_UI(object):
             # Time formatting
             if(hours<10):
                 h = "0" + str(hours)
+            else:
+                h = str(hours)
+            
             if (minutes<10):
                 m = "0" + str(minutes)
+            else:
+                m = str(minutes)
 
             time = "    " + h + ":" + m
 
@@ -655,8 +662,13 @@ class menu_UI(object):
             # Time formatting
             if(hours<10):
                 h = "0" + str(hours)
+            else:
+                h = str(hours)
+            
             if (minutes<10):
                 m = "0" + str(minutes)
+            else:
+                m = str(minutes)
 
             time = "    " + h + ":" + m
 

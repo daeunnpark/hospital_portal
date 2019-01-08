@@ -166,7 +166,7 @@ if __name__ == "__main__":
     )"""
 
     conn = pymysql.connect(
-        host="localhost", port=3306, user="root", passwd="", db="HealthCareUnited"
+        host="localhost", port=3306, user="root", passwd="", db="test2"
     )
 
     # Initialize the database cursor
